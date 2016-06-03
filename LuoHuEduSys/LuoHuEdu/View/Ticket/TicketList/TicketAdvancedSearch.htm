@@ -1,0 +1,167 @@
+﻿<style type="text/css">
+    dl
+    {
+        margin-bottom: 10px;
+    }
+    dt
+    {
+        font-weight: normal;
+    }
+</style>
+<div>
+    <div style="padding-left: 8px;">
+        <form id="advancedSearch" method="post">
+        <dl>
+            <dt>车票号: </dt>
+            <dd>
+                <input type="text" name="TicketNo" class="" maxlength="20" style="width: 140px" />
+            </dd>
+        </dl>
+        <dl>
+            <dt>订单号: </dt>
+            <dd>
+                <input type="text" name="OrderNum" class="" maxlength="20" style="width: 140px" />
+            </dd>
+        </dl>
+        <dl>
+            <dt>下单账号: </dt>
+            <dd>
+                <input type="text" name="CreatedBy" class="" maxlength="20" style="width: 140px" />
+            </dd>
+        </dl>
+<!--        <dl>
+            <dt>支付账号: </dt>
+            <dd>
+                <input type="text" name="PayAccount" class="" maxlength="20" style="width: 140px" />
+            </dd>
+        </dl>-->
+        <dl>
+            <dt>起点城市: </dt>
+            <dd>
+                <input type="text" name="BeginCity" id="BeginCity" style="height: 20px; width: 135px;" />
+                <div id='DivSuggest1' class="ac_results">
+                </div>
+                <input type="hidden" name="BeginCitySanCode" id="BeginCitySanCode" /></dd>
+        </dl>
+        <dl>
+            <dt>目的城市: </dt>
+            <dd>
+                <input type="text" name="EndCity" id="EndCity" style="height: 20px; width: 135px;" />
+                <div id='DivSuggest2' class="ac_results">
+                </div>
+                <input type="hidden" name="EndCitySanCode" id="EndCitySanCode" />
+            </dd>
+        </dl>
+            <dl>
+                <dt>线路名称: </dt>
+                <dd>
+                    <select class="easyui-combobox" id="ddlLine" name="TlId" style="width: 150px;">
+                    </select></dd>
+            </dl>
+            <dl>
+                <dt>所属营业部</dt>
+                <dd>
+                    <input type="text" name="SalesDepartment" class="" maxlength="20" style="width: 140px" />
+                </dd>
+            </dl>
+        <dl>
+            <dt>订单来源:</dt>
+            <dd>
+                <select name="OrderSource" class="easyui-combobox" style="width: 150px" panelheight="auto"> 
+                    <option value="2">站点售票机</option>
+                    <option value="8">代理商分销平台</option>
+                </select></dd>
+        </dl>
+        <dl>
+            <dt>下单起始日期: </dt>
+            <dd>
+                <input type="text" name="CreatedOnS" class="easyui-datebox" style="width: 150px" />
+            </dd>
+        </dl>
+        <dl>
+            <dt>下单结束日期: </dt>
+            <dd>
+                <input type="text" name="CreatedOnE" class="easyui-datebox" style="width: 150px" />
+            </dd>
+        </dl>
+<!--         <dl>
+            <dt>支付起始日期: </dt>
+            <dd>
+                <input type="text" name="PayTimeS" class="easyui-datebox" style="width: 150px" />
+            </dd>
+        </dl>
+        <dl>
+            <dt>支付结束日期: </dt>
+            <dd>
+                <input type="text" name="PayTimeE" class="easyui-datebox" style="width: 150px" />
+            </dd>
+        </dl>-->
+        <dl>
+            <dt>班次日期: </dt>
+            <dd>
+                <input type="text" name="LeaveDate" class="easyui-datebox" style="width: 150px" />
+            </dd>
+        </dl>
+        <!--<dl>
+            <dt>票价: </dt>
+            <dd>
+                <input type="text" name="TicketPriceS" class="easyui-numberbox" style="width: 60px" data-options="min:0,precision:2"/>
+                -
+                <input type="text" name="TicketPriceE" class="easyui-numberbox" style="width: 60px" data-options="min:0,precision:2"/>
+            </dd>-->
+        </dl>
+        <dl>
+            <dt>币种: </dt>
+            <dd>
+                <select type="text" name="CurrencyType" class="easyui-combobox" style="width: 150px"
+                    panelheight="auto">
+                    <option value="RMB">RMB</option>
+                    <option value="HKD">HKD</option>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt>核票状态: </dt>
+            <dd>
+                <select type="text" name="AuditState" class="easyui-combobox" style="width: 150px"
+                    panelheight="auto">
+                    <option value="1">未核票</option>
+                    <option value="2">已核票</option>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt>退票状态: </dt>
+            <dd>
+                <select type="text" name="IsRefund" class="easyui-combobox" style="width: 150px"
+                    panelheight="auto">
+                    <option value="1">未退票</option>
+                    <option value="2">已退票</option>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt>出票状态: </dt>
+            <dd>
+                <select type="text" name="IsOut" class="easyui-combobox" style="width: 150px" panelheight="auto">
+                    <option value="1">未出票</option>
+                    <option value="2">已出票</option>
+                </select>
+            </dd>
+        </dl>
+        <!-- <dl>
+            <dt>是否挂账: </dt>
+            <dd>
+                <select type="text" name="IsHanging" class="easyui-combobox" style="width: 150px" panelHeight="auto">
+                    <option value="0">非挂账</option>
+                    <option value="1">挂账</option>
+                </select>
+            </dd>
+        </dl>-->
+        </form>
+    </div>
+    <div style="margin-top: 15px; text-align: center">
+        <a href="#" class="easyui-linkbutton" onclick="advancedSearch();">立即搜索</a> <a href="#"
+            class="easyui-linkbutton" onclick="clearSearchCriteria();">清除条件</a>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<salary>
+  <!-- dataRowBeginIndex数据行开始索引号,headerRow表头所在索引，从0开始计算-->
+  <rowinfo dataRowBeginIndex="2" headerRow="1"></rowinfo>
+
+  <!-- 表头标题-->
+  <title>工资表</title>
+
+  <!-- 表头-->
+  <column property="ReleaseDate" type="System.DateTime">工资结算日期</column>
+  <column property="Name" type="System.String">员工姓名</column>
+  <column property="ActrulPay" type="System.Single">实发工资</column>
+  <column property="ShouldPay" type="System.Single">应发工资</column>
+  <column property="Basic" type="System.Single">基本工资</column>
+  <column property="Attendance" type="System.Single">勤工奖</column>
+  <column property="CommomWage" type="System.Single">平时加班工资</column>
+  <column property="FreeWage" type="System.Single">休息日加班工资</column>
+  <column property="HolidayWage" type="System.Single">法定节假日加班工资</column>
+  <column property="JobPerformance" type="System.Single">岗位绩效</column>
+  <column property="Performance" type="System.Single">绩效奖金</column>
+  <column property="JobWage" type="System.Single">职位补助工资</column>
+  <column property="AgePride" type="System.Single">工龄奖</column>
+  <column property="CardWage" type="System.Single">推卡提成</column>
+  <column property="CarTimesWage" type="System.Single">趟数工资</column>
+  <column property="SafePride" type="System.Single">安全奖</column>
+  <column property="ServicePride" type="System.Single">服务奖</column>
+  <column property="OilWage" type="System.Single">油耗补助</column>
+  <column property="CarDriveWage" type="System.Single">行車補助</column>
+  <column property="PeopleNumberWage" type="System.Single">人數補助</column>
+  <column property="ClothesWage" type="System.Single">服裝費</column>
+  <column property="ReliefWage" type="System.Single">替班補助</column>
+  <column property="FoodWage" type="System.Single">伙食補貼</column>
+  <column property="EmployWage" type="System.Single">傭金</column>
+  <column property="WaterWage" type="System.Single">水电费</column>
+  <column property="OtherMinus" type="System.Single">其它扣项</column>  
+  <column property="OtherAddWage" type="System.Single">其他加项</column>  
+  <column property="Penalties" type="System.Single">违规罚款</column>
+  <column property="SocialSecurity" type="System.Single">个人社保/强积金</column>
+  <column property="Tax" type="System.Single">个税</column>
+  <column property="Bill" type="System.Single">话费</column>
+  <column property="HouseRent" type="System.Single">房租</column>  
+</salary>

@@ -1,0 +1,86 @@
+﻿
+
+/************ start: 列表页面浮动层的样式（勿删）***************/
+/*鼠标提示的表格样式*/
+.Tb_Common11
+{
+    width: 460px;
+    border-collapse: collapse;
+    background-color: Fuchsia;
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-all;
+    font-size: 9pt;
+    font-weight: normal;
+    clear: both;
+    margin: 0 auto;
+}
+
+.Tb_Common11 td
+{
+    border: solid #5e90b8 1px;
+    line-height: 18px;
+    padding: 1px 3px 1px 3px;
+    height: 18px;
+    background: #ecf2f9;
+    font-size: 9pt;
+    font-weight: normal;
+    text-align: center;
+}
+
+#topic11
+{
+    width: 480px;
+    background: #f9f9fa;
+    padding: 3px;
+    border-top: 1px solid #ddd;
+    border-right: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    border-left: 1px solid #ddd;
+    position: absolute;
+    top: 100px;
+    left: 200px;
+}
+#topic11 .adorn11
+{
+    width: 7px;
+    height: 11px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 15px;
+    left: -7px;
+}
+/*background: url(/upload/201011/20101103150729602.gif);*/
+#topic11 .adorn_r11
+{
+    width: 7px;
+    height: 11px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 15px;
+    right: -7px;
+}
+#topic11 .inner_html11
+{
+    padding: 10px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #666;
+    font-family: arial;
+}
+#topic11 .inner_html11 a
+{
+    color: #990000;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px dotted #990000;
+}
+#topic11 .inner_html11 a:hover
+{
+    border-bottom: 2px solid #990000;
+}
+/************ end: 列表页面浮动层的样式（勿删）***************/
+.btn_station
+{
+    text-align:center; padding:15px 0 8px 0;
+    }

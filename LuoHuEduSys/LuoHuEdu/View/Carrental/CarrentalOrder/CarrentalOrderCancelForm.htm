@@ -1,0 +1,95 @@
+﻿<div id="dlgCancel" style="width: 570px; padding: 10px" data-options="buttons:'#dlg-cancel-buttons',
+                                                                      closed: true,
+                                                                      shadow:false,
+                                                                      modal:true">
+    <form id="cancelForm" method="post">
+        <div id="cancelInfo" style="height: 250px;"></div>
+        <div>
+            <input id="OrderId" type="hidden" name="OrderId" />
+        </div>
+    </form>
+</div>
+<div id="dlg-cancel-buttons">
+    <a class="easyui-linkbutton" onclick="cancelData();">确定</a> 
+    <a class="easyui-linkbutton" onclick="closeCancelDialog();">取消</a>
+</div>
+<script id="cancel-Template" type="text/x-handlebars-template">
+    <table class="custom_forms_popup">
+        <tr>
+            <td class="td_right" style="width: 15%">
+                订单号:
+            </td>
+            <td class="td_left" style="width: 40%">
+                {{OrderNum}}
+            </td>
+            <td class="td_right" style="width: 15%">
+                包车线路:
+            </td>
+            <td class="td_left" style="width: 30%">
+                {{LineName}}
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                订单总价:
+            </td>
+            <td class="td_left">
+                {{OrderPriceSource}}
+            </td>
+            <td class="td_right">
+                实扣总价:
+            </td>
+            <td class="td_left">
+                {{OrderPrice}}
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                联系人:
+            </td>
+            <td class="td_left">
+                {{UserName}}
+            </td>
+            <td class="td_right">
+                联系电话:
+            </td>
+            <td class="td_left">
+                {{Phone}}
+            </td>
+        </tr>
+
+        <tr>
+        <td class="td_right">
+                货币类型:
+            </td>
+            <td class="td_left" colspan="3">
+                {{CurrencyType}}
+            </td>
+            </tr>
+
+        <tr>
+            {{#if PaymentState}}
+            <td class="td_right">
+                退款金额:
+            </td>
+            <td class="td_left" colspan="3">
+                <input id="RefundPrice" name="RefundPrice" type="text" style="width: 145px;" maxlength="4" value="{{RefundPrice}}" />
+            </td>
+            {{else}}
+            <td colspan="4">
+                <font color="red">该订单未付款</font>
+            </td>
+            {{/if}}
+        </tr>
+        {{#if PaymentState}}
+        <tr>
+            <td class="td_right">
+                退票原由:
+            </td>
+            <td class="td_left" colspan="3">
+                <input type="text" name="RefundReason" id="txtRefundReason" maxlength="180"  style="width:275px"></input> 
+            </td>
+        </tr>
+        {{/if}}
+    </table>
+</script>

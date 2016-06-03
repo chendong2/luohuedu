@@ -1,0 +1,32 @@
+﻿
+<%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
+
+<webdiyer:AspNetPager runat="server" 
+    FirstPageText="首页" LastPageText="末页" LayoutType="Table" NextPageText="下一页" PrevPageText="上一页" PageSize="8"
+    ShowCustomInfoSection="Left" CustomInfoHTML="第%CurrentPageIndex%页，共%PageCount%页，每页%PageSize%条，共%RecordCount%条记录"
+    PageIndexBoxStyle="width:19px" ShowPageIndexBox="Never" NumericButtonCount="10"
+    ShowBoxThreshold="10" Width="99%" Height="20px" NumericButtonTextFormatString="{0}"
+    HorizontalAlign="Right" TextBeforePageIndexBox="第" TextAfterPageIndexBox="页"
+    CustomInfoTextAlign="Left" CssClass="paginator" 
+     CustomInfoClass="customInfo"
+    FirstLastButtonsClass="link_class" 
+    PrevNextButtonsClass="link_class" 
+    PagingButtonsClass="list_ye" 
+    CurrentPageButtonClass="link_acted">
+</webdiyer:AspNetPager>
+
+<asp:Image SkinId="037gif" runat="server" ImageUrl="~/App_Themes/Global/Images/037.gif" />
+<asp:Image SkinId="010gif" runat="server" ImageUrl="~/App_Themes/Global/Images/010.gif" />
+<asp:Image SkinId="011gif" runat="server" ImageUrl="~/App_Themes/Global/Images/011.gif" />
+<asp:Image SkinId="lookgif" runat="server" ImageUrl="~/App_Themes/Global/Images/look.gif" />
+<asp:Image SkinId="fgif" runat="server" ImageUrl="~/App_Themes/Global/Images/f.gif" />
+<asp:Image SkinId="look_edit" runat="server" ImageUrl="~/App_Themes/Global/Images/look_edit.png" />
+<asp:Image SkinId="look_production" runat="server" ImageUrl="~/App_Themes/Global/Images/look_production.png" />
+<asp:Image SkinId="changePwd" runat="server" ImageUrl="~/App_Themes/Global/Images/changePwd.png" />
+
+
+<asp:TextBox runat="server"   SkinID="inner_talbe_box" width="98%" CssClass="common_input" ></asp:TextBox>
+
+  <asp:RadioButtonList runat="server" CssClass="common_radio_button_list">
+    
+ </asp:RadioButtonList>

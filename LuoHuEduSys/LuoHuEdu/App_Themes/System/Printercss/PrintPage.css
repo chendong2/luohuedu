@@ -1,0 +1,171 @@
+﻿body
+{
+    font-size: 9pt;
+}
+
+/***********  去掉表格、单元格边框样式  ***********/
+h3
+{
+    margin: 0;
+    padding: 0;
+}
+.underline
+{
+    border: none;
+    border-bottom: 1px solid #B3BDE8;
+    margin-bottom: 2px;
+}
+/***********  表格水平居中  ***********/
+h3
+{
+    text-align: center;
+}
+
+/***********    ***********/
+.unblock
+{
+    border: solid #8db2e3 1px;
+    height: 35px;
+    margin: 0 auto;
+    line-height: 35px;
+    vertical-align: middle;
+    text-align: right;
+    border-top: none !important;
+}
+
+/***********    ***********/
+#btnPreview
+{
+    height: 24px;
+    width: 65px;
+    line-height: 21px;
+    vertical-align: middle;
+    font-size: 12px;
+    margin: 3px 10px 0 0;
+    cursor: pointer;
+}
+
+/*************错误提示信息样式*************/
+.errorMsg
+{
+    position: absolute;
+    font-size: 12px;
+    line-height: 20px;
+    vertical-align: middle;
+    border: 2px solid #ddd;
+    box-shadow: 0 0 6px #000;
+    -moz-box-shadow: 0 0 6px #000;
+    -webkit-box-shadow: 0 0 6px #000;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background: #ee0101;
+    color: #fff;
+}
+/*************时间控件信息样式*************/
+.Wdate
+{
+    border: none !important;
+    border-bottom: 1px solid #B3BDE8 !important;
+    padding: 0;
+}
+
+.Wdatetxt
+{
+    margin-bottom: -3px;
+    padding: 0;
+}
+textarea
+{
+    overflow: auto; background:#fff; border:1px solid #a5acb2;
+}
+.pub_idea
+{
+    width: 100%;
+}
+.pub_idea td
+{
+    border-bottom: 1px solid #d1d1d1;
+    padding: 0;
+}
+.pub_idea .ideatd
+{
+    border-left: 1px solid #d1d1d1;
+    border-right: 1px solid #d1d1d1;
+    background: #f9f9f9;
+    padding: 0 13px 0 13px;
+    width: 12%;
+}
+.printcls input
+{
+    background: #ffffff;
+}
+.main
+{
+    margin: 0 auto;
+    padding:10px 0 0 0;
+    text-align: center;
+}
+.band_input
+{
+    padding: 0 5px 0 5px;
+    text-align: left;
+}
+.print_tb
+{
+    width:100%;border-collapse: collapse;text-align: center;vertical-align: middle; word-break: break-all;
+    word-wrap:  break-word;font-weight: normal;margin:0 auto;line-height: 24px; font-size:12px;  padding:0;
+}
+.print_tb td
+{
+    border: solid #8db2e3 1px;word-break: break-all;
+}
+.print_tb .left
+{
+   background: #f1f6fe;  font-weight:bold;  font-size:12px; word-break: break-all;
+    word-wrap:  break-word; 
+}
+.print_tb caption
+{
+    font-size: 16px;font-weight: bold;line-height: 40px; text-align:center;width:750px;
+}
+.CancelSearchBtn
+{
+    background: url(common_btn.jpg) no-repeat;
+    border: 1px solid #b5b8c7;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    color: #e8f8ff;
+    width: 75px;
+    height: 25px;
+    line-height: 25px;
+    overflow: visible;
+    text-align: center;
+    border: none;
+    padding: 0;
+    margin-top:10px;
+}
+.font_wrte
+{
+  font-weight:bold; font-size:15pt; text-align:center; vertical-align:middle;    
+}
+
+.print_tb2
+{
+   width:734px; * width:740px !important;width:734px \9;border-collapse: collapse;text-align: center;vertical-align: middle; word-break: break-all;
+    word-wrap:  break-word;font-weight: normal;line-height: 24px; font-size:12px;  border:3px solid black; margin-left:-5px\0; *margin-left:-5px !important;
+}
+.print_tb2 td
+{
+    border: solid black 1px;word-break: break-all; vertical-align:middle; height:24px;
+}
+.print_tb2 th
+{
+   font-weight:bold; border: solid black 1px;word-break: break-all; 
+}
+
+.print_tb2 caption
+{
+    font-size: 16px;font-weight: bold;line-height: 40px; text-align:center;
+}

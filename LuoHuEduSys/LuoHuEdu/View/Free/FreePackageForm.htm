@@ -1,0 +1,275 @@
+﻿<div id="dlg" style="width: 480px;" data-options="buttons: '#dlg-button',
+                                        closed: true,
+                                        shadow:false,
+                                        modal:true">
+    <style type="text/css">
+        .custom_forms tr td input[type="text"]
+        {
+            width: auto;
+            }
+    </style>
+<form id="ff" method="post">
+    <div title="自由行订单信息" style="padding: 10px;">
+        <table class="custom_forms_popup">
+            <tbody>
+                <tr>
+                    <td class="td_right" style="width: 30%">
+                        套餐名称:
+                    </td>
+                    <td class="td_left" >
+                        <span  id="Title" />
+                    </td>
+                </tr>
+                <tr>      
+                    <td class="td_right">
+                        出发日期:
+                    </td>
+                    <td class="td_left">     
+                        <input type="text"  class="Wdate" 
+                        style="width:130px"
+                               onfocus="WdatePicker({doubleCalendar:true,minDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd'});" 
+                               name="BeginDate" id="txtBeginDate"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        出发时间:
+                    </td>
+                    <td class="td_left">     
+                        <input type="text" style="width:140px"  name="StartBanCi"  
+                        data-options="required:true"
+                        class="easyui-timespinner easyui-validatebox" 
+                               id="txtStartBanCi" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        成人数量:
+                    </td>
+                    <td class="td_left" >
+                        <a href="javascript:;" class="btn-reduce"></a>
+                        <input name="AdultNum" id="txtAdultNum" value="0" class="easyui-validatebox" 
+                        data-options="required:true"/>
+                        <a href="javascript:;" class="btn-add">   
+                        </a><span id="Adult-Price"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        孩童数量:
+                    </td>
+                    <td class="td_left" >
+                        <a href="javascript:;" class="btn-reduce"></a>
+                            <input name="ChildNum" id="txtChildNum" value="0" class="easyui-validatebox" 
+                        data-options="required:true"/>
+                        <a href="javascript:;" class="btn-add">
+                            
+                        </a><span id="Child-Price"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        长者数量:
+                    </td>
+                    <td class="td_left" >
+                        <a href="javascript:;" class="btn-reduce"></a>
+                        <input name="ElderNum" id ="txtElderNum" value="0" class="easyui-validatebox" 
+                               data-options="required:true"/>
+                        <a href="javascript:;" class="btn-add">     
+                        </a><span id="Elder-Price"></span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        联系人:
+                    </td>
+                    <td class="td_left" >
+                        <input name="Contact" id ="txtContact" class="easyui-validatebox" 
+                               data-options="required:true"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        联系方式:
+                    </td>
+                    <td class="td_left" >
+                        <input name="ContactWay" id ="txtContactWay" class="easyui-validatebox" 
+                               data-options="required:true"/>
+                    </td>
+
+                </tr>
+                <!--<tr>
+                    <td class="td_right">
+                        L签通行证:
+                    </td>
+                    <td class="td_left" >
+                        <a href="javascript:;" class="btn-reduce"></a>
+                        <input name="PassNum" id="txtPassNum" value="0"/>
+                        <a href="javascript:;" class="btn-add">     
+                        </a><span id="Pass-Price"></span>
+                    </td>
+                </tr>-->
+            </tbody>
+        </table>
+    </div>
+<div>
+    <input id="Fp_Id" type="hidden" name="FpId" />
+    <input id="HidName" type="hidden" name="HidName" />
+</div>
+</form>
+</div>
+<div id="dlg-button">
+    <a class="easyui-linkbutton" onclick=" saveFreeOrder(); ">确定</a>
+    <a class="easyui-linkbutton" onclick=" closeFormDialog(); ">取消</a>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        OrderInit();
+        $(".numchange").bind("change", function (e) {
+            var span = $(this).parent().find("span");
+            var count = $(this).val();
+            if (isNaN(count)) {
+                ZENG.msgbox.show('@Html.Lang("Lbl_NumBetween")', 5, 3000);
+                $(this).val(1);
+            } else if (parseInt(count) < 1) {
+                ZENG.msgbox.show('@Html.Lang("Lbl_NumBetween")', 5, 3000);
+                $(this).val(1);
+            }
+            else if (parseInt(count) > 30) {
+                ZENG.msgbox.show('@Html.Lang("Lbl_NumBetween")', 5, 3000);
+                $(this).val(30);
+            }
+            cal_price(span, $(this).val());
+            cal_total();
+        });
+        //tab显示隐藏
+        $('#filter li a').click(function () {
+            $('#filter .curre').removeClass('curre');
+            $(this).addClass('curre');
+            $('#detail div').hide();
+            $($(this).attr('rel')).show();
+        });
+        $(".btn-reduce").bind("click", function (e) {
+            var num = $(this).parent().find("input");
+            var span = $(this).parent().find("span");
+            var count = parseInt(num.val());
+            if (count <= 0) {
+                ZENG.msgbox.show('@Html.Lang("Lbl_NumLower")', 5, 3000);
+                return;
+            }
+            num.val(count - 1);
+            cal_price(span, count - 1);
+            cal_total();
+        });
+        $(".btn-add").bind("click", function (e) {
+            var num = $(this).parent().find("input");
+            var span = $(this).parent().find("span");
+            var count = parseInt(num.val());
+            if (count >= 30) {
+                ZENG.msgbox.show('@Html.Lang("Lbl_NumTop")', 5, 3000);
+                return;
+            }
+            num.val(count + 1);
+            cal_price(span, count + 1);
+            cal_total();
+        });
+        $(".bookBtn").bind("click", function (e) {
+            if ($("#StartBanCi").val() == '') {
+                ZENG.msgbox.show('@Html.Lang("Lbl_SelectTime")', 5, 3000);
+                return false;
+            }
+            $("form").submit();
+            return true;
+        });
+    });
+    function OrderInit() {
+        //var date = new Date();
+        //$("#txtBeginDate").val("");
+        //默认第一个选择选中，并赋值
+        $("#txtStartBanCi").timePicker({
+            startTime: new Date(0, 0, 0, 8, 0, 0), // Using string. Can take string or Date object.
+            endTime: new Date(0, 0, 0, 14, 0, 0), // Using Date object here.
+            show24Hours: true,
+            separator: ':',
+            step: 30
+        });
+
+        $("#txtAdultNum").numberbox({
+            min: 0,
+            value: 0,
+            max: 20
+        });
+        $("#txtChildNum").numberbox({
+            min: 0,
+            value: 0,
+            max: 20
+        });
+        $("#txtElderNum").numberbox({
+            min: 0,
+            value: 0,
+            max: 20
+        });
+        $("#txtPassNum").numberbox({
+            min: 0,
+            value: 0,
+            max: 30
+        });
+    }
+    //计算单价
+    function cal_price(span,count) {
+        var padult = $("#PriceAdultDirect").val();
+        var pchild = $("#PriceChildDirect").val();
+        var pelder = $("#PriceElderDirect").val();
+        var pass = $("#PassPrice").val();
+        var price = 0;
+        if(isNaN(padult)) padult = 0;
+        if(isNaN(pchild)) pchild = 0;
+        if(isNaN(pelder)) pelder = 0;
+        if(isNaN(pass)) pass = 0;
+        var strId = span.attr("id");
+        switch (strId) {
+        case "Adult-Price":
+            price= parseFloat(padult) * count;
+            span.text("￥"+price);break;
+        case "Child-Price":
+            price = parseFloat(pchild) * count;
+            span.text("￥"+price);break;
+        case "Elder-Price":
+            price = parseFloat(pelder) * count;
+            span.text("￥"+price);break;
+        case "Pass-Price":
+            price = parseFloat(pass) * count;
+            span.text("￥"+price);break;
+        default:span.text("");break;
+        }
+    }
+    //计算总价
+    function cal_total() {
+        var padult = $("#PriceAdultDirect").val();
+        var pchild = $("#PriceChildDirect").val();
+        var pelder = $("#PriceElderDirect").val();
+        var pass = $("#PassPrice").val();
+        var adultNum=$("#AdultNum").val();
+        var childNum=$("#ChildNum").val();
+        var elderNum=$("#ElderNum").val();
+        var passNum=$("#PassNum").val();
+        var total = 0;
+        if(isNaN(padult)) padult = 0;
+        if(isNaN(pchild)) pchild = 0;
+        if(isNaN(pelder)) pelder = 0;
+        if(isNaN(pass)) pass = 0;
+        if(isNaN(adultNum)) adultNum = 0;
+        if(isNaN(childNum)) childNum = 0;
+        if(isNaN(elderNum)) elderNum = 0;
+        if(isNaN(passNum)) passNum = 0;
+        total = padult * adultNum + pchild * childNum + pelder * elderNum + pass * passNum;
+        $("#total").html(total);
+    }
+
+    function pickedFunc() {
+  
+    }
+</script>

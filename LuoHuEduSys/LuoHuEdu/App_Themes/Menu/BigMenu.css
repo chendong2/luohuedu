@@ -1,0 +1,14 @@
+﻿.easyui-accordion ul li .icon_hide{margin:0px auto 0 auto;padding:0px; border:none; background:none;}
+.easyui-accordion ul li .icon_hide a span{ /*display:none;*/}
+.easyui-accordion ul li .icon_hide.big_selected{border:none; background:none; cursor:default;}
+.easyui-accordion ul li .icon_big a{width:100%;height:78px;padding:11px 0 0 0;display:block;/*background:url(BigImages/corporation.png) no-repeat top center; */margin:0 auto;cursor:pointer; text-align:center;}
+.easyui-accordion ul li .icon_big a:hover{width:100%;height:78px;padding:11px 0 0 0;/* background:url(BigImages/corporation.png) no-repeat top center;*/ margin:0 auto;cursor:pointer;text-align:center;}
+.easyui-accordion ul li .icon_big.big_selected a{width:100%;height:78px;padding:11px 0 0 0;/*background:url(BigImages/corporation.png) no-repeat top center;*/ margin:0 auto;cursor:pointer;text-align:center;}
+
+/****  wengmeiqin 2012.12.13 add   ****/
+.easyui-accordion ul li .icon_big a .icon{display:block; width:100%;height:52px;background:url(BigImages/corporation.png) no-repeat top center;}
+.easyui-accordion ul li .icon_big a .nav span{ width:100%; padding:0; text-align:center;color:#0269ad; display:block; font-size:12px;}
+.easyui-accordion ul li .icon_big a:hover .nav span{color:#ff2400;}
+.easyui-accordion ul li .icon_big.selected a .nav span{color:#ff9c00;font-size:12px;}
+.easyui-accordion ul li .icon_big.selected a .icon{display:block; width:100%;height:52px;background:url(BigImages/corporation.png) no-repeat top center;}
+/****  wengmeiqin 2012.12.13 end  ****/

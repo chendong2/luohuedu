@@ -1,0 +1,133 @@
+﻿.common_list_out_layer {
+    margin: 0 auto;
+    text-align: center;
+    min-width: 1185px;
+    *width:1185px;
+    padding-bottom: 10px;
+    font-size: 12px;
+}
+/******  user.htm   *****/
+
+.account_content {
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px 0px 18px;
+    overflow: hidden;
+}
+.account_content h1 
+{
+    padding-top:30px;
+    font-size:16px;
+    font-weight:bold;
+    color:#3d3d3d;
+}
+.inf_modular {
+    width: 100%;
+    min-width: 680px;/*
+    background: url(system/Inf_content_middle.png) repeat-x left bottom;
+    margin-top: 20px;*/
+    min-height: 31px;
+    height: auto !important;
+    height: 31px;
+    font-size: 12px;
+    text-align: left;
+}
+
+.inf_modular .titleDiv {
+    width: 100%;
+    background: url(system/Inf_title_middle.png) repeat-x left bottom;
+    height: 31px;
+}
+.title_border_top{ border-top:1px solid #DCE7EF;}
+
+.inf_modular .title_L {
+    padding-left: 17px;
+    height: 31px;
+    line-height: 31px;
+    color: #0f9fe1;
+    font-weight: bold;
+    width: 180px;
+    /*background: url(system/Inf_title_left.png) no-repeat left top;8*/
+    float: left;
+    border-left:1px solid #DCE7EF;
+}
+
+.inf_modular .title_R {
+    padding: 8px 21px 0 0;
+    height: 23px;
+    width: 16px;
+    text-align:right;
+   /* background: url(system/Inf_title_right.png) no-repeat right top;*/
+    float: right;
+    border-right:1px solid #DCE7EF;
+}
+.inf_modular .title_R a 
+{
+    color:#757b93;
+    font-size:12px;
+}
+.inf_modular .title_R a:hover 
+{
+    color:#fda907;
+    text-decoration:none;
+}
+.inf_modular .drop_down_icon {
+    height: 16px;
+    width: 16px;
+    display: block;
+    cursor: pointer;/*
+    background: url(system/drop_down_icon.png) no-repeat right center;*/
+}
+
+.inf_modular .contraction_icon {
+    height: 16px;
+    width: 16px;
+    display: block;
+    background: url(system/contraction_icon.png) no-repeat right center;
+}
+
+.inf_modular .content {
+    width: 100%;/*
+    background: url(system/Inf_content_right.png) no-repeat right bottom;*/
+    overflow: hidden;
+}
+
+.inf_modular .content_L {
+    line-height: 32px;
+    color: #8c8d8d;
+    /*border:1px solid #Dbdce0;*/
+    border-top:none;
+}
+.BasicinfoAdd2 
+{
+    margin:0 auto;
+}
+
+.inf_modular .content_main {/*
+    background: url(system/Inf_content_left.png) no-repeat left bottom;*/
+    /*padding: 0 1px;*/
+    overflow: hidden;
+}
+
+.inf_modular .content_L span {
+    /*font-weight: bold;*/
+}
+
+.inf_modular .content_L a {
+    color: #0fa2e3;
+    text-decoration: none;
+}
+
+.inf_padding {
+    padding-left: 27px;
+} 
+.manwidth 
+{
+    min-width:96%;
+    width:96%;
+}
+.minwidth 
+{
+    min-width:100%;
+    width:100%;
+}

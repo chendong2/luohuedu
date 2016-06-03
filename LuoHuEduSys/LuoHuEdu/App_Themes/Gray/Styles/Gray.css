@@ -1,0 +1,120 @@
+﻿@charset "utf-8";
+
+.head_container {
+
+    height: 83px;
+    position: relative;
+    z-index: 7000;
+    background: url("../Images/tile_bg.png") repeat-x 0 11px;
+}
+
+.menu_green_head_font {
+    float: left;
+    background: url("../Images/logo.png") no-repeat left center;
+    height: 35px;
+    color: #000;
+    font-family: "Microsoft YaHei";
+    font-size: 20px;
+    line-height: 35px;
+    padding-left: 40px;
+    margin-top: 8px;
+    margin-left: 18px;
+    font-weight:bold;
+}
+
+.menu_green_titlelink {
+    background: url("../Images/circleHalf.png") no-repeat left top;
+    height: 32px;
+    width:auto;
+    float: right;
+    padding: 0 0 0 25px;
+}
+
+.menu_green_titlelink .menu_green_titlelink_ul{
+    background: #ffffff url("../Images/menu_green_titlelink_ul_bg.png") repeat-x left top;
+    height: 28px;
+    line-height: 28px;
+    padding-bottom:3px;
+    padding-right:10px;
+}
+
+.menu_green_titlelink .menu_green_titlelink_ul li
+{
+    text-align: center;
+    margin: 0 auto;
+    line-height: 28px;
+    padding-left: 4px;
+    height: 28px;
+    display: inline;
+    background: url(../Images/greenTitleLink.png) no-repeat right 5px;
+}
+
+.menu_green_titlelink .menu_green_titlelink_ul .menu_green_titlelink_ullinks{
+    font-size: 12px;
+    line-height: 28px;
+    height: 28px;
+    color: #313131;
+    padding: 0 3px;
+    text-align: center;
+    width: 99.99%;
+    cursor: pointer;
+}
+
+.menu_green_titlelink .menu_green_titlelink_ul .menu_green_titlelink_ullinks_select {
+    font-size: 12px;
+    line-height: 28px;
+    height: 28px;
+    color: #d63c00;
+    padding: 0 3px;
+    text-align: center;
+    width: 99.99%;
+}
+
+/******控制底部工具栏的高度************/
+#toolbar {
+    height: 25px;
+    background: transparent;
+    padding: 7px 0 3px 7px;
+
+}
+.toolbar_div {
+    height: 25px;
+    padding: 5px 0 3px 7px;
+
+}
+
+/*******添加了隔行变色效果的样式*****************/
+.tr_evencolor {
+    background-color:#f8f8f8;
+}
+
+/******搜索功能样式************/
+.spanSearch {
+    float: right; 
+    margin-top: 1.5px;
+    padding-right:8px;
+    
+}
+
+.search_middle{ display:inline-block; float:left; padding-left:20px;
+                 background: url(../images/search_middle_bg.png) no-repeat 7px 2px;
+                  height:25px; vertical-align:middle;}
+                 
+span.span_text{ display:inline-block; padding:0 5px 0 8px;padding:8px 5px 0 8px \9; *padding:8px 5px 0 8px;  height:17px; }
+.search_middle .txtbox_margin{margin-top:-3px;margin-top:-4px \9;*margin-top:-7px;}
+                 
+.search_right{ display:inline-block; float:right; padding-right:10px; height:25px; vertical-align:middle;}
+
+.small_btn{ width:33px; height:22px; display:inline-block; border:none; color:#303032; font-size:12px;
+              background: url(../images/small_btnBg.png) no-repeat center; text-align:center; line-height:22px;margin-right:8px;}
+.sure_btn{ width:33px; height:22px; display:inline-block; border:none;  color:#ffffff; font-size:12px;
+              background: url(../images/sure_btnBg.png) no-repeat center; text-align:center; line-height:22px; margin-right:8px;}              
+.small_btn:hover{ text-decoration:none; cursor:pointer;}
+.sure_btn:hover{ text-decoration:none; cursor:pointer;} 
+                
+.divSearch2{height:30px;padding-top:10px;}
+
+span.middle_css{vertical-align:middle;padding:0 5px 0 8px;padding:3px 5px 0 8px \9; *padding:5px 5px 0 8px;}
+
+/*add by wyq for fix tab head's position'*/
+.tabs li{ position: static;}

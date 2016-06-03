@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <MachineTypes>
+    <!--触摸机管理模块下~机器类型-->
+    <Name value="1">大机器</Name>
+    <Name value="2">小机器</Name>
+    <Name value="3">手持机</Name>
+    <Name value="4">手机</Name>
+    <Name value="5">打印机</Name>
+  </MachineTypes>
+
+  <NetType>
+    <!--触摸机管理模块下~网络接入类型-->
+    <Name value="1">WIFI</Name>
+    <Name value="2">3G</Name>
+    <Name value="3">WLAN</Name>
+  </NetType>
+
+  <PushType>
+    <!--中港车票下的站点提成下的提成类型-->
+    <Type value="1">返现</Type>
+    <Type value="2">百分比</Type>
+  </PushType>
+
+  <!--定义系统配置下的会员类型-->
+  <VipUser>
+    <User value="1">Vip会员</User>
+    <User value="2">员工会员</User>
+    <User value="3">代理商会员</User>
+    <User value="4">网站注册会员</User>
+  </VipUser>
+
+  <!--定义会员管理下的会员状态-->
+  <VipUserState>
+    <State value="1">正常</State>
+    <State value="2">挂失</State>
+    <State value="3">禁用</State>
+  </VipUserState>
+
+  <!--定义中港车票下的线路类型-->
+  <LineType>
+    <Type value="0">机场线</Type>
+    <Type value="1">市区线</Type>
+  </LineType>
+
+  <!--定义中港车票下的线路类型-->
+  <ContractType>
+    <Type value="1">买卖合同</Type>
+    <Type value="2">借款合同</Type>
+    <Type value="3">租赁合同</Type>
+    <Type value="4">承揽合同</Type>
+    <Type value="5">运输合同</Type>
+    <Type value="6">技术合同</Type>
+    <Type value="7">保管合同</Type>
+    <Type value="8">仓储合同</Type>
+    <Type value="9">委托合同</Type>
+  </ContractType>
+
+
+  <!--定义报销单审核流程中的审核角色，避免硬编码-->
+  <!--审核流程中的审核角色必须和role表中对应角色名一直-->
+  <AuditRole>
+    <Role value="admin">admin</Role>
+    <Role value="dept">部门主管</Role>
+    <Role value="finance">财务主管</Role>
+    <Role value="final">最终审核</Role>
+  </AuditRole>
+
+</Root>

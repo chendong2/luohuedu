@@ -1,0 +1,84 @@
+﻿body 
+{
+    height:100%;
+    background:#2696d6 url(indeximage/bjl.jpg) repeat-x left top;
+}
+.wrap_box 
+{
+    height:100%;
+    background:url(indeximage/index1.jpg) no-repeat center top;
+}
+.login_main
+{
+    height:100%;
+    margin: 0 auto;
+    padding: 0;
+    padding: 26px 0 0 0;
+}
+.login_content
+{
+    margin: 0 auto;
+    width: 434px;
+}
+.textbox_color
+{
+    height: 45px;
+    line-height: 45px;
+    text-align: left;
+    width:304px;
+    padding-left:80px;
+    background:none;
+    border:none;
+}
+.login_btn
+{
+    background: url(indeximage/btn.png) no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+    width: 244px;
+    position:absolute;
+    top:205px;
+    left:94px;
+}
+.login_btn:hover
+{
+    background: url(indeximage/btn.png) no-repeat;
+}
+.copyRight
+{
+    color:#9ad0ef;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 29px;
+    font-family: arial;
+}
+.login_Bg
+{
+    background: url(indeximage/denglu.png) no-repeat;
+    height: 434px;
+    height: 347px;
+    margin:168px auto 0;
+    position:relative;
+}
+.userNameBox
+{
+    position:relative;
+    top:87px;
+    left:24px;
+}
+.passwordBox
+{
+    position:absolute;
+    top:155px;
+    left:24px;
+}
+.lblmag 
+{
+    width:244px;
+    line-height:24px;
+    position:absolute;
+    top:200px;
+    left:24px;
+    color:Red;
+}

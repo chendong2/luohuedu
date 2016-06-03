@@ -1,28 +1,93 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
 
-# Precompiled Headers
-*.gch
-*.pch
+# Folder config file
+Desktop.ini
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
 
-# Fortran module files
-*.mod
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Windows shortcuts
+*.lnk
 
-# Executables
-*.exe
-*.out
-*.app
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.bin
+*.dat
+*.crc
+*.version
+*.pdb
+LuoHuEduSys/Services/obj/Debug/Services.dll
+*.cache
+LuoHuEduSys/Services/obj/Debug/Services.csproj.FileListAbsolute.txt
+LuoHuEduSys/BusinessObject/bin/Debug/BusinessObject.dll
+LuoHuEduSys/BusinessObject/obj/Debug/BusinessObject.csproj.FileListAbsolute.txt
+LuoHuEduSys/BusinessObject/obj/Debug/BusinessObject.dll
+*.cache
+LuoHuEduSys/DapperExtensions/bin/Debug/Dapper.dll
+LuoHuEduSys/DapperExtensions/bin/Debug/Dapper.xml
+LuoHuEduSys/DapperExtensions/bin/Debug/DapperExtensions.dll
+LuoHuEduSys/DapperExtensions/obj/Debug/DapperExtensions.dll
+LuoHuEduSys/Domain/bin/Debug/BusinessObject.dll
+LuoHuEduSys/Domain/bin/Debug/Domain.dll
+LuoHuEduSys/Domain/obj/Debug/Domain.dll
+LuoHuEduSys/LuoHuEdu.DAO/bin/Debug/Dapper.dll
+LuoHuEduSys/LuoHuEdu.DAO/bin/Debug/Domain.dll
+LuoHuEduSys/LuoHuEdu.DAO/bin/Debug/
+LuoHuEduSys/LuoHuEdu/bin/
+LuoHuEduSys/LuoHuEdu.DAO/obj/Debug/
+LuoHuEduSys/LuoHuEdu/obj/Debug/
+LuoHuEduSys/BusinessObject/obj/Debug/
+*.txt
+*.cache
+LuoHuEduSys/LuoHuEduWebService/bin/
+LuoHuEduSys/LuoHuEduWebService/bin/Dapper.dll
+LuoHuEduSys/Services/bin/Debug/Services.dll
+LuoHuEduSys/Services/bin/Debug/
+LuoHuEduSys/Domain/obj/Debug/Domain.csproj.FileListAbsolute.txt
+LuoHuEduSys/Domain/obj/Debug/
+LuoHuEduSys/Services/obj/Debug/Services.csproj.FileListAbsolute.txt
+LuoHuEduSys/Services/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+LuoHuEduSys/LuoHuEduWebService/obj/Debug/LuoHuEduWebService.dll
+LuoHuEduSys/LuoHuEduWebService/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+LuoHuEduSys/LuoHuEdu/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+LuoHuEduSys/LuoHuEdu.DAO/obj/Debug/LuoHuEdu.DAO.csproj.FileListAbsolute.txt
+LuoHuEduSys/Domain/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+LuoHuEduSys/LuoHuEdu/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+LuoHuEduSys/LuoHuEduWebService/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.0
+LuoHuEduSys/_ReSharper.LuoHuEduSys/ModuleIds.xml
+*.bak

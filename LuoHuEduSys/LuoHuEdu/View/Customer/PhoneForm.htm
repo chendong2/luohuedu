@@ -1,0 +1,49 @@
+﻿<div id="dlgPhone" style="width: 380px; padding: 10px" data-options="buttons: '#dlg-buttons',
+                                                                closed: true,
+                                                                shadow:false,
+                                                                modal:true">
+    <form id="ffPhone" method="post">
+    <table class="custom_forms_popup">
+        <tr>
+            <td style="width: 25%" class="td_right">
+                姓名:
+            </td>
+            <td style="width: 35%" class="td_left">
+                <input id="txtName1" type="text"   name="Name" style="width: 145px" maxlength="20"   />
+            </td>
+                <td style="padding-left: 15px; width: 35%">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="ticket();">中港车票</a>
+            </td>
+        </tr>
+         <tr>
+            <td  class="td_right">
+                电话:
+            </td>
+            <td class="td_left">
+                <input id="txtPhone1" type="text"   name="Phone" maxlength="20" style="width: 145px"/>
+            </td>
+                <td style="padding-left: 15px">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="carrental();">中港包车</a>
+            </td>
+        </tr>   
+         <tr>
+            <td  class="td_right">
+                地址:
+            </td>
+            <td class="td_left" colspan="3">
+                <input id="txtAddress" type="text"   name="Address" maxlength="20" style="width: 145px"/>
+            </td>                
+        </tr>   
+    </table>
+    <div>
+        <input id="HidName" type="hidden" />
+        <input id="HidIdentification" type="hidden" name="Identification"/>
+    </div>
+    </form>
+    <div id="dlg-buttons" style="text-align: center;margin-top:5px">
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveData();">确定</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeFormDialogPhone();">
+        取消</a>
+</div>
+</div>
+

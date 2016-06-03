@@ -1,0 +1,271 @@
+﻿<style type="text/css">
+    .custom_forms_popup tbody td input[type="text"]
+    {
+        width: 130px;
+    }
+</style>
+    <link href="../../../App_Themes/Global/BanciSeat.css" rel="stylesheet" type="text/css" />
+<div id="dlg" style="width: 850px; padding: 10px" data-options="buttons:'#dlg-buttons1',
+                                                                         closed: true,
+                                                                         shadow:false,
+                                                                         modal:true">
+    <form id="ff" method="post">
+        <div id="TicketForm"></div>
+        <div>
+            <input id="TicketId" type="hidden" name="TkId" value="" />
+            <input id="HidSeatNum" type="hidden" value="" />
+            <input id="HidBanCiId" type="hidden" value="" />
+            <input id="TlId" type="hidden" name="TlId" value="" />
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons1">
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveData();">确定</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeFormDialog();">取消</a>
+</div>
+<script id="order-template" type="text/x-handlebars-template">
+<table class="custom_forms_popup">
+        <tr>
+            <td class="td_right" style="width: 14%">
+                订单编号:
+            </td>
+            <td class="td_left" style="width: 18%">
+                {{OrderNum}}
+            </td>
+            <td class="td_right" style="width: 14%">
+                车票号:
+            </td>
+            <td class="td_left"style="width: 18%">
+                {{TicketNo}}
+            </td>
+            <td class="td_right" style="width: 14%">
+                线路名称:
+            </td>
+            <td class="td_left" style="width: 18%">
+                {{LineName}}
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                班次日期:
+            </td>
+            <td class="td_left">
+                <input type="text" name="LeaveDate" id="LeaveDate" maxlength="10" style="width: 136px"/>
+            </td>
+        
+         <td class="td_right">
+                班次时间:
+            </td>
+            <td class="td_left">
+               <ul id="sddm">
+                            <li>
+                                <input type="text" name="LeaveTime" id="StrLinebanci" onmouseover="mopen('m1')"
+                                    onmouseout="mclosetime()" maxlength="10" style="width: 136px"/>
+                                <div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+                                    <span id="BanCiTime" class="span_R_long clearfix" style="width: 208px;"></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <input type="hidden" name="StrLinebanciId" id="StrLinebanciId" />
+            </td>        
+        <td class="td_right">
+                座位号:
+            </td>
+            <td class="td_left">
+                <ul id="sddm2">
+                            <li>
+                                <input type="text" name="SeatNum" id="StrSeat" onmouseover="mopen('m3')" onmouseout="mclosetime()"
+                                    maxlength="10" style="width: 136px"/>
+                                <div id="m3" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+                                    <span class="span_R_long clearfix" id="seat" style="width: 196px;"></span>
+                                </div>
+                            </li>
+                        </ul>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                是否改签:
+            </td>
+            <td class="td_left">
+                <label>
+                    <input type="checkbox" id="chkIsMeal" name="IsMeal" value="1" /></label>
+            </td>
+            <td class="td_right">
+                原班次时间：
+            </td>
+            <td class="td_left" >
+                {{OldLeaveDateStr}} {{OldLeaveTime}}
+            </td>
+            <td class="td_right">
+                旧票号:
+            </td>
+            <td class="td_left" >
+                {{OldTicketNo}} 
+            </td>
+            </tr>
+        <tr>
+            <td class="td_right">
+                票价:
+            </td>
+            <td class="td_left">
+                {{TicketPrice}}
+            </td>
+            <td class="td_right">
+                币种：
+            </td>
+            <td class="td_left">
+                {{CurrencyType}}
+            </td>       
+            <td class="td_right">
+                挂账状态:
+            </td>
+            <td class="td_left">
+                {{IsHangingStr}}
+            </td> 
+            </tr>
+        <tr>
+            <td class="td_right">
+                流水号:
+            </td>
+            <td class="td_left">
+                {{TicketSort}}
+            </td>
+      
+            <td class="td_right">
+                乘客姓名:
+            </td>
+            <td class="td_left">
+                <input type="text" name="CustomerName" id="txtCustomerName" maxlength="15" style="width: 136px"/>
+            </td>
+            <td class="td_right">
+                联系电话:
+            </td>
+            <td class="td_left">
+                 <input type="text" name="Phone" id="txtPhone" maxlength="15" style="width: 136px"/>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="td_right">
+                取票人:
+            </td>
+            <td class="td_left">
+                <input type="text" name="BeiYong1" id="txtBeiYong1" maxlength="15" style="width: 136px"/>
+            </td>
+            <td class="td_right">
+                取票电话:
+            </td>
+            <td class="td_left">
+                 <input type="text" name="BeiYong2" id="txtBeiYong2" maxlength="15" style="width: 136px"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td_right">
+                下单人:
+            </td>
+            <td class="td_left">
+                {{CreatedBy}}
+            </td>
+            <td class="td_right">
+                下单时间:
+            </td>
+            <td class="td_left">
+                {{CreatedOnStr}}
+            </td>
+        
+            <td class="td_right">
+                出票状态:
+            </td>
+            <td class="td_left" >
+                {{IsOutStr}}
+            </td>
+              </tr>
+        <tr>      
+            <td class="td_right">
+                出票人:
+            </td>
+            <td class="td_left">
+                {{OutBy}}
+            </td>
+            
+            <td class="td_right">
+                出票时间:
+            </td>
+            <td class="td_left">
+                {{OutOnStr}}
+            </td>
+            <td class="td_right">
+                核票状态：
+            </td>
+            <td class="td_left" >
+                {{AuditStateStr}}
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                核票人:
+            </td>
+            <td class="td_left">
+                {{CheckMan}}
+            </td>
+            <td class="td_right">
+                核票时间:
+            </td>
+            <td class="td_left">
+                {{CheckDateStr}}
+            </td>
+        
+            <td class="td_right">
+                退票状态:
+            </td>
+            <td class="td_left" >
+                {{IsRefundStr}}
+            </td>  
+              </tr>
+        <tr>   
+            <td class="td_right">
+                退票人:
+            </td>
+            <td class="td_left">
+                {{RefundBy}}
+            </td> 
+            <td class="td_right">
+                退票日期:
+            </td>
+            <td class="td_left">
+                {{RefundOnStr}}
+            </td>
+            <td class="td_right">
+                上车点:
+            </td>
+            <td class="td_left">
+                <input type="text" name="OnpointName" id="txtOnpointName" maxlength="15" style="width: 136px"/>
+            </td>
+        </tr>
+         <tr>
+            <td class="td_right">
+                下车点:
+            </td>
+            <td class="td_left" >
+                <input type="text" name="OffpointName" id="txtOffpointName" maxlength="15" style="width: 130px"/>
+            </td>
+               <td class="td_right">
+                接送时间:
+            </td>
+            <td class="td_left" colspan="3">
+                <input type="text" name="PickUpTime" id="txtPickUpTime" maxlength="10" style="width: 130px"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                备注:
+            </td>
+            <td class="td_left" colspan="5">
+               <textarea id="Remark" name="Remark" class="easyui-validatebox" data-options="validType:'maxLength[200]'"
+                    cols="84" rows="2" maxlength="200" onkeyup="return isMaxLen(this);" onblur="return isMaxLen(this);"/> 
+            </td>
+        </tr>
+        </table>
+</script>
