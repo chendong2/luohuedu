@@ -1255,6 +1255,7 @@
     <Content Include="View\Free\FreeOrderList.htm" />
     <Content Include="View\Free\FreeOrderPackageList.htm" />
     <Content Include="View\Free\FreePackageForm.htm" />
+    <Content Include="View\Parameter\SubjectForm.htm" />
     <Content Include="View\Parameter\SubjectList.htm" />
     <Content Include="View\System\PswChange.htm" />
     <Content Include="View\Ticket\TicketBook\BanciList.htm" />

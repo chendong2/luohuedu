@@ -20,17 +20,17 @@ using(easyloader.defaultReferenceModules, function () {
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
-            var customerData = {
+            var subjectData = {
                 page: param.page,
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
                 subjectBo: {}
             };
-            var paramStr = JSON.stringify(customerData);
+            var paramStr = JSON.stringify(subjectData);
 
             ajaxCRUD({
-                url: '/WebServices/SubjectWebServiceSubjectWebService.asmx/GetSubject',
+                url: '/LuoHuEduWebService/Parameter/Subject.asmx/GetSubjectList',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -66,7 +66,7 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/Customer/CustomerForm.htm',
+            href: '/View/Parameter/SubjectForm.htm',
             onLoad: function () {
 //                setValidatebox('Name', {
 //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
@@ -76,7 +76,7 @@ function loadPartialHtml() {
     }
 }
 
-var moduleName = '客户管理-';
+var moduleName = '科目设置-';
 
 //点击“新增”按钮
 function addData() {
@@ -101,7 +101,7 @@ function editData() {
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
     ajaxCRUD({
-        url: '/WebServices/CustomerWebService/CustomerWebService.asmx/GetCustomerById',
+        url: '/LuoHuEduWebService/Parameter/Subject.asmx/GetSubjectById',
         data: "{id:'" + itemid + "'}",
         success: function (data) {
             openDialog('dlg', {
@@ -122,20 +122,20 @@ function saveData() {
     }
 
     var hidValue = $("#HidName").val();
-    var basicUrl = '/WebServices/CustomerWebService/CustomerWebService.asmx/';
+    var basicUrl = '/LuoHuEduWebService/Parameter/Subject.asmx/';
 
     var wsMethod = '';
     if (hidValue.length > 0) {
-        wsMethod = "UpdateCustomer"; //修改
+        wsMethod = "UpdateSubject"; //修改
     } else {
-        wsMethod = "AddCustomer"; //新增
+        wsMethod = "AddSubject"; //新增
     }
 
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
     var form2JsonStr = JSON.stringify(form2JsonObj);
-    var jsonDataStr = "{customerInfoBo:" + form2JsonStr + "}";
+    var jsonDataStr = "{SubjectBo:" + form2JsonStr + "}";
 
     ajaxCRUD({
         url: formUrl,
@@ -166,7 +166,7 @@ function deleteDatas() {
 //批量删除后台AJAX处理
 function deleteDatasAjax(str) {
     ajaxCRUD({
-        url: '/WebServices/CustomerWebService/CustomerWebService.asmx/DelCustomer',
+        url: '/LuoHuEduWebService/Parameter/Subject.asmx/DelSubject',
         data: "{ids:'" + str + "'}",
         success: function (data) {
             if (data == true) {
@@ -184,20 +184,19 @@ function Search() {
     var dataGridOptions = {
         pageNumber: 1,
         loader: function (param, success, error) {
-            var customerData = {
+            var SubjectData = {
                 page: param.page,
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                customerInfoBo: {
-                    Name: $("#txtName").val(),
-                    Phone: $("#txtPhone").val()
+                SubjectBo: {
+                    SubjectName: $("#txtSubjectName").val()
                 }
             };
-            var paramStr = JSON.stringify(customerData);
+            var paramStr = JSON.stringify(SubjectData);
 
             ajaxCRUD({
-                url: '/WebServices/CustomerWebService/CustomerWebService.asmx/GetCustomers',
+                url: '/LuoHuEduWebService/Parameter/Subject.asmx/GetSubjectList',
                 data: paramStr,
                 success: function (data) {
                     success(data);
