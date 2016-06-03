@@ -7,10 +7,10 @@ namespace BusinessObject.Course
 {
     public  class CourseStudentBo
     {
-        /// <summary>
-        /// 编号ID唯一
-        /// </summary>
-        public  string Id { get; set; }
+        ///// <summary>
+        ///// 编号ID唯一
+        ///// </summary>
+        //public  string Id { get; set; }
 
         /// <summary>
         /// 姓名
