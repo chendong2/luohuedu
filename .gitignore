@@ -44,6 +44,7 @@ $RECYCLE.BIN/
 .AppleDesktop
 Network Trash Folder
 Temporary Items
+
 .apdisk
 *.bin
 *.dat
@@ -71,8 +72,6 @@ LuoHuEduSys/LuoHuEdu/bin/
 LuoHuEduSys/LuoHuEdu.DAO/obj/Debug/
 LuoHuEduSys/LuoHuEdu/obj/Debug/
 LuoHuEduSys/BusinessObject/obj/Debug/
-*.txt
-*.cache
 LuoHuEduSys/LuoHuEduWebService/bin/
 LuoHuEduSys/LuoHuEduWebService/bin/Dapper.dll
 LuoHuEduSys/Services/bin/Debug/Services.dll
@@ -89,5 +88,10 @@ LuoHuEduSys/Domain/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 LuoHuEduSys/LuoHuEdu/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 LuoHuEduSys/LuoHuEduWebService/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.0
-LuoHuEduSys/_ReSharper.LuoHuEduSys/ModuleIds.xml
+LuoHuEduSys/_ReSharper.LuoHuEduSys/
 *.bak
+LuoHuEduSys/LuoHuEdu/Common/Scripts/ifram/jquery-core-easyui/changelog.txt
+LuoHuEduSys/LuoHuEduWebService/obj/Debug/LuoHuEduWebService.csproj.FileListAbsolute.txt
+LuoHuEduSys/LuoHuEdu/Common/Scripts/ifram/jquery-core-easyui/licence_gpl.txt
+LuoHuEduSys/LuoHuEdu/Common/Scripts/ifram/jquery-core-easyui/readme.txt
+LuoHuEduSys/LuoHuEdu/Common/Scripts/ifram/jquery-core-easyui/license_commercial.txt
