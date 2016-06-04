@@ -30,7 +30,7 @@ using(easyloader.defaultReferenceModules, function () {
             var paramStr = JSON.stringify(subjectData);
 
             ajaxCRUD({
-                url: '/LuoHuEduWebService/Parameter/Subject.asmx/GetSubjectList',
+                url: '/WebServices/Parameter/Subject.asmx/GetSubjectList',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -101,7 +101,7 @@ function editData() {
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
     ajaxCRUD({
-        url: '/LuoHuEduWebService/Parameter/Subject.asmx/GetSubjectById',
+        url: '/WebServices/Parameter/Subject.asmx/GetSubjectById',
         data: "{id:'" + itemid + "'}",
         success: function (data) {
             openDialog('dlg', {
@@ -122,7 +122,7 @@ function saveData() {
     }
 
     var hidValue = $("#HidName").val();
-    var basicUrl = '/LuoHuEduWebService/Parameter/Subject.asmx/';
+    var basicUrl = '/WebServices/Parameter/Subject.asmx/';
 
     var wsMethod = '';
     if (hidValue.length > 0) {
@@ -166,7 +166,7 @@ function deleteDatas() {
 //批量删除后台AJAX处理
 function deleteDatasAjax(str) {
     ajaxCRUD({
-        url: '/LuoHuEduWebService/Parameter/Subject.asmx/DelSubject',
+        url: '/WebServices/Parameter/Subject.asmx/DelSubject',
         data: "{ids:'" + str + "'}",
         success: function (data) {
             if (data == true) {
@@ -196,7 +196,7 @@ function Search() {
             var paramStr = JSON.stringify(SubjectData);
 
             ajaxCRUD({
-                url: '/LuoHuEduWebService/Parameter/Subject.asmx/GetSubjectList',
+                url: '/WebServices/Parameter/Subject.asmx/GetSubjectList',
                 data: paramStr,
                 success: function (data) {
                     success(data);

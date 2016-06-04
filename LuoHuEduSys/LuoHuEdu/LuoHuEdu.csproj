@@ -1275,6 +1275,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WebServices\Parameter\Subject.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BaseCodes\XmlUtil.cs" />
@@ -1298,6 +1299,10 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebServices\Parameter\Subject.asmx.cs">
+      <DependentUpon>Subject.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common\Configs\log4net_local.config" />
@@ -1417,7 +1422,6 @@
     <Folder Include="Export\DataSet\" />
     <Folder Include="Export\WebService\" />
     <Folder Include="Models\" />
-    <Folder Include="WebServices\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessObject\BusinessObject.csproj">

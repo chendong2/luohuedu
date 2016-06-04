@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Course\Course.asmx" />
-    <Content Include="Parameter\Subject.asmx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -64,10 +63,6 @@
   <ItemGroup>
     <Compile Include="Course\Course.asmx.cs">
       <DependentUpon>Course.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Parameter\Subject.asmx.cs">
-      <DependentUpon>Subject.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
