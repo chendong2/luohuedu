@@ -45,12 +45,12 @@ namespace LuoHuEdu.WebServices.Parameter
 
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public SubjectBo GetSubjectById(int id)
+        public SubjectBo GetSubjectById(String id)
         {
 
-            var Subject = new SubjectService();
-            var SubjectBo = Subject.GetSubjectById(id);
-            return SubjectBo;
+            var subjectService = new SubjectService();
+            var subjectBo = subjectService.GetSubjectById(id);
+            return subjectBo;
         }
 
     }

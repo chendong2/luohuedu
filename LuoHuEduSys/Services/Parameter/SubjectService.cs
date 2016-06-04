@@ -113,7 +113,7 @@ namespace Services.Parameter
         /// </summary>
         /// <param name="id">科目id</param>
         /// <returns>科目BO实体</returns>
-        public SubjectBo GetSubjectById(int? id)
+        public SubjectBo GetSubjectById(String id)
         {
             if (id == null)
                 throw new ArgumentNullException("id");
@@ -123,7 +123,7 @@ namespace Services.Parameter
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
                     var sqlStr = @"select * from tb_subject where Id=@Id";
-                    SubjectBo = connection.Query<SubjectBo>(sqlStr, new { Id = id.GetValueOrDefault() }).FirstOrDefault();
+                    SubjectBo = connection.Query<SubjectBo>(sqlStr, new { Id = id }).FirstOrDefault();
                     
                 }
             }

@@ -8,9 +8,9 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '科目管理',
+        title: '科目设置',
         columns: [[
-            { field: 'Identification', checkbox: true },
+            { field: 'Id', checkbox: true },
             { field: 'SubjectName', title: '科目名称', width: 180, sortable: false }
         ]],
         singleSelect: false,
@@ -94,7 +94,7 @@ function editData() {
         msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
     } else {
         resetFormAndClearValidate('ff');
-        fillForm(row.Identification);
+        fillForm(row.Id);
     }
 }
 
@@ -108,7 +108,7 @@ function fillForm(itemid) {
                 title: moduleName + '编辑',
                 iconCls: 'icon-edit'
             });
-            $("#HidName").val(data.Name);
+            $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
             loadDataToForm('ff', data);
         }
