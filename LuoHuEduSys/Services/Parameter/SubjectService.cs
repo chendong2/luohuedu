@@ -18,29 +18,34 @@ namespace Services.Parameter
       ** 科目ISubjectService的实现类SubjectService。
     *******************************************************************************/
 
-    public class SubjectService 
+    public class SubjectService
     {
         #region 科目增删改查基本操作
 
         /// <summary>
         /// 新增科目
         /// </summary>
-        /// <param name="SubjectBo"> 科目BO</param>
+        /// <param name="subjectBo"> 科目BO</param>
         /// <returns>bool</returns>
-        public bool AddSubject(SubjectBo SubjectBo)
+        public bool AddSubject(SubjectBo subjectBo)
         {
-            if (SubjectBo == null)
-                throw new ArgumentNullException("SubjectBo");
-            if (SubjectBo.Id != null)
+            if (subjectBo == null)
+                throw new ArgumentNullException("subjectBo");
+            if (subjectBo.Id != null)
                 throw new Exception("不能给Id赋值");
             try
             {
-                SubjectBo.SubjectName = SubjectBo.SubjectName;
-             
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    String id = Guid.NewGuid().ToString();
+                    var sqlStr = @"INSERT INTO tb_subject(Id,SubjectName) VALUES('" + id + "','" + subjectBo.SubjectName + "');";
+                    connection.Execute(sqlStr);
+                }
+
             }
             catch (Exception ex)
             {
-                LogHelper.WriteLog(string.Format("SubjectService.AddSubject({0})异常", SubjectBo), ex);
+                LogHelper.WriteLog(string.Format("SubjectService.AddSubject({0})异常", subjectBo), ex);
                 return false;
             }
             return true;
@@ -57,7 +62,7 @@ namespace Services.Parameter
                 throw new ArgumentNullException("id");
             try
             {
-               
+
             }
             catch (Exception ex)
             {
@@ -76,7 +81,7 @@ namespace Services.Parameter
         {
             try
             {
-               
+
             }
             catch (Exception ex)
             {
@@ -97,8 +102,8 @@ namespace Services.Parameter
                 throw new ArgumentNullException("SubjectBo");
             try
             {
-                
-              
+
+
                 return true;
             }
             catch (Exception ex)
@@ -124,7 +129,7 @@ namespace Services.Parameter
                 {
                     var sqlStr = @"select * from tb_subject where Id=@Id";
                     SubjectBo = connection.Query<SubjectBo>(sqlStr, new { Id = id }).FirstOrDefault();
-                    
+
                 }
             }
             catch (Exception ex)

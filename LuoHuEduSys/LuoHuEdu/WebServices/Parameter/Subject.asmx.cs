@@ -21,6 +21,15 @@ namespace LuoHuEdu.WebServices.Parameter
     public class Subject : System.Web.Services.WebService
     {
 
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool AddSubject(SubjectBo subjectBo)
+        {
+
+            var subjectService = new SubjectService();
+            return subjectService.AddSubject(subjectBo);
+        }
+
 
         [ScriptMethod]
         [WebMethod(EnableSession = true)]

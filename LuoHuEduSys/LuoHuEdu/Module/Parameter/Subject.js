@@ -135,7 +135,7 @@ function saveData() {
 
     var form2JsonObj = form2Json("ff");
     var form2JsonStr = JSON.stringify(form2JsonObj);
-    var jsonDataStr = "{SubjectBo:" + form2JsonStr + "}";
+    var jsonDataStr = "{subjectBo:" + form2JsonStr + "}";
 
     ajaxCRUD({
         url: formUrl,
