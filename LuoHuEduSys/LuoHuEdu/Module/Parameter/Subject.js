@@ -189,7 +189,7 @@ function Search() {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                SubjectBo: {
+                subjectBo: {
                     SubjectName: $("#txtSubjectName").val()
                 }
             };
