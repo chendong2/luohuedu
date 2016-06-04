@@ -95,3 +95,4 @@ LuoHuEduSys/LuoHuEduWebService/obj/Debug/LuoHuEduWebService.csproj.FileListAbsol
 LuoHuEduSys/LuoHuEdu/Common/Scripts/ifram/jquery-core-easyui/licence_gpl.txt
 LuoHuEduSys/LuoHuEdu/Common/Scripts/ifram/jquery-core-easyui/readme.txt
 LuoHuEduSys/LuoHuEdu/Common/Scripts/ifram/jquery-core-easyui/license_commercial.txt
+*.suo
