@@ -94,21 +94,25 @@ namespace Services.Parameter
         /// <summary>
         /// 修改科目信息
         /// </summary>
-        /// <param name="SubjectBo">科目BO</param>
+        /// <param name="subjectBo">科目BO</param>
         /// <returns></returns>
-        public bool UpdateSubject(SubjectBo SubjectBo)
+        public bool UpdateSubject(SubjectBo subjectBo)
         {
-            if (SubjectBo == null)
-                throw new ArgumentNullException("SubjectBo");
+            if (subjectBo == null)
+                throw new ArgumentNullException("subjectBo");
             try
             {
-
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"update tb_subject set SubjectName='" + subjectBo.SubjectName+"' where Id='"+ subjectBo.Id+"'";
+                    connection.Execute(sqlStr);
+                }
 
                 return true;
             }
             catch (Exception ex)
             {
-                LogHelper.WriteLog(string.Format("SubjectService.UpdateSubject({0})异常", SubjectBo), ex);
+                LogHelper.WriteLog(string.Format("SubjectService.UpdateSubject({0})异常", subjectBo), ex);
                 return false;
             }
         }
@@ -139,6 +143,7 @@ namespace Services.Parameter
             return SubjectBo;
         }
 
+        //获取数据列表
         public Page<SubjectBo> GetSubjects(int page, int rows, string sort, string order, SubjectBo subjectBo)
         {
             int count = 0;

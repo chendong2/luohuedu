@@ -121,7 +121,7 @@ function saveData() {
         return;
     }
 
-    var hidValue = $("#HidName").val();
+    var hidValue = $("#HidId").val();
     var basicUrl = '/WebServices/Parameter/Subject.asmx/';
 
     var wsMethod = '';
@@ -184,7 +184,7 @@ function Search() {
     var dataGridOptions = {
         pageNumber: 1,
         loader: function (param, success, error) {
-            var SubjectData = {
+            var subjectData = {
                 page: param.page,
                 rows: param.rows,
                 order: param.order,
@@ -193,7 +193,7 @@ function Search() {
                     SubjectName: $("#txtSubjectName").val()
                 }
             };
-            var paramStr = JSON.stringify(SubjectData);
+            var paramStr = JSON.stringify(subjectData);
 
             ajaxCRUD({
                 url: '/WebServices/Parameter/Subject.asmx/GetSubjectList',

@@ -21,6 +21,7 @@ namespace LuoHuEdu.WebServices.Parameter
     public class Subject : System.Web.Services.WebService
     {
 
+        //新增数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
         public bool AddSubject(SubjectBo subjectBo)
@@ -30,7 +31,17 @@ namespace LuoHuEdu.WebServices.Parameter
             return subjectService.AddSubject(subjectBo);
         }
 
+        //编辑数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool UpdateSubject(SubjectBo subjectBo)
+        {
 
+            var subjectService = new SubjectService();
+            return subjectService.UpdateSubject(subjectBo);
+        }
+
+        //获取数据列表
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
         public object GetSubjectList(int page, int rows, string sort, string order, SubjectBo subjectBo)
@@ -52,6 +63,7 @@ namespace LuoHuEdu.WebServices.Parameter
             }
         }
 
+        //根据Id获取数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
         public SubjectBo GetSubjectById(String id)
