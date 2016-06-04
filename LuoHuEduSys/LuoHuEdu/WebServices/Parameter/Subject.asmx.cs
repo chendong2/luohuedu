@@ -8,18 +8,19 @@ using System.Web.Services;
 using BusinessObject.Parameter;
 using Services.Parameter;
 
-namespace LuoHuEduWebService.Parameter
+namespace LuoHuEdu.WebServices.Parameter
 {
     /// <summary>
-    /// Subject 的摘要说明
+    /// Summary description for Subject
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
-    // 若要允许使用 ASP.NET AJAX 从脚本中调用此 Web 服务，请取消对下行的注释。
+    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
     public class Subject : System.Web.Services.WebService
     {
+
 
         [ScriptMethod]
         [WebMethod]
@@ -40,5 +41,6 @@ namespace LuoHuEduWebService.Parameter
             var SubjectBo = Subject.GetSubjectById(id);
             return SubjectBo;
         }
+
     }
 }
