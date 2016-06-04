@@ -41,6 +41,17 @@ namespace LuoHuEdu.WebServices.Parameter
             return subjectService.UpdateSubject(subjectBo);
         }
 
+  
+
+        //批量删除数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool DeleteSubjectsByIds(String ids)
+        {
+            var subjectService = new SubjectService();
+            return subjectService.DeleteSubjectsByIds(ids);
+        }
+
         //获取数据列表
         [ScriptMethod]
         [WebMethod(EnableSession = true)]

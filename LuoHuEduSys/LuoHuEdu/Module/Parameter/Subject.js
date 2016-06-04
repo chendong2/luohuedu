@@ -166,7 +166,7 @@ function deleteDatas() {
 //批量删除后台AJAX处理
 function deleteDatasAjax(str) {
     ajaxCRUD({
-        url: '/WebServices/Parameter/Subject.asmx/DelSubject',
+        url: '/WebServices/Parameter/Subject.asmx/DeleteSubjectsByIds',
         data: "{ids:'" + str + "'}",
         success: function (data) {
             if (data == true) {
@@ -190,7 +190,7 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 subjectBo: {
-                    SubjectName: $("#txtSubjectName").val()
+                    SubjectName: $("#txtSubjectName").val().trim()
                 }
             };
             var paramStr = JSON.stringify(subjectData);

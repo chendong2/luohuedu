@@ -31,7 +31,7 @@ namespace Services.Parameter
         {
             if (subjectBo == null)
                 throw new ArgumentNullException("subjectBo");
-            if (subjectBo.Id != null)
+            if (subjectBo.Id != null && subjectBo.Id.Length>1)
                 throw new Exception("不能给Id赋值");
             try
             {
@@ -51,37 +51,26 @@ namespace Services.Parameter
             return true;
         }
 
-        /// <summary>
-        /// 通过科目id删除科目信息
-        /// </summary>
-        /// <param name="id">科目id</param>
-        /// <returns>bool</returns>
-        public bool DeleteSubject(int? id)
-        {
-            if (id == null)
-                throw new ArgumentNullException("id");
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                LogHelper.WriteLog(string.Format("SubjectService.DeleteSubject({0})异常", id), ex);
-                return false;
-            }
-            return true;
-        }
 
         /// <summary>
         /// 批量删除科目信息
         /// </summary>
         /// <param name="ids">多个科目id用逗号分隔的字符串</param>
         /// <returns>bool</returns>
-        public bool DeleteSubjectsByIds(int[] ids)
+        public bool DeleteSubjectsByIds(String ids)
         {
             try
             {
-
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    String[] idArray = ids.Split(',');
+                    for (int i = 0; i < idArray.Length; i++)
+                    {
+                        String id = idArray[i];
+                        var sqlStr = @"delete from  tb_subject where id='" + id + "';";
+                        connection.Execute(sqlStr);
+                    }
+                }
             }
             catch (Exception ex)
             {
