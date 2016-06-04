@@ -14,9 +14,6 @@ using DapperExtensions;
 using System.Data.Common;
 namespace Services.Parameter
 {
-    /********************************************************************************
-      ** 科目ISubjectService的实现类SubjectService。
-    *******************************************************************************/
 
     public class SubjectService
     {
@@ -37,9 +34,20 @@ namespace Services.Parameter
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
+
+
                     String id = Guid.NewGuid().ToString();
-                    var sqlStr = @"INSERT INTO tb_subject(Id,SubjectName) VALUES('" + id + "','" + subjectBo.SubjectName + "');";
-                    connection.Execute(sqlStr);
+                    subjectBo.Id = id;
+                    var sqlStr = @"INSERT INTO tb_subject(Id,SubjectName) VALUES(@Id,@SubjectName);";
+                    int row = connection.Execute(sqlStr, subjectBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
 
             }
@@ -48,8 +56,8 @@ namespace Services.Parameter
                 LogHelper.WriteLog(string.Format("SubjectService.AddSubject({0})异常", subjectBo), ex);
                 return false;
             }
-            return true;
         }
+
 
 
         /// <summary>
@@ -66,9 +74,10 @@ namespace Services.Parameter
                     String[] idArray = ids.Split(',');
                     for (int i = 0; i < idArray.Length; i++)
                     {
-                        String id = idArray[i];
-                        var sqlStr = @"delete from  tb_subject where id='" + id + "';";
-                        connection.Execute(sqlStr);
+                        SubjectBo sBo = new SubjectBo();
+                        sBo.Id = idArray[i];
+                        var sqlStr = @"delete from  tb_subject where id=@Id;";
+                        connection.Execute(sqlStr, sBo);
                     }
                 }
             }
@@ -93,11 +102,17 @@ namespace Services.Parameter
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"update tb_subject set SubjectName='" + subjectBo.SubjectName + "' where Id='" + subjectBo.Id + "'";
-                    connection.Execute(sqlStr);
+                    var sqlStr = @"update tb_subject set SubjectName=@SubjectName where Id=@Id";
+                    int row = connection.Execute(sqlStr, subjectBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-
-                return true;
             }
             catch (Exception ex)
             {
