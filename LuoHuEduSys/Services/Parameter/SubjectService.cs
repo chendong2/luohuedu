@@ -155,7 +155,7 @@ namespace Services.Parameter
             {
                 if (subjectBo.SubjectName != null)
                 {
-                    strSql += "and t.SubjectName like @SubjectName";
+                    strSql += "and subjectname like @SubjectName";
                 }
             }
 
