@@ -31,7 +31,7 @@ namespace Services.Parameter
         {
             if (subjectBo == null)
                 throw new ArgumentNullException("subjectBo");
-            if (subjectBo.Id != null && subjectBo.Id.Length>1)
+            if (subjectBo.Id != null && subjectBo.Id.Length > 1)
                 throw new Exception("不能给Id赋值");
             try
             {
@@ -93,7 +93,7 @@ namespace Services.Parameter
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"update tb_subject set SubjectName='" + subjectBo.SubjectName+"' where Id='"+ subjectBo.Id+"'";
+                    var sqlStr = @"update tb_subject set SubjectName='" + subjectBo.SubjectName + "' where Id='" + subjectBo.Id + "'";
                     connection.Execute(sqlStr);
                 }
 
@@ -171,14 +171,14 @@ namespace Services.Parameter
                 count = context.Query<SubjectBo>(strSql,
                                             new
                                             {
-                                                SubjectName = subjectBo.SubjectName
+                                                SubjectName = string.Format("%{0}%", subjectBo.SubjectName)
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
                 var list = context.Query<SubjectBo>(strSql,
                                                 new
                                                 {
-                                                    SubjectName = subjectBo.SubjectName,
+                                                    SubjectName = string.Format("%{0}%", subjectBo.SubjectName),
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
