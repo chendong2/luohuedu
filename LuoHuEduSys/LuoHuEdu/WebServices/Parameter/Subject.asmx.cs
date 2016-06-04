@@ -34,7 +34,7 @@ namespace LuoHuEdu.WebServices.Parameter
 
         [ScriptMethod]
         [WebMethod]
-        public SubjectBo GetSubjectById(int? id)
+        public SubjectBo GetSubjectById(int id)
         {
 
             var Subject = new SubjectService();
