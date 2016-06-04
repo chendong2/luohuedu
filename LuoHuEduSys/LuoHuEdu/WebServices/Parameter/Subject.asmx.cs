@@ -17,13 +17,13 @@ namespace LuoHuEdu.WebServices.Parameter
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
+     [System.Web.Script.Services.ScriptService]
     public class Subject : System.Web.Services.WebService
     {
 
 
         [ScriptMethod]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string GetSubjectList(int page, int rows, string sort, string order, SubjectBo SubjectBo)
         {
 
@@ -33,7 +33,7 @@ namespace LuoHuEdu.WebServices.Parameter
         }
 
         [ScriptMethod]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public SubjectBo GetSubjectById(int id)
         {
 
