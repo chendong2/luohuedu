@@ -1,7 +1,0 @@
-F:\work\luohuedu\program\luohuedu20160603\luohuedu\LuoHuEduSys\DapperExtensions\bin\Debug\DapperExtensions.dll
-F:\work\luohuedu\program\luohuedu20160603\luohuedu\LuoHuEduSys\DapperExtensions\bin\Debug\DapperExtensions.pdb
-F:\work\luohuedu\program\luohuedu20160603\luohuedu\LuoHuEduSys\DapperExtensions\bin\Debug\Dapper.dll
-F:\work\luohuedu\program\luohuedu20160603\luohuedu\LuoHuEduSys\DapperExtensions\bin\Debug\Dapper.pdb
-F:\work\luohuedu\program\luohuedu20160603\luohuedu\LuoHuEduSys\DapperExtensions\bin\Debug\Dapper.xml
-F:\work\luohuedu\program\luohuedu20160603\luohuedu\LuoHuEduSys\DapperExtensions\obj\Debug\DapperExtensions.dll
-F:\work\luohuedu\program\luohuedu20160603\luohuedu\LuoHuEduSys\DapperExtensions\obj\Debug\DapperExtensions.pdb
