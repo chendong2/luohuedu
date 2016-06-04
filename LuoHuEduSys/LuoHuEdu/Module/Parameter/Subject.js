@@ -25,7 +25,7 @@ using(easyloader.defaultReferenceModules, function () {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                SubjectBo: {}
+                subjectBo: {}
             };
             var paramStr = JSON.stringify(subjectData);
 
