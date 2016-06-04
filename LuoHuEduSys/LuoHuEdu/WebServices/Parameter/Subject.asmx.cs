@@ -24,12 +24,23 @@ namespace LuoHuEdu.WebServices.Parameter
 
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public string GetSubjectList(int page, int rows, string sort, string order, SubjectBo SubjectBo)
+        public object GetSubjectList(int page, int rows, string sort, string order, SubjectBo subjectBo)
         {
 
             var Subject = new SubjectService();
-            var list = Subject.GetSubjects(page, rows, sort, order, SubjectBo);
-            return new JavaScriptSerializer().Serialize(list);
+            var list = Subject.GetSubjects(page, rows, sort, order, subjectBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
         }
 
         [ScriptMethod]

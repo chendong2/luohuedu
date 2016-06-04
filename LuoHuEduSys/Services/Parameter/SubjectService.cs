@@ -134,7 +134,7 @@ namespace Services.Parameter
             return SubjectBo;
         }
 
-        public Page<SubjectBo> GetSubjects(int page, int rows, string sort, string order, SubjectBo SubjectBo)
+        public Page<SubjectBo> GetSubjects(int page, int rows, string sort, string order, SubjectBo subjectBo)
         {
             int count = 0;
             int pageIndex = 0;
@@ -151,9 +151,9 @@ namespace Services.Parameter
             var pageList = new Page<SubjectBo>();
 
             string strSql = string.Format(@"SELECT * from tb_subject where 1=1 ");
-            if (SubjectBo != null)
+            if (subjectBo != null)
             {
-                if (SubjectBo.SubjectName != null)
+                if (subjectBo.SubjectName != null)
                 {
                     strSql += "and t.SubjectName like @SubjectName";
                 }
@@ -172,14 +172,14 @@ namespace Services.Parameter
                 count = context.Query<SubjectBo>(strSql,
                                             new
                                             {
-                                                SubjectName = SubjectBo.SubjectName
+                                                SubjectName = subjectBo.SubjectName
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
                 var list = context.Query<SubjectBo>(strSql,
                                                 new
                                                 {
-                                                    SubjectName = SubjectBo.SubjectName,
+                                                    SubjectName = subjectBo.SubjectName,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
