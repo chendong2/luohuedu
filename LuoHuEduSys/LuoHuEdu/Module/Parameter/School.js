@@ -25,9 +25,9 @@ using(easyloader.defaultReferenceModules, function () {
                     } else {
                         return "其他";
                     }
-                } 
+                }
             },
-            { field: 'LearnLive', title: '学段设定', width: 120, sortable: false },
+            { field: 'LearnLive', title: '学段设定', width: 120, sortable: false},
             { field: 'Address', title: '详细地址', width: 150, sortable: false },
             { field: 'Phone', title: '联系电话', width: 100, sortable: false }
         ]],
@@ -87,9 +87,9 @@ function loadPartialHtml() {
         panel('formTemplate', {
             href: '/View/Parameter/School/SchoolForm.htm',
             onLoad: function () {
-//                setValidatebox('Name', {
-//                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
-//                });
+                //                setValidatebox('Name', {
+                //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
+                //                });
             }
         });
     }
@@ -136,13 +136,15 @@ function fillForm(itemid) {
 }
 
 function filltrativeData() {
-    $("#sAdministrative").find("option").remove(); 
+    $("#sAdministrative").find("option").remove();
     ajaxCRUD({
         url: '/WebServices/Parameter/EducationOffice.asmx/GetEducationOfficesList',
         async: false,
         success: function (data) {
+            var option = "<option value=''></option>";
+            $("#sAdministrative").append(option);
             for (var i = 0; i < data.length; i++) {
-                var option = "<option value='" + data[i].Id + "'>" + data[i].EducationtName + "</option>";
+                option = "<option value='" + data[i].Id + "'>" + data[i].EducationtName + "</option>";
                 $("#sAdministrative").append(option);
             }
         }
@@ -154,6 +156,18 @@ function saveData() {
     if (!formValidate('ff')) {
         return;
     }
+
+    var data = '';
+    if ($("#ckLL1").attr("checked")=="checked") {
+        data = data + "幼儿园，";
+    } if ($("#ckLL2").attr("checked") == "checked") {
+        data = data + "小学，";
+    } if ($("#ckLL3").attr("checked") == "checked") {
+        data = data + "初中，";
+    } if ($("#ckLL4").attr("checked") == "checked") {
+        data = data + "高中，";
+    }
+    data = data.substring(0, data.length - 1);
 
     var hidValue = $("#HidId").val();
     var basicUrl = '/WebServices/Parameter/School.asmx/';
@@ -168,9 +182,9 @@ function saveData() {
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
+    form2JsonObj.LearnLive = data;
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{schoolBo:" + form2JsonStr + "}";
-
     ajaxCRUD({
         url: formUrl,
         data: jsonDataStr,
