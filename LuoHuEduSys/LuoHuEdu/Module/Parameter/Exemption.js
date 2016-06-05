@@ -8,10 +8,10 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '免修名目设置',
+        title: '免修设置',
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'ExemptionReason', title: '免修名目', width: 180, sortable: false },
+            { field: 'ExemptionReason', title: '免修', width: 180, sortable: false },
             { field: 'Comment', title: '相关说明', width: 480, sortable: false }
         ]],
         singleSelect: false,
@@ -77,7 +77,7 @@ function loadPartialHtml() {
     }
 }
 
-var moduleName = '免修名目设置-';
+var moduleName = '免修设置-';
 
 //点击“新增”按钮
 function addData() {

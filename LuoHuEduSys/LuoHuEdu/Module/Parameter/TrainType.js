@@ -8,7 +8,7 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '培训类型管理',
+        title: '培训类型设置',
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'TrainCode', title: '字母代码', width: 180, sortable: false },
