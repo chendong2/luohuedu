@@ -13,7 +13,17 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'Id', checkbox: true },
             { field: 'TrainCode', title: '字母代码', width: 180, sortable: false },
             { field: 'TrainType', title: '对应类型', width: 180, sortable: false },
-            { field: 'Acess', title: '权限', width: 180, sortable: false }
+            { field: 'Acess', title: '权限', width: 180, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "中心";
+                    } else if (value == "2") { 
+                        return "学校";
+                    }else{ 
+                        return "中心\\学校";
+                    }
+                } 
+            }
         ]],
         singleSelect: false,
         toolbar: '#toolbar',

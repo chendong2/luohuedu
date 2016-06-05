@@ -169,12 +169,12 @@ namespace Services.Parameter
             {
                 if (trainTypeBo.TrainType != null)
                 {
-                    strSql += "and TrainType like @TrainType";
+                    strSql += "and TrainType like @TrainType ";
                 }
 
                 if (trainTypeBo.TrainCode != null)
                 {
-                    strSql += "and TrainCode like @TrainCode";
+                    strSql += "and TrainCode like @TrainCode ";
                 }
             }
 
