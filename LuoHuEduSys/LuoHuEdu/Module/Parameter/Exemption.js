@@ -11,7 +11,7 @@ using(easyloader.defaultReferenceModules, function () {
         title: '免修设置',
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'ExemptionReason', title: '免修', width: 180, sortable: false },
+            { field: 'ExemptionReason', title: '免修名目', width: 180, sortable: false },
             { field: 'Comment', title: '相关说明', width: 480, sortable: false }
         ]],
         singleSelect: false,
