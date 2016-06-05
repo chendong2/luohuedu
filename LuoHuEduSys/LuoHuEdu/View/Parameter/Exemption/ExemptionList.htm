@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/Common/Scripts/ifram/jquery-core-easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="/Common/Scripts/ifram/jquery-core-easyui/themes/icon.css" />
+    <link href="/App_Themes/Gray/Styles/Gray.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/App_Themes/Global/Reset.css" />
+</head>
+<body id="layout" class="easyui-layout" scroll="no" style="vertical-align: top;">
+<div region="center" border="false">
+    <table id="dg">
+    </table>
+</div>
+<div id="toolbar" style="display: none">
+    <span style="float: left">
+                <a href="#" class="easyui-linkbutton " iconcls="icon-add" plain="true" onclick="addData();">新增</a>
+                <a href="#" class="easyui-linkbutton " iconcls="icon-edit" plain="true" onclick="editData();">编辑</a> 
+                <a href="#" class="easyui-linkbutton " iconcls="icon-remove" plain="true" onclick="deleteDatas();">删除</a>   
+            </span>
+    <div class="search_middle">
+        
+        <span class="span_text">免修名目:</span><input id="txtExemptionReason" type="text" maxlength="25"
+            class="txtbox_margin" />
+        <a class="easyui-linkbutton" iconcls="icon-search" plain="true" onclick="Search();"
+            style="cursor: pointer; text-decoration: none">搜索 </a>
+    </div>
+</div>
+<div id="viewTemplate" style="display: none"></div>
+<div id="formTemplate" style="display: none"></div>
+<script type="text/javascript" src="/Common/Scripts/ifram/jquery.min.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-template/handlebars.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/easyloader.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-common-easyui/easyui.config.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-common-easyui/easyui.public.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/json2.js"></script>
+    <script src="/Module/Parameter/Exemption.js" type="text/javascript"></script>
+</body>
+</html>

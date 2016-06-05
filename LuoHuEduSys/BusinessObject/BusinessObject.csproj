@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Course\CourseStudentBo.cs" />
+    <Compile Include="Parameter\ExemptionBo.cs" />
     <Compile Include="Parameter\TrainTypeBo.cs" />
     <Compile Include="Parameter\SubjectBo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

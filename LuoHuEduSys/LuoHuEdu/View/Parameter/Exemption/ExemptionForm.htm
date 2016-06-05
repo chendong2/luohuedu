@@ -1,0 +1,34 @@
+﻿<div id="dlg" style="width: 400px; padding: 10px" data-options="buttons: '#dlg-buttons',
+                                                                closed: true,
+                                                                shadow:false,
+                                                                modal:true">
+    <form id="ff" method="post">
+    <table class="custom_forms_popup">
+        <tr>
+            <td style="width: 30%" class="td_right">
+                免修名目:
+            </td>
+            <td class="td_left">
+                <input id="txtExemptionReason" type="text" name="ExemptionReason" style="width: 195px" maxlength="20"  class="easyui-validatebox" data-options="required:true" />
+            </td>
+        </tr>
+         <tr>
+            <td style="width: 30%" class="td_right">
+                相关说明:
+            </td>
+            <td class="td_left">
+                <textarea rows="7" cols="30" id="txtComment" name='Comment' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+            </td>
+        </tr>
+    </table>
+    <div>
+        <input id="HidName" type="hidden" />
+        <input id="HidId" type="hidden" name="Id"/>
+    </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveData();">确定</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeFormDialog();">
+        取消</a>
+</div>
