@@ -27,7 +27,7 @@ using(easyloader.defaultReferenceModules, function () {
                     }
                 }
             },
-            { field: 'LearnLive', title: '学段设定', width: 120, sortable: false},
+            { field: 'LearnLive', title: '学段设定', width: 120, sortable: false },
             { field: 'Address', title: '详细地址', width: 150, sortable: false },
             { field: 'Phone', title: '联系电话', width: 100, sortable: false }
         ]],
@@ -131,6 +131,22 @@ function fillForm(itemid) {
             });
             //JSON数据填充表单
             loadDataToForm('ff', data);
+            $("#ckLL1").attr("checked", false);
+            $("#ckLL2").attr("checked", false);
+            $("#ckLL3").attr("checked", false);
+            $("#ckLL4").attr("checked", false);
+            var values = data.LearnLive.split("，");
+            for (var i = 0; i < values.length; i++) {
+                if (values[i].length > 0 && values[i] == "幼儿园") {
+                    $("#ckLL1").attr("checked", "checked");
+                } else if (values[i].length > 0 && values[i] == "小学") {
+                    $("#ckLL2").attr("checked", "checked");
+                } else if (values[i].length > 0 && values[i] == "初中") {
+                    $("#ckLL3").attr("checked", "checked");
+                } else if (values[i].length > 0 && values[i] == "高中") {
+                    $("#ckLL4").attr("checked", "checked");
+                }
+            }
         }
     });
 }
@@ -158,7 +174,7 @@ function saveData() {
     }
 
     var data = '';
-    if ($("#ckLL1").attr("checked")=="checked") {
+    if ($("#ckLL1").attr("checked") == "checked") {
         data = data + "幼儿园，";
     } if ($("#ckLL2").attr("checked") == "checked") {
         data = data + "小学，";
