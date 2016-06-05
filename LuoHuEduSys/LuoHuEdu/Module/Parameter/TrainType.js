@@ -8,29 +8,31 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '科目设置',
+        title: '培训类型管理',
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'SubjectName', title: '科目名称', width: 180, sortable: false }
+            { field: 'TrainCode', title: '字母代码', width: 180, sortable: false },
+            { field: 'TrainType', title: '对应类型', width: 180, sortable: false },
+            { field: 'Acess', title: '权限', width: 180, sortable: false }
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
-        sortName: 'SubjectName',
+        sortName: 'TrainCode',
         sortOrder: 'desc',
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
-            var subjectData = {
+            var trainTypeData = {
                 page: param.page,
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                subjectBo: {}
+                trainTypeBo: {}
             };
-            var paramStr = JSON.stringify(subjectData);
+            var paramStr = JSON.stringify(trainTypeData);
 
             ajaxCRUD({
-                url: '/WebServices/Parameter/Subject.asmx/GetSubjectList',
+                url: '/WebServices/Parameter/TrainType.asmx/GetTrainTypeList',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -66,7 +68,7 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/Parameter/Subject/SubjectForm.htm',
+            href: '/View/Parameter/TrainType/TrainTypeForm.htm',
             onLoad: function () {
 //                setValidatebox('Name', {
 //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
@@ -76,7 +78,7 @@ function loadPartialHtml() {
     }
 }
 
-var moduleName = '科目设置-';
+var moduleName = '培训类型设置-';
 
 //点击“新增”按钮
 function addData() {
@@ -101,14 +103,13 @@ function editData() {
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
     ajaxCRUD({
-        url: '/WebServices/Parameter/Subject.asmx/GetSubjectById',
+        url: '/WebServices/Parameter/TrainType.asmx/GetTrainTypeById',
         data: "{id:'" + itemid + "'}",
         success: function (data) {
             openDialog('dlg', {
                 title: moduleName + '编辑',
                 iconCls: 'icon-edit'
             });
-            $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
             loadDataToForm('ff', data);
         }
@@ -122,20 +123,20 @@ function saveData() {
     }
 
     var hidValue = $("#HidId").val();
-    var basicUrl = '/WebServices/Parameter/Subject.asmx/';
+    var basicUrl = '/WebServices/Parameter/TrainType.asmx/';
 
     var wsMethod = '';
     if (hidValue.length > 0) {
-        wsMethod = "UpdateSubject"; //修改
+        wsMethod = "UpdateTrainType"; //修改
     } else {
-        wsMethod = "AddSubject"; //新增
+        wsMethod = "AddTrainType"; //新增
     }
 
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
     var form2JsonStr = JSON.stringify(form2JsonObj);
-    var jsonDataStr = "{subjectBo:" + form2JsonStr + "}";
+    var jsonDataStr = "{trainTypeBo:" + form2JsonStr + "}";
 
     ajaxCRUD({
         url: formUrl,
@@ -166,7 +167,7 @@ function deleteDatas() {
 //批量删除后台AJAX处理
 function deleteDatasAjax(str) {
     ajaxCRUD({
-        url: '/WebServices/Parameter/Subject.asmx/DeleteSubjectsByIds',
+        url: '/WebServices/Parameter/TrainType.asmx/DeleteTrainTypesByIds',
         data: "{ids:'" + str + "'}",
         success: function (data) {
             if (data == true) {
@@ -184,19 +185,20 @@ function Search() {
     var dataGridOptions = {
         pageNumber: 1,
         loader: function (param, success, error) {
-            var subjectData = {
+            var trainTypeData = {
                 page: param.page,
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                subjectBo: {
-                    SubjectName: $("#txtSubjectName").val().trim()
+                trainTypeBo: {
+                    TrainCode: $("#txtTrainCode").val().trim(),
+                    TrainType: $("#txtTrainType").val().trim()
                 }
             };
-            var paramStr = JSON.stringify(subjectData);
+            var paramStr = JSON.stringify(trainTypeData);
 
             ajaxCRUD({
-                url: '/WebServices/Parameter/Subject.asmx/GetSubjectList',
+                url: '/WebServices/Parameter/TrainType.asmx/GetTrainTypeList',
                 data: paramStr,
                 success: function (data) {
                     success(data);

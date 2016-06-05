@@ -1230,6 +1230,7 @@
     <Content Include="Module\Customer\CustomerInfo.js" />
     <Content Include="Module\Free\FreeOrder.js" />
     <Content Include="Module\Free\FreePackage.js" />
+    <Content Include="Module\Parameter\TrainType.js" />
     <Content Include="Module\Parameter\Subject.js" />
     <Content Include="Module\System\PswChange.js" />
     <Content Include="Module\Ticket\BanciList.js" />
@@ -1255,8 +1256,10 @@
     <Content Include="View\Free\FreeOrderList.htm" />
     <Content Include="View\Free\FreeOrderPackageList.htm" />
     <Content Include="View\Free\FreePackageForm.htm" />
-    <Content Include="View\Parameter\SubjectForm.htm" />
-    <Content Include="View\Parameter\SubjectList.htm" />
+    <Content Include="View\Parameter\TrainType\TrainType.htm" />
+    <Content Include="View\Parameter\TrainType\TrainTypeList.htm" />
+    <Content Include="View\Parameter\Subject\SubjectForm.htm" />
+    <Content Include="View\Parameter\Subject\SubjectList.htm" />
     <Content Include="View\System\PswChange.htm" />
     <Content Include="View\Ticket\TicketBook\BanciList.htm" />
     <Content Include="View\Ticket\TicketBook\BookForm.htm" />
@@ -1275,6 +1278,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WebServices\Parameter\TrainType.asmx" />
     <Content Include="WebServices\Parameter\Subject.asmx" />
   </ItemGroup>
   <ItemGroup>
@@ -1299,6 +1303,10 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebServices\Parameter\TrainType.asmx.cs">
+      <DependentUpon>TrainType.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WebServices\Parameter\Subject.asmx.cs">
       <DependentUpon>Subject.asmx</DependentUpon>
       <SubType>Component</SubType>
