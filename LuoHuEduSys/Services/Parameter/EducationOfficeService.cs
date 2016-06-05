@@ -164,7 +164,7 @@ namespace Services.Parameter
             pageSize = page * rows;
             var pageList = new Page<EducationOfficeBo>();
 
-            string strSql = string.Format(@"SELECT * from tb_educationoffice where 1=1 ");
+            string strSql = string.Format(@"SELECT * from tb_educationoffice  where 1=1 ");
             if (educationOfficeBo != null)
             {
                 if (educationOfficeBo.EducationtName != null)
@@ -205,6 +205,21 @@ namespace Services.Parameter
             }
 
             return pageList;
+        }
+
+
+        //获取所有的教办数据
+        public List<EducationOfficeBo> GetEducationOfficesList()
+        {
+
+            string strSql = string.Format(@"SELECT Id,EducationtName from tb_educationoffice where 1=1 order by EducationtName ");
+            var list=new List<EducationOfficeBo>();
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                
+                 list = context.Query<EducationOfficeBo>(strSql).ToList();
+            }
+            return list;
         }
 
         #endregion

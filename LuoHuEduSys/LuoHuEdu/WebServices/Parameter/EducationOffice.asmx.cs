@@ -85,5 +85,16 @@ namespace LuoHuEdu.WebServices.Parameter
             return educationOfficeBo;
         }
 
+        //根据Id获取数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<EducationOfficeBo> GetEducationOfficesList()
+        {
+
+            var educationOfficeService = new EducationOfficeService();
+            var list = educationOfficeService.GetEducationOfficesList();
+            return list;
+        }
+
     }
 }

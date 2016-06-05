@@ -11,13 +11,25 @@ using(easyloader.defaultReferenceModules, function () {
         title: '单位设置',
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'SchoolNo', title: '学校编号', width: 180, sortable: false },
-            { field: 'SchoolName', title: '学校名称', width: 180, sortable: false },
-            { field: 'Administrative', title: '所属教办', width: 180, sortable: false },
-            { field: 'SchoolType', title: '办学方式', width: 180, sortable: false },
-            { field: 'LearnLive', title: '学段设定', width: 180, sortable: false },
-            { field: 'Address', title: '详细地址', width: 180, sortable: false },
-            { field: 'Phone', title: '联系电话', width: 180, sortable: false }
+            { field: 'SchoolNo', title: '学校编号', width: 100, sortable: false },
+            { field: 'SchoolName', title: '学校名称', width: 120, sortable: false },
+            { field: 'Administrative', title: '所属教办', width: 120, sortable: false },
+            { field: 'SchoolType', title: '办学方式', width: 90, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "公办学校";
+                    } else if (value == "2") {
+                        return "国有民办";
+                    } else if (value == "3") {
+                        return "民办学校";
+                    } else {
+                        return "其他";
+                    }
+                } 
+            },
+            { field: 'LearnLive', title: '学段设定', width: 120, sortable: false },
+            { field: 'Address', title: '详细地址', width: 150, sortable: false },
+            { field: 'Phone', title: '联系电话', width: 100, sortable: false }
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
@@ -48,6 +60,7 @@ using(easyloader.defaultReferenceModules, function () {
 
         },
         onDblClickRow: function (rowIndex, rowData) {
+            filltrativeData();
             fillForm(rowData.Id);
         }
     };
@@ -91,6 +104,7 @@ function addData() {
         iconCls: 'icon-add'
     });
     resetFormAndClearValidate('ff');
+    filltrativeData();
 }
 
 //点击“编辑”按钮
@@ -100,6 +114,7 @@ function editData() {
         msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
     } else {
         resetFormAndClearValidate('ff');
+        filltrativeData();
         fillForm(row.Id);
     }
 }
@@ -116,6 +131,20 @@ function fillForm(itemid) {
             });
             //JSON数据填充表单
             loadDataToForm('ff', data);
+        }
+    });
+}
+
+function filltrativeData() {
+    $("#sAdministrative").find("option").remove(); 
+    ajaxCRUD({
+        url: '/WebServices/Parameter/EducationOffice.asmx/GetEducationOfficesList',
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var option = "<option value='" + data[i].Id + "'>" + data[i].EducationtName + "</option>";
+                $("#sAdministrative").append(option);
+            }
         }
     });
 }

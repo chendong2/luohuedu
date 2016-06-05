@@ -166,7 +166,7 @@ namespace Services.Parameter
             pageSize = page * rows;
             var pageList = new Page<SchoolBo>();
 
-            string strSql = string.Format(@"SELECT * from tb_school where 1=1 ");
+            string strSql = string.Format(@"SELECT tb_school.Id,SchoolName,SchoolNo,tb_educationoffice.EducationtName as Administrative,SchoolType,LearnLive,Address,Phone from tb_school inner join tb_educationoffice where tb_school.Administrative=tb_educationoffice.Id  ");
             if (schoolBo != null)
             {
                 if (schoolBo.SchoolName != null)
