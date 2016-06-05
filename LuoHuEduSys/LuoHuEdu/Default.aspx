@@ -115,32 +115,51 @@
         var menus_2 = [];
         var menus_3 = [];
         var menus_4 = [];
+        var menus_5 = [];
 
-        menus_1.push({ "menuid": "11", "menuname": "线上下单", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/ticketbook/BanciList.htm") %>' });
-        menus_1.push({ "menuid": "41", "menuname": "电子库存", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketList/TicketList.htm") %>' });
-//        menus_1.push({ "menuid": "42", "menuname": "车票下单量统计", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketStatistics/TicketOrderStatisticsList.htm") %>' });
+        menus_1.push({ "menuid": "11", "menuname": "培训课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/ticketbook/BanciList.htm") %>' });
+        menus_1.push({ "menuid": "12", "menuname": "我的培训记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketList/TicketList.htm") %>' });
+        menus_1.push({ "menuid": "13", "menuname": "历史课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketList/TicketList.htm") %>' });
+        menus_1.push({ "menuid": "14", "menuname": "我是授课教师", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketList/TicketList.htm") %>' });
+      
 
-//        menus_2.push({ "menuid": "21", "menuname": "包车预定", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalRoute/CarrentalRouteList.htm") %>' });
-//        menus_2.push({ "menuid": "22", "menuname": "包车订单", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+        menus_2.push({ "menuid": "21", "menuname": "培训管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalRoute/CarrentalRouteList.htm") %>' });
+        menus_2.push({ "menuid": "22", "menuname": "课程表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+        menus_2.push({ "menuid": "23", "menuname": "授课教师信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+        menus_2.push({ "menuid": "24", "menuname": "校本研修审核", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+        menus_2.push({ "menuid": "25", "menuname": "免修审核", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+        menus_2.push({ "menuid": "26", "menuname": "学员管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+        menus_2.push({ "menuid": "27", "menuname": "权限管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
 
-//        menus_2.push({ "menuid": "23", "menuname": "自由行预定", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Free/FreeOrderPackageList.htm") %>' });
-//        menus_2.push({ "menuid": "23", "menuname": "自由行订单", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Free/FreeOrderList.htm") %>' });
+        menus_3.push({ "menuid": "31", "menuname": "校本研修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalRoute/CarrentalRouteList.htm") %>' });
+        menus_3.push({ "menuid": "32", "menuname": "免修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+        menus_3.push({ "menuid": "33", "menuname": "培训详细列表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
 
-//        menus_3.push({ "menuid": "23", "menuname": "客户列表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Customer/CustomerList.htm") %>' });
 
         menus_4.push({ "menuid": "41", "menuname": "科目设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Parameter/SubjectList.htm") %>' });
-        menus_4.push({ "menuid": "42", "menuname": "修改密码", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
+        menus_4.push({ "menuid": "42", "menuname": "类型设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
+        menus_4.push({ "menuid": "43", "menuname": "研修设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
+        menus_4.push({ "menuid": "44", "menuname": "免修设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
+        menus_4.push({ "menuid": "45", "menuname": "教办设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
+        menus_4.push({ "menuid": "46", "menuname": "单位设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
+
+
+        menus_5.push({ "menuid": "51", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
+        menus_5.push({ "menuid": "52", "menuname": "修改密码", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
 //        menus_4.push({ "menuid": "42", "menuname": "消费记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
 //        menus_4.push({ "menuid": "43", "menuname": "充值记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
 
         var _menus = { "menus": [
-                        { "menuid": "1", "icon": "icon-sys", "menuname": "车票管理", "menus": menus_1 },
+                        { "menuid": "1", "icon": "icon-sys", "menuname": "培训信息", "menus": menus_1 },
 
-//						{ "menuid": "2", "icon": "icon-sys", "menuname": "包车管理", "menus": menus_2 },
 
-//						{ "menuid": "3", "icon": "icon-sys", "menuname": "客户管理", "menus": menus_3 },
+					{ "menuid": "2", "icon": "icon-sys", "menuname": "培训管理", "menus": menus_2 },
 
-						{ "menuid": "4", "icon": "icon-sys", "menuname": "系统设置", "menus": menus_4 }
+					{ "menuid": "3", "icon": "icon-sys", "menuname": "用户信息", "menus": menus_3 },
+
+					{"menuid": "4", "icon": "icon-sys", "menuname": "参数管理", "menus": menus_4 },
+
+						{ "menuid": "5", "icon": "icon-sys", "menuname": "系统设置", "menus": menus_5 }
 				]
         };
     </script>
