@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Admin\StudentControl\StudentService.cs" />
     <Compile Include="Course\CourseControl\CourseStudentService.cs" />
+    <Compile Include="Parameter\EducationOfficeService.cs" />
     <Compile Include="Parameter\ExemptionService.cs" />
     <Compile Include="Parameter\TrainTypeService.cs" />
     <Compile Include="Parameter\SubjectService.cs" />
