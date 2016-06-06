@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-    <title>华通代理商分销系统</title>
+    <title>罗湖中小学继续教育系统</title>
     <link href="<%=Page.ResolveUrl("~/App_Themes/Global/global.css") %>" rel="stylesheet"
         type="text/css" />    
     <link href="<%=Page.ResolveUrl("~/App_Themes/EasyUI/default.css") %>" rel="stylesheet"
@@ -35,12 +35,7 @@
                 <ul class="clearfix">
                     <li style="padding: 0 12px 0 0;"><span class="user use">当前用户：<asp:Label ID="lblUser"
                         runat="server"></asp:Label></span></li>
-                        <li style="padding: 0 12px 0 0;"><span>
-                          <%--  <a id="extention" class="exit_btn" onclick="setExtention()"></a></span></li>--%>
-                   <%--     <li style="padding: 0 12px 0 0;"><span>
-                            <a id="lbtnCall" class="exit_btn" onclick="callNum(0)"></a></span></li>
-                            <input type="hidden" id="phone"/>
-                            <input type="hidden" id="phone1"/>--%>
+                        <li style="padding: 0 12px 0 0;">
                     <li class="loginsuccess" style="background: none;"><span>
                         <asp:LinkButton ID="lbtnLoginOut" runat="server" OnClick="lbtnLoginOut_Click" CssClass="exit_btn">安全退出</asp:LinkButton>
                         <asp:HiddenField ID="hfUserName" runat="server" />

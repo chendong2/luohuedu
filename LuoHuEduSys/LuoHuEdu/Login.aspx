@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="copyRight">
-                中国华通有限公司 版权所有Copyright <span>&copy;</span> 2016</div>
+               罗湖区教育科学研究中心 版权所有Copyright <span>&copy;</span> 2016</div>
         </div>
         </form>
         <script type="text/javascript">
