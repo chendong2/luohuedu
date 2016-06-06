@@ -38,7 +38,7 @@ namespace Services.Parameter
 
                     String id = Guid.NewGuid().ToString();
                     maintrainSetBo.Id = id;
-                    var sqlStr = @"INSERT INTO tb_maintrainset(Id,ProgrameName) VALUES(@Id,@ProgrameName);";
+                    var sqlStr = @"INSERT INTO tb_maintrainset(Id,ProgrameName,SubProgrameName,SunProgrameName,StuTime) VALUES(@Id,@ProgrameName,@SubProgrameName,@SunProgrameName,@StuTime);";
                     int row = connection.Execute(sqlStr, maintrainSetBo);
                     if (row > 0)
                     {
@@ -102,7 +102,7 @@ namespace Services.Parameter
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"update tb_maintrainset set ProgrameName=@ProgrameName where Id=@Id";
+                    var sqlStr = @"update tb_maintrainset set ProgrameName=@ProgrameName,SubProgrameName=@SubProgrameName,SunProgrameName=@SunProgrameName,StuTime=@StuTime where Id=@Id";
                     int row = connection.Execute(sqlStr, maintrainSetBo);
                     if (row > 0)
                     {
@@ -171,12 +171,20 @@ namespace Services.Parameter
                 {
                     strSql += "and ProgrameName like @ProgrameName ";
                 }
+                if (maintrainSetBo.SubProgrameName != null)
+                {
+                    strSql += "and SubProgrameName like @SubProgrameName ";
+                }
+                if (maintrainSetBo.SunProgrameName != null)
+                {
+                    strSql += "and SunProgrameName like @SunProgrameName ";
+                }
             }
 
             switch (sort)
             {
                 case "ProgrameName":
-                    strSql += " order by ProgrameName " + order;
+                    strSql += " order by ProgrameName,SubProgrameName,SunProgrameName " + order;
                     break;
             }
 
@@ -186,7 +194,9 @@ namespace Services.Parameter
                 count = context.Query<MaintrainSetBo>(strSql,
                                             new
                                             {
-                                                ProgrameName = string.Format("%{0}%", maintrainSetBo.ProgrameName)
+                                                ProgrameName = string.Format("%{0}%", maintrainSetBo.ProgrameName),
+                                                SubProgrameName = string.Format("%{0}%", maintrainSetBo.SubProgrameName),
+                                                SunProgrameName = string.Format("%{0}%", maintrainSetBo.SunProgrameName)
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
@@ -194,6 +204,8 @@ namespace Services.Parameter
                                                 new
                                                 {
                                                     ProgrameName = string.Format("%{0}%", maintrainSetBo.ProgrameName),
+                                                    SubProgrameName = string.Format("%{0}%", maintrainSetBo.SubProgrameName),
+                                                    SunProgrameName = string.Format("%{0}%", maintrainSetBo.SunProgrameName),
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
@@ -212,12 +224,12 @@ namespace Services.Parameter
         public List<MaintrainSetBo> GetMaintrainSetsList()
         {
 
-            string strSql = string.Format(@"SELECT Id,ProgrameName from tb_maintrainset where 1=1 order by ProgrameName ");
-            var list=new List<MaintrainSetBo>();
+            string strSql = string.Format(@"SELECT Id,ProgrameName,SubProgrameName,SunProgrameName,StuTime from tb_maintrainset where 1=1 order by ProgrameName,SubProgrameName,SunProgrameName ");
+            var list = new List<MaintrainSetBo>();
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
-                
-                 list = context.Query<MaintrainSetBo>(strSql).ToList();
+
+                list = context.Query<MaintrainSetBo>(strSql).ToList();
             }
             return list;
         }

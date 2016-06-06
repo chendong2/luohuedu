@@ -8,15 +8,18 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '研修主项目',
+        title: '研修设置',
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'ProgrameName', title: '项目名', width: 180, sortable: false }
+            { field: 'ProgrameName', title: '项目名', width: 180, sortable: false },
+            { field: 'SubProgrameName', title: '二级项目名', width: 180, sortable: false },
+            { field: 'SunProgrameName', title: '三级项目名', width: 180, sortable: false },
+            { field: 'StuTime', title: '折算学时', width: 180, sortable: false }
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
         sortName: 'ProgrameName',
-        sortOrder: 'desc',
+        sortOrder: 'asc',
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
@@ -189,7 +192,9 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 maintrainSetBo: {
-                    ProgrameName: $("#txtProgrameName").val().trim()
+                    ProgrameName: $("#txtProgrameName").val().trim(),
+                    SubProgrameName: $("#txtSubProgrameName").val().trim(),
+                    SunProgrameName: $("#txtSunProgrameName").val().trim()
                 }
             };
             var paramStr = JSON.stringify(maintrainSetData);
