@@ -88,6 +88,10 @@ function addData() {
         iconCls: 'icon-add'
     });
     resetFormAndClearValidate('ff');
+    $('txtStuTime').numberbox({
+        min: 0
+    });  
+
 }
 
 //点击“编辑”按钮
@@ -99,6 +103,9 @@ function editData() {
         resetFormAndClearValidate('ff');
         fillForm(row.Id);
     }
+    $('txtStuTime').numberbox({
+        min: 0
+    });
 }
 
 //获取JSON数据并填充到相应表单
