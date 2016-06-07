@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
   <publishProfile publishUrl="E:\LuohuEduFabu" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="配置文件1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
-    <file relUrl="Web.config" publishTime="06/02/2016 17:11:18" />
-    <file relUrl="Course/Course.asmx" publishTime="06/02/2016 13:07:04" />
-    <file relUrl="bin/MiniProfiler.pdb" publishTime="05/31/2016 20:25:58" />
-    <file relUrl="bin/Domain.dll" publishTime="06/02/2016 12:51:56" />
-    <file relUrl="bin/DapperExtensions.dll" publishTime="06/02/2016 12:51:56" />
-    <file relUrl="bin/Services.dll" publishTime="06/02/2016 17:11:18" />
-    <file relUrl="bin/LuoHuEduWebService.dll" publishTime="06/02/2016 17:11:18" />
-    <file relUrl="bin/LuoHuEdu.DAO.dll" publishTime="06/02/2016 12:51:57" />
-    <file relUrl="bin/Oracle.ManagedDataAccess.dll" publishTime="05/31/2016 20:25:58" />
-    <file relUrl="bin/BusinessObject.pdb" publishTime="06/02/2016 12:51:55" />
-    <file relUrl="bin/Dapper.xml" publishTime="05/31/2016 20:25:58" />
-    <file relUrl="bin/log4net.dll" publishTime="05/31/2016 20:25:56" />
-    <file relUrl="bin/MiniProfiler.xml" publishTime="05/31/2016 20:25:58" />
-    <file relUrl="bin/Dapper.dll" publishTime="05/31/2016 20:25:58" />
-    <file relUrl="bin/MiniProfiler.dll" publishTime="05/31/2016 20:25:58" />
-    <file relUrl="bin/Services.pdb" publishTime="06/02/2016 17:11:18" />
-    <file relUrl="bin/BusinessObject.dll" publishTime="06/02/2016 12:51:55" />
-    <file relUrl="bin/Domain.pdb" publishTime="06/02/2016 12:51:56" />
-    <file relUrl="bin/LuoHuEduWebService.pdb" publishTime="06/02/2016 17:11:18" />
-    <file relUrl="bin/MySql.Data.dll" publishTime="05/31/2016 20:25:57" />
-    <file relUrl="bin/Dapper.pdb" publishTime="05/31/2016 20:25:58" />
-    <file relUrl="bin/DapperExtensions.pdb" publishTime="06/02/2016 12:51:56" />
-    <file relUrl="bin/LuoHuEdu.DAO.pdb" publishTime="06/02/2016 12:51:57" />
+    <file relUrl="Web.config" publishTime="06/06/2016 23:13:43" />
+    <file relUrl="bin/MiniProfiler.pdb" publishTime="06/04/2016 07:45:34" />
+    <file relUrl="bin/Domain.dll" publishTime="06/06/2016 23:13:36" />
+    <file relUrl="bin/Services.dll" publishTime="06/06/2016 23:13:37" />
+    <file relUrl="bin/LuoHuEduWebService.dll" publishTime="06/06/2016 23:13:37" />
+    <file relUrl="bin/LuoHuEdu.DAO.dll" publishTime="06/06/2016 23:13:36" />
+    <file relUrl="bin/BusinessObject.pdb" publishTime="06/06/2016 23:13:35" />
+    <file relUrl="bin/Oracle.ManagedDataAccess.dll" publishTime="06/03/2016 21:15:50" />
+    <file relUrl="bin/DapperExtensions.dll" publishTime="06/06/2016 23:13:36" />
+    <file relUrl="bin/Dapper.xml" publishTime="06/03/2016 21:15:49" />
+    <file relUrl="bin/DapperExtensions.pdb" publishTime="06/06/2016 23:13:35" />
+    <file relUrl="bin/LuoHuEdu.DAO.pdb" publishTime="06/06/2016 23:13:36" />
+    <file relUrl="bin/log4net.dll" publishTime="06/03/2016 21:15:48" />
+    <file relUrl="bin/MiniProfiler.xml" publishTime="06/03/2016 21:15:49" />
+    <file relUrl="bin/Services.pdb" publishTime="06/06/2016 23:13:37" />
+    <file relUrl="bin/BusinessObject.dll" publishTime="06/06/2016 23:13:35" />
+    <file relUrl="bin/Domain.pdb" publishTime="06/06/2016 23:13:36" />
+    <file relUrl="bin/LuoHuEduWebService.pdb" publishTime="06/06/2016 23:13:37" />
+    <file relUrl="bin/Dapper.dll" publishTime="06/03/2016 21:15:49" />
+    <file relUrl="bin/MySql.Data.dll" publishTime="06/03/2016 21:15:49" />
+    <file relUrl="bin/Dapper.pdb" publishTime="06/04/2016 07:45:34" />
+    <file relUrl="Course/Course.asmx" publishTime="06/03/2016 21:15:49" />
+    <file relUrl="bin/MiniProfiler.dll" publishTime="06/03/2016 21:15:49" />
   </publishProfile>
 </publishData>

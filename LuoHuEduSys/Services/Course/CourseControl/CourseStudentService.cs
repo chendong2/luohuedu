@@ -13,7 +13,12 @@ namespace Services.Course.CourseControl
     {
         public List<CourseStudentBo> GetCourseStudent(string idNo, string yearNo, string isAll)
         {
-            string sql = @"SELECT Name,IDNO,YearNo,TermNo,CourseType,CourseName,StudyType,Period,DATE_FORMAT(StartDate, '%Y-%m-%d') AS StartDate,DATE_FORMAT(EndDate, '%Y-%m-%d') AS EndDate,TrainDept FROM tb_coursestudenttemp where 1=1 ";
+            string sql = @"SELECT Name,IDNO,YearNo,TermNo,CASE CourseType
+                            WHEN '集中培训' THEN '专业科目'
+                            WHEN '专项培训' THEN '专业科目'
+                            WHEN '校本培训' THEN '个人选修'
+                            ELSE CourseType
+                            END AS CourseType,CourseName,StudyType,Period,DATE_FORMAT(StartDate, '%Y-%m-%d') AS StartDate,DATE_FORMAT(EndDate, '%Y-%m-%d') AS                                EndDate,TrainDept FROM tb_coursestudenttemp where 1=1 ";
 
             //sql 查询条件拼接
             var wheres = new StringBuilder();
@@ -31,13 +36,15 @@ namespace Services.Course.CourseControl
                     paras.Add("YearNo", yearNo);
                 }
             }
+            string group = " GROUP BY IDNO,CourseName ";
             //加where条件
-            sql += wheres;
+            sql += wheres +group;
             try
             {
                 using (var context = DataBaseConnection.GetMySqlConnection())
                 {
                     var list = context.Query<CourseStudentBo>(sql, paras).ToList();
+                 
                     return list;
                 }
             }
