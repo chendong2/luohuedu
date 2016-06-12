@@ -52,12 +52,12 @@ namespace BusinessObject.Course
         /// <summary>
         /// 课程开始时间
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
 
         /// <summary>
         /// 课程结束时间
         /// </summary>
-        public DateTime EndDate { get; set; }
+        public string EndDate { get; set; }
 
         /// <summary>
         /// 培训单位
