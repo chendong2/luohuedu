@@ -5,6 +5,9 @@ using System.Text;
 
 namespace BusinessObject.Course
 {
+    /// <summary>
+    /// 备注：该类只给外部同步数据的WS接口使用，别修改此类方法
+    /// </summary>
     public  class CourseStudentBo
     {
         ///// <summary>

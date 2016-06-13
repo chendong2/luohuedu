@@ -916,7 +916,7 @@ border: solid #dce7ef 1px;
 }
 .head_bg
 {
-    background: url(Images/logoxin.png) no-repeat left center;
+    /*background: url(Images/logoxin.png) no-repeat left center;*/
     height: 62px;
     width: 100%;
 }
