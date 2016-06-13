@@ -188,14 +188,14 @@ namespace Services.UserInfo
                 count = context.Query<StudentExemptionBo>(strSql,
                                             new
                                             {
-                                                StudentExemptionReason = string.Format("%{0}%", studentExemptionBo.UserName)
+                                                UserName = string.Format("%{0}%", studentExemptionBo.UserName)
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
                 var list = context.Query<StudentExemptionBo>(strSql,
                                                 new
                                                 {
-                                                    StudentExemptionReason = string.Format("%{0}%", studentExemptionBo.UserName),
+                                                    UserName = string.Format("%{0}%", studentExemptionBo.UserName),
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
