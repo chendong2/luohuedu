@@ -408,15 +408,8 @@
     <Content Include="App_Themes\Global\indeximage\bjl.jpg" />
     <Content Include="App_Themes\Global\indeximage\btn.png" />
     <Content Include="App_Themes\Global\indeximage\denglu22.png" />
-    <Content Include="App_Themes\Global\indeximage\denglu1.png" />
     <Content Include="App_Themes\Global\indeximage\denglu.png" />
     <Content Include="App_Themes\Global\indeximage\index1.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index11.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index1111.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index12.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index21.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index211.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index4.jpg" />
     <Content Include="App_Themes\Global\indexs.css" />
     <Content Include="App_Themes\Global\Reset.css" />
     <Content Include="App_Themes\Global\stypebiao.css" />
