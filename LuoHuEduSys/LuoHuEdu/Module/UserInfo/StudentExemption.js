@@ -8,7 +8,7 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '免修设置',
+        title: '免修信息',
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'UserName', title: '姓名', width: 180, sortable: false },
