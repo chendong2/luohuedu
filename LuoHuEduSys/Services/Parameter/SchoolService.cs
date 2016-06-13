@@ -39,7 +39,7 @@ namespace Services.Parameter
                     String id = Guid.NewGuid().ToString();
                     schoolBo.Id = id;
                     schoolBo.CreatedOn = DateTime.Now;
-                    schoolBo.CreatedBy = UserInfo.GetUserName();
+                    schoolBo.CreatedBy = Domain.common.UserInfo.GetUserName();
                     var sqlStr = @"INSERT INTO tb_school(Id,SchoolName,SchoolNo,Administrative,SchoolType,LearnLive,Address,Phone,CreatedBy,CreatedOn) VALUES(@Id,@SchoolName,@SchoolNo,@Administrative,@SchoolType,@LearnLive,@Address,@Phone,@CreatedBy,@CreatedOn);";
                     int row = connection.Execute(sqlStr, schoolBo);
                     if (row > 0)

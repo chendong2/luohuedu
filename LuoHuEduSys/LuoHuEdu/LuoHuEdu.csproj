@@ -408,8 +408,15 @@
     <Content Include="App_Themes\Global\indeximage\bjl.jpg" />
     <Content Include="App_Themes\Global\indeximage\btn.png" />
     <Content Include="App_Themes\Global\indeximage\denglu22.png" />
+    <Content Include="App_Themes\Global\indeximage\denglu1.png" />
     <Content Include="App_Themes\Global\indeximage\denglu.png" />
     <Content Include="App_Themes\Global\indeximage\index1.jpg" />
+    <Content Include="App_Themes\Global\indeximage\index11.jpg" />
+    <Content Include="App_Themes\Global\indeximage\index1111.jpg" />
+    <Content Include="App_Themes\Global\indeximage\index12.jpg" />
+    <Content Include="App_Themes\Global\indeximage\index21.jpg" />
+    <Content Include="App_Themes\Global\indeximage\index211.jpg" />
+    <Content Include="App_Themes\Global\indeximage\index4.jpg" />
     <Content Include="App_Themes\Global\indexs.css" />
     <Content Include="App_Themes\Global\Reset.css" />
     <Content Include="App_Themes\Global\stypebiao.css" />
@@ -1235,6 +1242,7 @@
     <Content Include="Module\Ticket\BookForm.js" />
     <Content Include="Module\Ticket\TicketList.js" />
     <Content Include="Module\Ticket\TicketOrderStatisticsList.js" />
+    <Content Include="Module\UserInfo\StudentExemption.js" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderAdvancedSearch.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderCancelForm.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderEditForm.htm" />
@@ -1277,6 +1285,8 @@
     <Content Include="View\Ticket\TicketList\TicketList.htm" />
     <Content Include="View\Ticket\TicketStatistics\TicketOrderStatisticsAdvancedSearch.htm" />
     <Content Include="View\Ticket\TicketStatistics\TicketOrderStatisticsList.htm" />
+    <Content Include="View\UserInfo\StudentExemption\ExemptionForm.htm" />
+    <Content Include="View\UserInfo\StudentExemption\ExemptionList.htm" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1290,6 +1300,7 @@
     <Content Include="WebServices\Parameter\Exemption.asmx" />
     <Content Include="WebServices\Parameter\TrainType.asmx" />
     <Content Include="WebServices\Parameter\Subject.asmx" />
+    <Content Include="WebServices\UserInfo\StudentExemption.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BaseCodes\XmlUtil.cs" />
@@ -1335,6 +1346,10 @@
     </Compile>
     <Compile Include="WebServices\Parameter\Subject.asmx.cs">
       <DependentUpon>Subject.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\UserInfo\StudentExemption.asmx.cs">
+      <DependentUpon>StudentExemption.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
