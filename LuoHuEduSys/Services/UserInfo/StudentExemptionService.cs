@@ -176,6 +176,11 @@ namespace Services.UserInfo
                 }
             }
 
+            if (Domain.common.UserInfo.GetUserId() != null)
+            {
+                strSql += "and StudentID = @StudentID ";
+            }
+
             switch (sort)
             {
                 case "UserName":
@@ -189,7 +194,8 @@ namespace Services.UserInfo
                 count = context.Query<StudentExemptionBo>(strSql,
                                             new
                                             {
-                                                UserName = string.Format("%{0}%", studentExemptionBo.UserName)
+                                                UserName = string.Format("%{0}%", studentExemptionBo.UserName),
+                                                StudentID = Domain.common.UserInfo.GetUserId().ToString()
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
@@ -197,6 +203,7 @@ namespace Services.UserInfo
                                                 new
                                                 {
                                                     UserName = string.Format("%{0}%", studentExemptionBo.UserName),
+                                                    StudentID = Domain.common.UserInfo.GetUserId().ToString(),
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
