@@ -17,7 +17,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'CreateOn', title: '申请时间', width: 180, sortable: false,
                 formatter: function (value) {
                     value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-                    return d.getFullYear() + "-"+(d.getMonth() + 1) + "-" + d.getDate();
+                    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
                 }
             },
             { field: 'SchoolAudit', title: '中心审批', width: 180, sortable: false,
@@ -63,6 +63,7 @@ using(easyloader.defaultReferenceModules, function () {
         onDblClickRow: function (rowIndex, rowData) {
             getTheYear();
             getStudentData();
+            getAllExemption();
             fillForm(rowData.Id);
         }
     };
@@ -107,6 +108,7 @@ function addData() {
     });
     resetFormAndClearValidate('ff');
     getTheYear();
+    getAllExemption();
     getStudentData();
 }
 
@@ -119,6 +121,7 @@ function editData() {
         resetFormAndClearValidate('ff');
         getTheYear();
         getStudentData();
+        getAllExemption();
         fillForm(row.Id);
     }
 }
@@ -132,6 +135,25 @@ function getTheYear() {
         var option = "<option value='" + data + "'>" + data + "</option>";
         $("#sTheYear").append(option);
     }
+}
+
+//获取全部的免修数据
+function getAllExemption() {
+    $("#tdExep").empty();
+    ajaxCRUD({
+        url: '/WebServices/Parameter/Exemption.asmx/GetAllExemption',
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i].toString().split('******');
+                var option = "<input type='radio' name='ExemptionId' value='" + value[1] + "' />" + value[0];
+                if (i < data.length - 1) {
+                    option = option + "<br/>";
+                }
+                $("#tdExep").append(option);
+            }
+        }
+    });
 }
 
 //根据用户Id填充数据

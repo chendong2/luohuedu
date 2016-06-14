@@ -85,5 +85,16 @@ namespace LuoHuEdu.WebServices.Parameter
             return exemptionBo;
         }
 
+        //获取全部的免修数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public string[] GetAllExemption()
+        {
+            var exemptionService = new ExemptionService();
+            var exemptionList = exemptionService.GetAllExemption();
+            return exemptionList;
+        }
+       
+
     }
 }

@@ -208,5 +208,24 @@ namespace Services.Parameter
         }
 
         #endregion
+
+        //获取全部的免修数据
+        public string[] GetAllExemption()
+        {
+            List<ExemptionBo> list;
+            string strSql = string.Format(@"SELECT * from tb_exemption where 1=1 ");
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<ExemptionBo>(strSql,
+                                                new { }).ToList();
+            }
+            string[] data = new string[list.Count];
+            for (int i = 0; i < list.Count; i++)
+            {
+                data[i] = list[i].ExemptionReason + "(" + list[i].Comment + ")"+"******"+list[i].Id;
+            }
+            return data;
+        }
     }
 }
