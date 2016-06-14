@@ -39,6 +39,7 @@ namespace Services.UserInfo
                     String id = Guid.NewGuid().ToString();
                     studentExemptionBo.Id = id;
                     studentExemptionBo.CreateOn = DateTime.Now;
+                    studentExemptionBo.StudentId = Domain.common.UserInfo.GetUserId().ToString();
                     studentExemptionBo.SchoolAudit = 0;
                     var sqlStr = @"INSERT INTO tb_studentexemption(Id,StudentID,ExemptionId,TheYear,SchoolAudit,CreateOn) VALUES(@Id,@StudentID,@ExemptionId,@TheYear,@SchoolAudit,@CreateOn);";
                     int row = connection.Execute(sqlStr, studentExemptionBo);

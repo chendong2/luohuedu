@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
+using BusinessObject.AdminBo;
 using BusinessObject.UserInfo;
 using Services.Parameter;
 using Services.UserInfo;
+using Services.Admin.StudentControl;
 
 namespace LuoHuEdu.WebServices.UserInfo
 {
@@ -84,6 +86,17 @@ namespace LuoHuEdu.WebServices.UserInfo
             var studentExemptionService = new StudentExemptionService();
             var studentExemptionBo = studentExemptionService.GetStudentExemptionById(id);
             return studentExemptionBo;
+        }
+
+
+        //新增数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public StudentBo getStudentData()
+        {
+            string userId = Domain.common.UserInfo.GetUserId().ToString();
+
+            return StudentService.GetStudentById(userId);
         }
 
     }

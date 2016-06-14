@@ -19,6 +19,11 @@ namespace BusinessObject.AdminBo
         public string SchoolId { get; set; }
 
         /// <summary>
+        /// 学校名称
+        /// </summary>
+        public string SchoolName { get; set; }
+
+        /// <summary>
         /// 学员姓名
         /// </summary>
         public string Name { get; set; }
@@ -33,6 +38,8 @@ namespace BusinessObject.AdminBo
         public int Sex { get; set; }
 
         public DateTime Birthday { get; set; }
+
+        public string BirthdayStr { get; set; }
 
         public string Origin { get; set; }
     }

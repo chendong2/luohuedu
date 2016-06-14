@@ -34,6 +34,28 @@ namespace Services.Admin.StudentControl
 
             return null;
         }
+
+
+        public static StudentBo GetStudentById(String id)
+        {
+            if (id == null)
+                throw new ArgumentNullException("id");
+            var studentBo = new StudentBo { };
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"SELECT stu.UserName,sex,DATE_FORMAT(Birthday,'%Y-%m-%d') AS BirthdayStr,sc.SchoolName from tb_student stu INNER JOIN tb_school sc ON stu.SchoolId=sc.Id  where stu.Id=@Id";
+                    studentBo = connection.Query<StudentBo>(sqlStr, new { Id = id }).FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.GetStudentById({0})异常", id), ex);
+            }
+            return studentBo;
+        }
         
     }
 }

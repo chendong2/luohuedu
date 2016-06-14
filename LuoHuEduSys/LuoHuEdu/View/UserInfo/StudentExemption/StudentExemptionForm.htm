@@ -1,0 +1,66 @@
+﻿<div id="dlg" style="width: 400px; padding: 10px" data-options="buttons: '#dlg-buttons',
+                                                                closed: true,
+                                                                shadow:false,
+                                                                modal:true">
+    <form id="ff" method="post">
+    <table class="custom_forms_popup">
+        <tr>
+            <td style="width: 30%" class="td_right">
+                年度:
+            </td>
+            <td class="td_left">
+                <select id="sTheYear" name="TheYear">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%" class="td_right">
+                姓名:
+            </td>
+            <td class="td_left">
+                <input id="txtUserNameForm" type="text" style="width: 165px" maxlength="20"  class="easyui-validatebox" readonly="readonly" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%" class="td_right">
+                性别:
+            </td>
+            <td class="td_left">
+                <input id="txtSex" type="text" style="width: 165px" maxlength="20"  class="easyui-validatebox" readonly="readonly" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%" class="td_right">
+                出生年月:
+            </td>
+            <td class="td_left">
+                <input id="txtBirthday" type="text"  style="width: 165px" maxlength="20"  class="easyui-validatebox" readonly="readonly" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%" class="td_right">
+                所在学校:
+            </td>
+            <td class="td_left">
+                <input id="txtSchoolName" type="text" style="width: 165px" maxlength="20"  class="easyui-validatebox" readonly="readonly" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%" class="td_right">
+                免修原因:
+            </td>
+             <td class="td_left">
+
+             </td>
+        </tr>
+    </table>
+    <div>
+        <input id="HidId" type="hidden" name="Id"/>
+    </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveData();">确定</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeFormDialog();">
+        取消</a>
+</div>

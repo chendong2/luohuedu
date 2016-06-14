@@ -1285,8 +1285,8 @@
     <Content Include="View\Ticket\TicketList\TicketList.htm" />
     <Content Include="View\Ticket\TicketStatistics\TicketOrderStatisticsAdvancedSearch.htm" />
     <Content Include="View\Ticket\TicketStatistics\TicketOrderStatisticsList.htm" />
-    <Content Include="View\UserInfo\StudentExemption\ExemptionForm.htm" />
-    <Content Include="View\UserInfo\StudentExemption\ExemptionList.htm" />
+    <Content Include="View\UserInfo\StudentExemption\StudentExemptionForm.htm" />
+    <Content Include="View\UserInfo\StudentExemption\StudentExemptionList.htm" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -8,12 +8,18 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '免修信息',
+        title: '免修登记',
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'UserName', title: '姓名', width: 180, sortable: false },
             { field: 'ExemptionReason', title: '免修名目', width: 180, sortable: false },
             { field: 'TheYear', title: '年度', width: 180, sortable: false },
+            { field: 'CreateOn', title: '申请时间', width: 180, sortable: false,
+                formatter: function (value) {
+                    value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
+                    return d.getFullYear() + "-"+(d.getMonth() + 1) + "-" + d.getDate();
+                }
+            },
             { field: 'SchoolAudit', title: '中心审批', width: 180, sortable: false,
                 formatter: function (value) {
                     if (value == "0") {
@@ -55,6 +61,8 @@ using(easyloader.defaultReferenceModules, function () {
 
         },
         onDblClickRow: function (rowIndex, rowData) {
+            getTheYear();
+            getStudentData();
             fillForm(rowData.Id);
         }
     };
@@ -79,7 +87,7 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/Parameter/StudentExemption/StudentExemptionForm.htm',
+            href: '/View/UserInfo/StudentExemption/StudentExemptionForm.htm',
             onLoad: function () {
                 //                setValidatebox('Name', {
                 //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
@@ -89,7 +97,7 @@ function loadPartialHtml() {
     }
 }
 
-var moduleName = '免修设置-';
+var moduleName = '免修登记-';
 
 //点击“新增”按钮
 function addData() {
@@ -98,6 +106,8 @@ function addData() {
         iconCls: 'icon-add'
     });
     resetFormAndClearValidate('ff');
+    getTheYear();
+    getStudentData();
 }
 
 //点击“编辑”按钮
@@ -107,8 +117,39 @@ function editData() {
         msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
     } else {
         resetFormAndClearValidate('ff');
+        getTheYear();
+        getStudentData();
         fillForm(row.Id);
     }
+}
+
+//获取年份数据
+function getTheYear() {
+    var currentYear = new Date().getFullYear();
+    $("#sTheYear").empty();
+    for (var i = 1; i <=15; i++) {
+        var data = currentYear - i + "-" + (currentYear-i+1);
+        var option = "<option value='" + data + "'>" + data + "</option>";
+        $("#sTheYear").append(option);
+    }
+}
+
+//根据用户Id填充数据
+function getStudentData() {
+    ajaxCRUD({
+        url: '/WebServices/UserInfo/StudentExemption.asmx/getStudentData',
+        async: false,
+        success: function (data) {
+            $("#txtUserNameForm").val(data.UserName);
+            if (data.Sex == 1) {
+                $("#txtSex").val("男");
+            } else {
+                $("#txtSex").val("女");
+            }
+            $("#txtBirthday").val(data.BirthdayStr);
+            $("#txtSchoolName").val(data.SchoolName);
+        }
+    });
 }
 
 //获取JSON数据并填充到相应表单
