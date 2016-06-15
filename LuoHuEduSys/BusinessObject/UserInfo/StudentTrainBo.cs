@@ -15,7 +15,7 @@ namespace BusinessObject.UserInfo
 
         public string ProgramId { get; set; }
 
-        public string ProgramName { get; set; }
+        public string ProgrameName { get; set; }
 
         public string SubProgrameName { get; set; }
 

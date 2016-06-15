@@ -235,5 +235,66 @@ namespace Services.Parameter
         }
 
         #endregion
+
+        public string[] GetAllProgram()
+        {
+            List<MaintrainSetBo> list;
+            string strSql = string.Format(@"SELECT distinct ProgrameName from tb_maintrainset where 1=1 ");
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<MaintrainSetBo>(strSql,
+                                                new { }).ToList();
+            }
+            string[] data = new string[list.Count];
+            for (int i = 0; i < list.Count; i++)
+            {
+                data[i] = list[i].ProgrameName;
+            }
+            return data;
+        }
+
+        public string[] GetSubProgram(string pro)
+        {
+            List<MaintrainSetBo> list;
+            string strSql = string.Format(@"SELECT distinct SubProgrameName from tb_maintrainset where 1=1 and  ProgrameName=@ProgrameName ");
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<MaintrainSetBo>(strSql,
+                                                new
+                                                    {
+                                                        ProgrameName = pro
+                                                    }).ToList();
+            }
+            string[] data = new string[list.Count];
+            for (int i = 0; i < list.Count; i++)
+            {
+                data[i] = list[i].SubProgrameName;
+            }
+            return data;
+        }
+
+        public string[] GetSunProgram(string subPro)
+        {
+            List<MaintrainSetBo> list;
+            string strSql = string.Format(@"SELECT distinct Id,SunProgrameName,StuTime from tb_maintrainset where 1=1 and  SubProgrameName=@SubProgrameName ");
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<MaintrainSetBo>(strSql,
+                                                new
+                                                {
+                                                    SubProgrameName = subPro
+                                                }).ToList();
+            }
+            string[] data = new string[list.Count];
+            for (int i = 0; i < list.Count; i++)
+            {
+                data[i] = list[i].SunProgrameName + "/(" + list[i].StuTime + "课时)" + "******" + list[i].Id;
+            }
+            return data;
+        }
+    
     }
 }

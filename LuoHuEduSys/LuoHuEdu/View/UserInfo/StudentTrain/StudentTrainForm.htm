@@ -26,7 +26,8 @@
                     项目类型:
                 </td>
                 <td class="td_left">
-                     <select id="Select1" name="TheYear">
+                    <select id="sPro" onchange="getSubTrain();">
+                        <option value=""></option>
                     </select>
                 </td>
             </tr>
@@ -35,7 +36,7 @@
                     次项目类型:
                 </td>
                 <td class="td_left">
-                     <select id="Select2" name="TheYear">
+                     <select id="sSubPro" onchange="getSunTrain();">
                     </select>
                 </td>
             </tr>
@@ -44,7 +45,7 @@
                     子项目类型:
                 </td>
                 <td class="td_left">
-                     <select id="Select3" name="TheYear">
+                     <select id="sSunPro" onchange="setData();">
                     </select>
                 </td>
             </tr>
@@ -59,6 +60,7 @@
         </table>
     <div>
         <input id="HidId" type="hidden" name="Id"/>
+        <input id="HidProgramId" type="hidden" name="ProgramId"/>
     </div>
     </form>
 </div>

@@ -12,17 +12,17 @@ using(easyloader.defaultReferenceModules, function () {
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'TrainName', title: '项目标题', width: 180, sortable: false },
-            { field: 'ProgrameName', title: '项目类型', width: 180, sortable: false },
-            { field: 'SubProgrameName', title: '次项目类型', width: 180, sortable: false },
-            { field: 'SunProgrameName', title: '子项目类型', width: 180, sortable: false },
-            { field: 'TheYear', title: '年度', width: 120, sortable: false },
-            { field: 'CreateOn', title: '申请时间', width: 120, sortable: false,
+            { field: 'ProgrameName', title: '项目类型', width: 120, sortable: false },
+            { field: 'SubProgrameName', title: '次项目类型', width: 120, sortable: false },
+            { field: 'SunProgrameName', title: '子项目类型', width: 120, sortable: false },
+            { field: 'TheYear', title: '年度', width: 100, sortable: false },
+            { field: 'CreateOn', title: '申请时间', width: 100, sortable: false,
                 formatter: function (value) {
                     value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
                     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
                 }
             },
-            { field: 'SchoolAudit', title: '学校审核', width: 180, sortable: false,
+            { field: 'SchoolAudit', title: '学校审核', width: 100, sortable: false,
                 formatter: function (value) {
                     if (value == "0") {
                         return "未审核";
@@ -33,7 +33,7 @@ using(easyloader.defaultReferenceModules, function () {
                     }
                 }
             },
-            { field: 'DistinctSchoolAudit', title: '中心审核', width: 180, sortable: false,
+            { field: 'DistinctSchoolAudit', title: '中心审核', width: 100, sortable: false,
                 formatter: function (value) {
                     if (value == "0") {
                         return "未审核";
@@ -150,21 +150,60 @@ function getTheYear() {
 
 //获取全部的免修数据
 function getAllTrain() {
-    $("#tdExep").empty();
+    $("#sPro").empty();
+    $("#sPro").append("<option value=''></option>");
     ajaxCRUD({
-        url: '/WebServices/Parameter/Exemption.asmx/GetAllExemption',
+        url: '/WebServices/Parameter/MaintrainSet.asmx/GetAllProgram',
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var option = "<option value='" + data[i] + "'>" + data[i] + "</option>";
+                $("#sPro").append(option);
+            }
+        }
+    });
+}
+
+
+
+function getSubTrain() {
+    $("#sSubPro").empty();
+    $("#sSubPro").append("<option value=''></option>");
+    var pro = $("#sPro").val();
+    ajaxCRUD({
+        url: '/WebServices/Parameter/MaintrainSet.asmx/GetSubProgram',
+        data: "{pro:'" + pro + "'}",
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var option = "<option value='" + data[i] + "'>" + data[i] + "</option>";
+                $("#sSubPro").append(option);
+            }
+        }
+    });
+}
+
+function getSunTrain() {
+    $("#sSunPro").empty();
+    $("#sSunPro").append("<option value=''></option>");
+    var subPro = $("#sSubPro").val();
+    ajaxCRUD({
+        url: '/WebServices/Parameter/MaintrainSet.asmx/GetSunProgram',
+        data: "{subPro:'" + subPro + "'}",
         async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 var value = data[i].toString().split('******');
-                var option = "<input type='radio' name='ExemptionId' value='" + value[1] + "' />" + value[0];
-                if (i < data.length - 1) {
-                    option = option + "<br/>";
-                }
-                $("#tdExep").append(option);
+                var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
+                $("#sSunPro").append(option);
             }
         }
     });
+}
+
+function setData() {
+    var id = $("#sSunPro").val();
+    $("#HidProgramId").val(id);
 }
 
 //获取JSON数据并填充到相应表单

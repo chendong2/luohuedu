@@ -96,5 +96,32 @@ namespace LuoHuEdu.WebServices.Parameter
             return list;
         }
 
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public string[] GetAllProgram()
+        {
+            var maintrainSetService = new MaintrainSetService();
+            var maintrainList = maintrainSetService.GetAllProgram();
+            return maintrainList;
+        }
+
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public string[] GetSubProgram(string pro)
+        {
+            var maintrainSetService = new MaintrainSetService();
+            var maintrainList = maintrainSetService.GetSubProgram(pro);
+            return maintrainList;
+        }
+
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public string[] GetSunProgram(string subPro)
+        {
+            var maintrainSetService = new MaintrainSetService();
+            var maintrainList = maintrainSetService.GetSunProgram(subPro);
+            return maintrainList;
+        }
+
     }
 }

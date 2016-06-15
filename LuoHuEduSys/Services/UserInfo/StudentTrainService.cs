@@ -17,12 +17,12 @@ namespace Services.UserInfo
 
     public class StudentTrainService
     {
-        #region 免修信息增删改查基本操作
+        #region 校本研修登记增删改查基本操作
 
         /// <summary>
-        /// 新增免修信息
+        /// 新增校本研修登记
         /// </summary>
-        /// <param name="studentTrainBo"> 免修信息BO</param>
+        /// <param name="studentTrainBo"> 校本研修登记BO</param>
         /// <returns>bool</returns>
         public bool AddStudentTrain(StudentTrainBo studentTrainBo)
         {
@@ -65,9 +65,9 @@ namespace Services.UserInfo
 
 
         /// <summary>
-        /// 批量删除免修信息信息
+        /// 批量删除校本研修登记信息
         /// </summary>
-        /// <param name="ids">多个免修信息id用逗号分隔的字符串</param>
+        /// <param name="ids">多个校本研修登记id用逗号分隔的字符串</param>
         /// <returns>bool</returns>
         public bool DeleteStudentTrainsByIds(String ids)
         {
@@ -94,9 +94,9 @@ namespace Services.UserInfo
         }
 
         /// <summary>
-        /// 修改免修信息信息
+        /// 修改校本研修登记信息
         /// </summary>
-        /// <param name="studentTrainBo">免修信息BO</param>
+        /// <param name="studentTrainBo">校本研修登记BO</param>
         /// <returns></returns>
         public bool UpdateStudentTrain(StudentTrainBo studentTrainBo)
         {
@@ -126,10 +126,10 @@ namespace Services.UserInfo
         }
 
         /// <summary>
-        /// 通过免修信息id获取免修信息信息
+        /// 通过校本研修登记id获取校本研修登记信息
         /// </summary>
-        /// <param name="id">免修信息id</param>
-        /// <returns>免修信息BO实体</returns>
+        /// <param name="id">校本研修登记id</param>
+        /// <returns>校本研修登记BO实体</returns>
         public StudentTrainBo GetStudentTrainById(String id)
         {
             if (id == null)
