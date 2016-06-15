@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourseStudentBo.cs" />
+    <Compile Include="CourseStudentMessageBo.cs" />
+    <Compile Include="Course\CourseBo.cs" />
     <Compile Include="Course\CourseStudentBo.cs" />
     <Compile Include="Parameter\StudentExemptionBo.cs" />
     <Compile Include="Parameter\MaintrainSetBo.cs" />
@@ -50,6 +53,7 @@
     <Compile Include="Parameter\SubjectBo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminBo\StudentBo.cs" />
+    <Compile Include="SchoolBo.cs" />
     <Compile Include="UserInfo\StudentExemptionBo.cs" />
   </ItemGroup>
   <ItemGroup />
