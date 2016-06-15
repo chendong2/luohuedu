@@ -1242,6 +1242,7 @@
     <Content Include="Module\Ticket\BookForm.js" />
     <Content Include="Module\Ticket\TicketList.js" />
     <Content Include="Module\Ticket\TicketOrderStatisticsList.js" />
+    <Content Include="Module\UserInfo\StudentTrain.js" />
     <Content Include="Module\UserInfo\StudentExemption.js" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderAdvancedSearch.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderCancelForm.htm" />
@@ -1285,6 +1286,8 @@
     <Content Include="View\Ticket\TicketList\TicketList.htm" />
     <Content Include="View\Ticket\TicketStatistics\TicketOrderStatisticsAdvancedSearch.htm" />
     <Content Include="View\Ticket\TicketStatistics\TicketOrderStatisticsList.htm" />
+    <Content Include="View\UserInfo\StudentTrain\StudentTrainForm.htm" />
+    <Content Include="View\UserInfo\StudentTrain\StudentTrainList.htm" />
     <Content Include="View\UserInfo\StudentExemption\StudentExemptionForm.htm" />
     <Content Include="View\UserInfo\StudentExemption\StudentExemptionList.htm" />
     <Content Include="Web.config" />
@@ -1300,6 +1303,7 @@
     <Content Include="WebServices\Parameter\Exemption.asmx" />
     <Content Include="WebServices\Parameter\TrainType.asmx" />
     <Content Include="WebServices\Parameter\Subject.asmx" />
+    <Content Include="WebServices\UserInfo\StudentTrain.asmx" />
     <Content Include="WebServices\UserInfo\StudentExemption.asmx" />
   </ItemGroup>
   <ItemGroup>
@@ -1346,6 +1350,10 @@
     </Compile>
     <Compile Include="WebServices\Parameter\Subject.asmx.cs">
       <DependentUpon>Subject.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\UserInfo\StudentTrain.asmx.cs">
+      <DependentUpon>StudentTrain.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WebServices\UserInfo\StudentExemption.asmx.cs">
