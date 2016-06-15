@@ -8,19 +8,21 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '免修登记',
+        title: '校本研修登记',
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'UserName', title: '姓名', width: 180, sortable: false },
-            { field: 'ExemptionReason', title: '免修名目', width: 180, sortable: false },
-            { field: 'TheYear', title: '年度', width: 180, sortable: false },
-            { field: 'CreateOn', title: '申请时间', width: 180, sortable: false,
+            { field: 'TrainName', title: '项目标题', width: 180, sortable: false },
+            { field: 'ProgrameName', title: '项目类型', width: 180, sortable: false },
+            { field: 'SubProgrameName', title: '次项目类型', width: 180, sortable: false },
+            { field: 'SunProgrameName', title: '子项目类型', width: 180, sortable: false },
+            { field: 'TheYear', title: '年度', width: 120, sortable: false },
+            { field: 'CreateOn', title: '申请时间', width: 120, sortable: false,
                 formatter: function (value) {
                     value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
                     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
                 }
             },
-            { field: 'SchoolAudit', title: '中心审批', width: 180, sortable: false,
+            { field: 'SchoolAudit', title: '学校审核', width: 180, sortable: false,
                 formatter: function (value) {
                     if (value == "0") {
                         return "未审核";
@@ -30,7 +32,19 @@ using(easyloader.defaultReferenceModules, function () {
                         return "审核通过";
                     }
                 }
-            }
+            },
+            { field: 'DistinctSchoolAudit', title: '中心审核', width: 180, sortable: false,
+                formatter: function (value) {
+                    if (value == "0") {
+                        return "未审核";
+                    } else if (value == "1") {
+                        return "审核不通过";
+                    } else {
+                        return "审核通过";
+                    }
+                }
+            },
+            { field: 'StuTime', title: '对应课时', width: 90, sortable: false },
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
@@ -62,8 +76,7 @@ using(easyloader.defaultReferenceModules, function () {
         },
         onDblClickRow: function (rowIndex, rowData) {
             getTheYear();
-            getStudentData();
-            getAllExemption();
+            getAllTrain();
             fillForm(rowData.Id);
         }
     };
@@ -98,7 +111,7 @@ function loadPartialHtml() {
     }
 }
 
-var moduleName = '免修登记-';
+var moduleName = '校本研修登记-';
 
 //点击“新增”按钮
 function addData() {
@@ -108,8 +121,7 @@ function addData() {
     });
     resetFormAndClearValidate('ff');
     getTheYear();
-    getAllExemption();
-    getStudentData();
+    getAllTrain();
 }
 
 //点击“编辑”按钮
@@ -120,8 +132,7 @@ function editData() {
     } else {
         resetFormAndClearValidate('ff');
         getTheYear();
-        getStudentData();
-        getAllExemption();
+        getAllTrain();
         fillForm(row.Id);
     }
 }
@@ -138,7 +149,7 @@ function getTheYear() {
 }
 
 //获取全部的免修数据
-function getAllExemption() {
+function getAllTrain() {
     $("#tdExep").empty();
     ajaxCRUD({
         url: '/WebServices/Parameter/Exemption.asmx/GetAllExemption',
@@ -152,24 +163,6 @@ function getAllExemption() {
                 }
                 $("#tdExep").append(option);
             }
-        }
-    });
-}
-
-//根据用户Id填充数据
-function getStudentData() {
-    ajaxCRUD({
-        url: '/WebServices/UserInfo/StudentTrain.asmx/getStudentData',
-        async: false,
-        success: function (data) {
-            $("#txtUserNameForm").val(data.UserName);
-            if (data.Sex == 1) {
-                $("#txtSex").val("男");
-            } else {
-                $("#txtSex").val("女");
-            }
-            $("#txtBirthday").val(data.BirthdayStr);
-            $("#txtSchoolName").val(data.SchoolName);
         }
     });
 }
