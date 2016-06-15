@@ -275,16 +275,17 @@ namespace Services.Parameter
             return data;
         }
 
-        public string[] GetSunProgram(string subPro)
+        public string[] GetSunProgram(string pro,string subPro)
         {
             List<MaintrainSetBo> list;
-            string strSql = string.Format(@"SELECT distinct Id,SunProgrameName,StuTime from tb_maintrainset where 1=1 and  SubProgrameName=@SubProgrameName ");
+            string strSql = string.Format(@"SELECT distinct Id,SunProgrameName,StuTime from tb_maintrainset where 1=1 and  SubProgrameName=@SubProgrameName  and  ProgrameName=@ProgrameName ");
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
 
                 list = context.Query<MaintrainSetBo>(strSql,
                                                 new
                                                 {
+                                                    ProgrameName=pro,
                                                     SubProgrameName = subPro
                                                 }).ToList();
             }

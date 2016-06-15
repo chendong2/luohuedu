@@ -116,10 +116,10 @@ namespace LuoHuEdu.WebServices.Parameter
 
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public string[] GetSunProgram(string subPro)
+        public string[] GetSunProgram(string pro,string subPro)
         {
             var maintrainSetService = new MaintrainSetService();
-            var maintrainList = maintrainSetService.GetSunProgram(subPro);
+            var maintrainList = maintrainSetService.GetSunProgram(pro,subPro);
             return maintrainList;
         }
 

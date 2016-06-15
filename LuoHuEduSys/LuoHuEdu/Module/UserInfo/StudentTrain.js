@@ -75,9 +75,13 @@ using(easyloader.defaultReferenceModules, function () {
 
         },
         onDblClickRow: function (rowIndex, rowData) {
+
+            $("#sSunPro").empty();
+            $("#sSubPro").empty();
             getTheYear();
             getAllTrain();
             fillForm(rowData.Id);
+            fillProdata(rowData.ProgramId);
         }
     };
 
@@ -120,6 +124,8 @@ function addData() {
         iconCls: 'icon-add'
     });
     resetFormAndClearValidate('ff');
+    $("#sSunPro").empty();
+    $("#sSubPro").empty();
     getTheYear();
     getAllTrain();
 }
@@ -131,9 +137,12 @@ function editData() {
         msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
     } else {
         resetFormAndClearValidate('ff');
+        $("#sSunPro").empty();
+        $("#sSubPro").empty();
         getTheYear();
         getAllTrain();
         fillForm(row.Id);
+        fillProdata(row.ProgramId);
     }
 }
 
@@ -186,10 +195,11 @@ function getSubTrain() {
 function getSunTrain() {
     $("#sSunPro").empty();
     $("#sSunPro").append("<option value=''></option>");
+    var pro = $("#sPro").val();
     var subPro = $("#sSubPro").val();
     ajaxCRUD({
         url: '/WebServices/Parameter/MaintrainSet.asmx/GetSunProgram',
-        data: "{subPro:'" + subPro + "'}",
+        data: "{pro:'" + pro + "',subPro:'" + subPro + "'}",
         async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
@@ -205,6 +215,24 @@ function setData() {
     var id = $("#sSunPro").val();
     $("#HidProgramId").val(id);
 }
+
+
+function fillProdata(id) {
+    ajaxCRUD({
+        url: '/WebServices/Parameter/MaintrainSet.asmx/GetMaintrainSetById',
+        data: "{id:'" + id + "'}",
+        async: false,
+        success: function (data) {
+            $("#sPro").val(data.ProgrameName);
+            getSubTrain();
+            $("#sSubPro").val(data.SubProgrameName);
+            getSunTrain();
+            $("#sSunPro").val(id);
+        }
+    });
+}
+
+
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
