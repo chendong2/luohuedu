@@ -44,5 +44,39 @@ namespace BusinessObject.AdminBo
         public string BirthdayStr { get; set; }
 
         public string Origin { get; set; }
+
+        public string Minority { get; set; }
+
+        public string Profession { get; set; }
+
+        public string Professiontitles { get; set; }
+
+        public string Graduated { get; set; }
+
+        public int HighDegree { get; set; }
+
+        public int StudyPeriod { get; set; }
+
+        public int InCharge { get; set; }
+
+        public string Office { get; set; }
+
+        public string FirstTeaching { get; set; }
+
+        public string SecondTeaching { get; set; }
+
+        public string Address { get; set; }
+
+        public string PostCode { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Telephone { get; set; }
+
+        public string Email { get; set; }
+
+        public string HighHonor { get; set; }
+
+        public string RegistrationCode { get; set; }
     }
 }
