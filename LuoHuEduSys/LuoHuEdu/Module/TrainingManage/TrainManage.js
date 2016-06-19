@@ -11,19 +11,19 @@ using(easyloader.defaultReferenceModules, function () {
         title: '校本研修审核',
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'UserName', title: '姓名', width: 120, sortable: false },
+            { field: 'UserName', title: '姓名', width: 60, sortable: false },
             { field: 'TrainName', title: '项目标题', width: 180, sortable: false },
-            { field: 'ProgrameName', title: '项目类型', width: 120, sortable: false },
-            { field: 'SubProgrameName', title: '次项目类型', width: 120, sortable: false },
-            { field: 'SunProgrameName', title: '子项目类型', width: 120, sortable: false },
-            { field: 'TheYear', title: '年度', width: 100, sortable: false },
-            { field: 'CreateOn', title: '申请时间', width: 100, sortable: false,
+            { field: 'ProgrameName', title: '项目类型', width: 100, sortable: false },
+            { field: 'SubProgrameName', title: '次项目类型', width: 100, sortable: false },
+            { field: 'SunProgrameName', title: '子项目类型', width: 100, sortable: false },
+            { field: 'TheYear', title: '年度', width: 70, sortable: false },
+            { field: 'CreateOn', title: '申请时间', width: 70, sortable: false,
                 formatter: function (value) {
                     value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
                     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
                 }
             },
-            { field: 'SchoolAudit', title: '学校审核', width: 100, sortable: false,
+            { field: 'SchoolAudit', title: '学校审核', width: 70, sortable: false,
                 formatter: function (value) {
                     if (value == "0") {
                         return "未审核";
@@ -34,7 +34,7 @@ using(easyloader.defaultReferenceModules, function () {
                     }
                 }
             },
-            { field: 'DistinctSchoolAudit', title: '中心审核', width: 100, sortable: false,
+            { field: 'DistinctSchoolAudit', title: '中心审核', width: 70, sortable: false,
                 formatter: function (value) {
                     if (value == "0") {
                         return "未审核";
@@ -45,7 +45,12 @@ using(easyloader.defaultReferenceModules, function () {
                     }
                 }
             },
-            { field: 'StuTime', title: '对应课时', width: 90, sortable: false },
+            { field: 'StuTime', title: '对应课时', width: 60, sortable: false },
+            { field: 'Audit', title: '审核', width: 70, sortable: false,
+                formatter: function (value) {
+                    return "<a style='color:red;cursor:pointer'>审核</a>";
+                }
+            }
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
@@ -75,7 +80,7 @@ using(easyloader.defaultReferenceModules, function () {
             });
 
         },
-        onDblClickRow: function (rowIndex, rowData) {
+        onClickRow: function (rowIndex, rowData) {
 
             $("#sSunPro").empty();
             $("#sSubPro").empty();
@@ -106,7 +111,7 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/UserInfo/StudentTrain/StudentTrainForm.htm',
+            href: '/View/TrainingManage/TrainManage/TrainManageForm.htm',
             onLoad: function () {
                 //                setValidatebox('Name', {
                 //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
@@ -118,34 +123,7 @@ function loadPartialHtml() {
 
 var moduleName = '校本研修登记-';
 
-//点击“新增”按钮
-function addData() {
-    openDialog('dlg', {
-        title: moduleName + '新增',
-        iconCls: 'icon-add'
-    });
-    resetFormAndClearValidate('ff');
-    $("#sSunPro").empty();
-    $("#sSubPro").empty();
-    getTheYear();
-    getAllTrain();
-}
 
-//点击“编辑”按钮
-function editData() {
-    var row = getSelectedRow('dg');
-    if (row == null) {
-        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
-    } else {
-        resetFormAndClearValidate('ff');
-        $("#sSunPro").empty();
-        $("#sSubPro").empty();
-        getTheYear();
-        getAllTrain();
-        fillForm(row.Id);
-        fillProdata(row.ProgramId);
-    }
-}
 
 //获取年份数据
 function getTheYear() {
@@ -153,7 +131,7 @@ function getTheYear() {
     $("#sTheYear").empty();
     for (var i = 1; i <=15; i++) {
         var data = currentYear - i + "-" + (currentYear-i+1);
-        var option = "<option value='" + data + "'>" + data + "</option>";
+        var option = "<option disabled='disabled' value='" + data + "'>" + data + "</option>";
         $("#sTheYear").append(option);
     }
 }
@@ -167,7 +145,7 @@ function getAllTrain() {
         async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
-                var option = "<option value='" + data[i] + "'>" + data[i] + "</option>";
+                var option = "<option  disabled='disabled' value='" + data[i] + "'>" + data[i] + "</option>";
                 $("#sPro").append(option);
             }
         }
@@ -186,7 +164,7 @@ function getSubTrain() {
         async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
-                var option = "<option value='" + data[i] + "'>" + data[i] + "</option>";
+                var option = "<option  disabled='disabled' value='" + data[i] + "'>" + data[i] + "</option>";
                 $("#sSubPro").append(option);
             }
         }
@@ -205,7 +183,7 @@ function getSunTrain() {
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 var value = data[i].toString().split('******');
-                var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
+                var option = "<option  disabled='disabled' value='" + value[1] + "'>" + value[0] + "</option>";
                 $("#sSunPro").append(option);
             }
         }
@@ -242,7 +220,7 @@ function fillForm(itemid) {
         data: "{id:'" + itemid + "'}",
         success: function (data) {
             openDialog('dlg', {
-                title: moduleName + '编辑',
+                title: moduleName + '审核',
                 iconCls: 'icon-edit'
             });
             //JSON数据填充表单

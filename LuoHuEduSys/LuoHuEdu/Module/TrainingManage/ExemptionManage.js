@@ -33,7 +33,7 @@ using(easyloader.defaultReferenceModules, function () {
             },
             { field: 'Audit', title: '审批', width: 80, sortable: false,
                 formatter: function (value) {
-                    return "<a style='color:red;cursor:pointer' onclick='editData()'>审批</a>";
+                    return "<a style='color:red;cursor:pointer'>审批</a>";
                 }
             }
         ]],
