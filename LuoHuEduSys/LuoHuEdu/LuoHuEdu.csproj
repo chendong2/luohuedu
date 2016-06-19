@@ -1303,6 +1303,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WebServices\Admin\Student.asmx" />
     <Content Include="WebServices\Parameter\MaintrainSet.asmx" />
     <Content Include="WebServices\Parameter\School.asmx" />
     <Content Include="WebServices\Parameter\EducationOffice.asmx" />
@@ -1335,6 +1336,10 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebServices\Admin\Student.asmx.cs">
+      <DependentUpon>Student.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WebServices\Parameter\MaintrainSet.asmx.cs">
       <DependentUpon>MaintrainSet.asmx</DependentUpon>
       <SubType>Component</SubType>
