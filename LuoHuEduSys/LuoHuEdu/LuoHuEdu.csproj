@@ -1309,6 +1309,7 @@
     <Content Include="WebServices\Parameter\Exemption.asmx" />
     <Content Include="WebServices\Parameter\TrainType.asmx" />
     <Content Include="WebServices\Parameter\Subject.asmx" />
+    <Content Include="WebServices\UserInfo\Common.asmx" />
     <Content Include="WebServices\UserInfo\StudentTrain.asmx" />
     <Content Include="WebServices\UserInfo\StudentExemption.asmx" />
   </ItemGroup>
@@ -1356,6 +1357,10 @@
     </Compile>
     <Compile Include="WebServices\Parameter\Subject.asmx.cs">
       <DependentUpon>Subject.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\UserInfo\Common.asmx.cs">
+      <DependentUpon>Common.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WebServices\UserInfo\StudentTrain.asmx.cs">

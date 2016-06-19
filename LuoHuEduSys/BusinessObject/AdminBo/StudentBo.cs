@@ -13,6 +13,8 @@ namespace BusinessObject.AdminBo
 
         public string PassWord { get; set; }
 
+        public string OldPassword { get; set; }
+
         /// <summary>
         /// 学校ID
         /// </summary>
