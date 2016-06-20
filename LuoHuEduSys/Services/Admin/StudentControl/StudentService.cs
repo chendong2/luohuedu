@@ -245,9 +245,13 @@ namespace Services.Admin.StudentControl
             string strSql = string.Format(@"SELECT tb_student.*,tb_school.SchoolName from tb_student inner join tb_school on tb_student.SchoolId=tb_school.Id where 1=1 ");
             if (studentBo != null)
             {
-                if (studentBo.UserName != null)
+                if (studentBo.Name != null)
                 {
-                    strSql += "and UserName like @UserName ";
+                    strSql += "and Name like @Name ";
+                }
+                if (studentBo.IDNo != null)
+                {
+                    strSql += "and IDNo like @IDNo ";
                 }
                 if (studentBo.SchoolName != null)
                 {
@@ -257,8 +261,8 @@ namespace Services.Admin.StudentControl
 
             switch (sort)
             {
-                case "UserName":
-                    strSql += " order by UserName " + order;
+                case "Name":
+                    strSql += " order by Name " + order;
                     break;
             }
 
@@ -268,7 +272,8 @@ namespace Services.Admin.StudentControl
                 count = context.Query<StudentBo>(strSql,
                                             new
                                             {
-                                                UserName = string.Format("%{0}%", studentBo.UserName),
+                                                Name = string.Format("%{0}%", studentBo.Name),
+                                                IDNo = string.Format("%{0}%", studentBo.IDNo),
                                                 SchoolName = string.Format("%{0}%", studentBo.SchoolName)
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
@@ -276,8 +281,9 @@ namespace Services.Admin.StudentControl
                 var list = context.Query<StudentBo>(strSql,
                                                 new
                                                 {
-                                                    UserName = string.Format("%{0}%", studentBo.UserName),
-                                                    SchoolName = string.Format("%{0}%", studentBo.SchoolName),
+                                                      Name = string.Format("%{0}%", studentBo.Name),
+                                                      IDNo = string.Format("%{0}%", studentBo.IDNo),
+                                                      SchoolName = string.Format("%{0}%", studentBo.SchoolName),
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
