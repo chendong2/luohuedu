@@ -125,6 +125,10 @@ namespace BusinessObject.Course
 
         public DateTime ModifiyOn{ get; set; }
 
+        /// <summary>
+        /// 考勤次数
+        /// </summary>
+        public int Times { get; set; }
 
     }
 }
