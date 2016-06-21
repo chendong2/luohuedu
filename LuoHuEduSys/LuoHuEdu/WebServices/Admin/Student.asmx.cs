@@ -8,7 +8,6 @@ using System.Web.Services;
 using BusinessObject.AdminBo;
 using BusinessObject.Parameter;
 using Services.Admin.StudentControl;
-using Services.Parameter;
 
 namespace LuoHuEdu.WebServices.Admin
 {
@@ -26,21 +25,21 @@ namespace LuoHuEdu.WebServices.Admin
         //新增数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public bool AddStudent(StudentBo schoolBo)
+        public bool AddStudent(StudentBo studentBo)
         {
 
-            var schoolService = new StudentService();
-            return schoolService.AddStudent(schoolBo);
+            var studentService = new StudentService();
+            return studentService.AddStudent(studentBo);
         }
 
         //编辑数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public bool UpdateStudent(StudentBo schoolBo)
+        public bool UpdateStudent(StudentBo studentBo)
         {
 
-            var schoolService = new StudentService();
-            return schoolService.UpdateStudent(schoolBo);
+            var studentService = new StudentService();
+            return studentService.UpdateStudent(studentBo);
         }
 
   
@@ -50,18 +49,18 @@ namespace LuoHuEdu.WebServices.Admin
         [WebMethod(EnableSession = true)]
         public bool DeleteStudentsByIds(String ids)
         {
-            var schoolService = new StudentService();
-            return schoolService.DeleteStudentsByIds(ids);
+            var studentService = new StudentService();
+            return studentService.DeleteStudentsByIds(ids);
         }
 
         //获取数据列表
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public object GetStudentList(int page, int rows, string sort, string order, StudentBo schoolBo)
+        public object GetStudentList(int page, int rows, string sort, string order, StudentBo studentBo)
         {
 
-            var school = new StudentService();
-            var list = school.GetStudents(page, rows, sort, order, schoolBo);
+            var student = new StudentService();
+            var list = student.GetStudents(page, rows, sort, order, studentBo);
             if (list != null)
             {
                 return new
@@ -82,9 +81,9 @@ namespace LuoHuEdu.WebServices.Admin
         public StudentBo GetAllStudentById(String id)
         {
 
-            var schoolService = new StudentService();
-            var schoolBo = schoolService.GetAllStudentById(id);
-            return schoolBo;
+            var studentService = new StudentService();
+            var studentBo = studentService.GetAllStudentById(id);
+            return studentBo;
         }
 
     }

@@ -1225,6 +1225,7 @@
     <Content Include="Export\Common\Template\SalaryList.xml" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="Module\Admin\Student.js" />
     <Content Include="Module\Carrental\CarrentalOrder.js" />
     <Content Include="Module\Carrental\CarrentalRoute.js" />
     <Content Include="Module\Customer\CallNum.js" />
@@ -1246,6 +1247,8 @@
     <Content Include="Module\TrainingManage\TrainManage.js" />
     <Content Include="Module\UserInfo\StudentTrain.js" />
     <Content Include="Module\UserInfo\StudentExemption.js" />
+    <Content Include="View\Admin\Student\StudentForm.htm" />
+    <Content Include="View\Admin\Student\StudentList.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderAdvancedSearch.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderCancelForm.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderEditForm.htm" />
