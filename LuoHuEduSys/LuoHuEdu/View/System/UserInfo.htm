@@ -11,38 +11,201 @@
     <div region="center" border="false">
         <div style="width: 460px; margin: 100px 0 0 150px">
             <form id="ffChangeUserPsw" method="post">
-                <table class="custom_forms_popup">
-                    <tr>
-                        <td style="width: 20%" class="td_right">
-                            原密码123:
-                        </td>
-                        <td style="width: 30%" class="td_left">
-                            <input id="txtOldPassword" type="password" name="OldPassword" class="easyui-validatebox"
-                                   style="width: 160px" data-options="required:true,validType:'length[6,20]'" maxlength="20" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 20%" class="td_right">
-                            密码:
-                        </td>
-                        <td style="width: 30%" class="td_left">
-                            <input id="txtPassword" type="password" name="Password" class="easyui-validatebox"
-                                   style="width: 160px" data-options="required:true,validType:'length[6,20]'" maxlength="20" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_right">
-                            确认密码:
-                        </td>
-                        <td class="td_left">
-                            <input id="txtPassword2" type="password" class="easyui-validatebox" style="width: 160px"
-                                   data-options="required:true" maxlength="20" validtype="equalTo['txtPassword']"
-                                   invalidmessage="两次输入密码不匹配" />
-                        </td>
-                    </tr>
-                </table>
+            <table class="custom_forms_popup">
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        学校:
+                    </td>
+                    <td class="td_left">
+                        <select id="sSchool" name='SchoolId'>
+                        </select>
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        身份证号:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtIDNo" type="text" name="IDNo" style="width: 185px" maxlength="20" class="easyui-validatebox"
+                            data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        性别:
+                    </td>
+                    <td class="td_left">
+                        <select id="sSex" name='Sex'>
+                            <option value="1">男</option>
+                            <option value="2">女</option>
+                        </select>
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        出生日期:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtBirthday" type="text" name="Birthday" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        籍贯:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtOrigin" type="text" name="Origin" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        民族:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtMinority" type="text" name="Minority" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        专业:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtProfession" type="text" name="Profession" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        职称:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtProfessiontitles" type="text" name="Professiontitles" style="width: 185px"
+                            maxlength="20" class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        毕业院校:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtGraduated" type="text" name="Graduated" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        最高学历:
+                    </td>
+                    <td class="td_left">
+                        <select id="sHighDegree" name='HighDegree'>
+                            <option value="1">高中</option>
+                            <option value="2">中专</option>
+                            <option value="3">大专</option>
+                            <option value="4">本科</option>
+                            <option value="5">硕士</option>
+                            <option value="6">博士</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        任课学段:
+                    </td>
+                    <td class="td_left">
+                        <select id="sStudyPeriod" name='StudyPeriod'>
+                            <option value="1">幼儿</option>
+                            <option value="2">小学</option>
+                            <option value="3">初中</option>
+                            <option value="4">高中</option>
+                            <option value="5">其他</option>
+                        </select>
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        是否班主任:
+                    </td>
+                    <td class="td_left">
+                        <select id="sInCharge" name='InCharge'>
+                            <option value="1">是</option>
+                            <option value="2">否</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        职务:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtOffice" type="text" name="Office" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" />
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        第一任教学科（重要）:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtFirstTeaching" type="text" name="FirstTeaching" style="width: 185px"
+                            maxlength="20" class="easyui-validatebox" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        第二任教学科（重要）:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtSecondTeaching" type="text" name="SecondTeaching" style="width: 185px"
+                            maxlength="20" class="easyui-validatebox" />
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        家庭住址:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtAddress" type="text" name="Address" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        邮编:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtPostCode" type="text" name="PostCode" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" />
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        家庭电话:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtPhone" type="text" name="Phone" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        手机:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtTelephone" type="text" name="Telephone" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" />
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        电子邮箱:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtEmail" type="text" name="Email" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%" class="td_right">
+                        荣获最高荣誉或者学术称号:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtHighHonor" type="text" name="HighHonor" style="width: 185px" maxlength="20"
+                            class="easyui-validatebox" />
+                    </td>
+                    <td style="width: 20%" class="td_right">
+                        市注册码:
+                    </td>
+                    <td class="td_left" style="width: 30%">
+                        <input id="txtRegistrationCode" type="text" name="RegistrationCode" style="width: 185px"
+                            maxlength="20" class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                </tr>
+            </table>
             </form>
-            <div style="text-align: right;margin-top: 50px">
+            <div style="text-align: right; margin-top: 50px">
                 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveDataChangeUserPsw();">
                     确定</a> <a href="javascript:void(0)" class="easyui-linkbutton" onclick="reset();">重置</a>
             </div>
@@ -53,6 +216,6 @@
     <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/easyloader.js"></script>
     <script type="text/javascript" src="/Common/Scripts/ifram/jquery-common-easyui/easyui.config.js"></script>
     <script type="text/javascript" src="/Common/Scripts/ifram/jquery-common-easyui/easyui.public.js"></script>
-    <script src="/Module/System/PswChange.js" type="text/javascript"></script>
+    <script src="/Module/System/UserInfo.js" type="text/javascript"></script>
 </body>
 </html>
