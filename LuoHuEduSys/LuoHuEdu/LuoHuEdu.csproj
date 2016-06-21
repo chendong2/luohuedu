@@ -1228,6 +1228,7 @@
     <Content Include="Module\Admin\Student.js" />
     <Content Include="Module\Carrental\CarrentalOrder.js" />
     <Content Include="Module\Carrental\CarrentalRoute.js" />
+    <Content Include="Module\Course\Course.js" />
     <Content Include="Module\Customer\CallNum.js" />
     <Content Include="Module\Customer\CustomerInfo.js" />
     <Content Include="Module\Free\FreeOrder.js" />
@@ -1307,6 +1308,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="WebServices\Admin\Student.asmx" />
+    <Content Include="WebServices\Course\CourseWebServices.asmx" />
     <Content Include="WebServices\Parameter\MaintrainSet.asmx" />
     <Content Include="WebServices\Parameter\School.asmx" />
     <Content Include="WebServices\Parameter\EducationOffice.asmx" />
@@ -1341,6 +1343,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebServices\Admin\Student.asmx.cs">
       <DependentUpon>Student.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\Course\CourseWebServices.asmx.cs">
+      <DependentUpon>CourseWebServices.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WebServices\Parameter\MaintrainSet.asmx.cs">
