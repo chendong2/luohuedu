@@ -208,5 +208,24 @@ namespace Services.Parameter
         }
 
         #endregion
+
+        //获取全部的学校数据
+        public string[] GetAllSubject()
+        {
+            List<SubjectBo> list;
+            string strSql = string.Format(@"SELECT * from tb_subject where 1=1 ");
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<SubjectBo>(strSql,
+                                                new { }).ToList();
+            }
+            string[] data = new string[list.Count];
+            for (int i = 0; i < list.Count; i++)
+            {
+                data[i] = list[i].SubjectName + "******" + list[i].Id;
+            }
+            return data;
+        }
     }
 }
