@@ -64,7 +64,8 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             },
             { field: 'Office', title: '职务', width: 80, sortable: false },
-             { field: 'Telephone', title: '手机', width: 100, sortable: false }
+             { field: 'Telephone', title: '手机', width: 100, sortable: false },
+            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
@@ -137,6 +138,7 @@ function addData() {
         title: moduleName + '新增',
         iconCls: 'icon-add'
     });
+    getAllSchool();
     resetFormAndClearValidate('ff');
 }
 
@@ -153,8 +155,9 @@ function editData() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
+    getAllSchool();
     ajaxCRUD({
-        url: '/WebServices/Admin/Student.asmx/GetStudentById',
+        url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
         data: "{id:'" + itemid + "'}",
         success: function (data) {
             openDialog('dlg', {
@@ -164,6 +167,25 @@ function fillForm(itemid) {
             $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
             loadDataToForm('ff', data);
+            var bir = $("#txtBirthday").val();
+            bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
+            $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+        }
+    });
+}
+
+//获取全部的免修数据
+function getAllSchool() {
+    $("#sSchool").empty();
+    ajaxCRUD({
+        url: '/WebServices/Parameter/School.asmx/GetAllSchool',
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i].toString().split('******');
+                var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
+                $("#sSchool").append(option);
+            }
         }
     });
 }
@@ -198,7 +220,7 @@ function saveData() {
             if (hidValue.length > 0) {
                 msg = "修改成功"; //修改
             } else {
-                msg = "新增成功"; //新增
+                msg = "新增成功,用户初始密码为六个零000000"; //新增
             }
             if (data == true) {
                 msgShow('提示', msg, 'info');

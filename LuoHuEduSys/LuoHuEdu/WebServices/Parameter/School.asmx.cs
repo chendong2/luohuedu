@@ -85,5 +85,15 @@ namespace LuoHuEdu.WebServices.Parameter
             return schoolBo;
         }
 
+        //获取全部的免修数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public string[] GetAllSchool()
+        {
+            var schoolService = new SchoolService();
+            var schoolList = schoolService.GetAllSchool();
+            return schoolList;
+        }
+
     }
 }
