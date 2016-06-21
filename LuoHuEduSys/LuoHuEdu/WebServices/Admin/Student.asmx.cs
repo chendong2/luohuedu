@@ -86,5 +86,17 @@ namespace LuoHuEdu.WebServices.Admin
             return studentBo;
         }
 
+
+        //根据Id获取数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public StudentBo GetAllStudent()
+        {
+            var id = Domain.common.UserInfo.GetUserId().ToString();
+            var studentService = new StudentService();
+            var studentBo = studentService.GetAllStudentById(id);
+            return studentBo;
+        }
+
     }
 }

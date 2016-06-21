@@ -1239,6 +1239,7 @@
     <Content Include="Module\Parameter\Exemption.js" />
     <Content Include="Module\Parameter\TrainType.js" />
     <Content Include="Module\Parameter\Subject.js" />
+    <Content Include="Module\System\UserInfo.js" />
     <Content Include="Module\System\PswChange.js" />
     <Content Include="Module\Ticket\BanciList.js" />
     <Content Include="Module\Ticket\BookForm.js" />
