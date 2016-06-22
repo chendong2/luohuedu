@@ -360,6 +360,31 @@ input[type="text"]
      }
   }
   
+    .custom_forms_popup1
+{
+	border-collapse: collapse;
+	clear: both;
+	font-size:14px;
+	font-weight: normal;
+	margin: 20px auto;
+	text-align: center;
+	vertical-align: middle;
+	width:100%;
+	word-break: break-all; 
+	color:#333333; 
+	border:none; 
+	border-top:1px #dfdfdf dotted;
+}
+
+.custom_forms_popup1 td
+{
+    border: 1px solid black;	  
+    vertical-align:middle;
+    text-align:center;
+    padding:5px;
+    height:25px;
+}
+  
   .custom_forms_popup
 {
 	border-collapse: collapse;
