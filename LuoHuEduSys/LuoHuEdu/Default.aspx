@@ -129,7 +129,7 @@
 
         menus_3.push({ "menuid": "31", "menuname": "校本研修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentTrain/StudentTrainList.htm") %>' });
         menus_3.push({ "menuid": "32", "menuname": "免修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentExemption/StudentExemptionList.htm") %>' });
-        menus_3.push({ "menuid": "33", "menuname": "培训详细列表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+        menus_3.push({ "menuid": "33", "menuname": "培训详细列表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/AllCourse/CourseInfo.htm") %>' });
 
 
         menus_4.push({ "menuid": "41", "menuname": "科目设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Parameter/Subject/SubjectList.htm") %>' });
