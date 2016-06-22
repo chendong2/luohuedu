@@ -1249,6 +1249,7 @@
     <Content Include="Module\TrainingManage\TrainManage.js" />
     <Content Include="Module\UserInfo\StudentTrain.js" />
     <Content Include="Module\UserInfo\StudentExemption.js" />
+    <Content Include="View\Admin\MyCourse\MyCourseList.htm" />
     <Content Include="View\Admin\Student\StudentForm.htm" />
     <Content Include="View\Admin\Student\StudentList.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderAdvancedSearch.htm" />
@@ -1262,6 +1263,7 @@
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteForm.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteList.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteView.htm" />
+    <Content Include="View\Course\CourseList.htm" />
     <Content Include="View\Customer\CustomerForm.htm" />
     <Content Include="View\Customer\CustomerList.htm" />
     <Content Include="View\Customer\ExtentionForm.htm" />
@@ -1282,7 +1284,6 @@
     <Content Include="View\Parameter\TrainType\TrainTypeList.htm" />
     <Content Include="View\Parameter\Subject\SubjectForm.htm" />
     <Content Include="View\Parameter\Subject\SubjectList.htm" />
-    <Content Include="View\System\UserInfo.htm" />
     <Content Include="View\System\PswChange.htm" />
     <Content Include="View\Ticket\TicketBook\BanciList.htm" />
     <Content Include="View\Ticket\TicketBook\BookForm.htm" />
