@@ -1225,6 +1225,7 @@
     <Content Include="Export\Common\Template\SalaryList.xml" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="Module\Admin\StudentCourse.js" />
     <Content Include="Module\Admin\MyCourse\MyCourse.js" />
     <Content Include="Module\Admin\Student.js" />
     <Content Include="Module\Carrental\CarrentalOrder.js" />
@@ -1250,7 +1251,9 @@
     <Content Include="Module\TrainingManage\TrainManage.js" />
     <Content Include="Module\UserInfo\StudentTrain.js" />
     <Content Include="Module\UserInfo\StudentExemption.js" />
+    <Content Include="Module\UserInfo\CourseInfo.js" />
     <Content Include="View\Admin\MyCourse\MyCourseList.htm" />
+    <Content Include="View\Admin\Student\StudentCourseList.htm" />
     <Content Include="View\Admin\Student\StudentForm.htm" />
     <Content Include="View\Admin\Student\StudentList.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderAdvancedSearch.htm" />
@@ -1301,6 +1304,7 @@
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageList.htm" />
     <Content Include="View\TrainingManage\TrainManage\TrainManageForm.htm" />
     <Content Include="View\TrainingManage\TrainManage\TrainManageList.htm" />
+    <Content Include="View\UserInfo\AllCourse\CourseInfo.htm" />
     <Content Include="View\UserInfo\StudentTrain\StudentTrainForm.htm" />
     <Content Include="View\UserInfo\StudentTrain\StudentTrainList.htm" />
     <Content Include="View\UserInfo\StudentExemption\StudentExemptionForm.htm" />

@@ -10,10 +10,8 @@ using(easyloader.defaultReferenceModules, function () {
     var dataGridOptions = {
         title: '学员管理',
         columns: [[
-            { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
-            { field: 'IDNo', title: '身份证', width: 180, sortable: false },
-            { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
+            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false },
             { field: 'Sex', title: '性别', width: 60, sortable: false ,
                 formatter: function (value) {
                     if (value == "1") {
@@ -24,48 +22,15 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             },
             { field: 'Profession', title: '专业', width: 80, sortable: false },
-            { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
-            { field: 'Birthday', title: '生日', width: 100, sortable: false ,
-                formatter: function (value) {
-                    value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-                    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-                }
-            },
-            { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
-                formatter: function (value) {
-                    if (value == "1") {
-                        return "高中";
-                    } else if (value == "2") { 
-                        return "中专";
-                    } else if (value == "3") { 
-                        return "大专";
-                    } else if (value == "4") { 
-                        return "本科";
-                    } else if (value == "5") { 
-                        return "硕士";
-                    }else{ 
-                        return "博士";
-                    }
-                }
-            },
-            { field: 'StudyPeriod', title: '任课学段', width: 80, sortable: false,
-                formatter: function (value) {
-                    if (value == "1") {
-                        return "幼儿";
-                    } else if (value == "2") {
-                        return "小学";
-                    } else if (value == "3") {
-                        return "初中";
-                    } else if (value == "4") {
-                        return "高中";
-                    }else {
-                        return "其他";
-                    }
-                }
-            },
-            { field: 'Office', title: '职务', width: 80, sortable: false },
-             { field: 'Telephone', title: '手机', width: 100, sortable: false },
-            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
+            { field: '1', title: '培训科目数', width: 100, sortable: false },
+            { field: '2', title: '集中培训课时', width: 100, sortable: false },
+            { field: '3', title: '校本培训课时', width: 100, sortable: false },
+            { field: '4', title: '专项培训课时', width: 100, sortable: false },
+            { field: '5', title: '学历培训课时', width: 100, sortable: false },
+            { field: '6', title: '免修管理课时', width: 100, sortable: false },
+            { field: '7', title: '校本研修课时', width: 100, sortable: false },
+            { field: '8', title: '课时汇总', width: 100, sortable: false }
+            
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
@@ -94,9 +59,6 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             });
 
-        },
-        onDblClickRow: function (rowIndex, rowData) {
-            fillForm(rowData.Id);
         }
     };
 
@@ -114,167 +76,39 @@ using(easyloader.defaultReferenceModules, function () {
 
 });
 
-//easyloader.defaultTime为700ms
-setTimeout(loadPartialHtml, easyloader.defaultTime);
+getAllSchool();
+getTheYear();
 
-function loadPartialHtml() {
-    if ($('.window').length == 0) {
-        panel('formTemplate', {
-            href: '/View/Admin/Student/StudentForm.htm',
-            onLoad: function () {
-//                setValidatebox('Name', {
-//                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
-//                });
-            }
-        });
+//获取年份数据
+function getTheYear() {
+    var currentYear = new Date().getFullYear();
+    $("#sTheYear").empty();
+    for (var i = 1; i <= 15; i++) {
+        var data = currentYear - i + "-" + (currentYear - i + 1);
+        var option = "<option value='" + data + "'>" + data + "</option>";
+        $("#sTheYear").append(option);
     }
 }
 
-var moduleName = '学员管理-';
-
-//点击“新增”按钮
-function addData() {
-    openDialog('dlg', {
-        title: moduleName + '新增',
-        iconCls: 'icon-add'
-    });
-    getAllSchool();
-    getAllSubject();
-    resetFormAndClearValidate('ff');
-}
-
-//点击“编辑”按钮
-function editData() {
-    var row = getSelectedRow('dg');
-    if (row == null) {
-        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
-    } else {
-        resetFormAndClearValidate('ff');
-        fillForm(row.Id);
-    }
-}
-
-//获取JSON数据并填充到相应表单
-function fillForm(itemid) {
-    getAllSubject();
-    getAllSchool();
-    ajaxCRUD({
-        url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
-        data: "{id:'" + itemid + "'}",
-        success: function (data) {
-            openDialog('dlg', {
-                title: moduleName + '编辑',
-                iconCls: 'icon-edit'
-            });
-            $("#HidName").val(data.SubjetName);
-            //JSON数据填充表单
-            loadDataToForm('ff', data);
-            var bir = $("#txtBirthday").val();
-            bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-            $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
-        }
-    });
-}
 
 //获取全部的免修数据
 function getAllSchool() {
     $("#sSchool").empty();
+    var option = "<option value=''></option>";
+    $("#sSchool").append(option);
     ajaxCRUD({
         url: '/WebServices/Parameter/School.asmx/GetAllSchool',
         async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 var value = data[i].toString().split('******');
-                var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
+                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
                 $("#sSchool").append(option);
             }
         }
     });
 }
 
-function getAllSubject() {
-    $("#sFirstTeaching").empty();
-    $("#sSecondTeaching").empty();
-    var option = "<option value=''>未设定</option>";
-    $("#sFirstTeaching").append(option);
-    $("#sSecondTeaching").append(option);
-    ajaxCRUD({
-        url: '/WebServices/Parameter/Subject.asmx/GetAllSubject',
-        async: false,
-        success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var value = data[i].toString().split('******');
-                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
-                $("#sFirstTeaching").append(option);
-                $("#sSecondTeaching").append(option);
-            }
-        }
-    });
-}
-
-//保存表单数据
-function saveData() {
-    if (!formValidate('ff')) {
-        return;
-    }
-
-    var hidValue = $("#HidId").val();
-    var basicUrl = '/WebServices/Admin/Student.asmx/';
-
-    var wsMethod = '';
-    if (hidValue.length > 0) {
-        wsMethod = "UpdateStudent"; //修改
-    } else {
-        wsMethod = "AddStudent"; //新增
-    }
-
-    var formUrl = basicUrl + wsMethod;
-
-    var form2JsonObj = form2Json("ff");
-    var form2JsonStr = JSON.stringify(form2JsonObj);
-    var jsonDataStr = "{studentBo:" + form2JsonStr + "}";
-
-    ajaxCRUD({
-        url: formUrl,
-        data: jsonDataStr,
-        success: function (data) {
-            var msg = '';
-            if (hidValue.length > 0) {
-                msg = "修改成功"; //修改
-            } else {
-                msg = "新增成功,用户初始密码为六个零000000"; //新增
-            }
-            if (data == true) {
-                msgShow('提示', msg, 'info');
-                closeFormDialog();
-                refreshTable('dg');
-            } else {
-                msgShow('提示', '提交失败', 'info');
-            }
-        }
-    });
-} // end saveData()
-
-//批量删除前台提示
-function deleteDatas() {
-    deleteItems('dg', deleteDatasAjax);
-}
-
-//批量删除后台AJAX处理
-function deleteDatasAjax(str) {
-    ajaxCRUD({
-        url: '/WebServices/Admin/Student.asmx/DeleteStudentsByIds',
-        data: "{ids:'" + str + "'}",
-        success: function (data) {
-            if (data == true) {
-                msgShow('提示', '删除成功', 'info');
-                refreshTable('dg');
-            } else {
-                msgShow('提示', '删除失败', 'info');
-            }
-        }
-    });
-}
 
 function Search() {
     // 列表参数设置
@@ -287,9 +121,8 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 studentBo: {
-                    Name: $("#txtName").val().trim(),
-                    IDNo: $("#txtIDNo").val().trim(),
-                    SchoolName: $("#txtSchoolName").val().trim()
+                    TheYear: $("#sTheYear").val(),
+                    SchoolId: $("#sSchool").val()
                 }
             };
             var paramStr = JSON.stringify(studentData);
@@ -312,7 +145,3 @@ function Search() {
 }
 
 
-//关闭弹出层
-function closeFormDialog() {
-    closeDialog('dlg');
-}
