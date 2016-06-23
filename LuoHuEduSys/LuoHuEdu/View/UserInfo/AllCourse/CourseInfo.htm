@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>华通呼叫中心系统</title>
+    <link rel="stylesheet" type="text/css" href="/Common/Scripts/ifram/jquery-core-easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="/Common/Scripts/ifram/jquery-core-easyui/themes/icon.css" />
+    <link rel="stylesheet" type="text/css" href="/App_Themes/Global/Reset.css" />
+</head>
+<body id="layout" class="easyui-layout" scroll="no" style="vertical-align: top;">
+    <div region="center" border="false">
+        <div style="width: 960px; margin: 50px 0 0 50px;font-size: 16px;">
+            <form id="ff" method="post">
+            <div style="font-size: 18px;font-weight: bolder;">
+                年度：
+                <select id="sTheYear" name="TheYear" onchange="fillData();">
+                </select>
+            </div>
+                <table class="custom_forms_popup1" style="border:1px solid black">
+                    <tr>
+                        <td colspan="8" style="text-align: center;font-weight: bolder;">
+                            提示学员每人本年度应达到的课时标准数明细表
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bolder;">年度</td>
+                        <td style="font-weight: bolder;">集中培训</td>
+                        <td style="font-weight: bolder;">校本培训</td>
+                        <td style="font-weight: bolder;">专项培训</td>
+                        <td style="font-weight: bolder;">学历培训</td>
+                        <td style="font-weight: bolder;">免修管理</td>
+                        <td style="font-weight: bolder;">校本研修</td>
+                        <td style="font-weight: bolder;">合计</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="custom_forms_popup1"  style="border:1px solid black">
+                    <tr>
+                        <td style="width:8%;font-weight: bolder;">教师姓名</td>
+                        <td style="font-weight: bolder;">性别</td>
+                        <td style="width:12%;font-weight: bolder;">专业</td>
+                        <td style="width:8%;font-weight: bolder;">年度</td>
+                        <td style="font-weight: bolder;">培训科目数</td>
+                        <td style="font-weight: bolder;">集中培训课时</td>
+                        <td style="font-weight: bolder;">校本培训课时</td>
+                        <td style="font-weight: bolder;">专项培训课时</td>
+                        <td style="font-weight: bolder;">学历培训课时</td>
+                        <td style="font-weight: bolder;">课时汇总</td>
+                        <td style="font-weight: bolder;">校本研修课时</td>
+                        <td style="font-weight: bolder;">总课时</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                  <table class="custom_forms_popup1"  style="border:1px solid black">
+                    <tr>
+                        <td colspan="11" style="text-align: left;font-weight: bolder;">
+                            集中培训列表
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="font-weight: bolder;">课程名称</td>
+                        <td colspan="2"></td>
+                        <td  style="font-weight: bolder;">种类</td>
+                        <td></td>
+                        <td  style="font-weight: bolder;">类型</td>
+                        <td style="width:7%"></td>
+                        <td  style="font-weight: bolder;">授课对象</td>
+                        <td style="width:8%"></td>
+                        <td rowspan="3" style="width:8%;font-weight: bolder;">有效课时</td>
+                        <td rowspan="3" style="width:8%"></td>
+                    </tr>
+                    <tr>
+                        <td  style="font-weight: bolder;">培训类型</td>
+                        <td style="width:8%"></td>
+                        <td  style="font-weight: bolder;">授课教师</td>
+                        <td></td>
+                        <td  style="font-weight: bolder;">单位</td>
+                        <td style="width:10%"></td>
+                        <td  style="font-weight: bolder;">授课地点</td>
+                        <td style="width:8%"></td>
+                    </tr><tr>
+                        <td  style="font-weight: bolder;">课时</td>
+                        <td></td>
+                        <td  style="font-weight: bolder;" colspan="2">授课时间及考勤</td>
+                        <td colspan="5"></td>
+                    </tr>
+                </table>
+            <input id="HidId" type="hidden" name="Id" />
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery.min.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/easyloader.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-common-easyui/easyui.config.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-common-easyui/easyui.public.js"></script>
+    <script src="/Module/UserInfo/CourseInfo.js" type="text/javascript"></script>
+</body>
+</html>

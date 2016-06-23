@@ -8,7 +8,7 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '学员管理',
+        title: '学员信息管理',
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
@@ -130,7 +130,7 @@ function loadPartialHtml() {
     }
 }
 
-var moduleName = '学员管理-';
+var moduleName = '学员信息管理-';
 
 //点击“新增”按钮
 function addData() {
