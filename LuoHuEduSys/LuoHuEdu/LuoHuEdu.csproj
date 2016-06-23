@@ -1225,6 +1225,7 @@
     <Content Include="Export\Common\Template\SalaryList.xml" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="Module\Admin\MyCourse\MyCourse.js" />
     <Content Include="Module\Admin\Student.js" />
     <Content Include="Module\Carrental\CarrentalOrder.js" />
     <Content Include="Module\Carrental\CarrentalRoute.js" />
@@ -1239,7 +1240,6 @@
     <Content Include="Module\Parameter\Exemption.js" />
     <Content Include="Module\Parameter\TrainType.js" />
     <Content Include="Module\Parameter\Subject.js" />
-    <Content Include="Module\System\UserInfo.js" />
     <Content Include="Module\System\PswChange.js" />
     <Content Include="Module\Ticket\BanciList.js" />
     <Content Include="Module\Ticket\BookForm.js" />
