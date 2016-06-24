@@ -8,7 +8,7 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '学员信息管理',
+        title: '权限管理',
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
@@ -65,7 +65,11 @@ using(easyloader.defaultReferenceModules, function () {
             },
             { field: 'Office', title: '职务', width: 80, sortable: false },
              { field: 'Telephone', title: '手机', width: 100, sortable: false },
-            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
+            { field: 'permissions', title: '权限管理', width: 100, sortable: false,
+                formatter: function (value) {
+                    return "<a style='color:red;cursor:pointer'>修改权限</a>";
+                } 
+            }
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
@@ -95,7 +99,7 @@ using(easyloader.defaultReferenceModules, function () {
             });
 
         },
-        onDblClickRow: function (rowIndex, rowData) {
+        onClickRow: function (rowIndex, rowData) {
             fillForm(rowData.Id);
         }
     };
@@ -120,7 +124,7 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/Admin/Student/StudentForm.htm',
+            href: '/View/Admin/UserPermissions/PermissionsForm.htm',
             onLoad: function () {
 //                setValidatebox('Name', {
 //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
@@ -130,24 +134,14 @@ function loadPartialHtml() {
     }
 }
 
-var moduleName = '学员信息管理-';
+var moduleName = '权限管理-';
 
-//点击“新增”按钮
-function addData() {
-    openDialog('dlg', {
-        title: moduleName + '新增',
-        iconCls: 'icon-add'
-    });
-    getAllSchool();
-    getAllSubject();
-    resetFormAndClearValidate('ff');
-}
 
 //点击“编辑”按钮
 function editData() {
     var row = getSelectedRow('dg');
     if (row == null) {
-        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
+        msgShow(moduleName + '权限修改', '请选择要修改权限的一行数据', '');
     } else {
         resetFormAndClearValidate('ff');
         fillForm(row.Id);
@@ -163,15 +157,12 @@ function fillForm(itemid) {
         data: "{id:'" + itemid + "'}",
         success: function (data) {
             openDialog('dlg', {
-                title: moduleName + '编辑',
+                title: moduleName + '权限修改',
                 iconCls: 'icon-edit'
             });
             $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
             loadDataToForm('ff', data);
-            var bir = $("#txtBirthday").val();
-            bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-            $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
         }
     });
 }
