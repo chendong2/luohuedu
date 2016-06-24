@@ -1225,6 +1225,7 @@
     <Content Include="Export\Common\Template\SalaryList.xml" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="Module\Admin\Permissions.js" />
     <Content Include="Module\Admin\StudentCourse.js" />
     <Content Include="Module\Admin\MyCourse\MyCourse.js" />
     <Content Include="Module\Admin\Student.js" />
@@ -1256,6 +1257,8 @@
     <Content Include="View\Admin\Student\StudentCourseList.htm" />
     <Content Include="View\Admin\Student\StudentForm.htm" />
     <Content Include="View\Admin\Student\StudentList.htm" />
+    <Content Include="View\Admin\UserPermissions\PermissionsForm.htm" />
+    <Content Include="View\Admin\UserPermissions\PermissionsList.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderAdvancedSearch.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderCancelForm.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderEditForm.htm" />
@@ -1316,6 +1319,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WebServices\Admin\UserPermissions.asmx" />
     <Content Include="WebServices\Admin\Student.asmx" />
     <Content Include="WebServices\Course\CourseWebServices.asmx" />
     <Content Include="WebServices\Parameter\MaintrainSet.asmx" />
@@ -1350,6 +1354,10 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebServices\Admin\UserPermissions.asmx.cs">
+      <DependentUpon>UserPermissions.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WebServices\Admin\Student.asmx.cs">
       <DependentUpon>Student.asmx</DependentUpon>
       <SubType>Component</SubType>
