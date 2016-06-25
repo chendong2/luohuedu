@@ -116,9 +116,9 @@
         menus_1.push({ "menuid": "12", "menuname": "我的培训记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
         menus_1.push({ "menuid": "13", "menuname": "历史课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
         menus_1.push({ "menuid": "14", "menuname": "我是授课教师", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketList/TicketList.htm") %>' });
-      
 
-        menus_2.push({ "menuid": "21", "menuname": "培训管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalRoute/CarrentalRouteList.htm") %>' });
+
+        menus_2.push({ "menuid": "21", "menuname": "培训管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TrainingCourseManage/TrainingCourseList.htm") %>' });
         menus_2.push({ "menuid": "22", "menuname": "课程表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
         menus_2.push({ "menuid": "23", "menuname": "授课教师信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
         menus_2.push({ "menuid": "24", "menuname": "校本研修审核", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TrainManage/TrainManageList.htm") %>' });
