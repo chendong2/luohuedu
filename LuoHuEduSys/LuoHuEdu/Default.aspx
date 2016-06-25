@@ -113,8 +113,8 @@
         var menus_5 = [];
 
         menus_1.push({ "menuid": "11", "menuname": "培训课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Course/CourseList.htm") %>' });
-        menus_1.push({ "menuid": "12", "menuname": "我的培训记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketList/TicketList.htm") %>' });
-        menus_1.push({ "menuid": "13", "menuname": "历史课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketList/TicketList.htm") %>' });
+        menus_1.push({ "menuid": "12", "menuname": "我的培训记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
+        menus_1.push({ "menuid": "13", "menuname": "历史课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
         menus_1.push({ "menuid": "14", "menuname": "我是授课教师", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketList/TicketList.htm") %>' });
       
 
