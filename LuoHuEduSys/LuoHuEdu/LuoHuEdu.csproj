@@ -1225,10 +1225,7 @@
     <Content Include="Export\Common\Template\SalaryList.xml" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
-<<<<<<< HEAD
-=======
     <Content Include="Module\Admin\Permissions.js" />
->>>>>>> 8fb9539d4b6999146d4f88efc3c39dc00cbb9d4a
     <Content Include="Module\Admin\StudentCourse.js" />
     <Content Include="Module\Admin\MyCourse\MyCourse.js" />
     <Content Include="Module\Admin\Student.js" />
