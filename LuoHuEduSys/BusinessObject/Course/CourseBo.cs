@@ -129,6 +129,11 @@ namespace BusinessObject.Course
         /// 考勤次数
         /// </summary>
         public int Times { get; set; }
+        
+        /// <summary>
+        /// 授课教师姓名
+        /// </summary>
+        public string Name { get; set; }
 
     }
 }

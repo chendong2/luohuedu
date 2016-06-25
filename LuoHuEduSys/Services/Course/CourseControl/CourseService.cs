@@ -89,5 +89,69 @@ namespace Services.Course.CourseControl
         {
             return false;
         }
+
+        public bool AddCousrse(CourseBo courseBo)
+        {
+            if (courseBo == null)
+                throw new ArgumentNullException("courseBo");
+            if (courseBo.Id != null && courseBo.Id.Length > 1)
+                throw new Exception("不能给Id赋值");
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    courseBo.Id = Guid.NewGuid().ToString();
+                    var strSql = @"INSERT INTO `tb_course`
+                            (`Id`,`TeacherId`, `CourseName`,`TheYear`,`TrainType`,`Subject`,`Phone`,
+                             `Period`,`Cost`,`ChargeObj`,`SetCheck`, `IsMust`,`Address`, `MaxNumber`,`SetApply`,
+                             `OrganizationalName`,`DesignIdea`,`TrainingAim`,`Distinctive`,`EffectAnalysis`,
+                             `CourseDate`,`TimeStart`,`TimeEnd`,`CourseCode`, `Requirement`,`TeachingObject`,`ObjectEstablish`,`ObjectSubject`,
+                             `CourseState`,`AduitTime`,`FirstAduit`,`EndAduit`,`CenterAduit`,`AttendanceName`,
+                             `AttendanceUrl`,`Locked`,`Assessmentlevel`,`CreatedBy`,`CreatedOn`,`ModifiyBy`,`ModifiyOn`)
+                              VALUES ('Id','TeacherId','CourseName','TheYear','TrainType','Subject','Phone', 'Period','Cost','ChargeObj', 'SetCheck',
+                            'IsMust','Address','MaxNumber','SetApply','OrganizationalName','DesignIdea','TrainingAim',
+                            'Distinctive','EffectAnalysis','CourseDate',
+                            'TimeStart',
+                            'TimeEnd',
+                            'CourseCode',
+                            'Requirement',
+                            'TeachingObject',
+                            'ObjectEstablish',
+                            'ObjectSubject',
+                            'CourseState',
+                            'AduitTime',
+                            'FirstAduit',
+                            'EndAduit',
+                            'CenterAduit',
+                            'AttendanceName',
+                            'AttendanceUrl',
+                            'Locked',
+                            'Assessmentlevel',
+                            'CreatedBy',
+                            'CreatedOn',
+                            'ModifiyBy',
+                            'ModifiyOn');";
+                    int row = connection.Execute(strSql, courseBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseService.AddCousrse({0})异常", courseBo), ex);
+                return false;
+            }
+        }
+
+        public bool DeleteCousrse(CourseBo courseBo)
+        {
+            return false;
+        }
     }
 }
