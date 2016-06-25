@@ -1248,6 +1248,7 @@
     <Content Include="Module\Ticket\TicketList.js" />
     <Content Include="Module\Ticket\TicketOrderStatisticsList.js" />
     <Content Include="Module\TrainingManage\ExemptionManage.js" />
+    <Content Include="Module\TrainingManage\TrainingCourseManage.js" />
     <Content Include="Module\TrainingManage\TrainManage.js" />
     <Content Include="Module\UserInfo\StudentTrain.js" />
     <Content Include="Module\UserInfo\StudentExemption.js" />
@@ -1304,6 +1305,10 @@
     <Content Include="View\Ticket\TicketStatistics\TicketOrderStatisticsList.htm" />
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageForm.htm" />
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageList.htm" />
+    <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseAdvancedSearch.htm" />
+    <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseForm.htm" />
+    <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseList.htm" />
+    <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseView.htm" />
     <Content Include="View\TrainingManage\TrainManage\TrainManageForm.htm" />
     <Content Include="View\TrainingManage\TrainManage\TrainManageList.htm" />
     <Content Include="View\UserInfo\AllCourse\CourseInfo.htm" />
