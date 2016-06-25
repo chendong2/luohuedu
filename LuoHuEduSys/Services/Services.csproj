@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Permissions\PermissionsService.cs" />
     <Compile Include="Admin\StudentControl\StudentService.cs" />
     <Compile Include="Course\CourseControl\CourseService.cs" />
     <Compile Include="Course\CourseControl\CourseStudentService.cs" />

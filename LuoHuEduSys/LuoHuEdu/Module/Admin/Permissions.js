@@ -8,32 +8,68 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
+        title: '权限管理',
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'CourseName', title: '课程名称', width: 150 },
-            { field: 'TheYear', title: '年度', width: 150 },
-            { field: 'TrainType', title: '培训类型', width: 140 },
-
-            { field: 'Subject', title: '培训科目', width: 80 },
-            { field: 'Phone', title: '联系电话', width: 80 },
-            { field: 'Period', title: '学时', width: 80 },
-            { field: 'Cost', title: '培训费用', width: 80 },
-            { field: 'SetCheck', title: '考勤设定', width: 50 },
-            { field: 'IsMust', title: '种类', width: 60, formatter: function (value) {
-                if (value == 1)
-                    return '<span>选修</span>';
-                else
-                    return '<font>必修</font>';
-            }
+            { field: 'Name', title: '姓名', width: 80, sortable: false },
+            { field: 'IDNo', title: '身份证', width: 180, sortable: false },
+            { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
+            { field: 'Sex', title: '性别', width: 60, sortable: false ,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "男";
+                    } else {
+                        return "女";
+                    }
+                }
             },
-
-            { field: 'Address', title: '培训地址', width: 70, sortable: true },
-            { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
-            { field: 'OrganizationalName', title: '组织单位名称', width: 80 },
-            { field: 'CourseDate', title: '培训日期', width: 50 },
-            { field: 'TimeStart', title: '培训时间', width: 50 },
-            { field: 'CourseCode', title: '课程代码', width: 50 }
-
+            { field: 'Profession', title: '专业', width: 80, sortable: false },
+            { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
+            { field: 'Birthday', title: '生日', width: 100, sortable: false ,
+                formatter: function (value) {
+                    value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
+                    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+                }
+            },
+            { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "高中";
+                    } else if (value == "2") { 
+                        return "中专";
+                    } else if (value == "3") { 
+                        return "大专";
+                    } else if (value == "4") { 
+                        return "本科";
+                    } else if (value == "5") { 
+                        return "硕士";
+                    }else{ 
+                        return "博士";
+                    }
+                }
+            },
+            { field: 'StudyPeriod', title: '任课学段', width: 80, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "幼儿";
+                    } else if (value == "2") {
+                        return "小学";
+                    } else if (value == "3") {
+                        return "初中";
+                    } else if (value == "4") {
+                        return "高中";
+                    }else {
+                        return "其他";
+                    }
+                }
+            },
+            { field: 'Office', title: '职务', width: 80, sortable: false },
+             { field: 'Telephone', title: '手机', width: 100, sortable: false },
+            { field: 'permissions', title: '权限管理', width: 100, sortable: false,
+                formatter: function (value) {
+                    return "<a style='color:red;cursor:pointer'>修改权限</a>";
+                } 
+            }
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
@@ -63,7 +99,7 @@ using(easyloader.defaultReferenceModules, function () {
             });
 
         },
-        onDblClickRow: function (rowIndex, rowData) {
+        onClickRow: function (rowIndex, rowData) {
             fillForm(rowData.Id);
         }
     };
@@ -88,33 +124,24 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/Admin/Student/StudentForm.htm',
+            href: '/View/Admin/UserPermissions/PermissionsForm.htm',
             onLoad: function () {
-                //                setValidatebox('Name', {
-                //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
-                //                });
+//                setValidatebox('Name', {
+//                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
+//                });
             }
         });
     }
 }
 
-var moduleName = '学员管理-';
+var moduleName = '权限管理-';
 
-//点击“新增”按钮
-function addData() {
-    openDialog('dlg', {
-        title: moduleName + '新增',
-        iconCls: 'icon-add'
-    });
-    getAllSchool();
-    resetFormAndClearValidate('ff');
-}
 
 //点击“编辑”按钮
 function editData() {
     var row = getSelectedRow('dg');
     if (row == null) {
-        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
+        msgShow(moduleName + '权限修改', '请选择要修改权限的一行数据', '');
     } else {
         resetFormAndClearValidate('ff');
         fillForm(row.Id);
@@ -123,21 +150,19 @@ function editData() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
+    getAllSubject();
     getAllSchool();
     ajaxCRUD({
         url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
         data: "{id:'" + itemid + "'}",
         success: function (data) {
             openDialog('dlg', {
-                title: moduleName + '编辑',
+                title: moduleName + '权限修改',
                 iconCls: 'icon-edit'
             });
             $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
             loadDataToForm('ff', data);
-            var bir = $("#txtBirthday").val();
-            bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-            $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
         }
     });
 }
@@ -153,6 +178,26 @@ function getAllSchool() {
                 var value = data[i].toString().split('******');
                 var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
                 $("#sSchool").append(option);
+            }
+        }
+    });
+}
+
+function getAllSubject() {
+    $("#sFirstTeaching").empty();
+    $("#sSecondTeaching").empty();
+    var option = "<option value=''>未设定</option>";
+    $("#sFirstTeaching").append(option);
+    $("#sSecondTeaching").append(option);
+    ajaxCRUD({
+        url: '/WebServices/Parameter/Subject.asmx/GetAllSubject',
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i].toString().split('******');
+                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
+                $("#sFirstTeaching").append(option);
+                $("#sSecondTeaching").append(option);
             }
         }
     });

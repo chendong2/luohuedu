@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminBo\UserPermissionsBo.cs" />
     <Compile Include="CourseStudentBo.cs" />
     <Compile Include="CourseStudentMessageBo.cs" />
     <Compile Include="Course\CourseBo.cs" />
