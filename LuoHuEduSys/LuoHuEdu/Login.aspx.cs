@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Configuration;
 using Domain.common;
+using Services.Admin.Permissions;
 using Services.Admin.StudentControl;
 using Page = System.Web.UI.Page;
 using BusinessObject.AdminBo;
@@ -66,6 +67,11 @@ namespace HuaTongCallCenter
             HttpCookie userNameC = new HttpCookie("UserName") { Value = bo.UserName, Path = "/" };
             Response.Cookies.Add(useridC);
             Response.Cookies.Add(userNameC);
+
+            //获取权限
+            var pService = new PermissionsService();
+            var perList=pService.getUserPermissionsList(bo.Id);
+            Session.Add("perList", perList);
             Response.Redirect("~/Default.aspx");
         }
 

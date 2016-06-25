@@ -56,5 +56,49 @@ namespace Services.Admin.Permissions
                 return false;
             }
         }
+
+        public List<UserPermissionsBo>  getAllPermissionsList()
+        {
+            List<UserPermissionsBo> userPerList = null;
+
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"SELECT * from pub_permissions ";
+                    userPerList = connection.Query<UserPermissionsBo>(sqlStr, new { }).ToList();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.GetStudentById()异常"), ex);
+            }
+            return userPerList;
+        }
+
+        public string getUserPermissionsList(string userId)
+        {
+            string perStrList = string.Empty;
+
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"SELECT pub_permissions.*,pub_userpermissions.userId FROM tb_student INNER JOIN pub_userpermissions ON pub_userpermissions.UserId=tb_student.Id  INNER JOIN pub_permissions ON pub_userpermissions.permissionsid=pub_permissions.ID where Id=@Id";
+                    var userPerList = connection.Query<UserPermissionsBo>(sqlStr, new { Id=userId }).ToList();
+                    foreach (var userPermissionsBo in userPerList)
+                    {
+                        perStrList = perStrList + userPermissionsBo.PermissionsName + ",";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.GetStudentById({0})异常", userId), ex);
+            }
+            return perStrList;
+        }
     }
 }

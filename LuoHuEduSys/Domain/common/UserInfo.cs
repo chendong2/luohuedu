@@ -86,5 +86,19 @@ namespace Domain.common
             return HttpContext.Current.Session["UserRealName"].ToString();
         }
 
+        //判读用户是否有权限
+        public bool havePermissions(string name)
+        {
+            if (HttpContext.Current.Session["perList"] == null)
+            {
+                return false;
+            }
+            else
+            {
+                var perList=HttpContext.Current.Session["perList"].ToString();
+                return perList.Contains(name);
+            }
+        }
+
 	}
 }

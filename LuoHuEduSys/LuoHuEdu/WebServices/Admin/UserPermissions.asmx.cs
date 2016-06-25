@@ -32,6 +32,20 @@ namespace LuoHuEdu.WebServices.Admin
             return perService.AddPermissions(userPermissionsList, userId);
         }
 
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+         public List<UserPermissionsBo>  getAllPermissionsList()
+         {
+             var perService = new PermissionsService();
+             return perService.getAllPermissionsList();
+         }
 
+         [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public string getUserPermissionsList(string userId)
+        {
+            var perService = new PermissionsService();
+            return perService.getUserPermissionsList(userId);
+        }
     }
 }
