@@ -162,10 +162,46 @@ function fillForm(itemid) {
             loadDataToForm('ff', data);
             $("#txtUserName").val($("#txtUserName").val() + "(" + $("#HidName").val() + ")");
             fillPermission();
+            $("#perTable tr").each(function () {
+                var tag = true;
+                $(this).find(":checkbox[name='a']").each(function () {
+                    if ($(this).attr("checked") != "checked") {
+                        tag = false;
+                        return;
+                    }
+                });
+                if (tag) {
+                     $(this).find(":checkbox[name='b']").attr("checked", "checked");
+                } else {
+                     $(this).find(":checkbox[name='b']").attr("checked", false);
+                }
+            });
         }
     });
 }
 
+function check(e) {
+    if ($(e).attr("checked") == "checked") {
+        $(e).parent().next().find(":checkbox[name='a']").attr("checked","checked");
+    } else {
+        $(e).parent().next().find(":checkbox[name='a']").attr("checked", false);
+    }
+}
+
+function checkparent(e) {
+    var tag = true;
+    $(e).parent().find(":checkbox[name='a']").each(function () {
+        if ($(this).attr("checked") != "checked") {
+            tag = false;
+            return;
+        }
+    });
+    if(tag) {
+        $(e).parent().prev().find(":checkbox[name='b']").attr("checked","checked");
+    }else {
+        $(e).parent().prev().find(":checkbox[name='b']").attr("checked",false);
+    }
+}
 
 function fillPermission() {
     $("#perTr").nextAll().remove();
@@ -184,17 +220,17 @@ function fillPermission() {
         url: '/WebServices/Admin/UserPermissions.asmx/getAllPermissionsList',
         async: false,
         success: function (data) {
-            hmtl = hmtl + "<tr><td style='width: 20%;' class='td_right'>管理员级别:</td><td class='td_left' colspan='3'  >"
-                + " <input style=margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+            hmtl = hmtl + "<tr><td style='width: 20%;' class='td_right'><input style='margin-left:33px;float:left;' name='b' type='checkbox' onchange='check(this);'/>管理员级别:</td><td class='td_left' colspan='3'  >"
+                + " <input style='margin-left:15px;margin-top:5px;float:left;'  onchange='checkparent(this);' name='a' type='checkbox' ";
             if (perStr.indexOf(data[0].PermissionsName) > -1) {
                 hmtl = hmtl + " checked='checked' ";
             }
             hmtl = hmtl + " value='" + data[0].Id + "'/><div style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[0].PermissionsName + "</div>"
-                + " <input style=margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+                + " <input style='margin-left:15px;margin-top:5px;float:left;' onchange='checkparent(this);' name='a' type='checkbox' ";
             if (perStr.indexOf(data[1].PermissionsName) > -1) {
                 hmtl = hmtl + " checked='checked' ";
             }
-            hmtl = hmtl + " value='" + data[1].Id + "'/><div  style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[1].PermissionsName + "</div></td></tr>";
+            hmtl = hmtl + " value='" + data[1].Id + "'/><div onchange='checkparent(this);'  style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[1].PermissionsName + "</div></td></tr>";
 
             for (var a = 2; a < data.length; a++) {
                 var value = data[a];
@@ -203,14 +239,14 @@ function fillPermission() {
                     if (a > 2) {
                         hmtl = hmtl + "</td></tr>";
                     }
-                    hmtl = hmtl + "<tr><td style='width: 20%' class='td_right'>" + value.ModuleNAME
-                        + ":</td><td class='td_left' colspan='3'> <input style=margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+                    hmtl = hmtl + "<tr><td style='width: 20%' class='td_right'><input style='margin-left:45px;float:left;' name='b' type='checkbox' onchange='check(this);' />" + value.ModuleNAME
+                        + ":</td><td class='td_left' colspan='3'> <input onchange='checkparent(this);' style='margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
                     if (perStr.indexOf(data[a].PermissionsName) > -1) {
                         hmtl = hmtl + " checked='checked' ";
                     }
                     hmtl = hmtl + " value='" + data[a].Id + "'/><div style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[a].PermissionsName + "</div>";
                 } else {
-                    hmtl = hmtl + "<input style=margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+                    hmtl = hmtl + "<input onchange='checkparent(this);' style='margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
                     if (perStr.indexOf(data[a].PermissionsName) > -1) {
                         hmtl = hmtl + " checked='checked' ";
                     }
