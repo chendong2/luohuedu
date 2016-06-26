@@ -112,7 +112,7 @@
         var menus_4 = [];
         var menus_5 = [];
 
-        var perStr = decodeURI($.cookie('perList'));
+        var perStr = decodeURIComponent($.cookie('perList'));
         if (perStr.indexOf("课程浏览") > -1 || perStr.indexOf("课程编辑") > -1) {
             menus_1.push({ "menuid": "11", "menuname": "培训课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Course/CourseList.htm") %>' });
         }
