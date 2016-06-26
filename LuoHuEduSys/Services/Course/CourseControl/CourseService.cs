@@ -11,6 +11,7 @@ namespace Services.Course.CourseControl
 {
     public class CourseService
     {
+        #region "通过增删改查方法"
         /// <summary>
         /// 分页获取课程数据方法
         /// </summary>
@@ -90,6 +91,11 @@ namespace Services.Course.CourseControl
             return false;
         }
 
+        /// <summary>
+        /// 新增课程
+        /// </summary>
+        /// <param name="courseBo"></param>
+        /// <returns></returns>
         public bool AddCousrse(CourseBo courseBo)
         {
             if (courseBo == null)
@@ -149,9 +155,35 @@ namespace Services.Course.CourseControl
             }
         }
 
-        public bool DeleteCousrse(CourseBo courseBo)
+        /// <summary>
+        /// 课程管理批量删除方法
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public bool DeleteCousrseByIds(string ids)
         {
-            return false;
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    String[] idArray = ids.Split(',');
+                    for (int i = 0; i < idArray.Length; i++)
+                    {
+                        CourseBo courseBo = new CourseBo();
+                        courseBo.Id = idArray[i];
+                        var sqlStr = @"delete from  `tb_course` where id=@Id;";
+                        connection.Execute(sqlStr, courseBo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("ExemptionService.DeleteCousrseByIds({0})异常", ids), ex);
+                return false;
+            }
+            return true;
         }
+        #endregion 
+
     }
 }
