@@ -17,7 +17,7 @@ namespace Services.Admin.Permissions
         /// </summary>
         /// <param name="userPermissionsList"> 权限信息BO</param>
         /// <returns>bool</returns>
-        public bool AddPermissions(string[] userPermissionsList, string userId)
+        public bool AddPermissions(string userPermissionsList, string userId)
         {
             if (userPermissionsList == null)
                 throw new ArgumentNullException("userPermissionsList");
@@ -26,26 +26,19 @@ namespace Services.Admin.Permissions
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
                     String id = Guid.NewGuid().ToString();
+                    var perList = userPermissionsList.Split(',');
                     var sqlStr = @"DELETE  FROM pub_userpermissions;";
                     connection.Execute(sqlStr);
-                    for (int i = 0; i < userPermissionsList.Length; i++)
+                    for (int i = 0; i < perList.Length; i++)
                     {
                         var userPermissionsBo = new UserPermissionsBo()
                                                                   {
                                                                       Id = Guid.NewGuid().ToString(),
-                                                                      PermissionsId = userPermissionsList[i],
+                                                                      PermissionsId = perList[i],
                                                                       UserId = userId
                                                                   };
-                        sqlStr =@"INSERT INTO pub_userpermissions(Id,PermissionsId,UserId) VALUES(@Id,@PermissionsId,@UserId);";
-                        int row = connection.Execute(sqlStr, userPermissionsBo);
-                        if (row > 0)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        sqlStr = @"INSERT INTO pub_userpermissions(Id,PermissionsId,UserId) VALUES(@Id,@PermissionsId,@UserId);";
+                        connection.Execute(sqlStr, userPermissionsBo);
                     }
                 }
                 return true;
@@ -57,7 +50,7 @@ namespace Services.Admin.Permissions
             }
         }
 
-        public List<UserPermissionsBo>  getAllPermissionsList()
+        public List<UserPermissionsBo> getAllPermissionsList()
         {
             List<UserPermissionsBo> userPerList = null;
 
@@ -65,7 +58,9 @@ namespace Services.Admin.Permissions
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"SELECT * from pub_permissions ";
+                    var sqlStr = @"SELECT * FROM pub_permissions ORDER BY(CASE WHEN ModuleName='学校管理员' THEN 1 WHEN ModuleName='系统管理员' THEN 2 
+WHEN ModuleName='培训信息' THEN 3 WHEN ModuleName='培训管理' THEN 4 WHEN ModuleName='用户信息' THEN 5 WHEN ModuleName='参数管理' THEN 6
+WHEN ModuleName='系统设置' THEN 7 ELSE 8 END),Soft ";
                     userPerList = connection.Query<UserPermissionsBo>(sqlStr, new { }).ToList();
 
                 }
@@ -85,8 +80,8 @@ namespace Services.Admin.Permissions
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"SELECT pub_permissions.*,pub_userpermissions.userId FROM tb_student INNER JOIN pub_userpermissions ON pub_userpermissions.UserId=tb_student.Id  INNER JOIN pub_permissions ON pub_userpermissions.permissionsid=pub_permissions.ID where Id=@Id";
-                    var userPerList = connection.Query<UserPermissionsBo>(sqlStr, new { Id=userId }).ToList();
+                    var sqlStr = @"SELECT pub_permissions.*,pub_userpermissions.userId FROM tb_student INNER JOIN pub_userpermissions ON pub_userpermissions.UserId=tb_student.Id  INNER JOIN pub_permissions ON pub_userpermissions.permissionsid=pub_permissions.ID WHERE pub_userpermissions.userId=@Id";
+                    var userPerList = connection.Query<UserPermissionsBo>(sqlStr, new { Id = userId }).ToList();
                     foreach (var userPermissionsBo in userPerList)
                     {
                         perStrList = perStrList + userPermissionsBo.PermissionsName + ",";

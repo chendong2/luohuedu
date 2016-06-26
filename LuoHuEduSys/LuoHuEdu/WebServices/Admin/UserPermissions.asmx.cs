@@ -25,7 +25,7 @@ namespace LuoHuEdu.WebServices.Admin
         //新增数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public bool AddPermissions(string[] userPermissionsList, string userId)
+        public bool AddPermissions(string userPermissionsList, string userId)
         {
 
             var perService = new PermissionsService();

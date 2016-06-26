@@ -14,7 +14,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'Name', title: '姓名', width: 80, sortable: false },
             { field: 'IDNo', title: '身份证', width: 180, sortable: false },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
-            { field: 'Sex', title: '性别', width: 60, sortable: false ,
+            { field: 'Sex', title: '性别', width: 60, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "男";
@@ -25,7 +25,7 @@ using(easyloader.defaultReferenceModules, function () {
             },
             { field: 'Profession', title: '专业', width: 80, sortable: false },
             { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
-            { field: 'Birthday', title: '生日', width: 100, sortable: false ,
+            { field: 'Birthday', title: '生日', width: 100, sortable: false,
                 formatter: function (value) {
                     value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
                     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
@@ -35,15 +35,15 @@ using(easyloader.defaultReferenceModules, function () {
                 formatter: function (value) {
                     if (value == "1") {
                         return "高中";
-                    } else if (value == "2") { 
+                    } else if (value == "2") {
                         return "中专";
-                    } else if (value == "3") { 
+                    } else if (value == "3") {
                         return "大专";
-                    } else if (value == "4") { 
+                    } else if (value == "4") {
                         return "本科";
-                    } else if (value == "5") { 
+                    } else if (value == "5") {
                         return "硕士";
-                    }else{ 
+                    } else {
                         return "博士";
                     }
                 }
@@ -58,7 +58,7 @@ using(easyloader.defaultReferenceModules, function () {
                         return "初中";
                     } else if (value == "4") {
                         return "高中";
-                    }else {
+                    } else {
                         return "其他";
                     }
                 }
@@ -68,7 +68,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'permissions', title: '权限管理', width: 100, sortable: false,
                 formatter: function (value) {
                     return "<a style='color:red;cursor:pointer'>修改权限</a>";
-                } 
+                }
             }
         ]],
         singleSelect: false,
@@ -126,9 +126,9 @@ function loadPartialHtml() {
         panel('formTemplate', {
             href: '/View/Admin/UserPermissions/PermissionsForm.htm',
             onLoad: function () {
-//                setValidatebox('Name', {
-//                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
-//                });
+                //                setValidatebox('Name', {
+                //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
+                //                });
             }
         });
     }
@@ -150,8 +150,6 @@ function editData() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
-    getAllSubject();
-    getAllSchool();
     ajaxCRUD({
         url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
         data: "{id:'" + itemid + "'}",
@@ -160,81 +158,89 @@ function fillForm(itemid) {
                 title: moduleName + '权限修改',
                 iconCls: 'icon-edit'
             });
-            $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
             loadDataToForm('ff', data);
+            $("#txtUserName").val($("#txtUserName").val() + "(" + $("#HidName").val() + ")");
+            fillPermission();
         }
     });
 }
 
-//获取全部的免修数据
-function getAllSchool() {
-    $("#sSchool").empty();
+
+function fillPermission() {
+    $("#perTr").nextAll().remove();
+    var modulename = "";
+    var hmtl = "";
+    var perStr = "";
     ajaxCRUD({
-        url: '/WebServices/Parameter/School.asmx/GetAllSchool',
+        url: '/WebServices/Admin/UserPermissions.asmx/getUserPermissionsList',
+        data: "{userId:'" + $("#HidId").val() + "'}",
         async: false,
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var value = data[i].toString().split('******');
-                var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
-                $("#sSchool").append(option);
+            perStr = data;
+        }
+    });
+    ajaxCRUD({
+        url: '/WebServices/Admin/UserPermissions.asmx/getAllPermissionsList',
+        async: false,
+        success: function (data) {
+            hmtl = hmtl + "<tr><td style='width: 20%;' class='td_right'>管理员级别:</td><td class='td_left' colspan='3'  >"
+                + " <input style=margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+            if (perStr.indexOf(data[0].PermissionsName) > -1) {
+                hmtl = hmtl + " checked='checked' ";
+            }
+            hmtl = hmtl + " value='" + data[0].Id + "'/><div style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[0].PermissionsName + "</div>"
+                + " <input style=margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+            if (perStr.indexOf(data[1].PermissionsName) > -1) {
+                hmtl = hmtl + " checked='checked' ";
+            }
+            hmtl = hmtl + " value='" + data[1].Id + "'/><div  style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[1].PermissionsName + "</div></td></tr>";
+
+            for (var a = 2; a < data.length; a++) {
+                var value = data[a];
+                if (modulename != value.ModuleNAME) {
+                    modulename = value.ModuleNAME;
+                    if (a > 2) {
+                        hmtl = hmtl + "</td></tr>";
+                    }
+                    hmtl = hmtl + "<tr><td style='width: 20%' class='td_right'>" + value.ModuleNAME
+                        + ":</td><td class='td_left' colspan='3'> <input style=margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+                    if (perStr.indexOf(data[a].PermissionsName) > -1) {
+                        hmtl = hmtl + " checked='checked' ";
+                    }
+                    hmtl = hmtl + " value='" + data[a].Id + "'/><div style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[a].PermissionsName + "</div>";
+                } else {
+                    hmtl = hmtl + "<input style=margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+                    if (perStr.indexOf(data[a].PermissionsName) > -1) {
+                        hmtl = hmtl + " checked='checked' ";
+                    }
+                    hmtl = hmtl + " value='" + data[a].Id + "'/><div  style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[a].PermissionsName + "</div>";
+                }
             }
         }
     });
+    $("#perTable").append(hmtl);
 }
 
-function getAllSubject() {
-    $("#sFirstTeaching").empty();
-    $("#sSecondTeaching").empty();
-    var option = "<option value=''>未设定</option>";
-    $("#sFirstTeaching").append(option);
-    $("#sSecondTeaching").append(option);
-    ajaxCRUD({
-        url: '/WebServices/Parameter/Subject.asmx/GetAllSubject',
-        async: false,
-        success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var value = data[i].toString().split('******');
-                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
-                $("#sFirstTeaching").append(option);
-                $("#sSecondTeaching").append(option);
-            }
-        }
-    });
-}
+
+
 
 //保存表单数据
 function saveData() {
     if (!formValidate('ff')) {
         return;
     }
-
-    var hidValue = $("#HidId").val();
-    var basicUrl = '/WebServices/Admin/Student.asmx/';
-
-    var wsMethod = '';
-    if (hidValue.length > 0) {
-        wsMethod = "UpdateStudent"; //修改
-    } else {
-        wsMethod = "AddStudent"; //新增
-    }
-
-    var formUrl = basicUrl + wsMethod;
-
-    var form2JsonObj = form2Json("ff");
-    var form2JsonStr = JSON.stringify(form2JsonObj);
-    var jsonDataStr = "{studentBo:" + form2JsonStr + "}";
+    var perList ="";
+    $("input[name='a']:checked").each(function () {
+        perList=perList+$(this).val()+",";
+    });
+    perList = perList.substring(0, perList.length - 1);
 
     ajaxCRUD({
-        url: formUrl,
-        data: jsonDataStr,
+        url: '/WebServices/Admin/UserPermissions.asmx/AddPermissions',
+        data: "{userPermissionsList:'" + perList + "',userId:'" + $("#HidId").val() + "'}",
         success: function (data) {
-            var msg = '';
-            if (hidValue.length > 0) {
-                msg = "修改成功"; //修改
-            } else {
-                msg = "新增成功,用户初始密码为六个零000000"; //新增
-            }
+            var msg = "权限修改成功"; //修改
             if (data == true) {
                 msgShow('提示', msg, 'info');
                 closeFormDialog();
@@ -246,26 +252,7 @@ function saveData() {
     });
 } // end saveData()
 
-//批量删除前台提示
-function deleteDatas() {
-    deleteItems('dg', deleteDatasAjax);
-}
 
-//批量删除后台AJAX处理
-function deleteDatasAjax(str) {
-    ajaxCRUD({
-        url: '/WebServices/Admin/Student.asmx/DeleteStudentsByIds',
-        data: "{ids:'" + str + "'}",
-        success: function (data) {
-            if (data == true) {
-                msgShow('提示', '删除成功', 'info');
-                refreshTable('dg');
-            } else {
-                msgShow('提示', '删除失败', 'info');
-            }
-        }
-    });
-}
 
 function Search() {
     // 列表参数设置
