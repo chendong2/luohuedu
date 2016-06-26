@@ -27,8 +27,9 @@ namespace Services.Admin.Permissions
                 {
                     String id = Guid.NewGuid().ToString();
                     var perList = userPermissionsList.Split(',');
-                    var sqlStr = @"DELETE  FROM pub_userpermissions;";
-                    connection.Execute(sqlStr);
+                    var userBo = new UserPermissionsBo() { UserId = userId };
+                    var sqlStr = @"DELETE  FROM pub_userpermissions where UserId=@UserId;";
+                    connection.Execute(sqlStr, userBo);
                     for (int i = 0; i < perList.Length; i++)
                     {
                         var userPermissionsBo = new UserPermissionsBo()
