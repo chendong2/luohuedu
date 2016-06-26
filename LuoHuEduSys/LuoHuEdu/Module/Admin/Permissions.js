@@ -221,12 +221,12 @@ function fillPermission() {
         async: false,
         success: function (data) {
             hmtl = hmtl + "<tr><td style='width: 20%;' class='td_right'><input style='margin-left:33px;float:left;' name='b' type='checkbox' onchange='check(this);'/>管理员级别:</td><td class='td_left' colspan='3'  >"
-                + " <input style='margin-left:15px;margin-top:5px;float:left;'  onchange='checkparent(this);' name='a' type='checkbox' ";
+                + " <input style='margin-left:8px;margin-top:5px;float:left;'  onchange='checkparent(this);' name='a' type='checkbox' ";
             if (perStr.indexOf(data[0].PermissionsName) > -1) {
                 hmtl = hmtl + " checked='checked' ";
             }
             hmtl = hmtl + " value='" + data[0].Id + "'/><div style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[0].PermissionsName + "</div>"
-                + " <input style='margin-left:15px;margin-top:5px;float:left;' onchange='checkparent(this);' name='a' type='checkbox' ";
+                + " <input style='margin-left:8px;margin-top:5px;float:left;' onchange='checkparent(this);' name='a' type='checkbox' ";
             if (perStr.indexOf(data[1].PermissionsName) > -1) {
                 hmtl = hmtl + " checked='checked' ";
             }
@@ -240,13 +240,13 @@ function fillPermission() {
                         hmtl = hmtl + "</td></tr>";
                     }
                     hmtl = hmtl + "<tr><td style='width: 20%' class='td_right'><input style='margin-left:45px;float:left;' name='b' type='checkbox' onchange='check(this);' />" + value.ModuleNAME
-                        + ":</td><td class='td_left' colspan='3'> <input onchange='checkparent(this);' style='margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+                        + ":</td><td class='td_left' colspan='3'> <input onchange='checkparent(this);' style='margin-left:8px;margin-top:5px;float:left;' name='a' type='checkbox' ";
                     if (perStr.indexOf(data[a].PermissionsName) > -1) {
                         hmtl = hmtl + " checked='checked' ";
                     }
                     hmtl = hmtl + " value='" + data[a].Id + "'/><div style='margin-top:5px;float:left;padding-bottom:5px;'>" + data[a].PermissionsName + "</div>";
                 } else {
-                    hmtl = hmtl + "<input onchange='checkparent(this);' style='margin-left:15px;margin-top:5px;float:left;' name='a' type='checkbox' ";
+                    hmtl = hmtl + "<input onchange='checkparent(this);' style='margin-left:8px;margin-top:5px;float:left;' name='a' type='checkbox' ";
                     if (perStr.indexOf(data[a].PermissionsName) > -1) {
                         hmtl = hmtl + " checked='checked' ";
                     }

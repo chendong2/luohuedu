@@ -70,8 +70,12 @@ namespace HuaTongCallCenter
 
             //获取权限
             var pService = new PermissionsService();
-            var perList=pService.getUserPermissionsList(bo.Id);
+            string perList=pService.getUserPermissionsList(bo.Id);
             Session.Add("perList", perList);
+
+            HttpCookie perListC = new HttpCookie("perList") { Value = perList, Path = "/" };
+            Response.Cookies.Add(perListC);
+
             Response.Redirect("~/Default.aspx");
         }
 

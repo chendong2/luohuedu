@@ -37,6 +37,7 @@ namespace HuaTongCallCenter
         {
             Session.Contents.Remove("UserId");
             Session.Contents.Remove("UserName");
+            Session.Contents.Remove("perList");
             Response.Redirect("~/Login.aspx");
         }
     }
