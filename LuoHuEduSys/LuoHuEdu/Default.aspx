@@ -112,8 +112,8 @@
         var menus_4 = [];
         var menus_5 = [];
 
-        var perStr = $.cookie('perList');
-
+        var perStr = decodeURI($.cookie('perList'));
+        alert(perStr);
         if (perStr.indexOf("课程浏览") > -1 || perStr.indexOf("课程编辑") > -1) {
             menus_1.push({ "menuid": "11", "menuname": "培训课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Course/CourseList.htm") %>' });
         }
@@ -184,33 +184,24 @@
         //        menus_4.push({ "menuid": "42", "menuname": "消费记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
         //        menus_4.push({ "menuid": "43", "menuname": "充值记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
 
-        var data1 = '';
-        var data2 = '';
-        var data3 = '';
-        var data4 = '';
-        var data5 = '';
+        
         var _menus = { "menus": [
                         ]
         };
         if (menus_1.length > 0) {
-            data1 = { "menuid": "1", "icon": "icon-sys", "menuname": "培训信息", "menus": menus_1 };
-            _menus.menus.push(data1);
+            _menus.menus.push({ "menuid": "1", "icon": "icon-sys", "menuname": "培训信息", "menus": menus_1 });
         }
         if (menus_2.length>0) {
-            data2 = { "menuid": "2", "icon": "icon-sys", "menuname": "培训管理", "menus": menus_2 };
-            _menus.menus.push(data2);
+            _menus.menus.push({ "menuid": "2", "icon": "icon-sys", "menuname": "培训管理", "menus": menus_2 });
         }
         if (menus_3.length>0) {
-            data3 = { "menuid": "3", "icon": "icon-sys", "menuname": "用户信息", "menus": menus_3 };
-            _menus.menus.push(data3);
+            _menus.menus.push({ "menuid": "3", "icon": "icon-sys", "menuname": "用户信息", "menus": menus_3 });
         }
         if (menus_4.length>0) {
-            data4 = { "menuid": "4", "icon": "icon-sys", "menuname": "参数管理", "menus": menus_4 };
-            _menus.menus.push(data4);
+            _menus.menus.push({ "menuid": "4", "icon": "icon-sys", "menuname": "参数管理", "menus": menus_4 });
         }
         if (menus_5.length>0) {
-            data5 = { "menuid": "5", "icon": "icon-sys", "menuname": "系统设置", "menus": menus_5 };
-            _menus.menus.push(data5);
+            _menus.menus.push({ "menuid": "5", "icon": "icon-sys", "menuname": "系统设置", "menus": menus_5 });
         }
 
 
