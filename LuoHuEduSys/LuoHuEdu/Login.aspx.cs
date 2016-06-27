@@ -73,7 +73,7 @@ namespace HuaTongCallCenter
             string perList=pService.getUserPermissionsList(bo.Id);
             Session.Add("perList", perList);
 
-            HttpCookie perListC = new HttpCookie("perList") { Value = HttpUtility.UrlEncode(perList, Encoding.GetEncoding("UTF=8")), Path = "/" };
+            HttpCookie perListC = new HttpCookie("perList") { Value = HttpUtility.UrlEncode(perList, Encoding.GetEncoding("UTF-8")), Path = "/" };
             Response.Cookies.Add(perListC);
 
             Response.Redirect("~/Default.aspx");
