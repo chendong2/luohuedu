@@ -8,6 +8,7 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
+        title: '培训课程管理',
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'CourseName', title: '课程名称', width: 150 },
@@ -99,7 +100,7 @@ function loadPartialHtml() {
     }
 }
 
-var moduleName = '学员管理-';
+var moduleName = '学员信息管理-';
 
 //点击“新增”按钮
 function addData() {
@@ -108,6 +109,7 @@ function addData() {
         iconCls: 'icon-add'
     });
     getAllSchool();
+    getAllSubject();
     resetFormAndClearValidate('ff');
 }
 
@@ -124,6 +126,7 @@ function editData() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
+    getAllSubject();
     getAllSchool();
     ajaxCRUD({
         url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
@@ -154,6 +157,26 @@ function getAllSchool() {
                 var value = data[i].toString().split('******');
                 var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
                 $("#sSchool").append(option);
+            }
+        }
+    });
+}
+
+function getAllSubject() {
+    $("#sFirstTeaching").empty();
+    $("#sSecondTeaching").empty();
+    var option = "<option value=''>未设定</option>";
+    $("#sFirstTeaching").append(option);
+    $("#sSecondTeaching").append(option);
+    ajaxCRUD({
+        url: '/WebServices/Parameter/Subject.asmx/GetAllSubject',
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i].toString().split('******');
+                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
+                $("#sFirstTeaching").append(option);
+                $("#sSecondTeaching").append(option);
             }
         }
     });

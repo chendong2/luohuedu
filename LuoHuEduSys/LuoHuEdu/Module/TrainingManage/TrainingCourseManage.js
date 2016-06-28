@@ -1,68 +1,60 @@
 ﻿/***********************************
-/* 创建人：yzb
-/* 修改人：wsl
-/* 修改日期：2013-6-7
+/* 创建人：jjx
+/* 修改日期：2014-01-06
 /* 包含列表的绑定,增删改查
-/* 依赖：easyloader.js,easyui.config.js
 ***********************************/
 //easyloader.defaultReferenceModules表示默认引用easyui.public.js,如果当前IE7时会自动附加引用json2.min.js
-//新加城市选择插件
-var referenceModules = $.merge(['citylist', 'jqsuggest', 'jqsuggestpublic', 'jqCookie'], easyloader.defaultReferenceModules);
-var customerObject = { Name: '', Phone: '', Address: '' }; //存放呼入用户检索条件的全局变量
-using(referenceModules, function () {
-    var customerInfo = $.cookie('customerInfo');
-    var decodeInfo = {};
-    if (customerInfo != '' && typeof (customerInfo) != 'undefined' && customerInfo != null && customerInfo != 'null') {
-        decodeInfo = decodeURI(customerInfo);
-        customerObject = JSON.parse(decodeInfo);
-        $.cookie('customerInfo', null, { path: '/' }); //删除cookie，避免非呼入用户进入列表添加上条件
-    } //解析成对象
+using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '培训管理列表',
-        frozenColumns: [[
-        { field: 'productid', title: '课程名称', width: 80 }
-    ]],    
+        title: '培训课程管理',
         columns: [[
-            { field: 'CriId', checkbox: true },
-             { field: 'StartCity', title: "课程名称", width: 120 },
-            { field: 'EndCity', title: "设定", width: 60 },
-            { field: 'StartArea', title: "审核", width: 100 },
-            { field: 'EndArea', title: "锁定", width: 100 },
-            { field: 'StationName', title: '报表', width: 80 },
-            { field: 'Type', title: '培训类型', width: 60 },
-            {field: 'GuestPriceRMB', title: "组织单位", width: 80 },
-            { field: 'GuestPriceHKD', title: "上课时间", width: 80 },
-            { field: 'VipPriceRMB', title: "课时", width: 80 },
-            { field: 'VipPriceHKD', title: "额定人数", width: 80 },
-            { field: 'AgentPriceRMB', title: "授课教师", width: 80 },
-            { field: 'AgentPriceHKD', title: "授课教师单位", width: 80 },
-            { field: 'IsHotStr', title: "等级", width: 55 },
-            { field: 'IsHotStr', title: "上课地点", width: 55 },
-            { field: 'IsHotStr', title: "科目类别", width: 55 },
-            { field: 'IsHotStr', title: "授课对象", width: 55 },
-            { field: 'IsHotStr', title: "种类", width: 55 },
-            { field: 'IsHotStr', title: "课程代码", width: 55 }
+            { field: 'Id', checkbox: true },
+            { field: 'CourseName', title: '课程名称', width: 150 },
+            { field: 'TheYear', title: '年度', width: 150 },
+            { field: 'TrainType', title: '培训类型', width: 140 },
+
+            { field: 'Subject', title: '培训科目', width: 80 },
+            { field: 'Phone', title: '联系电话', width: 80 },
+            { field: 'Period', title: '学时', width: 80 },
+            { field: 'Cost', title: '培训费用', width: 80 },
+            { field: 'SetCheck', title: '考勤设定', width: 50 },
+            { field: 'IsMust', title: '种类', width: 60, formatter: function (value) {
+                if (value == 1)
+                    return '<span>选修</span>';
+                else
+                    return '<font>必修</font>';
+            }
+            },
+
+            { field: 'Address', title: '培训地址', width: 70, sortable: true },
+            { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
+            { field: 'SetApply', title: '超出额定人数设定', width: 80 },
+            { field: 'OrganizationalName', title: '组织单位名称', width: 80 },
+            { field: 'CourseDate', title: '培训日期', width: 50 },
+            { field: 'TimeStart', title: '培训时间', width: 50 },
+            { field: 'CourseCode', title: '课程代码', width: 50 }
+
         ]],
-        singleSelect: true,
+        singleSelect: false,
         toolbar: '#toolbar',
-        sortName: 'CriId',
+        sortName: 'Name',
         sortOrder: 'desc',
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
-            var routeData = {
-                order: param.order,
+            var studentData = {
                 page: param.page,
                 rows: param.rows,
+                order: param.order,
                 sort: param.sort,
-                pCarrentalLineBo: { State: 0 }
+                studentBo: {}
             };
-            var paramStr = JSON.stringify(routeData);
+            var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/CarrentalWebService/CarrentalRouteWebService.asmx/GetCarrentalRoutes',
+                url: '/WebServices/Admin/Student.asmx/GetStudentList',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -71,17 +63,25 @@ using(referenceModules, function () {
                     error.apply(this, arguments);
                 }
             });
+
         },
         onDblClickRow: function (rowIndex, rowData) {
-            fillForm(rowData.CriId);
+            fillForm(rowData.Id);
         }
     };
 
     //初始化列表组件
     iniDataGrid('dg', dataGridOptions);
-    //搜索状态
-    //填充列表上的简单搜索条件
-    getAllLineNamesWithNoIds('ddlCarrentalLine', true);
+
+    //搜索
+    searchbox('searchText', {
+        searcher: function (value, name) {
+            search(value, name);
+        },
+        menu: '#mm',
+        prompt: '输入后直接回车确认'
+    });
+
 });
 
 //easyloader.defaultTime为700ms
@@ -90,220 +90,182 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/Carrental/CarrentalRoute/CarrentalRouteView.htm',
+            href: '/View/TrainingManage/TrainingCourseManage/TrainingCourseForm.htm',
             onLoad: function () {
-                openDialog('dlg', {
-                    title: module + '预定',
-                    iconCls: 'icon-edit',
-                    onOpen: function () {
-                        //                        $('#formTabs').tabs('select', 0);
-                    }
-                }); closeFormDialog();
+                //                setValidatebox('Name', {
+                //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
+                //                });
             }
         });
     }
 }
 
-//获取站点信息，填充下拉列表
-function getAllStations(ddl) {
-    ajaxCRUD({
-        url: '/WebServices/CarrentalWebService/CarrentalRouteWebService.asmx/GetAllStations',
-        async: false,
-        success: function (data) {
-            initCombobox(ddl, "Identification", "Name", data);
-        }
+var moduleName = '培训课程管理-';
+
+//点击“新增”按钮
+function addData() {
+    openDialog('dlg', {
+        title: moduleName + '新增',
+        iconCls: 'icon-add'
     });
-}
-//获取车型信息，填充下拉列表
-function getAllCarTypes(ddlCartypeId, isSimpleSearch) {
-    ajaxCRUD({
-        url: '/WebServices/CarrentalWebService/CarrentalRouteWebService.asmx/GetAllCarType',
-        data: '',
-        async: false,
-        success: function (data) {
-            if (isSimpleSearch) {
-                data.unshift(ddlCartypeId, { 'CartId': 0, 'Type': '请选择' });
-            } else {
-                initCombobox(ddlCartypeId, "CartId", "Type", data);
-            }
-        }
-    });
+    getAllSchool();
+    getAllSubject();
+    resetFormAndClearValidate('ff');
 }
 
-function Search() {
-    if (ddlInfo("ddlCarrentalLine", "线路名称")) return;
-    // 列表参数设置
-    var dataGridOptions = {
-        pageNumber: 1,
-        loader: function (param, success, error) {
-            var carrentalRouteData = {
-                order: param.order,
-                page: param.page,
-                rows: param.rows,
-                sort: param.sort,
-                pCarrentalLineBo: {
-                    //取文本，按照线路名称来检索
-                    LineName: $("#ddlCarrentalLine").combobox('getText'),
-                    State: 0
-                }
-            };
-            var paramStr = JSON.stringify(carrentalRouteData);
-            ajaxCRUD({
-                url: '/WebServices/CarrentalWebService/CarrentalRouteWebService.asmx/GetCarrentalRoutes',
-                data: paramStr,
-                success: function (data) {
-                    success(data);
-                },
-                error: function () {
-                    error.apply(this, arguments);
-                }
-            });
-        }
-    };
-    //初始化列表组件
-    iniDataGrid('dg', dataGridOptions);
-}
-
-var module = "中港包车-";
-
-//点击“预定”按钮
-function addCarrentalOrder() {
+//点击“编辑”按钮
+function editData() {
     var row = getSelectedRow('dg');
     if (row == null) {
-        msgShow(module + '预定', '请选择要预定的一条线路', '');
+        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
     } else {
         resetFormAndClearValidate('ff');
-        fillForm(row.CriId);
+        fillForm(row.Id);
     }
 }
 
-
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
+    getAllSubject();
+    getAllSchool();
     ajaxCRUD({
-        url: '/WebServices/CarrentalWebService/CarrentalRouteWebService.asmx/GetOneCarrentalRouteForCallCenter',
-        data: "{pCriId:'" + itemid + "'}",
+        url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
+        data: "{id:'" + itemid + "'}",
         success: function (data) {
-            if (data == null || typeof (data) == undefined) {
-                msgShow('提示', '获取包车线路数据异常', 'info');
-                return;
-            }
-            //打开对话框
             openDialog('dlg', {
-                title: module + '预定',
-                iconCls: 'icon-edit',
-                onOpen: function () {
-                    $('#formTabs').tabs('select', 0);
-                }
+                title: moduleName + '编辑',
+                iconCls: 'icon-edit'
             });
+            $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
-            var allSpans = $('.val');
-            bindVal(allSpans, 'id', data);
-            $("#CriId").val(data.CriId);
-            $("#txtContactPhone").val(customerObject.Phone);
-            $("#txtContactPerson").val(customerObject.Name);
-            $("#txtOnPointName").val(customerObject.Address);
+            loadDataToForm('ff', data);
+            var bir = $("#txtBirthday").val();
+            bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
+            $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
         }
     });
-    //初始化下单参数
-    $("#txtCarrentalDate").datebox({
-        required: true
-    });
+}
 
-    $("#txtCarrentalTime").timespinner({
-        min: '00:00:00',
-        required: true,
-        showSeconds: false
+//获取全部的免修数据
+function getAllSchool() {
+    $("#sSchool").empty();
+    ajaxCRUD({
+        url: '/WebServices/Parameter/School.asmx/GetAllSchool',
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i].toString().split('******');
+                var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
+                $("#sSchool").append(option);
+            }
+        }
     });
-    $("#txtCarrentalTime").timespinner('setValue', '00:00');
+}
 
-    clearValidate('ff');
+function getAllSubject() {
+    $("#sFirstTeaching").empty();
+    $("#sSecondTeaching").empty();
+    var option = "<option value=''>未设定</option>";
+    $("#sFirstTeaching").append(option);
+    $("#sSecondTeaching").append(option);
+    ajaxCRUD({
+        url: '/WebServices/Parameter/Subject.asmx/GetAllSubject',
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i].toString().split('******');
+                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
+                $("#sFirstTeaching").append(option);
+                $("#sSecondTeaching").append(option);
+            }
+        }
+    });
 }
 
 //保存表单数据
 function saveData() {
-    /*表单有未填项，返回*/
     if (!formValidate('ff')) {
         return;
     }
 
-    var hidValue = $("#CriId").val();
-    if (hidValue == '' || typeof (hidValue) == undefined || parseInt(hidValue) == 0) {
-        msgShow('提示', "下单失败，请选择包车线路", 'info');
+    var hidValue = $("#HidId").val();
+    var basicUrl = '/WebServices/Admin/Student.asmx/';
+
+    var wsMethod = '';
+    if (hidValue.length > 0) {
+        wsMethod = "UpdateStudent"; //修改
+    } else {
+        wsMethod = "AddStudent"; //新增
     }
-    var formUrl = '/WebServices/CarrentalWebService/CarrentalOrderWebService.asmx/AddCarrentalOrder';
+
+    var formUrl = basicUrl + wsMethod;
+
     var form2JsonObj = form2Json("ff");
-    form2JsonObj.CriId = hidValue;
     var form2JsonStr = JSON.stringify(form2JsonObj);
-    var jsonDataStr = "{order:" + form2JsonStr + "}";
+    var jsonDataStr = "{studentBo:" + form2JsonStr + "}";
 
     ajaxCRUD({
         url: formUrl,
         data: jsonDataStr,
         success: function (data) {
             var msg = '';
-            if (data == 0) {
-                msg = "下单成功";
+            if (hidValue.length > 0) {
+                msg = "修改成功"; //修改
+            } else {
+                msg = "新增成功,用户初始密码为六个零000000"; //新增
             }
-            else {
-                msg = '下单失败';
+            if (data == true) {
+                msgShow('提示', msg, 'info');
+                closeFormDialog();
+                refreshTable('dg');
+            } else {
+                msgShow('提示', '提交失败', 'info');
             }
-            msgShow('提示', msg, 'info');
-            closeFormDialog();
-            //refreshTable('dg');
         }
     });
 } // end saveData()
 
-//高级搜索
-function openAdvancedSearch() {
-    var eastPanel = $('#layout').layout('panel', 'east');
-
-    if (eastPanel.length == 0) {
-        var options = {
-            region: 'east',
-            split: true,
-            width: 190,
-            closable: true,
-            title: '高级搜索',
-            href: '/View/TrainingManage/TrainingCourseManage/TrainingCourseAdvancedSearch.htm',
-            onLoad: function () {
-                initCombobox("ddlState", "State", "SateName");
-                $("#ddlState").combobox('setValue', '0');
-                getStations("ddlStationSearch", false);
-                getAllCarTypes("ddlCartIdSearh", false);
-            },
-            onClose: function () {
-                $('#layout').layout('remove', 'east');
-            }
-        };
-        $('#layout').layout('add', options);
-        $('.layout-panel-east .panel-tool .layout-button-right').remove();
-
-    } else {
-        $('#layout').layout('remove', 'east');
-    }
+//批量删除前台提示
+function deleteDatas() {
+    deleteItems('dg', deleteDatasAjax);
 }
 
-function advancedSearch() {
-    if (ddlInfo("ddlStationSearch", "所属站点")) return;
-    var form2JsonObj = form2Json("advancedSearch");
+//批量删除后台AJAX处理
+function deleteDatasAjax(str) {
+    ajaxCRUD({
+        url: '/WebServices/Admin/Student.asmx/DeleteStudentsByIds',
+        data: "{ids:'" + str + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '删除成功', 'info');
+                refreshTable('dg');
+            } else {
+                msgShow('提示', '删除失败', 'info');
+            }
+        }
+    });
+}
 
+function Search() {
     // 列表参数设置
     var dataGridOptions = {
         pageNumber: 1,
         loader: function (param, success, error) {
-            var carrentalRouteData = {
-                order: param.order,
+            var studentData = {
                 page: param.page,
                 rows: param.rows,
+                order: param.order,
                 sort: param.sort,
-                pCarrentalLineBo: form2JsonObj
+                studentBo: {
+                    Name: $("#txtName").val().trim(),
+                    IDNo: $("#txtIDNo").val().trim(),
+                    SchoolName: $("#txtSchoolName").val().trim()
+                }
             };
-            var paramStr = JSON.stringify(carrentalRouteData);
+            var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/CarrentalWebService/CarrentalRouteWebService.asmx/GetCarrentalRoutes',
+                url: '/WebServices/Admin/Student.asmx/GetStudentList',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -319,110 +281,8 @@ function advancedSearch() {
     iniDataGrid('dg', dataGridOptions);
 }
 
-function clearSearchCriteria() {
-    clearForm('advancedSearch');
-}
-
 
 //关闭弹出层
 function closeFormDialog() {
     closeDialog('dlg');
-}
-//禁用输入的combobox
-function initComboboxRoute(param) {
-    var width = param.width || 100;
-    var panelHeight = param.panelHeight || 200;
-    var data = param.data || null;
-
-    param.obj.combobox({
-        data: param.data, valueField: param.value, textField: param.text, width: width, panelHeight: panelHeight
-    });
-    if (param.disabled != 'undefined')
-        param.obj.combobox('disableTextbox', { stoptype: 'readOnly', activeTextArrow: true, stopArrowFocus: true });
-}
-
-//获取已经有的包车线路集合，填充包车线路下拉框
-//add by ys on 2013-7-18
-function getCarentalLines(ddlid, isSimpleSearch) {
-    var webserviceUrl = '/WebServices/CarrentalWebService/CarrentalRouteWebService.asmx/GetAllCarrentalRoutes';
-    ajaxCRUD({
-        async: false,
-        url: webserviceUrl,
-        data: '{}',
-        success: function (data) {
-            if (isSimpleSearch) {
-                //写入默认的请选择选项
-                data.unshift({ "CriId": 0, 'LineName': '请选择' });
-            }
-            initCombobox(ddlid, "CriId", "LineName", data, "");
-        }
-    });
-}
-
-//获取所有线路名称，填充包车线路下拉框
-//add by ys on 2013-7-22
-function getAllLineNamesWithNoIds(ddlid, isSimpleSearch) {
-    var webserviceUrl = "/WebServices/CarrentalWebService/CarrentalRouteWebService.asmx/GetAllCarrentalLineNames";
-    ajaxCRUD({
-        async: false,
-        url: webserviceUrl,
-        data: '{}',
-        success: function (data) {
-            if (isSimpleSearch) {
-                data.unshift({ "Index": 0, 'LineName': '请选择' });
-            }
-            initCombobox(ddlid, "Index", "LineName", data, true);
-        }
-    });
-}
-
-var searchStatus = 0;
-// 导出excel （add by jjx on 2013-08-06）
-function exportExcelByCarrentalline() {
-    var data = {};
-    switch (searchStatus) {
-        case 0: // 页面初始化时
-            data = { order: "desc", sort: "CriId", bo: {} };
-            break;
-        case 1: // 普通搜索时
-            var lineName = $("#ddlCarrentalLine").combobox('getText');
-            data = { order: "desc", sort: "CriId", bo: { LineName: lineName} };
-            break;
-        case 2: // 高级搜索时
-            var form2JsonObj = form2Json("advancedSearch");
-            data = { order: "desc", sort: "CriId", bo: form2JsonObj };
-            break;
-        default:
-            break;
-    }
-    location.href = "Export/WebService/ExportExcelWebService.asmx/ExportExcelByCarrentalline?data=" + encodeURI(JSON.stringify(data));
-}
-
-//一次性为多个标签绑定值
-function bindVal(classObj, attr, dataVal) {
-    // 获取所有的id名
-    var idName = [];
-    // 遍历所有的id名，存到数组idName中
-    classObj.attr(attr, function (i, val) {
-        idName.push(val);
-    });
-    // 遍历data数据，如果data的key值在idName中存在，就绑定相应的值
-    for (var key in dataVal) {
-        if ($.inArray(key, idName) > -1) {
-            var val = dataVal[key];
-            if (val == null) val = "";
-            $('#' + key).text(val);
-        }
-    }
-}
-
-function sure(obj) {
-    if (!formValidate('ff')) {
-        return;
-    }
-    $(obj).parent().prepend('<b id="note">提交中...</b>');
-    $('#submit').hide();
-    saveData();
-    $('#submit').show();
-    $('#note').remove();
 }

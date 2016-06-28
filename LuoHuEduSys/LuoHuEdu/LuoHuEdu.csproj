@@ -1243,6 +1243,7 @@
     <Content Include="Module\Parameter\TrainType.js" />
     <Content Include="Module\Parameter\Subject.js" />
     <Content Include="Module\System\PswChange.js" />
+    <Content Include="Module\System\UserInfo.js" />
     <Content Include="Module\Ticket\BanciList.js" />
     <Content Include="Module\Ticket\BookForm.js" />
     <Content Include="Module\Ticket\TicketList.js" />
@@ -1270,6 +1271,7 @@
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteForm.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteList.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteView.htm" />
+    <Content Include="View\Course\CourseForm.htm" />
     <Content Include="View\Course\CourseList.htm" />
     <Content Include="View\Customer\CustomerForm.htm" />
     <Content Include="View\Customer\CustomerList.htm" />
