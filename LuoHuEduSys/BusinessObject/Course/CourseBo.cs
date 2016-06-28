@@ -135,5 +135,9 @@ namespace BusinessObject.Course
         /// </summary>
         public string Name { get; set; }
 
+        public int Sex { get; set; }
+
+        public int Profession { get; set; }
+
     }
 }
