@@ -23,8 +23,11 @@ function getTheYear() {
 
 function fillData() {
     var theyear = $("#sTheYear").val();
-    $("#kemu1").nextAll().remove();
-    $("#kemu2").nextAll().remove();
+
+    $("#tdTheYear").html(theyear);
+    $("#kemu").nextAll().remove();
+    $("#tdCount").nextAll().remove();
+    $("#tdCount").html(0);
     ajaxCRUD({
         url: '/WebServices/Parameter/TrainType.asmx/GetAllTrainType',
         async: false,
@@ -39,14 +42,17 @@ function fillData() {
                     data: "{theYear:'" + theyear + "',trainType:'" + value[1] + "'}",
                     async: false,
                     success: function (data1) {
-                        var td1 = "<td  style='font-weight: bolder;'>" + data1.Period + "</td>";
-                        total = total + data1.Period;
-                        $("#tdCount").parent().append(td1);
-                        if (data1.Period > 0) {
+                        if (data1 != null) {
+                            var td1 = "<td  style='font-weight: bolder;'>" + data1.Period + "</td>";
+                            total = total + data1.Period;
+                            $("#tdCount").parent().append(td1);
+
                             $("#tdName").html(data1.Name);
                             $("#tdSex").html(data1.Sex == 1 ? "男" : "女");
-                            $("#tdTheYear").html(data1.TheYear);
                             $("#tdProfession").html(data1.Profession);
+                        } else {
+                            var td2 = "<td  style='font-weight: bolder;'>0</td>";
+                            $("#tdCount").parent().append(td2);
                         }
 
                     }
@@ -54,17 +60,22 @@ function fillData() {
             }
             td = "<td  style='font-weight: bolder;'>课时汇总</td>";
             $("#kemu").parent().append(td);
-            td = "<td  style='font-weight: bolder;'>"+total+"</td>";
+            td = "<td  style='font-weight: bolder;'>" + total + "</td>";
             $("#tdCount").parent().append(td);
 
             ajaxCRUD({
                 url: '/WebServices/UserInfo/StudentTrain.asmx/GetMyStudentTrain',
+                data: "{theYear:'" + theyear + "'}",
                 async: false,
                 success: function (data2) {
-                    total = total + data2.StuTime;
                     td = "<td  style='font-weight: bolder;'>校本研修课时</td>";
                     $("#kemu").parent().append(td);
-                    td = "<td  style='font-weight: bolder;'>" + data2.StuTime + "</td>";
+                    if (data2 != null) {
+                        td = "<td  style='font-weight: bolder;'>" + data2.StuTime + "</td>";
+                        total = total + data2.StuTime;
+                    } else {
+                        td = "<td  style='font-weight: bolder;'>0</td>";
+                    }
                     $("#tdCount").parent().append(td);
 
                     td = "<td  style='font-weight: bolder;'>总课时</td>";

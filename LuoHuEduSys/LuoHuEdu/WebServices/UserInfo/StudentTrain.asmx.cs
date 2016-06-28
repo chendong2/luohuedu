@@ -92,11 +92,11 @@ namespace LuoHuEdu.WebServices.UserInfo
         //根据Id获取数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public StudentTrainBo GetMyStudentTrain()
+        public StudentTrainBo GetMyStudentTrain(string theYear)
         {
 
             var studentTrainService = new StudentTrainService();
-            var studentTrainBo = studentTrainService.GetMyStudentTrain();
+            var studentTrainBo = studentTrainService.GetMyStudentTrain(theYear);
             return studentTrainBo;
         }
 
