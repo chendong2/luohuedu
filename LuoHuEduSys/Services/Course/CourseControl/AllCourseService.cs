@@ -21,12 +21,28 @@ namespace Services.Course.CourseControl
                 var sqlStr =
                     @"SELECT  NAME,Sex,Profession,b.Period,TheYear,TrainType FROM tb_student st INNER JOIN 
 (SELECT ct.StudentId,SUM(Period) AS Period,TrainType,TheYear  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId 
-GROUP BY ct.StudentId,TrainType,TheYear)b ON st.id=b.studentid WHERE TheYear=@TheYear AND TrainType=@TrainType";
-                courseBo = connection.Query<CourseBo>(sqlStr, new { TheYear = theYear, TrainType = trainType }).FirstOrDefault();
+GROUP BY ct.StudentId,TrainType,TheYear)b ON st.id=b.studentid where TheYear =@TheYear and TrainType=@TrainType and StudentId=@StudentId ";
+                courseBo = connection.Query<CourseBo>(sqlStr, new { TheYear = theYear, TrainType = trainType, studentid = userId }).FirstOrDefault();
             }
 
 
             return  courseBo;
+        }
+
+        public CourseBo GetCount(string theYear)
+        {
+            string userId = Domain.common.UserInfo.GetUserId().ToString();
+            var courseBo = new CourseBo { };
+            using (var connection = DataBaseConnection.GetMySqlConnection())
+            {
+                var sqlStr =
+                    @"SELECT COUNT(Period) AS  Period FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId   
+                      where TheYear =@TheYear  and StudentId=@StudentId ";
+                courseBo = connection.Query<CourseBo>(sqlStr, new { TheYear = theYear, studentid = userId }).FirstOrDefault();
+            }
+
+
+            return courseBo;
         }
 
     }

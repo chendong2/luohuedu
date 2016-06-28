@@ -137,7 +137,7 @@ namespace BusinessObject.Course
 
         public int Sex { get; set; }
 
-        public int Profession { get; set; }
+        public string Profession { get; set; }
 
     }
 }
