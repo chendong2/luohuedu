@@ -38,5 +38,16 @@ namespace LuoHuEdu.WebServices.Course
             var courseService = new AllCourseService();
             return courseService.GetCount(theYear);
         }
+
+
+        //获取课程列表数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<CourseBo> GetMyCourseList(string theYear, string trainType)
+        {
+
+            var courseService = new AllCourseService();
+            return courseService.GetMyCourseList(theYear, trainType);
+        }
     }
 }

@@ -97,6 +97,7 @@ function fillData() {
 
             //集中培训列表
             ("#tb2").nextAll("table").remove();
+            
         }
     });
 }

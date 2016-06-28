@@ -45,5 +45,31 @@ GROUP BY ct.StudentId,TrainType,TheYear)b ON st.id=b.studentid where TheYear =@T
             return courseBo;
         }
 
+        public List<CourseBo>  GetMyCourseList(string theYear,string trainType)
+        {
+            var list = new List<CourseBo>();
+            string userId = Domain.common.UserInfo.GetUserId().ToString();
+            string strSql = string.Format(@"SELECT  CourseNAME,IsMust,TeachingObject,SubjectName,st1.name AS teachername,OrganizationalName,
+co.Address,co.Period,CourseDate,SIGN FROM tb_student st INNER JOIN 
+tb_coursestudent ct ON st.id=ct.studentid
+INNER JOIN tb_course co  ON co.id=ct.CourseId  INNER JOIN tb_subject sub 
+ON co.Subject=sub.id INNER JOIN tb_student st1 ON st1.id=co.teacherid 
+WHERE TheYear =@TheYear AND TrainType=@TrainType AND st.StudentId=@StudentId
+");
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                list = context.Query<CourseBo>(strSql,
+                                                   new
+                                                       {
+                                                           TheYear = theYear,
+                                                           TrainType = trainType,
+                                                           StudentId = userId
+                                                       }).ToList();
+            }
+
+            return list;
+
+        }
+
     }
 }
