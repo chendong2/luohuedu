@@ -94,6 +94,9 @@ function fillData() {
                     $("#tdCount").html(data3.Period);
                 }
             });
+
+            //集中培训列表
+            ("#tb2").nextAll("table").remove();
         }
     });
 }
