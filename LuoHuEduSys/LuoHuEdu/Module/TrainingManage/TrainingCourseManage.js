@@ -54,7 +54,7 @@ using(easyloader.defaultReferenceModules, function () {
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseList',
                 data: paramStr,
                 success: function (data) {
                     success(data);
