@@ -37,7 +37,7 @@ function fillData() {
             var total = 0;
             for (var i = 0; i < data.length; i++) {
                 var value = data[i].toString().split('******');
-                var td = "<td  style='font-weight: bolder;'>" + value[0] + "课时</td>";
+                var td = "<td  style='font-weight: bolder;background-color:#f6f6f6;'>" + value[0] + "课时</td>";
                 $("#kemu").parent().append(td);
                 ajaxCRUD({
                     url: '/WebServices/Course/AllCourseServices.asmx/GetMyColloctCourse',
@@ -70,17 +70,17 @@ function fillData() {
                     success: function (data4) {
                         for (var m = 0; m < data4.length; m++) {
 
-                            var tr = "<tr><td  style='font-weight: bolder;'>课程名称</td><td colspan='2'>" + data4[m].CourseName +
-                                "</td><td  style='font-weight: bolder;'>种类</td><td>" + (data4[m].IsMust == 1 ? "选修" : "必修") +
-                                    "</td><td  style='font-weight: bolder;width:7%' >类型</td><td style='width:9%'>" + value[0] +
-                                        "</td><td  style='font-weight: bolder;'>授课对象</td><td style='width:8%'>" +
+                            var tr = "<tr><td  style='font-weight: bolder;background-color:#f6f6f6;'>课程名称</td><td colspan='2'>" + data4[m].CourseName +
+                                "</td><td  style='font-weight: bolder;background-color:#f6f6f6;'>种类</td><td>" + (data4[m].IsMust == 1 ? "选修" : "必修") +
+                                    "</td><td  style='font-weight: bolder;width:7%;background-color:#f6f6f6;' >类型</td><td style='width:9%'>" + value[0] +
+                                        "</td><td  style='font-weight: bolder;background-color:#f6f6f6;'>授课对象</td><td style='width:8%'>" +
                                             (data4[m].TeachingObject == 1 ? "幼儿教师" : data4[m].TeachingObject == 2 ? "小学教师" : data4[m].TeachingObject == 3 ? "初中教师" : data4[m].TeachingObject == 3 ? "高中教师" : "其他") +
-                                                "</td><td rowspan='3' style='width:8%;font-weight: bolder;'>有效课时</td><td rowspan='3' style='width:8%'>" + (data4[m].Sign == 2 ? data4[m].Period : 0) +
-                                                    "</td></tr><tr><td  style='font-weight: bolder;'>培训类型</td><td style='width:8%'>" + data4[m].SubjectName +
-                                                        "</td> <td  style='font-weight: bolder;'>授课教师</td><td>" + data4[m].Teachername + "</td><td  style='font-weight: bolder;'>单位</td>" +
-                                                            "<td  colspan='2' style='width:10%'>" + data4[m].OrganizationalName + "</td><td  style='font-weight: bolder;'>授课地点</td>" +
-                                                                "<td style='width:8%'>" + data4[m].Address + "</td></tr><tr><td  style='font-weight: bolder;'>课时</td>" +
-                                                                    "<td>" + data4[m].Period + "</td><td  style='font-weight: bolder;' colspan='2'>授课时间及考勤</td><td class='datestr' colspan='5'>" + data4[m].CourseDateStr + " (" + (data4[m].Sign == 2 ? data4[m].Period : 0) + "课时)</td></tr>";
+                                                "</td><td rowspan='3' style='width:8%;font-weight: bolder;background-color:#f6f6f6;'>有效课时</td><td rowspan='3' style='width:8%'>" + (data4[m].Sign == 2 ? data4[m].Period : 0) +
+                                                    "</td></tr><tr><td  style='font-weight: bolder;background-color:#f6f6f6;'>培训类型</td><td style='width:8%'>" + data4[m].SubjectName +
+                                                        "</td> <td  style='font-weight: bolder;background-color:#f6f6f6;'>授课教师</td><td>" + data4[m].Teachername + "</td><td  style='font-weight: bolder;background-color:#f6f6f6;'>单位</td>" +
+                                                            "<td  colspan='2' style='width:10%'>" + data4[m].OrganizationalName + "</td><td  style='font-weight: bolder;background-color:#f6f6f6;'>授课地点</td>" +
+                                                                "<td style='width:8%'>" + data4[m].Address + "</td></tr><tr><td  style='font-weight: bolder;background-color:#f6f6f6;'>课时</td>" +
+                                                                    "<td>" + data4[m].Period + "</td><td  style='font-weight: bolder;background-color:#f6f6f6;' colspan='2'>授课时间及考勤</td><td class='datestr' colspan='5'>" + data4[m].CourseDateStr + " (" + (data4[m].Sign == 2 ? data4[m].Period : 0) + "课时)</td></tr>";
                             table = table + tr;
                         }
                     }
@@ -93,7 +93,7 @@ function fillData() {
 
                 });
             }
-            td = "<td  style='font-weight: bolder;'>课时汇总</td>";
+            td = "<td  style='font-weight: bolder;background-color:#f6f6f6;'>课时汇总</td>";
             $("#kemu").parent().append(td);
             td = "<td  style='font-weight: bolder;'>" + total + "</td>";
             $("#tdCount").parent().append(td);
@@ -103,7 +103,7 @@ function fillData() {
                 data: "{theYear:'" + theyear + "'}",
                 async: false,
                 success: function (data2) {
-                    td = "<td  style='font-weight: bolder;'>校本研修课时</td>";
+                    td = "<td  style='font-weight: bolder;background-color:#f6f6f6;'>校本研修课时</td>";
                     $("#kemu").parent().append(td);
                     if (data2 != null) {
                         td = "<td  style='font-weight: bolder;'>" + data2.StuTime + "</td>";
@@ -113,7 +113,7 @@ function fillData() {
                     }
                     $("#tdCount").parent().append(td);
 
-                    td = "<td  style='font-weight: bolder;'>总课时</td>";
+                    td = "<td  style='font-weight: bolder;background-color:#f6f6f6;'>总课时</td>";
                     $("#kemu").parent().append(td);
                     td = "<td  style='font-weight: bolder;'>" + total + "</td>";
                     $("#tdCount").parent().append(td);
