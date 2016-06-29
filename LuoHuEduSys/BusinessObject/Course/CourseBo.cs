@@ -139,5 +139,14 @@ namespace BusinessObject.Course
 
         public string Profession { get; set; }
 
+
+        public string SubjectName { get; set; }
+
+        public string Teachername { get; set; }
+
+        public int Sign { get; set; }
+
+        public string CourseDateStr { get; set; }
+
     }
 }

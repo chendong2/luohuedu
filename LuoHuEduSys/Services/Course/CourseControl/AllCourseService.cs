@@ -20,7 +20,7 @@ namespace Services.Course.CourseControl
             {
                 var sqlStr =
                     @"SELECT  NAME,Sex,Profession,b.Period,TheYear,TrainType FROM tb_student st INNER JOIN 
-(SELECT ct.StudentId,SUM(Period) AS Period,TrainType,TheYear  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId 
+(SELECT ct.StudentId,SUM(Period) AS Period,TrainType,TheYear  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId and sign=2 
 GROUP BY ct.StudentId,TrainType,TheYear)b ON st.id=b.studentid where TheYear =@TheYear and TrainType=@TrainType and StudentId=@StudentId ";
                 courseBo = connection.Query<CourseBo>(sqlStr, new { TheYear = theYear, TrainType = trainType, studentid = userId }).FirstOrDefault();
             }
@@ -50,11 +50,11 @@ GROUP BY ct.StudentId,TrainType,TheYear)b ON st.id=b.studentid where TheYear =@T
             var list = new List<CourseBo>();
             string userId = Domain.common.UserInfo.GetUserId().ToString();
             string strSql = string.Format(@"SELECT  CourseNAME,IsMust,TeachingObject,SubjectName,st1.name AS teachername,OrganizationalName,
-co.Address,co.Period,CourseDate,SIGN FROM tb_student st INNER JOIN 
+co.Address,co.Period,DATE_FORMAT(CourseDate,'%Y-%m-%d') AS CourseDateStr,SIGN FROM tb_student st INNER JOIN 
 tb_coursestudent ct ON st.id=ct.studentid
 INNER JOIN tb_course co  ON co.id=ct.CourseId  INNER JOIN tb_subject sub 
 ON co.Subject=sub.id INNER JOIN tb_student st1 ON st1.id=co.teacherid 
-WHERE TheYear =@TheYear AND TrainType=@TrainType AND st.StudentId=@StudentId
+WHERE TheYear =@TheYear AND TrainType=@TrainType AND st.Id=@Id
 ");
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
@@ -63,7 +63,7 @@ WHERE TheYear =@TheYear AND TrainType=@TrainType AND st.StudentId=@StudentId
                                                        {
                                                            TheYear = theYear,
                                                            TrainType = trainType,
-                                                           StudentId = userId
+                                                           Id = userId
                                                        }).ToList();
             }
 
