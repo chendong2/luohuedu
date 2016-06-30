@@ -26,7 +26,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'Countc', title: '培训科目数', width: 100, sortable: false },
             { field: 'jizhong', title: '集中培训课时', width: 100, sortable: false },
             { field: 'xiaoben', title: '校本培训课时', width: 100, sortable: false },
-            { field: 'zx', title: '专项培训课时', width: 100, sortable: false },
+            { field: 'zxpx', title: '专项培训课时', width: 100, sortable: false },
             { field: 'xueli', title: '学历培训课时', width: 100, sortable: false },
             { field: 'exTime', title: '免修管理课时', width: 100, sortable: false },
             { field: 'maTime', title: '校本研修课时', width: 100, sortable: false },

@@ -320,11 +320,11 @@ namespace Services.Admin.StudentControl
 
             string strSql = string.Format(@"
 SELECT xxb.*,IF(ISNULL(maTime),0,maTime) AS maTime,0 AS exTime,
-IF(ISNULL(jizhong+xiaoben+zx+xueli+maTime),0,jizhong+xiaoben+zx+xueli+maTime) AS total,IF(ISNULL(Countc),0,Countc) AS Countc FROM(
+IF(ISNULL(jizhong+xiaoben+zxpx+xueli+maTime),0,jizhong+xiaoben+zxpx+xueli+maTime) AS total,IF(ISNULL(Countc),0,Countc) AS Countc FROM(
 SELECT Id,NAME,RegistrationCode,Profession,SchoolName,SchoolId,TheYear,
 MAX(CASE TrainTypeName WHEN '集中培训' THEN Period ELSE 0 END ) jizhong,
 MAX(CASE TrainTypeName WHEN '校本培训' THEN Period ELSE 0 END ) xiaoben,
-MAX(CASE TrainTypeName WHEN '专项培训' THEN Period ELSE 0 END ) zx,
+MAX(CASE TrainTypeName WHEN '专项培训' THEN Period ELSE 0 END ) zxpx,
 MAX(CASE TrainTypeName WHEN '学历培训' THEN Period ELSE 0 END ) xueli 
  FROM (
 SELECT stsc.Id,stsc.Name,RegistrationCode,Profession,stsc.SchoolName,TrainTypeName,SchoolId,IF(ISNULL(Period),0,Period) AS Period,TheYear FROM 
