@@ -98,5 +98,29 @@ namespace LuoHuEdu.WebServices.Admin
             return studentBo;
         }
 
+
+
+        //获取数据列表
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetStudentCourseList(int page, int rows, string sort, string order, StudentBo studentBo)
+        {
+
+            var student = new StudentService();
+            var list = student.GetStudentCourseList(page, rows, sort, order, studentBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
+
     }
 }
