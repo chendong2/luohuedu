@@ -6,6 +6,7 @@ using BusinessObject.AdminBo;
 using Dapper;
 using Domain.common;
 using Huatong.DAO;
+using Services.Course.CourseControl;
 
 namespace Services.Admin.StudentControl
 {
@@ -349,7 +350,7 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
                 {
                     strSql += "and xxb.TheYear = @TheYear ";
                 }
-                if (studentBo.SchoolId != null)
+                if (!string.IsNullOrEmpty(studentBo.SchoolId))
                 {
                     strSql += "and SchoolId = @SchoolId ";
                 }
@@ -381,6 +382,21 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
+
+                for (int i = 0; i < list.Count;i++ )
+                {
+                    var stuBo = list[i];
+;                   var courService = new AllCourseService();
+                    var course = courService.GetCoursePeroid(stuBo.Id, studentBo.TheYear, "集中培训");
+                    stuBo.jizhong = course != null ? course.Period : 0;
+                    course = courService.GetCoursePeroid(stuBo.Id, studentBo.TheYear, "校本培训");
+                    stuBo.xiaoben = course != null ? course.Period : 0;
+                    course = courService.GetCoursePeroid(stuBo.Id, studentBo.TheYear, "专项培训");
+                    stuBo.zxpx = course != null ? course.Period : 0;
+                    course = courService.GetCoursePeroid(stuBo.Id, studentBo.TheYear, "学历培训");
+                    stuBo.xueli =course!=null?course.Period:0;
+                    stuBo.total = stuBo.jizhong + stuBo.xiaoben + stuBo.zxpx + stuBo.xueli + stuBo.maTime ;
+                }
 
                 pageList.ListT = list;
                 pageList.PageIndex = page;
