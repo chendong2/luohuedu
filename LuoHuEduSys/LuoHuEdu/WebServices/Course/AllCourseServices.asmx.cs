@@ -23,11 +23,31 @@ namespace LuoHuEdu.WebServices.Course
         //获取课程列表数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public CourseBo GetMyColloctCourse()
+        public CourseBo GetMyColloctCourse(string theYear, string trainType)
         {
 
             var courseService = new AllCourseService();
-            return courseService.GetMyColloctCourse();
+            return courseService.GetMyColloctCourse(theYear, trainType);
+        }
+
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public CourseBo GetCount(string theYear)
+        {
+
+            var courseService = new AllCourseService();
+            return courseService.GetCount(theYear);
+        }
+
+
+        //获取课程列表数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<CourseBo> GetMyCourseList(string theYear, string trainType)
+        {
+
+            var courseService = new AllCourseService();
+            return courseService.GetMyCourseList(theYear, trainType);
         }
     }
 }

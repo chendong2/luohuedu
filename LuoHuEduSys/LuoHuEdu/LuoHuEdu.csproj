@@ -1327,6 +1327,7 @@
     </Content>
     <Content Include="WebServices\Admin\UserPermissions.asmx" />
     <Content Include="WebServices\Admin\Student.asmx" />
+    <Content Include="WebServices\Course\AllCourseServices.asmx" />
     <Content Include="WebServices\Course\CourseWebServices.asmx" />
     <Content Include="WebServices\Parameter\MaintrainSet.asmx" />
     <Content Include="WebServices\Parameter\School.asmx" />
@@ -1366,6 +1367,10 @@
     </Compile>
     <Compile Include="WebServices\Admin\Student.asmx.cs">
       <DependentUpon>Student.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\Course\AllCourseServices.asmx.cs">
+      <DependentUpon>AllCourseServices.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WebServices\Course\CourseWebServices.asmx.cs">

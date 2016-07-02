@@ -85,5 +85,17 @@ namespace LuoHuEdu.WebServices.Parameter
             return trainTypeBo;
         }
 
+
+          //根据Id获取数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public string[] GetAllTrainType()
+        {
+
+            var trainTypeService = new TrainTypeService();
+            var trainType = trainTypeService.GetAllTrainType();
+            return trainType;
+        }
+
     }
 }

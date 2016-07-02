@@ -6,6 +6,7 @@ using BusinessObject.AdminBo;
 using Dapper;
 using Domain.common;
 using Huatong.DAO;
+using Services.Course.CourseControl;
 
 namespace Services.Admin.StudentControl
 {
@@ -298,5 +299,112 @@ namespace Services.Admin.StudentControl
         }
 
         #endregion
+
+
+        //获取数据列表
+        public Page<StudentBo> GetStudentCourseList(int page, int rows, string sort, string order, StudentBo studentBo)
+        {
+            int count = 0;
+            int pageIndex = 0;
+            int pageSize = 0;
+            if (page < 0)
+            {
+                pageIndex = 0;
+            }
+            else
+            {
+                pageIndex = (page - 1) * rows;
+            }
+            pageSize = page * rows;
+            var pageList = new Page<StudentBo>();
+            string studentid = Domain.common.UserInfo.GetUserId().ToString();
+
+            string strSql = string.Format(@"
+SELECT xxb.*,IF(ISNULL(maTime),0,maTime) AS maTime,0 AS exTime,
+IF(ISNULL(jizhong+xiaoben+zxpx+xueli+maTime),0,jizhong+xiaoben+zxpx+xueli+maTime) AS total,IF(ISNULL(Countc),0,Countc) AS Countc FROM(
+SELECT Id,NAME,RegistrationCode,Profession,SchoolName,SchoolId,TheYear,
+MAX(CASE TrainTypeName WHEN '集中培训' THEN Period ELSE 0 END ) jizhong,
+MAX(CASE TrainTypeName WHEN '校本培训' THEN Period ELSE 0 END ) xiaoben,
+MAX(CASE TrainTypeName WHEN '专项培训' THEN Period ELSE 0 END ) zxpx,
+MAX(CASE TrainTypeName WHEN '学历培训' THEN Period ELSE 0 END ) xueli 
+ FROM (
+SELECT stsc.Id,stsc.Name,RegistrationCode,Profession,stsc.SchoolName,TrainTypeName,SchoolId,IF(ISNULL(Period),0,Period) AS Period,TheYear FROM 
+(SELECT st.id,st.Name,RegistrationCode,Profession,tb_school.SchoolName,SchoolId,TrainTypeName FROM(
+ SELECT  st.Id,NAME,RegistrationCode,Profession,tb_traintype.TrainType AS TrainTypeName,SchoolId FROM tb_student st,tb_traintype)st 
+ LEFT JOIN tb_school ON st.SchoolId=tb_school.Id)stsc LEFT JOIN 
+
+(SELECT StudentId,b.Period,TheYear,tt.TrainType,tt.Id FROM tb_traintype tt INNER  JOIN(
+SELECT ct.StudentId,SUM(Period) AS Period,TrainType,TheYear  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId AND SIGN=2 
+GROUP BY ct.StudentId,TrainType,TheYear )b   ON tt.id=b.TrainType) ttb ON  ttb.StudentId=stsc.id AND stsc.TrainTypeName=ttb.TrainType)ststtb 
+GROUP BY Id,NAME,RegistrationCode,Profession,SchoolName,SchoolId,TheYear)xxb 
+LEFT JOIN (
+SELECT StudentId,TheYear,COUNT(Period) AS Countc  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId 
+GROUP BY StudentId,TheYear)ccb ON xxb.Id=ccb.StudentId AND xxb.TheYear=ccb.TheYear 
+LEFT JOIN (
+SELECT studentid,TheYear,SUM(StuTime) AS maTime FROM tb_student st INNER JOIN tb_studenttrain stt ON st.id=stt.StudentID 
+INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 AND stt.DistinctSchoolAudit=2  GROUP BY studentid,TheYear
+)mmb ON xxb.Id=mmb.studentid AND xxb.TheYear=mmb.TheYear WHERE 1=1 ");
+            if (studentBo != null)
+            {
+                if (studentBo.TheYear != null)
+                {
+                    strSql += "and xxb.TheYear = @TheYear ";
+                }
+                if (!string.IsNullOrEmpty(studentBo.SchoolId))
+                {
+                    strSql += "and SchoolId = @SchoolId ";
+                }
+            }
+
+            switch (sort)
+            {
+                case "Name":
+                    strSql += " order by Name " + order;
+                    break;
+            }
+
+
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                count = context.Query<StudentBo>(strSql,
+                                            new
+                                            {
+                                                TheYear = studentBo.TheYear,
+                                                SchoolId = studentBo.SchoolId
+                                            }).Count();
+                strSql += " limit @pageindex,@pagesize";
+
+                var list = context.Query<StudentBo>(strSql,
+                                                new
+                                                {
+                                                    TheYear = studentBo.TheYear,
+                                                    SchoolId = studentBo.SchoolId,
+                                                    pageindex = pageIndex,
+                                                    pagesize = pageSize
+                                                }).ToList();
+
+                for (int i = 0; i < list.Count;i++ )
+                {
+                    var stuBo = list[i];
+;                   var courService = new AllCourseService();
+                    var course = courService.GetCoursePeroid(stuBo.Id, studentBo.TheYear, "集中培训");
+                    stuBo.jizhong = course != null ? course.Period : 0;
+                    course = courService.GetCoursePeroid(stuBo.Id, studentBo.TheYear, "校本培训");
+                    stuBo.xiaoben = course != null ? course.Period : 0;
+                    course = courService.GetCoursePeroid(stuBo.Id, studentBo.TheYear, "专项培训");
+                    stuBo.zxpx = course != null ? course.Period : 0;
+                    course = courService.GetCoursePeroid(stuBo.Id, studentBo.TheYear, "学历培训");
+                    stuBo.xueli =course!=null?course.Period:0;
+                    stuBo.total = stuBo.jizhong + stuBo.xiaoben + stuBo.zxpx + stuBo.xueli + stuBo.maTime ;
+                }
+
+                pageList.ListT = list;
+                pageList.PageIndex = page;
+                pageList.PageSize = rows;
+                pageList.TotalCount = count;
+            }
+
+            return pageList;
+        }
     }
 }

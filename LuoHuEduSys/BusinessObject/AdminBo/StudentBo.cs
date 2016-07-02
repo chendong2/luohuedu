@@ -78,5 +78,17 @@ namespace BusinessObject.AdminBo
         public string HighHonor { get; set; }
 
         public string RegistrationCode { get; set; }
+
+
+        public string TheYear { get; set; }
+
+        public int jizhong { get; set; }
+        public int zxpx { get; set; }
+        public int xiaoben { get; set; }
+        public int xueli { get; set; }
+        public int maTime { get; set; }
+        public int exTime { get; set; }
+        public int total { get; set; }
+        public int Countc { get; set; }
     }
 }

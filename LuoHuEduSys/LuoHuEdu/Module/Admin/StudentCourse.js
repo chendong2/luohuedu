@@ -22,14 +22,15 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             },
             { field: 'Profession', title: '专业', width: 80, sortable: false },
-            { field: '1', title: '培训科目数', width: 100, sortable: false },
-            { field: '2', title: '集中培训课时', width: 100, sortable: false },
-            { field: '3', title: '校本培训课时', width: 100, sortable: false },
-            { field: '4', title: '专项培训课时', width: 100, sortable: false },
-            { field: '5', title: '学历培训课时', width: 100, sortable: false },
-            { field: '6', title: '免修管理课时', width: 100, sortable: false },
-            { field: '7', title: '校本研修课时', width: 100, sortable: false },
-            { field: '8', title: '课时汇总', width: 100, sortable: false }
+            { field: 'SchoolName', title: '单位', width: 80, sortable: false },
+            { field: 'Countc', title: '培训科目数', width: 100, sortable: false },
+            { field: 'jizhong', title: '集中培训课时', width: 100, sortable: false },
+            { field: 'xiaoben', title: '校本培训课时', width: 100, sortable: false },
+            { field: 'zxpx', title: '专项培训课时', width: 100, sortable: false },
+            { field: 'xueli', title: '学历培训课时', width: 100, sortable: false },
+            { field: 'exTime', title: '免修管理课时', width: 100, sortable: false },
+            { field: 'maTime', title: '校本研修课时', width: 100, sortable: false },
+            { field: 'total', title: '课时汇总', width: 100, sortable: false }
             
         ]],
         singleSelect: false,
@@ -44,12 +45,14 @@ using(easyloader.defaultReferenceModules, function () {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                studentBo: {}
+                studentBo: {
+                    TheYear: $("#sTheYear").val()
+                }
             };
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Admin/Student.asmx/GetStudentCourseList',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -128,7 +131,7 @@ function Search() {
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Admin/Student.asmx/GetStudentCourseList',
                 data: paramStr,
                 success: function (data) {
                     success(data);

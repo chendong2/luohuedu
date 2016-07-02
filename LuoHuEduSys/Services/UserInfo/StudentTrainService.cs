@@ -219,5 +219,21 @@ namespace Services.UserInfo
         }
 
         #endregion
+
+        public StudentTrainBo GetMyStudentTrain(string theYear)
+        {
+            string userId = Domain.common.UserInfo.GetUserId().ToString();
+            var StudentTrainBo = new StudentTrainBo { };
+            using (var connection = DataBaseConnection.GetMySqlConnection())
+            {
+                var sqlStr =
+                    @"SELECT studentid,SUM(StuTime) AS StuTime FROM tb_student st INNER JOIN tb_studenttrain stt ON st.id=stt.StudentID 
+INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 AND stt.DistinctSchoolAudit=2 and stt.TheYear=@TheYear   and stt.StudentID=@StudentId  GROUP BY studentid ";
+                StudentTrainBo = connection.Query<StudentTrainBo>(sqlStr, new { TheYear = theYear, studentid = userId }).FirstOrDefault();
+            }
+
+
+            return StudentTrainBo;
+        }
     }
 }

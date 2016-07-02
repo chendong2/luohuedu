@@ -215,5 +215,24 @@ namespace Services.Parameter
         }
 
         #endregion
+
+        //获取全部的学校数据
+        public string[] GetAllTrainType()
+        {
+            List<TrainTypeBo> list;
+            string strSql = string.Format(@"SELECT * from tb_traintype where 1=1 ");
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<TrainTypeBo>(strSql,
+                                                new { }).ToList();
+            }
+            string[] data = new string[list.Count];
+            for (int i = 0; i < list.Count; i++)
+            {
+                data[i] = list[i].TrainType + "******" + list[i].Id;
+            }
+            return data;
+        }
     }
 }
