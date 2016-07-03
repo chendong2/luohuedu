@@ -5,7 +5,6 @@
 ***********************************/
 //easyloader.defaultReferenceModules表示默认引用easyui.public.js,如果当前IE7时会自动附加引用json2.min.js
 using(easyloader.defaultReferenceModules, function () {
-
     // 列表参数设置
     var dataGridOptions = {
         title: '培训课程管理',
@@ -126,7 +125,7 @@ function editData() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
-    getAllSubject();
+    getAllSubject("TrainType",true);
     getAllSchool();
     ajaxCRUD({
         url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
@@ -138,13 +137,23 @@ function fillForm(itemid) {
             });
             $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
+           // initCombobox()
             loadDataToForm('ff', data);
-            var bir = $("#txtBirthday").val();
-            bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-            $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
         }
     });
 }
+
+//获取年份数据
+function getTheYear() {
+    var currentYear = new Date().getFullYear();
+    $("#sTheYear").empty();
+    for (var i = 1; i <= 15; i++) {
+        var data = currentYear - i + "-" + (currentYear - i + 1);
+        var option = "<option value='" + data + "'>" + data + "</option>";
+        $("#sTheYear").append(option);
+    }
+}
+
 
 //获取全部的免修数据
 function getAllSchool() {
@@ -162,22 +171,18 @@ function getAllSchool() {
     });
 }
 
-function getAllSubject() {
-    $("#sFirstTeaching").empty();
-    $("#sSecondTeaching").empty();
-    var option = "<option value=''>未设定</option>";
-    $("#sFirstTeaching").append(option);
-    $("#sSecondTeaching").append(option);
+function getAllSubject(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Parameter/TrainType.asmx/GetAllTrainTypeNew';
     ajaxCRUD({
-        url: '/WebServices/Parameter/Subject.asmx/GetAllSubject',
         async: false,
+        url: webserviceUrl,
+        data: '{}',
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var value = data[i].toString().split('******');
-                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
-                $("#sFirstTeaching").append(option);
-                $("#sSecondTeaching").append(option);
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'TrainType': '请选择' });
             }
+            initCombobox(ddlRoute, "Id", "TrainType", data, true);
         }
     });
 }
@@ -280,7 +285,6 @@ function Search() {
     //初始化列表组件
     iniDataGrid('dg', dataGridOptions);
 }
-
 
 //关闭弹出层
 function closeFormDialog() {
