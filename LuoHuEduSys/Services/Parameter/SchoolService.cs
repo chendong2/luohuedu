@@ -235,5 +235,20 @@ namespace Services.Parameter
             }
             return data;
         }
+
+
+        public List<SchoolBo> GetAllSchoolNew()
+        {
+            List<SchoolBo> list;
+            string strSql = string.Format(@"SELECT * from tb_school where 1=1 ");
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<SchoolBo>(strSql,
+                                                new { }).ToList();
+            }
+          
+            return list;
+        }
     }
 }

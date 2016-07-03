@@ -26,9 +26,12 @@
                         培训类型:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" comboname="TrainType" id="sTrainType" class="easyui-validatebox" data-options="required:true">
+                        <!--     <select style="width: 145px;" class="easyui-combobox" comboname="TrainType" id="sTrainType" class="easyui-validatebox" data-options="required:true">
                            
-                        </select>
+                                 </select>-->
+                                  <select class="easyui-combobox" id="ddlTrainType" name="ddlTrainType" style="width: 140px;">
+                                        <option value="0">请选择</option>
+                                 </select>
                     </td>
                 </tr>
                  <tr>
@@ -138,7 +141,7 @@
                         组织单位:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" name="OrganizationalName" id="ddlOrganizationalName" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" class="easyui-combobox" name="ddlOrganizationalName" id="ddlOrganizationalName" class="easyui-validatebox" data-options="required:true">
                            
                         </select>
                     </td>
@@ -192,12 +195,12 @@
         </table>
     </div>
 </div>
-<!--<div>
-    <input id="CriId" type="hidden" name="CriId" />
-    <input id="HidStationId" type="hidden" name="HidStationId" />
+<div>
+    <input id="Hid" type="hidden" name="Hid" />
+  <!--  <input id="HidStationId" type="hidden" name="HidStationId" />
     <input id="HidLineName" type="hidden" name="HidLineName" />
-    <input id="HidCartId" type="hidden" name="HidCartId"/>
-</div>-->
+    <input id="HidCartId" type="hidden" name="HidCartId"/>-->
+</div>
 </form>
 </div>
 <div id="dlg-button">

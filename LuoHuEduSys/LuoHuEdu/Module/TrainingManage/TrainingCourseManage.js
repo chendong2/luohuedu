@@ -108,8 +108,8 @@ function addData() {
         title: moduleName + '新增',
         iconCls: 'icon-add'
     });
-    getAllSchool();
-    getAllSubject();
+    getAllSubject("ddlTrainType", true);
+    getAllSchool("ddlOrganizationalName",true );
     getTheYear();
     resetFormAndClearValidate('ff');
 }
@@ -127,8 +127,8 @@ function editData() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
-    getAllSubject();
-    getAllSchool();
+    getAllSubject("ddlTrainType", true);
+    getAllSchool("ddlOrganizationalName", true);
     getTheYear();
     ajaxCRUD({
         url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
@@ -160,41 +160,41 @@ function getTheYear() {
     }
 }
 
-//获取全部的免修数据
-function getAllSchool() {
+//获取全部的学校数据
+function getAllSchool(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetAllSchoolNew';
     $("#sSchool").empty();
     ajaxCRUD({
-        url: '/WebServices/Parameter/School.asmx/GetAllSchool',
         async: false,
+        url: webserviceUrl,
+        data: '{}',
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var value = data[i].toString().split('******');
-                var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
-                $("#sSchool").append(option);
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'SchoolName': '请选择' });
             }
+            initCombobox(ddlRoute, "Id", "SchoolName", data, true);
         }
     });
 }
 
-function getAllSubject() {
-    $("#sFirstTeaching").empty();
-    $("#sSecondTeaching").empty();
-    var option = "<option value=''>未设定</option>";
-    $("#sFirstTeaching").append(option);
-    $("#sSecondTeaching").append(option);
+function getAllSubject(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Parameter/TrainType.asmx/GetAllTrainTypeNew';
     ajaxCRUD({
-        url: '/WebServices/Parameter/Subject.asmx/GetAllSubject',
         async: false,
+        url: webserviceUrl,
+        data: '{}',
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var value = data[i].toString().split('******');
-                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
-                $("#sFirstTeaching").append(option);
-                $("#sSecondTeaching").append(option);
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'TrainType': '请选择' });
             }
+            initCombobox(ddlRoute, "Id", "TrainType", data, true);
         }
     });
 }
+
+
 
 //保存表单数据
 function saveData() {
@@ -202,7 +202,7 @@ function saveData() {
         return;
     }
 
-    var hidValue = $("#HidId").val();
+    var hidValue = $("#Hid").val();
     var basicUrl = '/WebServices/Admin/Student.asmx/';
 
     var wsMethod = '';
@@ -217,7 +217,8 @@ function saveData() {
     var form2JsonObj = form2Json("ff");
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{studentBo:" + form2JsonStr + "}";
-
+//    console.log(jsonDataStr);
+//    return false;
     ajaxCRUD({
         url: formUrl,
         data: jsonDataStr,

@@ -95,5 +95,13 @@ namespace LuoHuEdu.WebServices.Parameter
             return schoolList;
         }
 
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<SchoolBo> GetAllSchoolNew()
+        {
+            var schoolService = new SchoolService();
+            return schoolService.GetAllSchoolNew();
+        }
+
     }
 }
