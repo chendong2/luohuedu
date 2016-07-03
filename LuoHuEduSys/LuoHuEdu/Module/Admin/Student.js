@@ -180,7 +180,7 @@ function fillForm(itemid) {
 function getAllSchool() {
     $("#sSchool").empty();
     ajaxCRUD({
-        url: '/WebServices/Parameter/TrainType.asmx/GetAllSchool',
+        url: '/WebServices/Parameter/School.asmx/GetAllSchool',
         async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {

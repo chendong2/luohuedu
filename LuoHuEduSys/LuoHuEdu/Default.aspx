@@ -130,9 +130,9 @@
         if (perStr.indexOf("培训浏览") > -1 || perStr.indexOf("培训审核") > -1 || perStr.indexOf("培训锁定") > -1) {
             menus_2.push({ "menuid": "21", "menuname": "培训管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TrainingCourseManage/TrainingCourseList.htm") %>' });
         }
-//        if (perStr.indexOf("课程表") > -1) {
-//            menus_2.push({ "menuid": "22", "menuname": "课程表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
-//        }
+        if (perStr.indexOf("课程表") > -1) {
+            menus_2.push({ "menuid": "22", "menuname": "课程表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+        }
         if (perStr.indexOf("授课教师信息") > -1) {
             menus_2.push({ "menuid": "23", "menuname": "授课教师信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
         }

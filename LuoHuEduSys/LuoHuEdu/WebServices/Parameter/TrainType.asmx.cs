@@ -97,14 +97,5 @@ namespace LuoHuEdu.WebServices.Parameter
             return trainType;
         }
 
-        [ScriptMethod]
-        [WebMethod(EnableSession = true)]
-        public List<TrainTypeBo> GetAllTrainTypeNew()
-        {
-            var trainType = new TrainTypeService();
-            var list = trainType.GetAllTrainTypeNew();
-            return list;
-        }
-
     }
 }

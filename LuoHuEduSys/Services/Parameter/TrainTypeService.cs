@@ -234,17 +234,5 @@ namespace Services.Parameter
             }
             return data;
         }
-
-        public List<TrainTypeBo> GetAllTrainTypeNew()
-        {
-            List<TrainTypeBo> list;
-            string strSql = string.Format(@"SELECT * from tb_traintype where 1=1 ");
-            using (var context = DataBaseConnection.GetMySqlConnection())
-            {
-                list = context.Query<TrainTypeBo>(strSql,
-                                               new { }).ToList();
-            }
-            return list;
-        }
     }
 }
