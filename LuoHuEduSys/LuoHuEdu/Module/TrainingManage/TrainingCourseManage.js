@@ -110,6 +110,7 @@ function addData() {
     });
     getAllSchool();
     getAllSubject();
+    getTheYear();
     resetFormAndClearValidate('ff');
 }
 
@@ -126,6 +127,7 @@ function editData() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
+    getTheYear();
     getAllSubject();
     getAllSchool();
     ajaxCRUD({
@@ -144,6 +146,17 @@ function fillForm(itemid) {
             $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
         }
     });
+}
+
+
+function getTheYear() {
+    var currentYear = new Date().getFullYear();
+    $("#sTheYear").empty();
+    for (var i = 1; i <= 15; i++) {
+        var data = currentYear - i + "-" + (currentYear - i + 1);
+        var option = "<option  value='" + data + "'>" + data + "</option>";
+        $("#sTheYear").append(option);
+    }
 }
 
 //获取全部的免修数据
