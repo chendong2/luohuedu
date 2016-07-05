@@ -87,6 +87,7 @@ using(easyloader.defaultReferenceModules, function () {
 //easyloader.defaultTime为700ms
 setTimeout(loadPartialHtml, easyloader.defaultTime);
 
+//预先加载表单页面，提升打开表单弹出层的性能
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
@@ -131,7 +132,7 @@ function fillForm(itemid) {
     getAllSchool("ddlOrganizationalName", true);
     getTheYear();
     ajaxCRUD({
-        url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
+        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
         data: "{id:'" + itemid + "'}",
         success: function (data) {
             openDialog('dlg', {
@@ -149,7 +150,7 @@ function fillForm(itemid) {
 }
 
 
-//获取年份数据
+//获取年份数据，用于绑定下拉框
 function getTheYear() {
     var currentYear = new Date().getFullYear();
     $("#sTheYear").empty();
@@ -160,7 +161,7 @@ function getTheYear() {
     }
 }
 
-//获取全部的学校数据
+//获取所有学校数据，用于绑定下拉框
 function getAllSchool(ddlRoute, isSimpleSearch) {
     var webserviceUrl = '/WebServices/Parameter/School.asmx/GetAllSchoolNew';
     $("#sSchool").empty();
@@ -178,6 +179,7 @@ function getAllSchool(ddlRoute, isSimpleSearch) {
     });
 }
 
+//获取所有培训类型数据，用于绑定下拉框
 function getAllSubject(ddlRoute, isSimpleSearch) {
     var webserviceUrl = '/WebServices/Parameter/TrainType.asmx/GetAllTrainTypeNew';
     ajaxCRUD({
@@ -194,8 +196,6 @@ function getAllSubject(ddlRoute, isSimpleSearch) {
     });
 }
 
-
-
 //保存表单数据
 function saveData() {
     if (!formValidate('ff')) {
@@ -203,13 +203,13 @@ function saveData() {
     }
 
     var hidValue = $("#Hid").val();
-    var basicUrl = '/WebServices/Admin/Student.asmx/';
+    var basicUrl = '/WebServices/Course/CourseWebServices.asmx/';
 
     var wsMethod = '';
     if (hidValue.length > 0) {
-        wsMethod = "UpdateStudent"; //修改
+        wsMethod = "UpdateCourse"; //修改
     } else {
-        wsMethod = "AddStudent"; //新增
+        wsMethod = "AddCourse"; //新增
     }
 
     var formUrl = basicUrl + wsMethod;
@@ -248,7 +248,7 @@ function deleteDatas() {
 //批量删除后台AJAX处理
 function deleteDatasAjax(str) {
     ajaxCRUD({
-        url: '/WebServices/Admin/Student.asmx/DeleteStudentsByIds',
+        url: '/WebServices/Course/CourseWebServices.asmx/DeleteCousrseByIds',
         data: "{ids:'" + str + "'}",
         success: function (data) {
             if (data == true) {
@@ -280,7 +280,7 @@ function Search() {
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseList',
                 data: paramStr,
                 success: function (data) {
                     success(data);
