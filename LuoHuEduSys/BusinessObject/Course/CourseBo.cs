@@ -67,7 +67,7 @@ namespace BusinessObject.Course
         public string EffectAnalysis{ get; set; }
 
         /// 上课日期
-        public DateTime CourseDate{ get; set; }
+        public string CourseDate{ get; set; }
 
         /// 上课时间开始
         public DateTime TimeStart{ get; set; }

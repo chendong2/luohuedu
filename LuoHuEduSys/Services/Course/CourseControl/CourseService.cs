@@ -11,7 +11,7 @@ namespace Services.Course.CourseControl
 {
     public class CourseService
     {
-        #region "通过增删改查方法"
+        #region "通用增删改查方法"
         /// <summary>
         /// 分页获取课程数据方法
         /// </summary>
@@ -43,7 +43,7 @@ namespace Services.Course.CourseControl
                 //课程名称查询
                 if (courseBo.CourseName != null)
                 {
-                    strSql += "and CourseName like @CourseName ";
+                    strSql += "and CourseName Like @CourseName ";
                 }
                 //课程代码查询
                 if (courseBo.CourseCode != null)
@@ -184,6 +184,62 @@ namespace Services.Course.CourseControl
             return true;
         }
         #endregion 
+
+
+
+        #region "考勤机接口方法"
+        /// <summary>
+        /// 获取课程数据方法
+        /// </summary>
+        /// <param name="courseName">课程名称</param>
+        /// <param name="courseCode">课程代码</param>
+        /// <param name="beginDate">课程开始日期</param>
+        /// <param name="endDate">课程结束日期</param>
+        /// <returns></returns>
+        public List<CourseBo> GetCourses(string courseName, string courseCode,DateTime beginDate,DateTime endDate)
+        {
+            string strSql = string.Format(@"SELECT * from tb_course  where 1=1 ");
+
+            if (!string.IsNullOrEmpty(courseName))
+            {
+                strSql += "and CourseName =@CourseName ";
+            }
+            if (!string.IsNullOrEmpty(courseCode))
+            {
+                strSql += " and CourseCode=@CourseCode ";
+            }
+            if (!String.IsNullOrEmpty(beginDate.ToString()) && !String.IsNullOrEmpty(endDate.ToString()))
+            {
+
+                strSql += " and CourseDate BETWEEN @beginDate and @endDate ";
+            }
+            try
+            {
+                using (var context = DataBaseConnection.GetMySqlConnection())
+                {
+                    var list = context.Query<CourseBo>(strSql,
+                                                   new
+                                                   {
+                                                       CourseName = courseName,
+                                                       CourseCode = courseCode,
+                                                       beginDate = beginDate,
+                                                       endDate = endDate
+                                                   }).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+               
+                LogHelper.WriteLog(string.Format("ExemptionService.GetCourses({0})异常", courseName), ex);
+                return null;
+            }
+          
+        }
+        
+        
+    
+        #endregion
 
     }
 }

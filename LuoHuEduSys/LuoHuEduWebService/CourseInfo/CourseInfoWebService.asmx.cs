@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Script.Services;
 using System.Web.Services;
+using Services.Course.CourseControl;
 
 namespace LuoHuEduWebService.CourseInfo
 {
@@ -16,11 +19,13 @@ namespace LuoHuEduWebService.CourseInfo
     // [System.Web.Script.Services.ScriptService]
     public class CourseInfoWebService : System.Web.Services.WebService
     {
-
+        [ScriptMethod]
         [WebMethod]
-        public string HelloWorld()
+        public string GetCourseStudent(string courseName, string courseCode,DateTime beginDate,DateTime endDate)
         {
-            return "Hello World";
+            CourseService course=new CourseService();
+            var list = course.GetCourses(courseName, courseCode, beginDate, endDate);
+            return new JavaScriptSerializer().Serialize(list);
         }
     }
 }
