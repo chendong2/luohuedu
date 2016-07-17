@@ -39,19 +39,19 @@ using(easyloader.defaultReferenceModules, function () {
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
-        sortName: 'Name',
+        sortName: 'CourseDate',
         sortOrder: 'desc',
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
-            var studentData = {
+            var courseData = {
                 page: param.page,
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                studentBo: {}
+                courseBo: {}
             };
-            var paramStr = JSON.stringify(studentData);
+            var paramStr = JSON.stringify(courseData);
 
             ajaxCRUD({
                 url: '/WebServices/Course/CourseWebServices.asmx/GetCourseList',

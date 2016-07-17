@@ -21,7 +21,7 @@ namespace Services.Course.CourseControl
         /// <param name="order">排序字段</param>
         /// <param name="courseBo">课程实体</param>
         /// <returns></returns>
-        public Page<CourseBo> GetCourseList(int page, int rows, string sort, string order, CourseBo courseBo)
+        public Page<CourseBo> GetCourseList(int page, int rows, string order, string sort, CourseBo courseBo)
         {
             int count = 0;
             int pageIndex = 0;
