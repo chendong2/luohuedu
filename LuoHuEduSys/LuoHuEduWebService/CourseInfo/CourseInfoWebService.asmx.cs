@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
+using System.Web.Services.Protocols;
+using LuoHuEduWebService.Common;
 using Services.Course.CourseControl;
 
 namespace LuoHuEduWebService.CourseInfo
@@ -19,10 +21,13 @@ namespace LuoHuEduWebService.CourseInfo
     // [System.Web.Script.Services.ScriptService]
     public class CourseInfoWebService : System.Web.Services.WebService
     {
+        public LuoHuSoapHeader htSoapHeader;
         [ScriptMethod]
         [WebMethod]
+       [SoapHeader("htSoapHeader", Direction = SoapHeaderDirection.InOut | SoapHeaderDirection.Fault)]
         public string GetCourseStudent(string courseName, string courseCode,DateTime beginDate,DateTime endDate)
         {
+            if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return null;
             CourseService course=new CourseService();
             var list = course.GetCourses(courseName, courseCode, beginDate, endDate);
             return new JavaScriptSerializer().Serialize(list);

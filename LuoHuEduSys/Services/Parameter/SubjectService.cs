@@ -227,5 +227,22 @@ namespace Services.Parameter
             }
             return data;
         }
+
+        /// <summary>
+        /// 获取全部的科目数据by laq
+        /// </summary>
+        /// <returns></returns>
+        public List<SubjectBo> GetAllSubjectNew()
+        {
+            List<SubjectBo> list;
+            string strSql = string.Format(@"SELECT * from tb_subject where 1=1 ");
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<SubjectBo>(strSql,
+                                                new { }).ToList();
+            }
+            return list;
+        }
     }
 }

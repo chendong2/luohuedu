@@ -37,18 +37,20 @@ namespace Services.Course.CourseControl
             pageSize = page * rows;
             var pageList = new Page<CourseBo>();
 
-            string strSql = string.Format(@"SELECT * from tb_course  where 1=1 ");
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType FROM tb_course AS c 
+                                            INNER JOIN tb_subject AS s ON c.Subject=s.Id
+                                            INNER JOIN tb_traintype AS t ON c.TrainType=t.Id  where 1=1 ");
             if (courseBo != null)
             {
                 //课程名称查询
                 if (courseBo.CourseName != null)
                 {
-                    strSql += "and CourseName Like @CourseName ";
+                    strSql += "and c.CourseName Like @CourseName ";
                 }
                 //课程代码查询
                 if (courseBo.CourseCode != null)
                 {
-                    strSql += " and CourseCode=@CourseCode ";
+                    strSql += " and c.CourseCode=@CourseCode ";
                 }
             }
 

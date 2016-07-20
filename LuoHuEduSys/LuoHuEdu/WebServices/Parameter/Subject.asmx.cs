@@ -95,5 +95,14 @@ namespace LuoHuEdu.WebServices.Parameter
             return subjectList;
         }
 
+        //获取全部的免修数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<SubjectBo> GetAllSubjectNew()
+        {
+            var subjectService = new SubjectService();
+            var subjectList = subjectService.GetAllSubjectNew();
+            return subjectList;
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿/***********************************
-/* 创建人：jjx
-/* 修改日期：2014-01-06
+/* 创建人：Laq
+/* 修改日期：2016-05-06
 /* 包含列表的绑定,增删改查
 ***********************************/
 //easyloader.defaultReferenceModules表示默认引用easyui.public.js,如果当前IE7时会自动附加引用json2.min.js
@@ -15,7 +15,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'TheYear', title: '年度', width: 150 },
             { field: 'TrainType', title: '培训类型', width: 140 },
 
-            { field: 'Subject', title: '培训科目', width: 80 },
+            { field: 'SubjectName', title: '培训科目', width: 80 },
             { field: 'Phone', title: '联系电话', width: 80 },
             { field: 'Period', title: '学时', width: 80 },
             { field: 'Cost', title: '培训费用', width: 80 },
@@ -109,9 +109,10 @@ function addData() {
         title: moduleName + '新增',
         iconCls: 'icon-add'
     });
-    getAllSubject("ddlTrainType", true);
+    getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName",true );
     getTheYear();
+    getAllSubject("Subject", true);
     resetFormAndClearValidate('ff');
 }
 
@@ -128,8 +129,9 @@ function editData() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
-    getAllSubject("ddlTrainType", true);
+    getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName", true);
+    getAllSubject("Subject", true);
     getTheYear();
     ajaxCRUD({
         url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
@@ -180,7 +182,7 @@ function getAllSchool(ddlRoute, isSimpleSearch) {
 }
 
 //获取所有培训类型数据，用于绑定下拉框
-function getAllSubject(ddlRoute, isSimpleSearch) {
+function getAllTrainType(ddlRoute, isSimpleSearch) {
     var webserviceUrl = '/WebServices/Parameter/TrainType.asmx/GetAllTrainTypeNew';
     ajaxCRUD({
         async: false,
@@ -195,6 +197,26 @@ function getAllSubject(ddlRoute, isSimpleSearch) {
         }
     });
 }
+
+
+//获取所有培训类型数据，用于绑定下拉框
+function getAllSubject(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Parameter/Subject.asmx/GetAllSubjectNew';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'SubjectName': '请选择' });
+            }
+            initCombobox(ddlRoute, "Id", "SubjectName", data, true);
+        }
+    });
+}
+
+
 
 //保存表单数据
 function saveData() {

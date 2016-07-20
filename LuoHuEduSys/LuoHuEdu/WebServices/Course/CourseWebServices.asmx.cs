@@ -41,5 +41,17 @@ namespace LuoHuEdu.WebServices.Course
                 return new { total = 0, rows = 0 };
             }
         }
+        /// <summary>
+        /// 课程新增方法
+        /// </summary>
+        /// <param name="courseBo"></param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool AddCousrse(CourseBo courseBo)
+        {
+            var courseService = new CourseService();
+            return courseService.AddCousrse(courseBo);
+        }  
     }
 }
