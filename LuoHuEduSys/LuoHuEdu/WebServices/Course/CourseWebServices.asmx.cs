@@ -48,10 +48,18 @@ namespace LuoHuEdu.WebServices.Course
         /// <returns></returns>
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public bool AddCousrse(CourseBo courseBo)
+        public bool AddCourse(CourseBo courseBo)
         {
             var courseService = new CourseService();
-            return courseService.AddCousrse(courseBo);
-        }  
+            return courseService.AddCourse(courseBo);
+        }
+
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool UpdateCourse(CourseBo courseBo)
+        {
+            var courseService = new CourseService();
+            return courseService.UpdateCourse(courseBo);
+        }
     }
 }

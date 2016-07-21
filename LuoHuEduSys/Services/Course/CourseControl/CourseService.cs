@@ -98,7 +98,7 @@ namespace Services.Course.CourseControl
         /// </summary>
         /// <param name="courseBo"></param>
         /// <returns></returns>
-        public bool AddCousrse(CourseBo courseBo)
+        public bool AddCourse(CourseBo courseBo)
         {
             if (courseBo == null)
                 throw new ArgumentNullException("courseBo");

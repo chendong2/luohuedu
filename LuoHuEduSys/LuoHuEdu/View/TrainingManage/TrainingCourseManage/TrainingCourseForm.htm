@@ -18,7 +18,7 @@
                         年度设定:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;"  name="TheYear" id="sTheYear" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;"  name="TheYear" id="TheYear" class="easyui-validatebox" data-options="required:true">
                            
                         </select>
                     </td>
@@ -29,7 +29,7 @@
                         <!--     <select style="width: 145px;" class="easyui-combobox" comboname="TrainType" id="sTrainType" class="easyui-validatebox" data-options="required:true">
                            
                                  </select>-->
-                        <select id="ddlTrainType" name="ddlTrainType"  class="easyui-combobox" style="width: 140px;" class="easyui-validatebox" data-options="required:true">
+                        <select id="ddlTrainType" name="TrainType"  class="easyui-combobox" style="width: 140px;" class="easyui-validatebox" data-options="required:true">
                                        
                         </select>
                     </td>
@@ -75,7 +75,7 @@
                         收费对象:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" name="CartId" id="ddlCartId" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" class="easyui-combobox" name="ChargeObj" id="ChargeObj" class="easyui-validatebox" data-options="required:true">
                             <option value="1">所有</option>
                             <option value="2">在编教师</option>
                             <option value="3">非在编教师</option>
@@ -87,7 +87,7 @@
                         考勤设定:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" name="ChargeObj" id="ddlChargeObj" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" class="easyui-combobox" name="SetCheck" id="SetCheck" class="easyui-validatebox" data-options="required:true">
                             <option value="1">签到考勤</option>
                             <option value="2">课时量考勤</option>
                         </select>
@@ -135,13 +135,13 @@
                         预报设定:
                     </td>
                     <td class="td_left">
-                        超出额定人数允许报名<input type="checkbox" name="State" value="0" />
+                        超出额定人数允许报名<input type="checkbox" name="SetApply" value="0" />
                     </td>
                     <td class="td_right">
                         组织单位:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" name="ddlOrganizationalName" id="ddlOrganizationalName" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" class="easyui-combobox" name="OrganizationalName" id="ddlOrganizationalName" class="easyui-validatebox" data-options="required:true">
                            
                         </select>
                     </td>
@@ -196,7 +196,7 @@
     </div>
 </div>
 <div>
-    <input id="Hid" type="hidden" name="Hid" />
+    <input id="Hid" type="hidden" name="Id" />
   <!--  <input id="HidStationId" type="hidden" name="HidStationId" />
     <input id="HidLineName" type="hidden" name="HidLineName" />
     <input id="HidCartId" type="hidden" name="HidCartId"/>-->

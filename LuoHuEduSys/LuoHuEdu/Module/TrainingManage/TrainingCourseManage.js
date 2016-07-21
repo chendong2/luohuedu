@@ -155,11 +155,11 @@ function fillForm(itemid) {
 //获取年份数据，用于绑定下拉框
 function getTheYear() {
     var currentYear = new Date().getFullYear();
-    $("#sTheYear").empty();
+    $("#TheYear").empty();
     for (var i = 1; i <= 15; i++) {
         var data = currentYear - i + "-" + (currentYear - i + 1);
         var option = "<option  value='" + data + "'>" + data + "</option>";
-        $("#sTheYear").append(option);
+        $("#TheYear").append(option);
     }
 }
 
@@ -233,14 +233,14 @@ function saveData() {
     } else {
         wsMethod = "AddCourse"; //新增
     }
-
+    
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
     var form2JsonStr = JSON.stringify(form2JsonObj);
-    var jsonDataStr = "{studentBo:" + form2JsonStr + "}";
-//    console.log(jsonDataStr);
-//    return false;
+    var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
+    console.log(jsonDataStr);
+   // return false;
     ajaxCRUD({
         url: formUrl,
         data: jsonDataStr,
@@ -249,7 +249,7 @@ function saveData() {
             if (hidValue.length > 0) {
                 msg = "修改成功"; //修改
             } else {
-                msg = "新增成功,用户初始密码为六个零000000"; //新增
+                msg = "新增成功"; //新增
             }
             if (data == true) {
                 msgShow('提示', msg, 'info');
@@ -293,7 +293,7 @@ function Search() {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                studentBo: {
+                courseBo: {
                     Name: $("#txtName").val().trim(),
                     IDNo: $("#txtIDNo").val().trim(),
                     SchoolName: $("#txtSchoolName").val().trim()

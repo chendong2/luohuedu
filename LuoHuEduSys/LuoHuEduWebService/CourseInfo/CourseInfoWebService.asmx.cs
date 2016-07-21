@@ -25,7 +25,7 @@ namespace LuoHuEduWebService.CourseInfo
         [ScriptMethod]
         [WebMethod]
        [SoapHeader("htSoapHeader", Direction = SoapHeaderDirection.InOut | SoapHeaderDirection.Fault)]
-        public string GetCourseStudent(string courseName, string courseCode,DateTime beginDate,DateTime endDate)
+        public string GetCourses(string courseName, string courseCode,DateTime beginDate,DateTime endDate)
         {
             if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return null;
             CourseService course=new CourseService();
