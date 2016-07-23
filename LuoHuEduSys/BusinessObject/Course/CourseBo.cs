@@ -12,8 +12,13 @@ namespace BusinessObject.Course
         /// 授课教师Id
         public string TeacherId{ get; set; }
 
+        /// <summary>
+        /// 教师姓名
+        /// </summary>
+        public string TeacherName { get; set; }
+
         /// 课程名称
-        public string CourseName{ get; set; }
+        public string CourseName { get; set; }
 
         /// 年度
         public string TheYear{ get; set; }

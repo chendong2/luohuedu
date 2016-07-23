@@ -93,6 +93,10 @@ namespace Services.Course.CourseControl
             return false;
         }
 
+        public CourseBo GetCourseById(string id)
+        {
+            return null;
+        }
         /// <summary>
         /// 新增课程
         /// </summary>
@@ -116,29 +120,29 @@ namespace Services.Course.CourseControl
                              `CourseDate`,`TimeStart`,`TimeEnd`,`CourseCode`, `Requirement`,`TeachingObject`,`ObjectEstablish`,`ObjectSubject`,
                              `CourseState`,`AduitTime`,`FirstAduit`,`EndAduit`,`CenterAduit`,`AttendanceName`,
                              `AttendanceUrl`,`Locked`,`Assessmentlevel`,`CreatedBy`,`CreatedOn`,`ModifiyBy`,`ModifiyOn`)
-                              VALUES ('Id','TeacherId','CourseName','TheYear','TrainType','Subject','Phone', 'Period','Cost','ChargeObj', 'SetCheck',
-                            'IsMust','Address','MaxNumber','SetApply','OrganizationalName','DesignIdea','TrainingAim',
-                            'Distinctive','EffectAnalysis','CourseDate',
-                            'TimeStart',
-                            'TimeEnd',
-                            'CourseCode',
-                            'Requirement',
-                            'TeachingObject',
-                            'ObjectEstablish',
-                            'ObjectSubject',
-                            'CourseState',
-                            'AduitTime',
-                            'FirstAduit',
-                            'EndAduit',
-                            'CenterAduit',
-                            'AttendanceName',
-                            'AttendanceUrl',
-                            'Locked',
-                            'Assessmentlevel',
-                            'CreatedBy',
-                            'CreatedOn',
-                            'ModifiyBy',
-                            'ModifiyOn');";
+                              VALUES (@Id,@TeacherId,@CourseName,@TheYear,@TrainType,@Subject,@Phone, @Period,@Cost,@ChargeObj, @SetCheck,
+                            @IsMust,@Address,@MaxNumber,@SetApply,@OrganizationalName,@DesignIdea,@TrainingAim,
+                            @Distinctive,@EffectAnalysis,@CourseDate,
+                            @TimeStart,
+                            @TimeEnd,
+                            @CourseCode,
+                            @Requirement,
+                            @TeachingObject,
+                            @ObjectEstablish,
+                            @ObjectSubject,
+                            @CourseState,
+                            @AduitTime,
+                            @FirstAduit,
+                            @EndAduit,
+                            @CenterAduit,
+                            @AttendanceName,
+                            @AttendanceUrl,
+                            @Locked,
+                            @Assessmentlevel,
+                            @CreatedBy,
+                            @CreatedOn,
+                            @ModifiyBy,
+                            @ModifiyOn);";
                     int row = connection.Execute(strSql, courseBo);
                     if (row > 0)
                     {
