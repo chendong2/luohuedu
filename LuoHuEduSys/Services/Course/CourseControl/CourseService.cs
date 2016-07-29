@@ -95,7 +95,23 @@ namespace Services.Course.CourseControl
 
         public CourseBo GetCourseById(string id)
         {
-            return null;
+            if (id == null)
+                throw new ArgumentNullException("id");
+            var courseBo = new CourseBo { };
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"select * from tb_course where Id=@Id";
+                    courseBo = connection.Query<CourseBo>(sqlStr, new { Id = id }).FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseService.GetCourseById({0})异常", id), ex);
+            }
+            return courseBo;
         }
         /// <summary>
         /// 新增课程

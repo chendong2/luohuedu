@@ -47,6 +47,7 @@
     <Compile Include="Admin\StudentControl\StudentService.cs" />
     <Compile Include="Course\CourseControl\AllCourseService.cs" />
     <Compile Include="Course\CourseControl\CourseService.cs" />
+    <Compile Include="Course\CourseControl\CourseStudentFace.cs" />
     <Compile Include="Course\CourseControl\CourseStudentService.cs" />
     <Compile Include="UserInfo\StudentTrainService.cs" />
     <Compile Include="UserInfo\StudentExemptionService.cs" />

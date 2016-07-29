@@ -61,5 +61,13 @@ namespace LuoHuEdu.WebServices.Course
             var courseService = new CourseService();
             return courseService.UpdateCourse(courseBo);
         }
+
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public CourseBo GetCourseById(string id)
+        {
+            var courseService = new CourseService();
+            return courseService.GetCourseById(id);
+        }
     }
 }

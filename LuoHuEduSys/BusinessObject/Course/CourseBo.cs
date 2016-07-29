@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Web.Script.Serialization;
 namespace BusinessObject.Course
 {
     public class CourseBo
@@ -75,10 +75,15 @@ namespace BusinessObject.Course
         public string CourseDate{ get; set; }
 
         /// 上课时间开始
+        //[ScriptIgnore]
         public DateTime TimeStart{ get; set; }
 
+        public string TimeStartStr { get { return TimeStart.ToString("yyyy-MM-dd HH:mm"); } }
         /// 上课时间结束
+        //[ScriptIgnore]
         public DateTime TimeEnd{ get; set; }
+
+        public string TimeEndStr { get { return TimeEnd.ToString("yyyy-MM-dd HH:mm"); } }
 
         /// 课程代码
         public string CourseCode{ get; set; }

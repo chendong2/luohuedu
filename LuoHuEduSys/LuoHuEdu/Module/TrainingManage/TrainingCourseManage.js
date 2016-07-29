@@ -32,8 +32,8 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
             { field: 'SetApply', title: '超出额定人数设定', width: 80 },
             { field: 'OrganizationalName', title: '组织单位名称', width: 80 },
-            { field: 'CourseDate', title: '培训日期', width: 50 },
-            { field: 'TimeStart', title: '培训时间', width: 50 },
+            { field: 'TimeStartStr', title: '培训开始', width: 50 },
+            { field: 'TimeEndStr', title: '培训结束', width: 50 },
             { field: 'CourseCode', title: '课程代码', width: 50 }
 
         ]],
@@ -100,6 +100,11 @@ function loadPartialHtml() {
         });
     }
 }
+
+//function initFormControl() {
+//    
+//}
+
 
 var moduleName = '培训课程管理-';
 
