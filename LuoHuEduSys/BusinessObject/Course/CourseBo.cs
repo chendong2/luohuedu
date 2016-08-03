@@ -151,11 +151,16 @@ namespace BusinessObject.Course
 
         public string SubjectName { get; set; }
 
-        public string Teachername { get; set; }
-
         public int Sign { get; set; }
 
         public string CourseDateStr { get; set; }
+
+        /// <summary>
+        /// 课程主要内容
+        /// </summary>
+        public string MainComment { get; set; }
+
+        public string SchoolName { get; set; }
 
     }
 }

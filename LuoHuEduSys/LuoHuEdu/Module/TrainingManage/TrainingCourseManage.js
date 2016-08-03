@@ -31,7 +31,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'Address', title: '培训地址', width: 70, sortable: true },
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
             { field: 'SetApply', title: '超出额定人数设定', width: 80 },
-            { field: 'OrganizationalName', title: '组织单位名称', width: 80 },
+            { field: 'SchoolName', title: '组织单位名称', width: 80 },
             { field: 'TimeStartStr', title: '培训开始', width: 50 },
             { field: 'TimeEndStr', title: '培训结束', width: 50 },
             { field: 'CourseCode', title: '课程代码', width: 50 }

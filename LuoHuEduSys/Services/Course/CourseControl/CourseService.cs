@@ -37,9 +37,12 @@ namespace Services.Course.CourseControl
             pageSize = page * rows;
             var pageList = new Page<CourseBo>();
 
-            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType FROM tb_course AS c 
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
                                             INNER JOIN tb_subject AS s ON c.Subject=s.Id
-                                            INNER JOIN tb_traintype AS t ON c.TrainType=t.Id  where 1=1 ");
+                                            INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
+					                        INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`                                         
+                                            WHERE 1=1 
+                                             ");
             if (courseBo != null)
             {
                 //课程名称查询
@@ -88,9 +91,70 @@ namespace Services.Course.CourseControl
             return pageList;
         }
 
+        /// <summary>
+        /// 课程修改方法
+        /// </summary>
+        /// <param name="courseBo"></param>
+        /// <returns></returns>
         public bool UpdateCourse(CourseBo courseBo)
         {
-            return false;
+            if (courseBo == null)
+                throw new ArgumentNullException("courseBo");
+            try
+            {
+                var sqlStr = @"UPDATE `tb_course`
+                                SET `TeacherId` = @TeacherId,
+                                  `CourseName` = @CourseName,
+                                  `TheYear` = @TheYear,
+                                  `TrainType` = @TrainType,
+                                  `Subject` = @Subject,
+                                  `Phone` = Phone,
+                                  `Period` = @Period,
+                                  `Cost` = @Cost,
+                                  `ChargeObj` = @ChargeObj,
+                                  `SetCheck` = @SetCheck,
+                                  `IsMust` = @IsMust,
+                                  `Address` = @Address,
+                                  `MaxNumber` = @MaxNumber,
+                                  `SetApply` = @SetApply,
+                                  `OrganizationalName` = @OrganizationalName,
+                                  `DesignIdea` = @DesignIdea,
+                                  `TrainingAim` = @TrainingAim,
+                                  `Distinctive` = @Distinctive,
+                                  `EffectAnalysis` = @EffectAnalysis,
+                                  `TimeStart` = @TimeStart,
+                                  `TimeEnd` = @TimeEnd,
+                                  `CourseCode` = @CourseCode,
+                                  `Requirement` = @Requirement,
+                                  `TeachingObject` = @TeachingObject,
+                                  `ObjectEstablish` = @ObjectEstablish,
+                                  `ObjectSubject` = @ObjectSubject,
+                                  `ModifiyBy` = @ModifiyBy,
+                                  `ModifiyOn` = @ModifiyOn,
+                                  `MainComment` = @MainComment,
+                                  `TeacherName` = @TeacherName
+                                   WHERE `Id` = @Id;"; 
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    int row = connection.Execute(sqlStr, courseBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+               
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("EducationOfficeService.UpdateCourse({0})异常", courseBo), ex);
+                return false;
+            }
+
         }
 
         public CourseBo GetCourseById(string id)
