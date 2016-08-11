@@ -11,6 +11,34 @@ using(easyloader.defaultReferenceModules, function () {
         title: '培训课程管理',
         columns: [[
             { field: 'Id', checkbox: true },
+            {field:
+                'opt',
+                title: '报名设置',
+                width: 50,
+                formatter: function(value, rec) {
+                    var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">报名设置</a>';
+                    return btn;
+                }
+            },
+            {field:'Aduit', title:'审核',width:50,  
+                formatter: function(value, rec) {
+                    var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">审核</a>';
+                    return btn;
+                } 
+            },
+             { field: 'Aduit1', title: '锁定', width: 50,
+                 formatter: function (value, rec) {
+                     var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">锁定</a>';
+                     return btn;
+                 }
+             },
+
+            { field: 'Aduit2', title: '报表', width: 50,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">查看</a>';
+                    return btn;
+                }
+            },
             { field: 'CourseName', title: '课程名称', width: 150 },
             { field: 'TheYear', title: '年度', width: 150 },
             { field: 'TrainType', title: '培训类型', width: 140 },
@@ -101,9 +129,6 @@ function loadPartialHtml() {
     }
 }
 
-//function initFormControl() {
-//    
-//}
 
 
 var moduleName = '培训课程管理-';
@@ -131,6 +156,18 @@ function editData() {
         fillForm(row.Id);
     }
 }
+
+//点击“编辑”按钮
+function editData1() {
+    var row = getSelectedRow('dg');
+    if (row == null) {
+        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
+    } else {
+        resetFormAndClearValidate('ff');
+        fillForm(row.Id);
+    }
+}
+
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
