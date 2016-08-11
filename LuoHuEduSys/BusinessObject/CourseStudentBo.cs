@@ -24,5 +24,7 @@ namespace BusinessObject
         public DateTime SignDate { get; set; }
         /// 签退时间
         public DateTime SignOutDate { get; set; }
+        //课程ID
+        public string CourseId { get; set; }
     }
 }

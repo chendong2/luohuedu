@@ -47,6 +47,7 @@
     <Compile Include="CourseStudentMessageBo.cs" />
     <Compile Include="Course\CourseBo.cs" />
     <Compile Include="Course\CourseStudentBo.cs" />
+    <Compile Include="Course\CourseStudentDto.cs" />
     <Compile Include="Parameter\StudentExemptionBo.cs" />
     <Compile Include="Parameter\MaintrainSetBo.cs" />
     <Compile Include="Parameter\SchoolBo.cs" />

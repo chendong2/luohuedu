@@ -11,6 +11,14 @@ namespace Services.Course.CourseControl
 {
     public class CourseStudentService
     {
+        #region "市获取考勤数据接口方法"
+        /// <summary>
+        /// 该方法供市中心获取临时考勤数据使用！
+        /// </summary>
+        /// <param name="idNo"></param>
+        /// <param name="yearNo"></param>
+        /// <param name="isAll"></param>
+        /// <returns></returns>
         public List<CourseStudentBo> GetCourseStudent(string idNo, string yearNo, string isAll)
         {
             string sql = @"SELECT Name,IDNO,YearNo,TermNo,CASE CourseType
@@ -38,13 +46,13 @@ namespace Services.Course.CourseControl
             }
             string group = " GROUP BY IDNO,CourseName ";
             //加where条件
-            sql += wheres +group;
+            sql += wheres + group;
             try
             {
                 using (var context = DataBaseConnection.GetMySqlConnection())
                 {
                     var list = context.Query<CourseStudentBo>(sql, paras).ToList();
-                 
+
                     return list;
                 }
             }
@@ -56,5 +64,110 @@ namespace Services.Course.CourseControl
 
 
         }
+
+        #endregion
+
+
+        #region "CRUD方法封装"
+
+        /// <summary>
+        /// 修改学生报名
+        /// </summary>
+        /// <param name="courseStudentBo"></param>
+        /// <returns></returns>
+        public bool UpdateCourseStudent(CourseStudentDto studentBo)
+        {
+            if (studentBo == null)
+                throw new ArgumentNullException("studentBo");
+            try
+            {
+                string sqlStr = @"UPDATE `tb_coursestudent`
+                                    SET 
+                                      `CourseNumber` = @CourseNumber,
+                                      `StudentId` = @StudentId,
+                                      `Sign` = @Sign,
+                                      `feedback` = @feedback,
+                                      `TaskName` = @TaskName,
+                                      `TaskUrl` = @TaskUrl,
+                                      `SignDate` = @SignDate,
+                                      `SignOutDate` = @SignOutDate
+                                       WHERE `Id` = @Id;";
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    int row = connection.Execute(sqlStr, studentBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.UpdateCourseStudent(studentBo)", studentBo), ex);
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// 新增课程报名数据
+        /// </summary>
+        /// <param name="studentBo"></param>
+        /// <returns></returns>
+        public bool AddCourseStudent(CourseStudentDto studentBo)
+        {
+            if (studentBo == null)
+                throw new ArgumentNullException("studentBo");
+            if (studentBo.Id != null && studentBo.Id.Length > 1)
+                throw new Exception("不能给Id赋值");
+
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    studentBo.Id = Guid.NewGuid().ToString();
+                    var strSql = @"INSERT INTO `tb_coursestudent`
+                                    (`Id`,
+                                     `CourseNumber`,
+                                     `StudentId`,
+                                     `Sign`,
+                                     `feedback`,
+                                     `TaskName`,
+                                     `TaskUrl`,
+                                     `SignDate`,
+                                     `SignOutDate`)
+                                    VALUES (@Id,
+                                            @CourseNumber,
+                                            @StudentId,
+                                            @Sign,
+                                            @feedback,
+                                            @TaskName,
+                                            @TaskUrl,
+                                            @SignDate,
+                                            @SignOutDate);";
+                    int row = connection.Execute(strSql, studentBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.AddCourseStudent({0})异常", studentBo), ex);
+            }
+            return false;
+        }
+
+        #endregion
     }
 }
