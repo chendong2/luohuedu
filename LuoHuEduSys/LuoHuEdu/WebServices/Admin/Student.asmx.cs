@@ -94,7 +94,7 @@ namespace LuoHuEdu.WebServices.Admin
         {
             var id = Domain.common.UserInfo.GetUserId().ToString();
             var studentService = new StudentService();
-            var studentBo = studentService.GetAllStudentById(id);
+            var studentBo = studentService.GetAllStudentById1(id);
             return studentBo;
         }
 
