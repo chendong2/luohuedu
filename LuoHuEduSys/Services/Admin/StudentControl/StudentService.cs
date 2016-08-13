@@ -116,7 +116,7 @@ namespace Services.Admin.StudentControl
                     String id = Guid.NewGuid().ToString();
                     studentBo.Id = id;
                     studentBo.PassWord = "000000";
-                    var sqlStr = @"INSERT INTO tb_student(Id,UserName,PassWord,SchoolId,Name,IDNo,Sex,Birthday,Origin,Minority,Profession,Professiontitles,Graduated,HighDegree,StudyPeriod,InCharge,Office,FirstTeaching,SecondTeaching,Address,PostCode,Phone,Telephone,Email,HighHonor,RegistrationCode) VALUES(@Id,@UserName,@PassWord,@SchoolId,@Name,@IDNo,@Sex,@Birthday,@Origin,@Minority,@Profession,@Professiontitles,@Graduated,@HighDegree,@StudyPeriod,@InCharge,@Office,@FirstTeaching,@SecondTeaching,@Address,@PostCode,@Phone,@Telephone,@Email,@HighHonor,@RegistrationCode);";
+                    var sqlStr = @"INSERT INTO tb_student(Id,LoginId,UserName,PassWord,SchoolId,Name,IDNo,Sex,Birthday,Origin,Minority,Profession,Professiontitles,Graduated,HighDegree,StudyPeriod,InCharge,Office,FirstTeaching,SecondTeaching,Address,PostCode,Phone,Telephone,Email,HighHonor,RegistrationCode) VALUES(@Id,@LoginId,@UserName,@PassWord,@SchoolId,@Name,@IDNo,@Sex,@Birthday,@Origin,@Minority,@Profession,@Professiontitles,@Graduated,@HighDegree,@StudyPeriod,@InCharge,@Office,@FirstTeaching,@SecondTeaching,@Address,@PostCode,@Phone,@Telephone,@Email,@HighHonor,@RegistrationCode);";
                     int row = connection.Execute(sqlStr, studentBo);
                     if (row > 0)
                     {
@@ -224,6 +224,29 @@ namespace Services.Admin.StudentControl
             }
             return StudentBo;
         }
+
+
+        public StudentBo GetAllStudentById1(String id)
+        {
+            if (id == null)
+                throw new ArgumentNullException("id");
+            var StudentBo = new StudentBo { };
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"select *  from tb_student where tb_student.Id=@Id";
+                    StudentBo = connection.Query<StudentBo>(sqlStr, new { Id = id }).FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.GetStudentById({0})异常", id), ex);
+            }
+            return StudentBo;
+        }
+
 
 
         //获取数据列表
@@ -405,6 +428,33 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
             }
 
             return pageList;
+        }
+
+
+        /// <summary>
+        /// 通过用户姓名获取用户信息
+        /// </summary>
+        /// <param name="id">学生信息id</param>
+        /// <returns>学生信息BO实体</returns>
+        public StudentBo GetAllStudentByLoginid(string loginid)
+        {
+            if (loginid == null)
+                throw new ArgumentNullException("loginid");
+            var StudentBo = new StudentBo { };
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"select * from tb_student  where tb_student.loginid=@loginid";
+                    StudentBo = connection.Query<StudentBo>(sqlStr, new { loginid = loginid }).FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.GetStudentById({0})异常", loginid), ex);
+            }
+            return StudentBo;
         }
     }
 }
