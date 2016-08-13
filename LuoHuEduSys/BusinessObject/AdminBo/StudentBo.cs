@@ -41,7 +41,7 @@ namespace BusinessObject.AdminBo
 
         public int Sex { get; set; }
 
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
 
         public string BirthdayStr { get; set; }
 

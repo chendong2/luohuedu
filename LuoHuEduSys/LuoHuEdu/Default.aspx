@@ -178,7 +178,6 @@
         
          menus_5.push({ "menuid": "51", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/UserInfo.htm") %>' });
         
-         menus_5.push({ "menuid": "52", "menuname": "修改密码", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
         
         //        menus_4.push({ "menuid": "42", "menuname": "消费记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
         //        menus_4.push({ "menuid": "43", "menuname": "充值记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
@@ -203,8 +202,6 @@
             _menus.menus.push({ "menuid": "5", "icon": "icon-sys", "menuname": "系统设置", "menus": menus_5 });
         }
 
-
-        
         
     </script>
 </body>
