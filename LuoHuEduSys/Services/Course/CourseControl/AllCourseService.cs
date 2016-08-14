@@ -89,5 +89,73 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
             return courseBo;
         }
 
+
+
+        //获取授课教师列表数据
+        public Page<CourseBo> GetTeacherMessage(int page, int rows, string sort, string order, CourseBo courseBo)
+        {
+            int count = 0;
+            int pageIndex = 0;
+            int pageSize = 0;
+            if (page < 0)
+            {
+                pageIndex = 0;
+            }
+            else
+            {
+                pageIndex = (page - 1) * rows;
+            }
+            pageSize = page * rows;
+            var pageList = new Page<CourseBo>();
+
+            string strSql = string.Format(@"SELECT sc.SchoolName,st.Name AS teachername,tt.TrainType,CourseName,TimeStart,TimeEnd,co.Period 
+                                            FROM tb_course co INNER JOIN tb_student st ON co.TeacherId=st.id 
+                                            INNER JOIN tb_school sc ON st.SchoolId=sc.Id INNER JOIN tb_traintype tt ON co.traintype=tt.id  WHERE 1=1  ");
+            if (courseBo != null)
+            {
+                if (courseBo.SchoolName != null)
+                {
+                    strSql += "and sc.SchoolName like @SchoolName ";
+                }
+
+                if (courseBo.TeacherName != null)
+                {
+                    strSql += "and st.Name like @TeacherName ";
+                }
+            }
+
+
+
+            strSql += " ORDER BY sc.SchoolName,st.Name,TimeStart ";
+
+
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                count = context.Query<CourseBo>(strSql,
+                                            new
+                                            {
+                                                SchoolName = string.Format("%{0}%", courseBo.SchoolName),
+                                                TeacherName = string.Format("%{0}%", courseBo.TeacherName)
+                                            }).Count();
+                strSql += " limit @pageindex,@pagesize";
+
+                var list = context.Query<CourseBo>(strSql,
+                                                new
+                                                {
+                                                    SchoolName = string.Format("%{0}%", courseBo.SchoolName),
+                                                    TeacherName = string.Format("%{0}%", courseBo.TeacherName),
+                                                    pageindex = pageIndex,
+                                                    pagesize = pageSize
+                                                }).ToList();
+
+                pageList.ListT = list;
+                pageList.PageIndex = page;
+                pageList.PageSize = rows;
+                pageList.TotalCount = count;
+            }
+
+            return pageList;
+        }
+
     }
 }

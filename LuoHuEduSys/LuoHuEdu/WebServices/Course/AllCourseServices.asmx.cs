@@ -49,5 +49,28 @@ namespace LuoHuEdu.WebServices.Course
             var courseService = new AllCourseService();
             return courseService.GetMyCourseList(theYear, trainType);
         }
+
+
+        //获取授课教师列表数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetTeacherMessage(int page, int rows, string sort, string order, CourseBo courseBo)
+        {
+
+            var courseService = new AllCourseService();
+            var list = courseService.GetTeacherMessage(page, rows, sort, order, courseBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
     }
 }
