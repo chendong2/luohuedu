@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using BusinessObject.Course;
 using Dapper;
@@ -271,7 +272,79 @@ namespace Services.Course.CourseControl
         }
         #endregion 
 
+        #region "课程审核、设定、锁定、查看报名数据方法封装"
 
+        /// <summary>
+        /// 报名设置方法，
+        /// </summary>
+        /// <param name="courseBo"></param>
+        /// <returns></returns>
+        public bool ApplySet(CourseBo courseBo)
+        {
+            if (courseBo == null)
+                throw new ArgumentNullException("courseBo");
+            try
+            {
+                var sqlStr = @"UPDATE `tb_course` SET Requirement=@Requirement,TeachingObject=@TeachingObject,ObjectEstablish=@ObjectEstablish,ObjectEstablish=@ObjectEstablish,
+ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=@Id
+";
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    int row = connection.Execute(sqlStr, courseBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("EducationOfficeService.ApplySet({0})异常", courseBo), ex);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 课程审批方法
+        /// </summary>
+        /// <param name="courseBo"></param>
+        /// <returns></returns>
+        public bool AduitSet(CourseBo courseBo)
+        {
+            if (courseBo == null)
+                throw new ArgumentNullException("courseBo");
+            try
+            {
+                var sqlStr = @"UPDATE `tb_course` SET CourseState=@CourseState，AduitTime=@AduitTime，FirstAduit=@FirstAduit，
+                                EndAduit=@EndAduit，CenterAduit=@CenterAduit
+                                WHERE Id=@Id
+                                ";
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    int row = connection.Execute(sqlStr, courseBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("EducationOfficeService.AduitSet({0})异常", courseBo), ex);
+                return false;
+            }
+        }
+        #endregion
 
         #region "考勤机接口方法"
         /// <summary>

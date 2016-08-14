@@ -62,10 +62,27 @@ namespace LuoHuEduWebService.CourseInfo
         public string GetCourseStudentByCourseId(string courseId)
         {
             if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return null;
-            CourseStudentFace courseStudentFace=new CourseStudentFace();
+            var courseStudentFace=new CourseStudentFace();
             var list = courseStudentFace.GetCourseStudentByCourseId(courseId);
             return new JavaScriptSerializer().Serialize(list);
         }
-        
+
+        /// <summary>
+        /// 根据课程ID，学员ID修改签到和签退时间
+        /// </summary>
+        /// <param name="signDate">签到时间</param>
+        /// <param name="signOutDate">签退时间</param>
+        /// <param name="studentId">学员ID</param>
+        /// <param name="courseId">课程ID</param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod]
+        [SoapHeader("htSoapHeader", Direction = SoapHeaderDirection.InOut | SoapHeaderDirection.Fault)]
+        public bool Registration(DateTime signDate, DateTime signOutDate, string studentId, string courseId)
+        {
+            if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return false;
+            var course=new CourseStudentService();
+            return course.Registration(signDate, signOutDate, studentId, courseId);
+        }
     }
 }
