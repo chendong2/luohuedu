@@ -168,6 +168,28 @@ namespace Services.Course.CourseControl
             return false;
         }
 
+        /// <summary>
+        /// 根据学员ID、课程ID 修改签到时间和签退时间
+        /// </summary>
+        /// <param name="studentDtos"></param>
+        /// <returns></returns>
+        public bool Registration( List<CourseStudentDto> studentDtos)
+        {
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    string sql = @"UPDATE `tb_coursestudent` SET `SignDate`=@SignDate,`SignOutDate`=@SignOutDate WHERE `StudentId`=@StudentId AND                                            `CourseId`=@CourseId";
+
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return false;
+        }
         #endregion
     }
 }
