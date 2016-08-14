@@ -134,7 +134,7 @@
             menus_2.push({ "menuid": "22", "menuname": "课程表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
         }
         if (perStr.indexOf("授课教师信息") > -1) {
-            menus_2.push({ "menuid": "23", "menuname": "授课教师信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Carrental/CarrentalOrder/CarrentalOrderList.htm") %>' });
+            menus_2.push({ "menuid": "23", "menuname": "授课教师信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TeacherMessage/TeacherMessageList.htm") %>' });
         }
         if (perStr.indexOf("校本研修审核") > -1) {
             menus_2.push({ "menuid": "24", "menuname": "校本研修审核", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TrainManage/TrainManageList.htm") %>' });
