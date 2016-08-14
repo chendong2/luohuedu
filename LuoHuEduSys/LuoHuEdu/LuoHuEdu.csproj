@@ -1248,7 +1248,7 @@
     <Content Include="Module\Ticket\BookForm.js" />
     <Content Include="Module\Ticket\TicketList.js" />
     <Content Include="Module\Ticket\TicketOrderStatisticsList.js" />
-    <Content Include="Module\TrainingManage\TeacherManage.js" />
+    <Content Include="Module\TrainingManage\TeacherMessage.js" />
     <Content Include="Module\TrainingManage\ExemptionManage.js" />
     <Content Include="Module\TrainingManage\TrainingCourseManage.js" />
     <Content Include="Module\TrainingManage\TrainManage.js" />
