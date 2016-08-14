@@ -8,10 +8,10 @@ using(easyloader.defaultReferenceModules, function () {
     var dataGridOptions = {
         title: '授课教师信息',
         columns: [[
-            { field: 'SchoolName', title: '学校名称', width: 60, sortable: false },
-            { field: 'TeacherName', title: '教师姓名', width: 180, sortable: false },
-            { field: 'TrainType', title: '课程类型', width: 100, sortable: false },
-            { field: 'CourseName', title: '授课内容', width: 100, sortable: false },
+            { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
+            { field: 'TeacherName', title: '教师姓名', width: 90, sortable: false },
+            { field: 'TrainType', title: '课程类型', width: 90, sortable: false },
+            { field: 'CourseName', title: '授课内容', width: 380, sortable: false },
             { field: 'TimeStart', title: '开始时间', width: 70, sortable: false,
                 formatter: function (value) {
                     value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
