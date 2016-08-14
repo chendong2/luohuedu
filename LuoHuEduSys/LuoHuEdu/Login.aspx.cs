@@ -71,6 +71,7 @@ namespace HuaTongCallCenter
                       else
                       {
                           StudentBo sBo = new StudentBo();
+                          sBo.Name = username;
                           sBo.UserName = username;
                           sBo.LoginId = loginid;
                           sBo.Sex = sex;
