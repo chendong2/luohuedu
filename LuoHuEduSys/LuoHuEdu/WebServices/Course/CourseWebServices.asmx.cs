@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using BusinessObject.Course;
@@ -82,7 +83,31 @@ namespace LuoHuEdu.WebServices.Course
             var courseService = new CourseService();
             return courseService.ApplySet(courseBo);
         }
+        /// <summary>
+        /// 课程审核方法
+        /// </summary>
+        /// <param name="courseBo"></param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool AduitSet(CourseBo courseBo)
+        {
+            var courseService = new CourseService();
+            return courseService.AduitSet(courseBo);
+        }
 
-
+        /// <summary>
+        /// 根据课程ID获取报名数据
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public string GetCourseStudentByCourseId(string courseId)
+        {
+            var courseStudent = new CourseStudentFace();
+            var list = courseStudent.GetCourseStudentByCourseId(courseId);
+            return new JavaScriptSerializer().Serialize(list);
+        }
     }
 }
