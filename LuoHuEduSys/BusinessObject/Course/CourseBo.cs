@@ -162,5 +162,15 @@ namespace BusinessObject.Course
 
         public string SchoolName { get; set; }
 
+        /// <summary>
+        /// 公立学校ID 逗号分开的字符串
+        /// </summary>
+        public string PlcSchool { get; set; }
+
+        /// <summary>
+        /// 私立学校ID 逗号分开的字符串
+        /// </summary>
+        public string PriSchool { get; set; }
+
     }
 }

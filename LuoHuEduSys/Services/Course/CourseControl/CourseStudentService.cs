@@ -168,6 +168,46 @@ namespace Services.Course.CourseControl
             return false;
         }
 
+       /// <summary>
+       /// 根据学员ID和课程ID修改签到及签退时间
+       /// </summary>
+       /// <param name="signDate"></param>
+       /// <param name="signOutDate"></param>
+       /// <param name="studentId"></param>
+       /// <param name="courseId"></param>
+       /// <returns></returns>
+        public bool Registration(DateTime signDate, DateTime signOutDate, string studentId, string courseId)
+        {
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    string sql = @"UPDATE `tb_coursestudent` SET `SignDate`=@SignDate,`SignOutDate`=@SignOutDate WHERE `StudentId`=@StudentId AND                                            `CourseId`=@CourseId";
+                    int row = connection.Execute(sql, new
+                    {
+                        SignDate = signDate,
+                        SignOutDate = signOutDate,
+                        StudentId = studentId,
+                        CourseId = courseId
+                    
+                    });
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                LogHelper.WriteLog(string.Format("CourseStudentService.Registration({0},{1},{2},{3})", signDate, signOutDate, studentId, courseId), ex);
+                return false;
+            }
+        }
         #endregion
     }
 }

@@ -69,5 +69,20 @@ namespace LuoHuEdu.WebServices.Course
             var courseService = new CourseService();
             return courseService.GetCourseById(id);
         }
+
+        /// <summary>
+        /// 报名设置方法
+        /// </summary>
+        /// <param name="courseBo"></param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool ApplySet(CourseBo courseBo)
+        {
+            var courseService = new CourseService();
+            return courseService.ApplySet(courseBo);
+        }
+
+
     }
 }
