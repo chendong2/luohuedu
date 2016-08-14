@@ -1,0 +1,111 @@
+﻿<div id="registerSetDlg" style="width: 800px;" data-options="buttons: '#rsdlg-button',
+                                                                        closed: true,
+                                                                        shadow:false,
+                                                                        modal:true">
+    <style type="text/css">
+        .custom_forms tr td input[type="text"]
+        {
+            width: auto;
+        }
+    </style>
+    <form id="registerSetForm" method="post">
+    <div id="formTabs" class="easyui-tabs">
+        <div title="报名信息" style="padding: 10px;">
+            <table class="custom_forms_popup">
+                <tbody>
+                    <tr>
+                        <td class="td_right" style="width: 100px">
+                            报名要求:
+                        </td>
+                        <td class="td_left">
+                            <select style="width: 145px;" name="registerReq" id="registerReq">
+                                <option value="1">允许所有教师报名</option>
+                                <option value="2">只允许学校管理员增加名单</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_right">
+                            授课对象:
+                        </td>
+                        <td class="td_left">
+                            <input type="checkbox" name="skdx" value="1"/>幼儿教师
+                            &nbsp;&nbsp;
+                            <input type="checkbox" name="skdx" value="2"/>小学教师
+                            &nbsp;&nbsp;
+                            <input type="checkbox" name="skdx" value="3"/>初中教师
+                            &nbsp;&nbsp;
+                            <input type="checkbox" name="skdx" value="4"/>高中教师
+                            &nbsp;&nbsp;
+                            <input type="checkbox" name="skdx" value="5"/>其他
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_right">
+                            授课对象编制:
+                        </td>
+                        <td class="td_left">
+                            <input type="checkbox" name="skdxbz" value="1"/>在编教师
+                            &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxbz" value="2"/>非在编教师
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_right">
+                            授课对象学科:
+                        </td>
+                        <td class="td_left">
+                            <input type="checkbox" name="skdxxk" value="1"/>语文 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="2"/>数学 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="3"/>英语 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="4"/>体育与健康 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="5"/>音乐 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="6"/>美术 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="7"/>历史 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="8"/>生物学 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="9"/>化学 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="10"/>物理 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="11"/>科学 &nbsp;&nbsp;<br/>
+                            <input type="checkbox" name="skdxxk" value="12"/>地理 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="13"/>思想品德 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="14"/>品德与社会 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="15"/>品德与生活 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="16"/>历史与社会 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="17"/>艺术 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="18"/>信息技术 &nbsp;&nbsp;
+                            <input type="checkbox" name="skdxxk" value="19"/>政治 &nbsp;&nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div title="公办学校" style="padding: 10px;" id="PublicSchool">
+            <table id="PublicSchoolTbl" class="custom_forms_popup">
+                <tr>
+                    <td class="td_right">
+                    </td>
+                    <td class="td_left">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div title="民办学校" style="padding: 10px;" id="PrivateSchool">
+            <table id="PrivateSchoolTbl" class="custom_forms_popup">
+                <tr>
+                    <td class="td_right">
+                    </td>
+                    <td class="td_left">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <input id="Hrsid" type="hidden" name="rsId" />
+    </div>
+    </form>
+</div>
+<div id="rsdlg-button">
+    <a class="easyui-linkbutton" onclick="saveRegisterSetData();">确定</a> <a class="easyui-linkbutton"
+        onclick="closeFormDialog('registerSetDlg');">取消</a>
+</div>

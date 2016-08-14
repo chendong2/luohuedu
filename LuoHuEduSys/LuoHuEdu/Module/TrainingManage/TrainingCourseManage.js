@@ -16,7 +16,7 @@ using(easyloader.defaultReferenceModules, function () {
                 title: '报名设置',
                 width: 50,
                 formatter: function(value, rec) {
-                    var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">报名设置</a>';
+                    var btn = '<a class="editcls" onclick="registerSet()" href="javascript:void(0)">报名设置</a>';
                     return btn;
                 }
             },
@@ -124,6 +124,12 @@ function loadPartialHtml() {
                 //                setValidatebox('Name', {
                 //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
                 //                });
+            }
+        });
+        panel('registerSetTemplate', {
+            href: '/View/TrainingManage/TrainingCourseManage/RegisterSet.htm',
+            onLoad: function () {
+                
             }
         });
     }
@@ -294,7 +300,7 @@ function saveData() {
             }
             if (data == true) {
                 msgShow('提示', msg, 'info');
-                closeFormDialog();
+                closeFormDialog('dlg');
                 refreshTable('dg');
             } else {
                 msgShow('提示', '提交失败', 'info');
@@ -361,6 +367,119 @@ function Search() {
 
 
 //关闭弹出层
-function closeFormDialog() {
-    closeDialog('dlg');
+function closeFormDialog(id) {
+    closeDialog(id);
+}
+
+//点击“报名设置”按钮
+function registerSet() {
+
+    var row = getSelectedRow('dg');
+
+    //获取所有公办学校
+    getAllPublicSchool();
+    //获取所有民办学校
+    getAllPrivateSchool();
+
+    
+
+    ajaxCRUD({
+        url: '/WebServices/xxxx/xxx.asmx/xxxx',
+        data: "{id:'" + itemid + "'}",
+        success: function (data) {
+            openDialog('registerSetDlg', {
+                title: '报名设置',
+                iconCls: 'icon-edit'
+            });
+            
+           
+            //JSON数据填充表单
+            loadDataToForm('registerSetForm', data);
+            
+            
+        }
+    });
+
+}
+
+//保存“报名设置”表单数据
+function saveRegisterSetData() {
+    
+//    if (!formValidate('registerSetForm')) {
+//        return;
+//    }
+
+    var hidValue = $("#Hrsid").val();
+    var basicUrl = '/WebServices/xxxx/xxxx.asmx/';
+
+    var wsMethod = '';
+    if (hidValue.length > 0) {
+        wsMethod = "UpdateRegisterSet"; //修改
+    } else {
+        wsMethod = "AddRegisterSet"; //新增
+    }
+    
+    var formUrl = basicUrl + wsMethod;
+
+    var form2JsonObj = form2Json("registerSetForm"); 
+    var form2JsonStr = JSON.stringify(form2JsonObj); 
+    var jsonDataStr = "{xxxxBo:" + form2JsonStr + "}";
+    //console.log(jsonDataStr);
+    
+    ajaxCRUD({
+        url: formUrl,
+        data: jsonDataStr,
+        success: function (data) {
+            var msg = '';
+            if (hidValue.length > 0) {
+                msg = "修改成功"; //修改
+            } else {
+                msg = "新增成功"; //新增
+            }
+            if (data == true) {
+                msgShow('提示', msg, 'info');
+                closeFormDialog('registerSetDlg');
+                refreshTable('dg');
+            } else {
+                msgShow('提示', '提交失败', 'info');
+            }
+        }
+    });
+    
+} //saveRegisterSetData
+
+//获取所有公办学校信息，用于多选框绑定数据
+function getAllPublicSchool() {
+    var webserviceUrl = '/WebServices/xxxx/xxxx.asmx/xxxxx';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            data.each(function (index) {
+
+                var trHtml = '<tr><td class="td_right"><input type="checkbox" name="gbxx" value=""/></td><td class="td_left"></td></tr>';
+                $('#PublicSchoolTbl').empty();
+                $('#PublicSchoolTbl').append(trHtml);
+            });
+        }
+    });
+}
+
+//获取所有民办学校信息，用于多选框绑定数据
+function getAllPrivateSchool() {
+    var webserviceUrl = '/WebServices/xxxx/xxxx.asmx/xxxxx';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            data.each(function (index) {
+
+                var trHtml = '<tr><td class="td_right"><input type="checkbox" name="mbxx" value=""/></td><td class="td_left"></td></tr>';
+                $('#PrivateSchoolTbl').empty();
+                $('#PrivateSchoolTbl').append(trHtml);
+            });
+        }
+    });
 }

@@ -1309,6 +1309,7 @@
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageForm.htm" />
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageList.htm" />
     <Content Include="View\TrainingManage\TeacherMessage\TeacherMessageList.htm" />
+    <Content Include="View\TrainingManage\TrainingCourseManage\RegisterSet.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseAdvancedSearch.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseForm.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseList.htm" />
