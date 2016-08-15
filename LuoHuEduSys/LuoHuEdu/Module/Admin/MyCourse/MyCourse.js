@@ -4,6 +4,7 @@
 /* 包含列表的绑定,增删改查
 ***********************************/
 //easyloader.defaultReferenceModules表示默认引用easyui.public.js,如果当前IE7时会自动附加引用json2.min.js
+//var referenceModules = $.merge(['jqCookie'], easyloader.defaultReferenceModules);
 using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
@@ -14,7 +15,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'TheYear', title: '年度', width: 150 },
             { field: 'TrainType', title: '培训类型', width: 140 },
 
-            { field: 'Subject', title: '培训科目', width: 80 },
+            { field: 'SubjectName', title: '培训科目', width: 80 },
             { field: 'Phone', title: '联系电话', width: 80 },
             { field: 'Period', title: '学时', width: 80 },
             { field: 'Cost', title: '培训费用', width: 80 },
@@ -29,9 +30,10 @@ using(easyloader.defaultReferenceModules, function () {
 
             { field: 'Address', title: '培训地址', width: 70, sortable: true },
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
-            { field: 'OrganizationalName', title: '组织单位名称', width: 80 },
-            { field: 'CourseDate', title: '培训日期', width: 50 },
-            { field: 'TimeStart', title: '培训时间', width: 50 },
+            { field: 'SetApply', title: '超出额定人数设定', width: 80 },
+            { field: 'SchoolName', title: '组织单位名称', width: 80 },
+            { field: 'TimeStartStr', title: '培训开始', width: 50 },
+            { field: 'TimeEndStr', title: '培训结束', width: 50 },
             { field: 'CourseCode', title: '课程代码', width: 50 }
 
         ]],
@@ -42,17 +44,19 @@ using(easyloader.defaultReferenceModules, function () {
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
+            //alert();
             var studentData = {
                 page: param.page,
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                studentBo: {}
+                courseBo: {},
+                studentId: $.cookie('UserId')
             };
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Course/CourseWebServices.asmx/GetMyCourseList',
                 data: paramStr,
                 success: function (data) {
                     success(data);

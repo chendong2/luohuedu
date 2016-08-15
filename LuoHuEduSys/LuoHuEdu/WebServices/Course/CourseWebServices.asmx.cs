@@ -6,6 +6,7 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using BusinessObject.Course;
+using BusinessObject.WSBo;
 using Services.Course.CourseControl;
 
 namespace LuoHuEdu.WebServices.Course
@@ -29,6 +30,37 @@ namespace LuoHuEdu.WebServices.Course
 
             var courseService = new CourseService();
             var list = courseService.GetCourseList(page, rows, sort, order, courseBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
+
+        /// <summary>
+        /// 根据学员ID获取学员报名的课程数据信息
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="rows"></param>
+        /// <param name="order"></param>
+        /// <param name="sort"></param>
+        /// <param name="courseBo"></param>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetMyCourseList(int page, int rows, string order, string sort, CourseBo courseBo,
+            string studentId)
+        {
+            var courseService = new CourseService();
+            var list = courseService.GetMyCourseList(page, rows, sort, order, courseBo,studentId);
             if (list != null)
             {
                 return new
@@ -103,11 +135,11 @@ namespace LuoHuEdu.WebServices.Course
         /// <returns></returns>
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public string GetCourseStudentByCourseId(string courseId)
+        public List<CourseStudentWSBo> GetCourseStudentByCourseId(string courseId)
         {
             var courseStudent = new CourseStudentFace();
             var list = courseStudent.GetCourseStudentByCourseId(courseId);
-            return new JavaScriptSerializer().Serialize(list);
+            return list;
         }
     }
 }

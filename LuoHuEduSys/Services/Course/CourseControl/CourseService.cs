@@ -403,5 +403,81 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
     
         #endregion
 
+        #region "我的课程"
+        public Page<CourseBo> GetMyCourseList(int page, int rows, string order, string sort, CourseBo courseBo,string studentId)
+        {
+            int count = 0;
+            int pageIndex = 0;
+            int pageSize = 0;
+            if (page < 0)
+            {
+                pageIndex = 0;
+            }
+            else
+            {
+                pageIndex = (page - 1) * rows;
+            }
+            pageSize = page * rows;
+            var pageList = new Page<CourseBo>();
+
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
+                                            INNER JOIN tb_subject AS s ON c.Subject=s.Id
+                                            INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
+					                        INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
+					                        INNER JOIN tb_coursestudent cs ON c.`Id`=cs.`CourseId`                                 
+                                            WHERE cs.`StudentId`=@StudentId
+                                             ");
+            //if (courseBo != null)
+            //{
+            //    //课程名称查询
+            //    if (courseBo.CourseName != null)
+            //    {
+            //        strSql += "and c.CourseName Like @CourseName ";
+            //    }
+            //    //课程代码查询
+            //    if (courseBo.CourseCode != null)
+            //    {
+            //        strSql += " and c.CourseCode=@CourseCode ";
+            //    }
+            //}
+
+            switch (sort)
+            {
+                case "TheYear":
+                    strSql += " order by TheYear " + order;
+                    break;
+            }
+
+
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                count = context.Query<CourseBo>(strSql,
+                                            new
+                                            {
+                                                StudentId = studentId
+                                            }).Count();
+                strSql += " limit @pageindex,@pagesize";
+
+                var list = context.Query<CourseBo>(strSql,
+                                                new
+                                                {
+                                                    StudentId = studentId,
+                                                    pageindex = pageIndex,
+                                                    pagesize = pageSize
+                                                }).ToList();
+
+                pageList.ListT = list;
+                pageList.PageIndex = page;
+                pageList.PageSize = rows;
+                pageList.TotalCount = count;
+            }
+
+            return pageList;
+        }
+        #endregion 
+
+        #region "培训课程信息"
+
+        #endregion
     }
 }

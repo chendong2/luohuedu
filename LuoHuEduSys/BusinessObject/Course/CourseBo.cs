@@ -172,5 +172,10 @@ namespace BusinessObject.Course
         /// </summary>
         public string PriSchool { get; set; }
 
+        /// <summary>
+        /// 学员ID
+        /// </summary>
+        public string StudentId { get; set; }
+
     }
 }
