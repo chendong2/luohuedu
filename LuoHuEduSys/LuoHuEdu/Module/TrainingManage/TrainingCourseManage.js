@@ -16,7 +16,7 @@ using(easyloader.defaultReferenceModules, function () {
                 title: '报名设置',
                 width: 50,
                 formatter: function(value, rec) {
-                    var btn = '<a class="editcls" onclick="registerSet()" href="javascript:void(0)">报名设置</a>';
+                    var btn = '<a class="editcls" onclick="registerSet(\''+ rec.Id +'\')" href="javascript:void(0)">报名设置</a>';
                     return btn;
                 }
             },
@@ -372,29 +372,25 @@ function closeFormDialog(id) {
 }
 
 //点击“报名设置”按钮
-function registerSet() {
-
-    var row = getSelectedRow('dg');
+function registerSet(courseid) {
 
     //获取所有公办学校
     getAllPublicSchool();
     //获取所有民办学校
     getAllPrivateSchool();
 
-    
-
     ajaxCRUD({
-        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseStudentByCourseId',
-        data: "{id:'" + row.Id + "'}",
+        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
+        data: "{id:'" + courseid + "'}",
         success: function (data) {
+            
             openDialog('registerSetDlg', {
                 title: '报名设置',
                 iconCls: 'icon-edit'
             });
+
             //JSON数据填充表单
             loadDataToForm('registerSetForm', data);
-            
-            
         }
     });
 
@@ -407,10 +403,33 @@ function saveRegisterSetData() {
 //        return;
 //    }
     var basicUrl = '/WebServices/Course/CourseWebServices.asmx/ApplySet';
+
+    var form2JsonObj = form2Json("registerSetForm");
+    //alert(form2JsonObj.TeachingObject);
+    if (form2JsonObj.TeachingObject && $.isArray(form2JsonObj.TeachingObject)) {
+        form2JsonObj.TeachingObject = form2JsonObj.TeachingObject.join(',');
+    }
+
+    if (form2JsonObj.ObjectEstablish && $.isArray(form2JsonObj.ObjectEstablish)) {
+        form2JsonObj.ObjectEstablish = form2JsonObj.ObjectEstablish.join(',');
+    }
+
+    if (form2JsonObj.ObjectSubject && $.isArray(form2JsonObj.ObjectSubject)) {
+        form2JsonObj.ObjectSubject = form2JsonObj.ObjectSubject.join(',');
+    }
+
+    if (form2JsonObj.PlcSchool && $.isArray(form2JsonObj.PlcSchool)) {
+        form2JsonObj.PlcSchool = form2JsonObj.PlcSchool.join(',');
+    }
+
+    if (form2JsonObj.PriSchool && $.isArray(form2JsonObj.PriSchool)) {
+        form2JsonObj.PriSchool = form2JsonObj.PriSchool.join(',');
+    }
     
-    var form2JsonObj = form2Json("registerSetForm"); 
+
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
+    
     //console.log(jsonDataStr);
     
     ajaxCRUD({
@@ -431,15 +450,14 @@ function saveRegisterSetData() {
 
 //获取所有公办学校信息，用于多选框绑定数据
 function getAllPublicSchool() {
-    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetPriSchoolByType';
+    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetPlcSchoolByType';
     ajaxCRUD({
         async: false,
         url: webserviceUrl,
         data: '{}',
-        success: function (data) {
-            data.each(function (index) {
-
-                var trHtml = '<tr><td class="td_right"><input type="checkbox" name="gbxx" value=""/></td><td class="td_left"></td></tr>';
+        success: function (dataList) {
+            $.each(dataList,function (index, schoolBo) {
+                var trHtml = '<tr><td class="td_right"><input type="checkbox" name="PlcSchool" value="' + schoolBo.Id + '"/></td><td class="td_left">' + schoolBo.SchoolName + '</td></tr>';
                 $('#PublicSchoolTbl').empty();
                 $('#PublicSchoolTbl').append(trHtml);
             });
@@ -454,10 +472,9 @@ function getAllPrivateSchool() {
         async: false,
         url: webserviceUrl,
         data: '{}',//
-        success: function (data) {
-            data.each(function (index) {
-
-                var trHtml = '<tr><td class="td_right"><input type="checkbox" name="mbxx" value=""/></td><td class="td_left"></td></tr>';
+        success: function (dataList) {
+            $.each(dataList, function (index, schoolBo) {
+                var trHtml = '<tr><td class="td_right"><input type="checkbox" name="PriSchool" value="' + schoolBo.Id + '"/></td><td class="td_left">' + schoolBo.SchoolName + '</td></tr>';
                 $('#PrivateSchoolTbl').empty();
                 $('#PrivateSchoolTbl').append(trHtml);
             });
