@@ -344,6 +344,9 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
                 return false;
             }
         }
+
+
+        
         #endregion
 
         #region "考勤机接口方法"

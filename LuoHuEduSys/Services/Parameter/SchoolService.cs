@@ -250,5 +250,44 @@ namespace Services.Parameter
           
             return list;
         }
+
+        /// <summary>
+        /// 获取所有公办学校
+        /// </summary>
+        /// <returns></returns>
+        public List<SchoolBo> GetPlcSchoolByType()
+        {
+            List<SchoolBo> list;
+            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=1 ");
+
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<SchoolBo>(strSql,
+                                                new { }).ToList();
+            }
+
+            return list;
+        }
+        /// <summary>
+        /// 获取所有民办学校
+        /// </summary>
+        /// <returns></returns>
+        public List<SchoolBo> GetPriSchoolByType()
+        {
+            List<SchoolBo> list;
+            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=3 ");
+
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+
+                list = context.Query<SchoolBo>(strSql,
+                                                new { }).ToList();
+            }
+
+            return list;
+        }
+
+
     }
 }

@@ -102,6 +102,20 @@ namespace LuoHuEdu.WebServices.Parameter
             var schoolService = new SchoolService();
             return schoolService.GetAllSchoolNew();
         }
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<SchoolBo> GetPlcSchoolByType()
+        {
+            var schoolService = new SchoolService();
+            return schoolService.GetPlcSchoolByType();
+        }
 
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<SchoolBo> GetPriSchoolByType()
+        {
+            var schoolService = new SchoolService();
+            return schoolService.GetPriSchoolByType();
+        }
     }
 }

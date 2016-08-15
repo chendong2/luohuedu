@@ -384,15 +384,13 @@ function registerSet() {
     
 
     ajaxCRUD({
-        url: '/WebServices/xxxx/xxx.asmx/xxxx',
-        data: "{id:'" + itemid + "'}",
+        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseStudentByCourseId',
+        data: "{id:'" + row.Id + "'}",
         success: function (data) {
             openDialog('registerSetDlg', {
                 title: '报名设置',
                 iconCls: 'icon-edit'
             });
-            
-           
             //JSON数据填充表单
             loadDataToForm('registerSetForm', data);
             
@@ -408,36 +406,19 @@ function saveRegisterSetData() {
 //    if (!formValidate('registerSetForm')) {
 //        return;
 //    }
-
-    var hidValue = $("#Hrsid").val();
-    var basicUrl = '/WebServices/xxxx/xxxx.asmx/';
-
-    var wsMethod = '';
-    if (hidValue.length > 0) {
-        wsMethod = "UpdateRegisterSet"; //修改
-    } else {
-        wsMethod = "AddRegisterSet"; //新增
-    }
+    var basicUrl = '/WebServices/Course/CourseWebServices.asmx/ApplySet';
     
-    var formUrl = basicUrl + wsMethod;
-
     var form2JsonObj = form2Json("registerSetForm"); 
-    var form2JsonStr = JSON.stringify(form2JsonObj); 
-    var jsonDataStr = "{xxxxBo:" + form2JsonStr + "}";
+    var form2JsonStr = JSON.stringify(form2JsonObj);
+    var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
     //console.log(jsonDataStr);
     
     ajaxCRUD({
-        url: formUrl,
+        url: basicUrl,
         data: jsonDataStr,
         success: function (data) {
-            var msg = '';
-            if (hidValue.length > 0) {
-                msg = "修改成功"; //修改
-            } else {
-                msg = "新增成功"; //新增
-            }
             if (data == true) {
-                msgShow('提示', msg, 'info');
+                msgShow('提示', '修改成功', 'info');
                 closeFormDialog('registerSetDlg');
                 refreshTable('dg');
             } else {
@@ -450,7 +431,7 @@ function saveRegisterSetData() {
 
 //获取所有公办学校信息，用于多选框绑定数据
 function getAllPublicSchool() {
-    var webserviceUrl = '/WebServices/xxxx/xxxx.asmx/xxxxx';
+    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetPriSchoolByType';
     ajaxCRUD({
         async: false,
         url: webserviceUrl,
@@ -468,11 +449,11 @@ function getAllPublicSchool() {
 
 //获取所有民办学校信息，用于多选框绑定数据
 function getAllPrivateSchool() {
-    var webserviceUrl = '/WebServices/xxxx/xxxx.asmx/xxxxx';
+    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetPriSchoolByType';
     ajaxCRUD({
         async: false,
         url: webserviceUrl,
-        data: '{}',
+        data: '{}',//
         success: function (data) {
             data.each(function (index) {
 

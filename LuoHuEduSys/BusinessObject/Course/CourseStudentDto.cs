@@ -8,7 +8,7 @@ namespace BusinessObject.Course
     public  class CourseStudentDto
     {
         /// <summary>
-        /// 编号ID唯一
+        /// 报名表ID
         /// </summary>
         public string Id { get; set; }
 
@@ -63,5 +63,20 @@ namespace BusinessObject.Course
         /// 培训单位
         /// </summary>
         public string TrainDept { get; set; }
+
+        /// <summary>
+        /// 课程ID
+        /// </summary>
+        public string CourseId { get; set; }
+
+        /// <summary>
+        /// 签到时间
+        /// </summary>
+        public DateTime SignDate { get; set; }
+
+        /// <summary>
+        /// 签退时间
+        /// </summary>
+        public DateTime SignOutDate { get; set; }
     }
 }
