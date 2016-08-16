@@ -210,28 +210,41 @@ namespace Services.Course.CourseControl
         }
         #endregion
 
-
+        /// <summary>
+        /// 批量修改报名数据方法
+        /// </summary>
+        /// <param name="courseStudentDtos"></param>
+        /// <returns></returns>
         public bool BatchRegistration(List<CourseStudentDto> courseStudentDtos )
         {
-            try
-            {
-
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-
-                    foreach (var courseStudentDto in courseStudentDtos)
+                    string sql = @"UPDATE `tb_coursestudent` SET `SignDate`=@SignDate,`SignOutDate`=@SignOutDate WHERE `StudentId`=@StudentId AND                                            `CourseId`=@CourseId";
+                    var trans = connection.BeginTransaction();
+                    try
                     {
-                        
-                    }
-                }
+                        foreach (var courseStudentDto in courseStudentDtos)
+                        {
+                            connection.Execute(sql, new
+                            {
+                                SignDate = courseStudentDto.SignDate,
+                                SignOutDate = courseStudentDto.SignOutDate,
+                                StudentId = courseStudentDto.StudentId,
+                                CourseId = courseStudentDto.CourseId
+                            }, trans);
+                        }
+                        trans.Commit();
+                        return true;
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                LogHelper.WriteLog(string.Format("CourseStudentService.BatchRegistration({0})", courseStudentDtos), ex);
-                return false;
-            }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.WriteLog(string.Format("CourseStudentService.Registration({0})", courseStudentDtos), ex);
+                        trans.Rollback();
+                        return false;
+                    }
+                   
+                }
         }
 
     }

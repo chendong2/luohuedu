@@ -6,8 +6,10 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.Services.Protocols;
+using BusinessObject.Course;
 using BusinessObject.WSBo;
 using LuoHuEduWebService.Common;
+using Newtonsoft.Json;
 using Services.Course.CourseControl;
 
 namespace LuoHuEduWebService.CourseInfo
@@ -83,6 +85,17 @@ namespace LuoHuEduWebService.CourseInfo
             if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return false;
             var course=new CourseStudentService();
             return course.Registration(signDate, signOutDate, studentId, courseId);
+        }
+
+        [ScriptMethod]
+        [WebMethod]
+        [SoapHeader("htSoapHeader", Direction = SoapHeaderDirection.InOut | SoapHeaderDirection.Fault)]
+        public bool BatchRegistration(string jsonParm)
+        {
+            if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return false;
+            var course = new CourseStudentService();
+            var list = JsonConvert.DeserializeObject<List<CourseStudentDto>>(jsonParm);
+            return course.BatchRegistration(list);
         }
     }
 }
