@@ -320,8 +320,8 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
                 throw new ArgumentNullException("courseBo");
             try
             {
-                var sqlStr = @"UPDATE `tb_course` SET CourseState=@CourseState，AduitTime=@AduitTime，FirstAduit=@FirstAduit，
-                                EndAduit=@EndAduit，CenterAduit=@CenterAduit
+                var sqlStr = @"UPDATE `tb_course` SET CourseState=@CourseState,AduitTime=@AduitTime,FirstAduit=@FirstAduit,
+                                EndAduit=@EndAduit,CenterAduit=@CenterAduit
                                 WHERE Id=@Id
                                 ";
                 using (var connection = DataBaseConnection.GetMySqlConnection())
@@ -477,7 +477,81 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
         #endregion 
 
         #region "培训课程信息加权限判断"
+        public Page<CourseBo> GetRoleCourseList(int page, int rows, string order, string sort, CourseBo courseBo, string studentId)
+        {
+            int count = 0;
+            int pageIndex = 0;
+            int pageSize = 0;
+            if (page < 0)
+            {
+                pageIndex = 0;
+            }
+            else
+            {
+                pageIndex = (page - 1) * rows;
+            }
+            pageSize = page * rows;
+            var pageList = new Page<CourseBo>();
 
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
+                                            INNER JOIN tb_subject AS s ON c.Subject=s.Id
+                                            INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
+					                        INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`                                
+                                            WHERE 1=1
+                                             ");
+
+            //允许所有教师报名
+            if (courseBo.Requirement != 2)
+            {
+                
+            }
+            //if (courseBo != null)
+            //{
+            //    //课程名称查询
+            //    if (courseBo.CourseName != null)
+            //    {
+            //        strSql += "and c.CourseName Like @CourseName ";
+            //    }
+            //    //课程代码查询
+            //    if (courseBo.CourseCode != null)
+            //    {
+            //        strSql += " and c.CourseCode=@CourseCode ";
+            //    }
+            //}
+
+            switch (sort)
+            {
+                case "TheYear":
+                    strSql += " order by TheYear " + order;
+                    break;
+            }
+
+
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                count = context.Query<CourseBo>(strSql,
+                                            new
+                                            {
+                                                StudentId = studentId
+                                            }).Count();
+                strSql += " limit @pageindex,@pagesize";
+
+                var list = context.Query<CourseBo>(strSql,
+                                                new
+                                                {
+                                                    StudentId = studentId,
+                                                    pageindex = pageIndex,
+                                                    pagesize = pageSize
+                                                }).ToList();
+
+                pageList.ListT = list;
+                pageList.PageIndex = page;
+                pageList.PageSize = rows;
+                pageList.TotalCount = count;
+            }
+
+            return pageList;
+        }
         #endregion
     }
 }
