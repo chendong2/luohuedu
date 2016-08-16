@@ -26,16 +26,21 @@ using(easyloader.defaultReferenceModules, function () {
                     return btn;
                 } 
             },
-             { field: 'Aduit1', title: '锁定', width: 50,
+             { field: 'Lock', title: '锁定', width: 50,
                  formatter: function (value, rec) {
                      var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">锁定</a>';
                      return btn;
                  }
              },
-
-            { field: 'Aduit2', title: '报表', width: 50,
+            { field: 'Report', title: '报表', width: 50,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">查看</a>';
+                    return btn;
+                }
+            },
+            {field: 'Manage', title: '管理', width: 50,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">管理</a>';
                     return btn;
                 }
             },
