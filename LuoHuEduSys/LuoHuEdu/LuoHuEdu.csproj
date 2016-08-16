@@ -1221,6 +1221,8 @@
     <Content Include="DLL\Json.NET4.5.6.14930\Newtonsoft.Json.dll" />
     <Content Include="DLL\log4net\log4net.dll" />
     <Content Include="DLL\mysql\MySql.Data.dll" />
+    <Content Include="DLL\net40\Newtonsoft.Json.dll" />
+    <Content Include="DLL\net40\Newtonsoft.Json.xml" />
     <Content Include="DLL\ZXing\zxing.dll" />
     <Content Include="Export\Common\Template\SalaryList.xml" />
     <Content Include="Global.asax" />

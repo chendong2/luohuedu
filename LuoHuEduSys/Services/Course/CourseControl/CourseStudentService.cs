@@ -217,34 +217,34 @@ namespace Services.Course.CourseControl
         /// <returns></returns>
         public bool BatchRegistration(List<CourseStudentDto> courseStudentDtos )
         {
-                using (var connection = DataBaseConnection.GetMySqlConnection())
+            using (var connection = DataBaseConnection.GetMySqlConnection())
+            {
+                string sql = @"UPDATE `tb_coursestudent` SET `SignDate`=@SignDate,`SignOutDate`=@SignOutDate WHERE `StudentId`=@StudentId AND                                            `CourseId`=@CourseId";
+                var trans = connection.BeginTransaction();
+                try
                 {
-                    string sql = @"UPDATE `tb_coursestudent` SET `SignDate`=@SignDate,`SignOutDate`=@SignOutDate WHERE `StudentId`=@StudentId AND                                            `CourseId`=@CourseId";
-                    var trans = connection.BeginTransaction();
-                    try
+                    foreach (var courseStudentDto in courseStudentDtos)
                     {
-                        foreach (var courseStudentDto in courseStudentDtos)
+                        connection.Execute(sql, new
                         {
-                            connection.Execute(sql, new
-                            {
-                                SignDate = courseStudentDto.SignDate,
-                                SignOutDate = courseStudentDto.SignOutDate,
-                                StudentId = courseStudentDto.StudentId,
-                                CourseId = courseStudentDto.CourseId
-                            }, trans);
-                        }
-                        trans.Commit();
-                        return true;
+                            SignDate = courseStudentDto.SignDate,
+                            SignOutDate = courseStudentDto.SignOutDate,
+                            StudentId = courseStudentDto.StudentId,
+                            CourseId = courseStudentDto.CourseId
+                        }, trans);
+                    }
+                    trans.Commit();
+                    return true;
 
-                    }
-                    catch (Exception ex)
-                    {
-                        LogHelper.WriteLog(string.Format("CourseStudentService.Registration({0})", courseStudentDtos), ex);
-                        trans.Rollback();
-                        return false;
-                    }
-                   
                 }
+                catch (Exception ex)
+                {
+                    LogHelper.WriteLog(string.Format("CourseStudentService.Registration({0})", courseStudentDtos), ex);
+                    trans.Rollback();
+                    return false;
+                }
+                   
+            }
         }
 
     }
