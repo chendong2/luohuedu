@@ -476,7 +476,7 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
         }
         #endregion 
 
-        #region "培训课程信息"
+        #region "培训课程信息加权限判断"
 
         #endregion
     }

@@ -92,10 +92,10 @@ namespace BusinessObject.Course
         public int Requirement{ get; set; }
 
         /// 授课对象（1幼儿教师，2小学教师，3初中教师，4高中教师，5其他）
-        public int TeachingObject{ get; set; }
+        public string TeachingObject{ get; set; }
 
         /// 授课对象编制（1在编教师，2非在编教师）
-        public int ObjectEstablish{ get; set; }
+        public string ObjectEstablish{ get; set; }
 
         /// 授课对象学科（对应多个学科，可以用逗号分离）
         public string ObjectSubject{ get; set; }

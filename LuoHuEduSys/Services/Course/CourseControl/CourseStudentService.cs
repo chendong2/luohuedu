@@ -209,5 +209,30 @@ namespace Services.Course.CourseControl
             }
         }
         #endregion
+
+
+        public bool BatchRegistration(List<CourseStudentDto> courseStudentDtos )
+        {
+            try
+            {
+
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+
+                    foreach (var courseStudentDto in courseStudentDtos)
+                    {
+                        
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.BatchRegistration({0})", courseStudentDtos), ex);
+                return false;
+            }
+        }
+
     }
 }
