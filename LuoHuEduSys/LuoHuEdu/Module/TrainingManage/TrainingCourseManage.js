@@ -22,7 +22,7 @@ using(easyloader.defaultReferenceModules, function () {
             },
             {field:'Aduit', title:'审核',width:50,  
                 formatter: function(value, rec) {
-                    var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">审核</a>';
+                    var btn = '<a class="editcls" onclick="courseAudit(\'' + rec.Id + '\')" href="javascript:void(0)">审核</a>';
                     return btn;
                 } 
             },
@@ -135,6 +135,12 @@ function loadPartialHtml() {
             href: '/View/TrainingManage/TrainingCourseManage/RegisterSet.htm',
             onLoad: function () {
                 
+            }
+        });
+        panel('courseAuditFormTemplate', {
+            href: '/View/TrainingManage/TrainingCourseManage/CourseAudit.htm',
+            onLoad: function () {
+
             }
         });
     }
@@ -486,3 +492,50 @@ function getAllPrivateSchool() {
         }
     });
 }
+
+//点击“审核”按钮
+function courseAudit(courseid) {
+    ajaxCRUD({
+        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
+        data: "{id:'" + courseid + "'}",
+        success: function (data) {
+
+            openDialog('courseAuditDlg', {
+                title: '课程审核',
+                iconCls: 'icon-edit'
+            });
+
+            //JSON数据填充表单
+            loadDataToForm('courseAuditForm', data);
+        }
+    });
+}
+
+//保存“课程审核”表单数据
+function saveCourseAuditSetData() {
+
+    //    if (!formValidate('courseAuditForm')) {
+    //        return;
+    //    }
+    
+    var basicUrl = '/WebServices/Course/CourseWebServices.asmx/AduitSet';
+    var form2JsonObj = form2Json("courseAuditForm");
+    var form2JsonStr = JSON.stringify(form2JsonObj);
+    var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
+    //console.log(jsonDataStr);
+
+    ajaxCRUD({
+        url: basicUrl,
+        data: jsonDataStr,
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '修改成功', 'info');
+                closeFormDialog('courseAuditDlg');
+                refreshTable('dg');
+            } else {
+                msgShow('提示', '提交失败', 'info');
+            }
+        }
+    });
+
+} //saveCourseAuditSetData
