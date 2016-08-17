@@ -232,15 +232,14 @@ function Search() {
         pageNumber: 1,
         loader: function (param, success, error) {
             var studentData = {
-                page: param.page,
+                 page: param.page,
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                studentBo: {
-                    Name: $("#txtName").val().trim(),
-                    IDNo: $("#txtIDNo").val().trim(),
-                    SchoolName: $("#txtSchoolName").val().trim()
-                }
+                courseBo: {
+                    CourseName: $("#txtCourseName").val().trim()
+                },
+                studentId: $.cookie('UserId')
             };
             var paramStr = JSON.stringify(studentData);
 
