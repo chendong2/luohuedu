@@ -18,7 +18,7 @@
                         年度设定:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;"  name="TheYear" id="TheYear" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" disabled="disabled"   name="TheYear" id="TheYear" class="easyui-validatebox" data-options="required:true">
                            
                         </select>
                     </td>
@@ -26,7 +26,7 @@
                         培训类型:
                     </td>
                     <td class="td_left">
-                        <select id="ddlTrainType" name="TrainType"  class="easyui-combobox" style="width: 140px;" class="easyui-validatebox" data-options="required:true">
+                        <select id="ddlTrainType" name="TrainType" disabled="disabled"  class="easyui-combobox" style="width: 140px;" class="easyui-validatebox" data-options="required:true">
                                        
                         </select>
                     </td>
@@ -36,7 +36,7 @@
                         培训科目:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" comboname="Subject" id="Subject" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" class="easyui-combobox" disabled="disabled" comboname="Subject" id="Subject" class="easyui-validatebox" data-options="required:true">
                            
                         </select>
                     </td>
@@ -44,7 +44,7 @@
                         课程名称:
                     </td>
                     <td class="td_left">
-                        <input type="text" name="CourseName" maxlength="50" style="width: 136px">
+                        <input type="text" name="CourseName" readonly="readonly" maxlength="50" style="width: 136px">
                     </td>
                 </tr>
                 <tr>
@@ -52,13 +52,13 @@
                         授课教师电话:
                     </td>
                     <td class="td_left">
-                        <input type="text" name="Phone" maxlength="20" style="width: 136px" >
+                        <input type="text" name="Phone" readonly="readonly" maxlength="20" style="width: 136px" >
                     </td>
                     <td class="td_right">
                         学时:
                     </td>
                     <td class="td_left">
-                        <input type="text" name="Period" maxlength="20" style="width: 136px" >
+                        <input type="text" name="Period" readonly="readonly" maxlength="20" style="width: 136px" >
                     </td>
                 </tr>
                 <tr>
@@ -66,13 +66,13 @@
                         培训费用:
                     </td>
                     <td class="td_left">
-                        <input type="text" name="Cost" maxlength="20" style="width: 136px" >
+                        <input type="text" name="Cost" readonly="readonly" maxlength="20" style="width: 136px" >
                     </td>
                     <td class="td_right">
                         收费对象:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" name="ChargeObj" id="ChargeObj" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" class="easyui-combobox" disabled="disabled" name="ChargeObj" id="ChargeObj" class="easyui-validatebox" data-options="required:true">
                             <option value="1">所有</option>
                             <option value="2">在编教师</option>
                             <option value="3">非在编教师</option>
@@ -84,7 +84,7 @@
                         考勤设定:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" name="SetCheck" id="SetCheck" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" class="easyui-combobox"  disabled="disabled" name="SetCheck" id="SetCheck" class="easyui-validatebox" data-options="required:true">
                             <option value="1">签到考勤</option>
                             <option value="2">课时量考勤</option>
                         </select>
@@ -93,7 +93,7 @@
                         选修/必修:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" name="IsMust" id="ddlIsMust" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" class="easyui-combobox"  disabled="disabled" name="IsMust" id="ddlIsMust" class="easyui-validatebox" data-options="required:true">
                             <option value="1">选修</option>
                             <option value="2">必修</option>
                         </select>
@@ -104,13 +104,13 @@
                         课程开始时间:
                     </td>
                     <td class="td_left">
-                        <input type="text" class="easyui-datetimebox" name="TimeStart" id="txtTimeStart" maxlength="20" style="width: 145px;" />
+                        <input type="text" class="easyui-datetimebox" readonly="readonly" name="TimeStart" id="txtTimeStart" maxlength="20" style="width: 145px;" />
                     </td>
                     <td class="td_right">
                         课程结束时间:
                     </td>
                     <td class="td_left">
-                        <input type="text" class="easyui-datetimebox" name="TimeEnd" id="txtTimeEnd" maxlength="20" style="width: 145px;" />
+                        <input type="text" class="easyui-datetimebox" readonly="readonly" name="TimeEnd" id="txtTimeEnd" maxlength="20" style="width: 145px;" />
                     </td>
                 </tr>
                 <tr>
@@ -118,13 +118,13 @@
                         培训地点:
                     </td>
                     <td class="td_left">
-                        <input type="text" name="Address" id="txtAddress" maxlength="20" style="width:320px;" />
+                        <input type="text" name="Address" id="txtAddress" readonly="readonly" maxlength="20" style="width:320px;" />
                     </td>
                     <td class="td_right">
                         额定人数:
                     </td>
                     <td class="td_left">
-                        <input type="text" name="MaxNumber" id="txtMaxNumber" maxlength="20" style="width:145px;" />
+                        <input type="text" name="MaxNumber" readonly="readonly" id="txtMaxNumber" maxlength="20" style="width:145px;" />
                     </td>
                 </tr>
                 <tr>
@@ -132,13 +132,13 @@
                         预报设定:
                     </td>
                     <td class="td_left">
-                        超出额定人数允许报名<input type="checkbox" name="SetApply" value="0" />
+                        超出额定人数允许报名<input type="checkbox" readonly="readonly" name="SetApply" value="0" />
                     </td>
                     <td class="td_right">
                         组织单位:
                     </td>
                     <td class="td_left">
-                        <select style="width: 145px;" class="easyui-combobox" name="OrganizationalName" id="ddlOrganizationalName" class="easyui-validatebox" data-options="required:true">
+                        <select style="width: 145px;" class="easyui-combobox"  disabled="disabled" name="OrganizationalName" id="ddlOrganizationalName" class="easyui-validatebox" data-options="required:true">
                            
                         </select>
                     </td>
@@ -154,7 +154,7 @@
                     设计思想:
                 </td>
                 <td class="td_left">
-                   <textarea rows="2" cols="100" id="txtDesignIdea" name='DesignIdea' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                   <textarea rows="2" cols="100" id="txtDesignIdea" readonly="readonly" name='DesignIdea' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
                 </td>
             </tr>
             <tr>
@@ -162,7 +162,7 @@
                    培训目标:
                 </td>
                 <td class="td_left">
-                    <textarea rows="2" cols="100" id="txtTrainingAim" name='TrainingAim' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                    <textarea rows="2" cols="100" id="txtTrainingAim" readonly="readonly" name='TrainingAim' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
                 </td>
             </tr>
             <tr>
@@ -170,7 +170,7 @@
                    课程主要内容:
                 </td>
                 <td class="td_left">
-                     <textarea rows="2" cols="100" id="txtMainComment" name='MainComment' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                     <textarea rows="2" cols="100" id="txtMainComment" name='MainComment'  readonly="readonly" class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
                 </td>
             </tr>
             <tr>
@@ -178,7 +178,7 @@
                     课程开发特色:
                 </td>
                 <td class="td_left">
-                    <textarea rows="2" cols="100" id="txtDistinctive" name='Distinctive' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                    <textarea rows="2" cols="100" id="txtDistinctive" name='Distinctive'  readonly="readonly" class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
                 </td>
             </tr>
             <tr>
@@ -186,7 +186,7 @@
                    预期效果分析:
                 </td>
                 <td class="td_left">
-                     <textarea rows="2" cols="100" id="txtEffectAnalysis" name='EffectAnalysis' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                     <textarea rows="2" cols="100" id="txtEffectAnalysis" readonly="readonly" name='EffectAnalysis' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
                 </td>
             </tr>
         </table>
