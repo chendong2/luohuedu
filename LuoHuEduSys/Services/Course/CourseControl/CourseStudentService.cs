@@ -210,6 +210,32 @@ namespace Services.Course.CourseControl
                 return false;
             }
         }
+
+
+        public bool DeleteCourseStudent(String ids)
+        {
+
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    String[] idArray = ids.Split(',');
+                    for (int i = 0; i < idArray.Length; i++)
+                    {
+                        CourseStudentDto sBo = new CourseStudentDto();
+                        sBo.Id = idArray[i];
+                        var sqlStr = @"delete from  tb_coursestudent where id=@Id;";
+                        connection.Execute(sqlStr, sBo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentExemptionService.DeleteCourseStudent({0})异常", ids), ex);
+                return false;
+            }
+            return false;
+        }
         #endregion
 
         /// <summary>

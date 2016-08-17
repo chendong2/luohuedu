@@ -141,5 +141,19 @@ namespace LuoHuEdu.WebServices.Course
             var list = courseStudent.GetCourseStudentByCourseId(courseId);
             return list;
         }
+
+
+        #region "删除报名学员信息"
+
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool DeleteCourseStudent(String ids)
+        {
+            var courseStudent = new CourseStudentService();
+            return courseStudent.DeleteCourseStudent(ids);
+        }
+
+
+        #endregion
     }
 }
