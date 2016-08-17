@@ -103,9 +103,17 @@ namespace BusinessObject.Course
         /// 课程状态（1待审核状态，2审核通过并开放，3审核不通过）
         public int CourseState{ get; set; }
 
-        /// 审批时间
+        /// <summary>
+        /// 审核时间
+        /// </summary>
+        [ScriptIgnore]
         public DateTime AduitTime{ get; set; }
 
+        public string AduitTimeStr
+        {
+            get { return AduitTime.ToString("yyyy-MM-dd"); }
+            set {AduitTime= Convert.ToDateTime(value); }
+        }
         /// 学科评审意见（初审）
         public string FirstAduit{ get; set; }
 
