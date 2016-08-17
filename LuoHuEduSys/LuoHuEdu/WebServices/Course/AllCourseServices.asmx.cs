@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
+using BusinessObject.AdminBo;
 using BusinessObject.Course;
+using Services.Admin.StudentControl;
 using Services.Course.CourseControl;
 
 namespace LuoHuEdu.WebServices.Course
@@ -59,6 +61,29 @@ namespace LuoHuEdu.WebServices.Course
 
             var courseService = new AllCourseService();
             var list = courseService.GetTeacherMessage(page, rows, sort, order, courseBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
+
+
+        //培训课程信息列表
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetPerStudents(int page, int rows, string order, string sort, CourseBo courseBo,
+            string studentId)
+        {
+            var courseService = new AllCourseService();
+            var list = courseService.GetPerStudents(page, rows, sort, order, courseBo, studentId);
             if (list != null)
             {
                 return new

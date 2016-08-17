@@ -4,18 +4,18 @@
 /* 包含列表的绑定,增删改查
 ***********************************/
 //easyloader.defaultReferenceModules表示默认引用easyui.public.js,如果当前IE7时会自动附加引用json2.min.js
+//var referenceModules = $.merge(['jqCookie'], easyloader.defaultReferenceModules);
 using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '培训课程管理',
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'CourseName', title: '课程名称', width: 150 },
             { field: 'TheYear', title: '年度', width: 150 },
             { field: 'TrainType', title: '培训类型', width: 140 },
 
-            { field: 'Subject', title: '培训科目', width: 80 },
+            { field: 'SubjectName', title: '培训科目', width: 80 },
             { field: 'Phone', title: '联系电话', width: 80 },
             { field: 'Period', title: '学时', width: 80 },
             { field: 'Cost', title: '培训费用', width: 80 },
@@ -31,9 +31,9 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'Address', title: '培训地址', width: 70, sortable: true },
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
             { field: 'SetApply', title: '超出额定人数设定', width: 80 },
-            { field: 'OrganizationalName', title: '组织单位名称', width: 80 },
-            { field: 'CourseDate', title: '培训日期', width: 50 },
-            { field: 'TimeStart', title: '培训时间', width: 50 },
+            { field: 'SchoolName', title: '组织单位名称', width: 80 },
+            { field: 'TimeStartStr', title: '培训开始', width: 50 },
+            { field: 'TimeEndStr', title: '培训结束', width: 50 },
             { field: 'CourseCode', title: '课程代码', width: 50 }
 
         ]],
@@ -44,17 +44,19 @@ using(easyloader.defaultReferenceModules, function () {
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
+            //alert();
             var studentData = {
                 page: param.page,
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                studentBo: {}
+                courseBo: {},
+                studentId: $.cookie('UserId')
             };
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Course/AllCourseServices.asmx/GetPerStudents',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -100,7 +102,7 @@ function loadPartialHtml() {
     }
 }
 
-var moduleName = '学员信息管理-';
+var moduleName = '学员管理-';
 
 //点击“新增”按钮
 function addData() {
@@ -109,7 +111,6 @@ function addData() {
         iconCls: 'icon-add'
     });
     getAllSchool();
-    getAllSubject();
     resetFormAndClearValidate('ff');
 }
 
@@ -126,7 +127,6 @@ function editData() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
-    getAllSubject();
     getAllSchool();
     ajaxCRUD({
         url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
@@ -157,26 +157,6 @@ function getAllSchool() {
                 var value = data[i].toString().split('******');
                 var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
                 $("#sSchool").append(option);
-            }
-        }
-    });
-}
-
-function getAllSubject() {
-    $("#sFirstTeaching").empty();
-    $("#sSecondTeaching").empty();
-    var option = "<option value=''>未设定</option>";
-    $("#sFirstTeaching").append(option);
-    $("#sSecondTeaching").append(option);
-    ajaxCRUD({
-        url: '/WebServices/Parameter/Subject.asmx/GetAllSubject',
-        async: false,
-        success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var value = data[i].toString().split('******');
-                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
-                $("#sFirstTeaching").append(option);
-                $("#sSecondTeaching").append(option);
             }
         }
     });
@@ -265,7 +245,7 @@ function Search() {
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Course/AllCourseServices.asmx/GetPerStudents',
                 data: paramStr,
                 success: function (data) {
                     success(data);

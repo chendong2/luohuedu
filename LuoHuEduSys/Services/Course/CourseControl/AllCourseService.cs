@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BusinessObject.AdminBo;
 using BusinessObject.Course;
 using Dapper;
 using Domain.common;
@@ -144,6 +145,36 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
                                                 {
                                                     SchoolName = string.Format("%{0}%", courseBo.SchoolName),
                                                     TeacherName = string.Format("%{0}%", courseBo.TeacherName),
+                                                    pageindex = pageIndex,
+                                                    pagesize = pageSize
+                                                }).ToList();
+
+                pageList.ListT = list;
+                pageList.PageIndex = page;
+                pageList.PageSize = rows;
+                pageList.TotalCount = count;
+            }
+
+            return pageList;
+        }
+
+
+
+        //培训课程信息列表
+        {
+            int count = 0;
+            int pageIndex = 0;
+            int pageSize = 0;
+            if (page < 0)
+            {
+                pageIndex = 0;
+            }
+            else
+            {
+                pageIndex = (page - 1) * rows;
+            }
+            pageSize = page * rows;
+
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
