@@ -11,15 +11,22 @@ using(easyloader.defaultReferenceModules, function () {
     var dataGridOptions = {
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'CourseName', title: '课程名称', width: 150 },
-            { field: 'TheYear', title: '年度', width: 150 },
-            { field: 'TrainType', title: '培训类型', width: 140 },
+             { field: '1', title: '报名', width: 60, formatter: function (value, rec) {
+                 return '<a style="color:red;cursor:pointer" onclick="baoming(\'' + rec.Id + '\')" href="javascript:void(0)">报名</a>';
+             }
+             },
+            { field: 'CourseName', title: '课程名称', width:80, formatter: function (value, rec) {
+                return '<a style="color:red;cursor:pointer" onclick="kecheng(\'' + rec.Id + '\')" href="javascript:void(0)">' + value + '</a>';
+            } 
+            },
+            { field: 'TheYear', title: '年度', width: 80 },
+            { field: 'TrainType', title: '培训类型', width: 80 },
 
             { field: 'SubjectName', title: '培训科目', width: 80 },
             { field: 'Phone', title: '联系电话', width: 80 },
             { field: 'Period', title: '学时', width: 80 },
             { field: 'Cost', title: '培训费用', width: 80 },
-            { field: 'SetCheck', title: '考勤设定', width: 50 },
+            { field: 'SetCheck', title: '考勤设定', width: 70 },
             { field: 'IsMust', title: '种类', width: 60, formatter: function (value) {
                 if (value == 1)
                     return '<span>选修</span>';
@@ -29,12 +36,12 @@ using(easyloader.defaultReferenceModules, function () {
             },
 
             { field: 'Address', title: '培训地址', width: 70, sortable: true },
-            { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
-            { field: 'SetApply', title: '超出额定人数设定', width: 80 },
-            { field: 'SchoolName', title: '组织单位名称', width: 80 },
-            { field: 'TimeStartStr', title: '培训开始', width: 50 },
-            { field: 'TimeEndStr', title: '培训结束', width: 50 },
-            { field: 'CourseCode', title: '课程代码', width: 50 }
+            { field: 'MaxNumber', title: '额定人数', width: 70, sortable: true },
+            { field: 'SetApply', title: '超出额定人数设定', width:100 },
+            { field: 'SchoolName', title: '组织单位名称', width: 100 },
+            { field: 'TimeStartStr', title: '培训开始', width: 70 },
+            { field: 'TimeEndStr', title: '培训结束', width: 70 },
+            { field: 'CourseCode', title: '课程代码', width: 60 }
 
         ]],
         singleSelect: false,
@@ -66,9 +73,6 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             });
 
-        },
-        onDblClickRow: function (rowIndex, rowData) {
-            fillForm(rowData.Id);
         }
     };
 
@@ -92,135 +96,123 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/Admin/Student/StudentForm.htm',
+            href: '/View/Course/TrainingCourseForm.htm',
             onLoad: function () {
-                //                setValidatebox('Name', {
-                //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
-                //                });
             }
         });
     }
 }
 
-var moduleName = '学员管理-';
+function kecheng(id) {
 
-//点击“新增”按钮
-function addData() {
-    openDialog('dlg', {
-        title: moduleName + '新增',
-        iconCls: 'icon-add'
-    });
-    getAllSchool();
-    resetFormAndClearValidate('ff');
-}
-
-//点击“编辑”按钮
-function editData() {
-    var row = getSelectedRow('dg');
-    if (row == null) {
-        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
-    } else {
-        resetFormAndClearValidate('ff');
-        fillForm(row.Id);
-    }
-}
-
-//获取JSON数据并填充到相应表单
-function fillForm(itemid) {
-    getAllSchool();
+    getAllTrainType("ddlTrainType", true);
+    getAllSchool("ddlOrganizationalName", true);
+    getAllSubject("Subject", true);
+    getTheYear();
     ajaxCRUD({
-        url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
-        data: "{id:'" + itemid + "'}",
+        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
+        data: "{id:'" + id + "'}",
         success: function (data) {
             openDialog('dlg', {
-                title: moduleName + '编辑',
+                title: '课程信息查看',
                 iconCls: 'icon-edit'
             });
             $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
             loadDataToForm('ff', data);
-            var bir = $("#txtBirthday").val();
-            bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-            $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
         }
     });
 }
 
-//获取全部的免修数据
-function getAllSchool() {
+//获取所有培训类型数据，用于绑定下拉框
+function getAllTrainType(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Parameter/TrainType.asmx/GetAllTrainTypeNew';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'TrainType': '请选择' });
+            }
+            initCombobox(ddlRoute, "Id", "TrainType", data, true);
+        }
+    });
+}
+
+
+//获取所有培训类型数据，用于绑定下拉框
+function getAllSubject(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Parameter/Subject.asmx/GetAllSubjectNew';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'SubjectName': '请选择' });
+            }
+            initCombobox(ddlRoute, "Id", "SubjectName", data, true);
+        }
+    });
+}
+
+//获取所有学校数据，用于绑定下拉框
+function getAllSchool(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetAllSchoolNew';
     $("#sSchool").empty();
     ajaxCRUD({
-        url: '/WebServices/Parameter/School.asmx/GetAllSchool',
         async: false,
+        url: webserviceUrl,
+        data: '{}',
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var value = data[i].toString().split('******');
-                var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
-                $("#sSchool").append(option);
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'SchoolName': '请选择' });
             }
+            initCombobox(ddlRoute, "Id", "SchoolName", data, true);
         }
     });
 }
 
-//保存表单数据
-function saveData() {
-    if (!formValidate('ff')) {
-        return;
+//获取年份数据，用于绑定下拉框
+function getTheYear() {
+    var currentYear = new Date().getFullYear();
+    $("#TheYear").empty();
+    for (var i = 1; i <= 15; i++) {
+        var data = currentYear - i + "-" + (currentYear - i + 1);
+        var option = "<option  value='" + data + "'>" + data + "</option>";
+        $("#TheYear").append(option);
     }
+}
 
-    var hidValue = $("#HidId").val();
-    var basicUrl = '/WebServices/Admin/Student.asmx/';
 
-    var wsMethod = '';
-    if (hidValue.length > 0) {
-        wsMethod = "UpdateStudent"; //修改
-    } else {
-        wsMethod = "AddStudent"; //新增
-    }
 
-    var formUrl = basicUrl + wsMethod;
 
-    var form2JsonObj = form2Json("ff");
-    var form2JsonStr = JSON.stringify(form2JsonObj);
-    var jsonDataStr = "{studentBo:" + form2JsonStr + "}";
 
-    ajaxCRUD({
-        url: formUrl,
-        data: jsonDataStr,
-        success: function (data) {
-            var msg = '';
-            if (hidValue.length > 0) {
-                msg = "修改成功"; //修改
-            } else {
-                msg = "新增成功,用户初始密码为六个零000000"; //新增
-            }
-            if (data == true) {
-                msgShow('提示', msg, 'info');
-                closeFormDialog();
-                refreshTable('dg');
-            } else {
-                msgShow('提示', '提交失败', 'info');
-            }
-        }
-    });
-} // end saveData()
 
 //批量删除前台提示
-function deleteDatas() {
-    deleteItems('dg', deleteDatasAjax);
+function baoming(id) {
+    $.messager.confirm('课程报名', '确定要报名此课程吗？', function (r) {
+        if (r) {
+            baomingData(id);
+        }
+    });
 }
 
 //批量删除后台AJAX处理
-function deleteDatasAjax(str) {
+function baomingData(str) {
     ajaxCRUD({
-        url: '/WebServices/Admin/Student.asmx/DeleteStudentsByIds',
-        data: "{ids:'" + str + "'}",
+        url: '/WebServices/Course/AllCourseServices.asmx/AddCourseStudent',
+        data: "{userId:'" + $.cookie('UserId') + "',courseId:'" + str + "'}",
         success: function (data) {
             if (data == true) {
-                msgShow('提示', '删除成功', 'info');
+                msgShow('提示', '报名成功', 'info');
                 refreshTable('dg');
             } else {
-                msgShow('提示', '删除失败', 'info');
+                msgShow('提示', '报名失败', 'info');
             }
         }
     });

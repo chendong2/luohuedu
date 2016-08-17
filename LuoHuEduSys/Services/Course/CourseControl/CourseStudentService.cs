@@ -140,7 +140,8 @@ namespace Services.Course.CourseControl
                                      `TaskName`,
                                      `TaskUrl`,
                                      `SignDate`,
-                                     `SignOutDate`)
+                                     `SignOutDate`,
+                                     `CourseId`)
                                     VALUES (@Id,
                                             @CourseNumber,
                                             @StudentId,
@@ -149,7 +150,8 @@ namespace Services.Course.CourseControl
                                             @TaskName,
                                             @TaskUrl,
                                             @SignDate,
-                                            @SignOutDate);";
+                                            @SignOutDate,
+                                            @CourseId);";
                     int row = connection.Execute(strSql, studentBo);
                     if (row > 0)
                     {

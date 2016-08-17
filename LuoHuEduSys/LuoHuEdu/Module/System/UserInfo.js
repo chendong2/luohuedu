@@ -9,7 +9,7 @@ ajaxCRUD({
         //JSON数据填充表单
         loadDataToForm('ff', data);
         var bir = $("#txtBirthday").val();
-        bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
+        bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a); });
         $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
     }
 });

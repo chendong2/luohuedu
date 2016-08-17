@@ -97,5 +97,19 @@ namespace LuoHuEdu.WebServices.Course
                 return new { total = 0, rows = 0 };
             }
         }
+
+        //报名方法
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool AddCourseStudent(string userId, string courseId)
+        {
+            var courseService = new CourseStudentService();
+            var studentBo = new CourseStudentDto();
+            studentBo.CourseId = courseId;
+            studentBo.StudentId = userId;
+            studentBo.Sign = 1;
+            studentBo.Feedback = 1;
+            return courseService.AddCourseStudent(studentBo);
+        }
     }
 }
