@@ -178,11 +178,16 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
             var pageList = new Page<CourseBo>();
 
             string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
-                                            INNER JOIN tb_subject AS s ON c.Subject=s.Id
-                                            INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
-					                        INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
-					                        INNER JOIN tb_coursestudent cs ON c.`Id`=cs.`CourseId`                                 
-                                            WHERE cs.`StudentId`=@StudentId
+INNER JOIN tb_subject AS s ON c.Subject=s.Id
+INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
+INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName` 
+INNER JOIN tb_coursestudent cs ON c.`Id`!=cs.CourseId  AND cs.`StudentId`=@StudentId                
+WHERE c.Requirement=1 OR 
+EXISTS( SELECT * FROM tb_student st INNER JOIN tb_subject su ON st.`FirstTeaching`=su.`Id` 
+INNER JOIN tb_subject su1 ON st.`SecondTeaching`=su1.`Id`
+WHERE POSITION(st.StudyPeriod IN c.TeachingObject)>0 AND POSITION(st.Staffing IN c.ObjectEstablish)>0 
+AND (POSITION(su.`SubjectName` IN c.ObjectSubject)>0 OR POSITION(su1.`SubjectName` IN c.ObjectSubject)>0) 
+AND st.`Id`=@StudentId  ) 
                                              ");
            if (courseBo != null)
           {
