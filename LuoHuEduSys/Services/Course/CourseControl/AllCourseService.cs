@@ -184,19 +184,19 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
 					                        INNER JOIN tb_coursestudent cs ON c.`Id`=cs.`CourseId`                                 
                                             WHERE cs.`StudentId`=@StudentId
                                              ");
-            //if (courseBo != null)
-            //{
-            //    //课程名称查询
-            //    if (courseBo.CourseName != null)
-            //    {
-            //        strSql += "and c.CourseName Like @CourseName ";
-            //    }
+           if (courseBo != null)
+          {
+               //课程名称查询
+           if (courseBo.CourseName != null)
+              {
+                   strSql += "and c.CourseName Like @CourseName ";
+              }
             //    //课程代码查询
             //    if (courseBo.CourseCode != null)
             //    {
             //        strSql += " and c.CourseCode=@CourseCode ";
             //    }
-            //}
+          }
 
             switch (sort)
             {
@@ -211,7 +211,8 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
                 count = context.Query<CourseBo>(strSql,
                                             new
                                             {
-                                                StudentId = studentId
+                                                StudentId = studentId,
+                                                CourseName = string.Format("%{0}%", courseBo.CourseName)
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
@@ -219,6 +220,7 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
                                                 new
                                                 {
                                                     StudentId = studentId,
+                                                    CourseName = string.Format("%{0}%", courseBo.CourseName),
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();

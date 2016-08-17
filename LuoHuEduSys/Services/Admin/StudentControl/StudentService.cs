@@ -116,7 +116,7 @@ namespace Services.Admin.StudentControl
                     String id = Guid.NewGuid().ToString();
                     studentBo.Id = id;
                     studentBo.PassWord = "000000";
-                    var sqlStr = @"INSERT INTO tb_student(Id,LoginId,UserName,PassWord,SchoolId,Name,IDNo,Sex,Birthday,Origin,Minority,Profession,Professiontitles,Graduated,HighDegree,StudyPeriod,InCharge,Office,FirstTeaching,SecondTeaching,Address,PostCode,Phone,Telephone,Email,HighHonor,RegistrationCode) VALUES(@Id,@LoginId,@UserName,@PassWord,@SchoolId,@Name,@IDNo,@Sex,@Birthday,@Origin,@Minority,@Profession,@Professiontitles,@Graduated,@HighDegree,@StudyPeriod,@InCharge,@Office,@FirstTeaching,@SecondTeaching,@Address,@PostCode,@Phone,@Telephone,@Email,@HighHonor,@RegistrationCode);";
+                    var sqlStr = @"INSERT INTO tb_student(Id,LoginId,UserName,PassWord,SchoolId,Name,IDNo,Sex,Birthday,Origin,Minority,Profession,Professiontitles,Graduated,HighDegree,StudyPeriod,Staffing,InCharge,Office,FirstTeaching,SecondTeaching,Address,PostCode,Phone,Telephone,Email,HighHonor,RegistrationCode) VALUES(@Id,@LoginId,@UserName,@PassWord,@SchoolId,@Name,@IDNo,@Sex,@Birthday,@Origin,@Minority,@Profession,@Professiontitles,@Graduated,@HighDegree,@StudyPeriod,@InCharge,@Staffing,@Office,@FirstTeaching,@SecondTeaching,@Address,@PostCode,@Phone,@Telephone,@Email,@HighHonor,@RegistrationCode);";
                     int row = connection.Execute(sqlStr, studentBo);
                     if (row > 0)
                     {
@@ -180,7 +180,7 @@ namespace Services.Admin.StudentControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"update tb_student set SchoolId=@SchoolId,Name=@Name,IDNo=@IDNo,Sex=@Sex,Birthday=@Birthday,Origin=@Origin,Minority=@Minority,Profession=@Profession,Professiontitles=@Professiontitles,Graduated=@Graduated,HighDegree=@HighDegree,StudyPeriod=@StudyPeriod,InCharge=@InCharge,Office=@Office,FirstTeaching=@FirstTeaching,SecondTeaching=@SecondTeaching,Address=@Address,PostCode=@PostCode,Phone=@Phone,Telephone=@Telephone,Email=@Email,HighHonor=@HighHonor,RegistrationCode=@RegistrationCode where Id=@Id";
+                    var sqlStr = @"update tb_student set SchoolId=@SchoolId,Name=@Name,IDNo=@IDNo,Sex=@Sex,Birthday=@Birthday,Origin=@Origin,Minority=@Minority,Profession=@Profession,Professiontitles=@Professiontitles,Graduated=@Graduated,HighDegree=@HighDegree,StudyPeriod=@StudyPeriod,Staffing=@Staffing,InCharge=@InCharge,Office=@Office,FirstTeaching=@FirstTeaching,SecondTeaching=@SecondTeaching,Address=@Address,PostCode=@PostCode,Phone=@Phone,Telephone=@Telephone,Email=@Email,HighHonor=@HighHonor,RegistrationCode=@RegistrationCode where Id=@Id";
                     int row = connection.Execute(sqlStr, studentBo);
                     if (row > 0)
                     {

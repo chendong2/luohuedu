@@ -44,7 +44,7 @@
                     出生日期:
                  </td>
             <td class="td_left" style="width: 30%" >
-                <input id="txtBirthday" type="text" name="Birthday" style="width: 185px" maxlength="20"  class="easyui-validatebox" data-options="required:true" />
+                <input id="txtBirthday" type="text" name="Birthday" style="width: 185px" maxlength="20"  class="easyui-datebox" data-options="required:true" />
             </td>
         </tr> <tr>
            <td style="width: 20%" class="td_right">
@@ -103,7 +103,17 @@
                     <option value="4">高中</option>
                     <option value="5">其他</option>
                 </select>
-            </td><td style="width: 20%" class="td_right">
+            </td>
+            <td style="width: 20%" class="td_right">
+                     编制设定:
+                 </td>
+            <td class="td_left">
+                <select id="Staffing" name='Staffing' >
+                    <option value="1">非在编教师</option>
+                    <option value="2">在编教师</option>
+                </select>
+            </td>
+        </tr><tr><td style="width: 20%" class="td_right">
                      是否班主任:
                  </td>
             <td class="td_left">
@@ -112,69 +122,68 @@
                     <option value="2">否</option>
                 </select>
             </td>
-        </tr><tr>
            <td style="width: 20%" class="td_right">
                     职务:
                  </td>
             <td class="td_left" style="width: 30%" >
                 <input id="txtOffice" type="text" name="Office" style="width: 185px" maxlength="20"  class="easyui-validatebox"  />
-            </td><td style="width: 20%" class="td_right">
+            </td>
+              </tr><tr><td style="width: 20%" class="td_right">
                     第一任教学科（重要）:
                  </td>
             <td class="td_left" style="width: 30%" >
                <select id="sFirstTeaching" name='FirstTeaching' >
                 </select>
             </td>
-              </tr><tr>
            <td style="width: 20%" class="td_right">
                     第二任教学科（重要）:
                  </td>
             <td class="td_left" style="width: 30%" >
                 <select id="sSecondTeaching" name='SecondTeaching' >
                 </select>
-            </td><td style="width: 20%" class="td_right">
+            </td>
+              </tr><tr><td style="width: 20%" class="td_right">
                     家庭住址:
                  </td>
             <td class="td_left" style="width: 30%" >
                 <input id="txtAddress" type="text" name="Address" style="width: 185px" maxlength="20"  data-options="required:true"   class="easyui-validatebox"  />
             </td>
-              </tr><tr>
            <td style="width: 20%" class="td_right">
                     邮编:
                  </td>
             <td class="td_left" style="width: 30%" >
                 <input id="txtPostCode" type="text" name="PostCode" style="width: 185px" maxlength="20"  class="easyui-validatebox"  />
-            </td><td style="width: 20%" class="td_right">
+            </td>
+              </tr><tr><td style="width: 20%" class="td_right">
                     家庭电话:
                  </td>
             <td class="td_left" style="width: 30%" >
                 <input id="txtPhone" type="text" name="Phone" style="width: 185px" maxlength="20"  class="easyui-validatebox"  />
             </td>
-              </tr><tr>
            <td style="width: 20%" class="td_right">
                     手机:
                  </td>
             <td class="td_left" style="width: 30%" >
                 <input id="txtTelephone" type="text" name="Telephone" style="width: 185px"  data-options="required:true"  maxlength="20"  class="easyui-validatebox"  />
-            </td><td style="width: 20%" class="td_right">
+            </td>
+              </tr><tr><td style="width: 20%" class="td_right">
                     电子邮箱:
                  </td>
             <td class="td_left" style="width: 30%" >
                 <input id="txtEmail" type="text" name="Email" style="width: 185px" maxlength="20"  data-options="required:true"   class="easyui-validatebox" />
             </td>
-              </tr><tr>
            <td style="width: 20%" class="td_right">
                     荣获最高荣誉或者学术称号:
                  </td>
             <td class="td_left" style="width: 30%" >
                 <input id="txtHighHonor" type="text" name="HighHonor" style="width: 185px" maxlength="20"  class="easyui-validatebox" />
-            </td><td style="width: 20%" class="td_right">
+            </td>
+              </tr><tr><td style="width: 20%" class="td_right">
                     市注册码:
                  </td>
             <td class="td_left" style="width: 30%" >
                 <input id="txtRegistrationCode" type="text" name="RegistrationCode" style="width: 185px" maxlength="20"  class="easyui-validatebox" data-options="required:true" />
-            </td>
-              </tr>
+            </td></tr>
     </table>
     <div>
         <input id="HidName" type="hidden" />

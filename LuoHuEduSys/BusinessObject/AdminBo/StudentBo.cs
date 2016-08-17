@@ -59,6 +59,8 @@ namespace BusinessObject.AdminBo
 
         public int StudyPeriod { get; set; }
 
+        public int Staffing { get; set; }
+
         public int InCharge { get; set; }
 
         public string Office { get; set; }
