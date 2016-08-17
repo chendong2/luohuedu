@@ -161,6 +161,7 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
 
 
         //培训课程信息列表
+        public Page<CourseBo> GetPerStudents(int page, int rows, string order, string sort, CourseBo courseBo, string studentId)
         {
             int count = 0;
             int pageIndex = 0;
@@ -174,7 +175,50 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
                 pageIndex = (page - 1) * rows;
             }
             pageSize = page * rows;
+            var pageList = new Page<CourseBo>();
 
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
+                                            INNER JOIN tb_subject AS s ON c.Subject=s.Id
+                                            INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
+					                        INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
+					                        INNER JOIN tb_coursestudent cs ON c.`Id`=cs.`CourseId`                                 
+                                            WHERE cs.`StudentId`=@StudentId
+                                             ");
+            //if (courseBo != null)
+            //{
+            //    //课程名称查询
+            //    if (courseBo.CourseName != null)
+            //    {
+            //        strSql += "and c.CourseName Like @CourseName ";
+            //    }
+            //    //课程代码查询
+            //    if (courseBo.CourseCode != null)
+            //    {
+            //        strSql += " and c.CourseCode=@CourseCode ";
+            //    }
+            //}
+
+            switch (sort)
+            {
+                case "TheYear":
+                    strSql += " order by TheYear " + order;
+                    break;
+            }
+
+
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                count = context.Query<CourseBo>(strSql,
+                                            new
+                                            {
+                                                StudentId = studentId
+                                            }).Count();
+                strSql += " limit @pageindex,@pagesize";
+
+                var list = context.Query<CourseBo>(strSql,
+                                                new
+                                                {
+                                                    StudentId = studentId,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
