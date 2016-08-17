@@ -1313,6 +1313,7 @@
     <Content Include="View\TrainingManage\TeacherMessage\TeacherMessageList.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\CourseAudit.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\RegisterSet.htm" />
+    <Content Include="View\TrainingManage\TrainingCourseManage\StudentManage.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseAdvancedSearch.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseForm.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseList.htm" />

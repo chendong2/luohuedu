@@ -40,7 +40,7 @@ using(easyloader.defaultReferenceModules, function () {
             },
             {field: 'Manage', title: '管理', width: 50,
                 formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">管理</a>';
+                    var btn = '<a class="editcls" onclick="studentManage()" href="javascript:void(0)">学员管理</a>';
                     return btn;
                 }
             },
@@ -120,6 +120,9 @@ using(easyloader.defaultReferenceModules, function () {
 //easyloader.defaultTime为700ms
 setTimeout(loadPartialHtml, easyloader.defaultTime);
 
+
+
+
 //预先加载表单页面，提升打开表单弹出层的性能
 function loadPartialHtml() {
     if ($('.window').length == 0) {
@@ -139,6 +142,12 @@ function loadPartialHtml() {
         });
         panel('courseAuditFormTemplate', {
             href: '/View/TrainingManage/TrainingCourseManage/CourseAudit.htm',
+            onLoad: function () {
+
+            }
+        });
+        panel('studentManageTemplate', {
+            href: '/View/TrainingManage/TrainingCourseManage/StudentManage.htm',
             onLoad: function () {
 
             }
@@ -539,3 +548,126 @@ function saveCourseAuditSetData() {
     });
 
 } //saveCourseAuditSetData
+
+
+// 列表参数设置
+var smDataGridOptions = {
+
+    columns: [[
+            { field: 'Id', checkbox: true },
+            { field: 'Name', title: '姓名', width: 80, sortable: false },
+            { field: 'Sex', title: '性别', width: 60, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "男";
+                    } else {
+                        return "女";
+                    }
+                }
+            },
+            { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
+            { field: 'Office', title: '职务', width: 80, sortable: false }
+        ]],
+    singleSelect: false,
+    toolbar: '#studentManageToolbar',
+    sortName: 'Name',
+    sortOrder: 'desc',
+    rownumbers: true,
+    pagination: true,
+    loader: function (param, success, error) {
+        var studentData = {
+            page: param.page,
+            rows: param.rows,
+            order: param.order,
+            sort: param.sort,
+            studentBo: {}
+        };
+        var paramStr = JSON.stringify(studentData);
+
+        ajaxCRUD({
+            url: '/WebServices/Admin/Student.asmx/GetStudentList',
+            data: paramStr,
+            success: function (data) {
+                success(data);
+            },
+            error: function () {
+                error.apply(this, arguments);
+            }
+        });
+
+    },
+    onDblClickRow: function (rowIndex, rowData) {
+        //rowData.Id
+    }
+};
+
+//点击“学员管理”按钮
+function studentManage() {
+    openDialog('studentManageDlg', {
+        title: '学员管理',
+        iconCls: 'icon-edit',
+        onOpen: function () {
+            //初始化列表组件
+            iniDataGrid('studentManageDG', smDataGridOptions);
+        }
+    });
+
+}
+
+//学员管理搜索
+function StudentSearch() {
+    
+    // 列表参数设置
+    var dataGridOptions = {
+        pageNumber: 1,
+        loader: function (param, success, error) {
+            var studentData = {
+                page: param.page,
+                rows: param.rows,
+                order: param.order,
+                sort: param.sort,
+                studentBo: {
+                    Name: $("#txtName").val().trim(),
+                    SchoolName: $("#txtSchoolName").val().trim()
+                }
+            };
+            var paramStr = JSON.stringify(studentData);
+
+            ajaxCRUD({
+                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                data: paramStr,
+                success: function (data) {
+                    success(data);
+                },
+                error: function () {
+                    error.apply(this, arguments);
+                }
+            });
+        }
+    };
+
+    //初始化列表组件
+    iniDataGrid('studentManageDG', dataGridOptions);
+}
+
+//批量删除前台提示
+function deleteStudentManageDatas() {
+    deleteItems('dg', deleteStudentManageDatasAjax);
+}
+
+//批量删除后台AJAX处理
+function deleteStudentManageDatasAjax(str) {
+    ajaxCRUD({
+        url: '/WebServices/Course/CourseWebServices.asmx/DeleteCousrseByIds',
+        data: "{ids:'" + str + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '删除成功', 'info');
+                refreshTable('dg');
+            } else {
+                msgShow('提示', '删除失败', 'info');
+            }
+        }
+    });
+}
+
