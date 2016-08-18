@@ -111,5 +111,15 @@ namespace LuoHuEdu.WebServices.Course
             studentBo.Feedback = 1;
             return courseService.AddCourseStudent(studentBo);
         }
+
+
+        //判断是否可以报名
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool CanBaoMing(string courseId)
+        {
+            var courseService = new CourseStudentService();
+            return courseService.CanBaoMing(courseId);
+        }
     }
 }

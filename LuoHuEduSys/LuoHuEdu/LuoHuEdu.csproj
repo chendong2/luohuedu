@@ -1278,6 +1278,7 @@
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteView.htm" />
     <Content Include="View\Course\CourseForm.htm" />
     <Content Include="View\Course\CourseList.htm" />
+    <Content Include="View\Course\TrainingCourseForm.htm" />
     <Content Include="View\Customer\CustomerForm.htm" />
     <Content Include="View\Customer\CustomerList.htm" />
     <Content Include="View\Customer\ExtentionForm.htm" />
