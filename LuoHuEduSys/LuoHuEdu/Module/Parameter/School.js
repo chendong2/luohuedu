@@ -19,8 +19,6 @@ using(easyloader.defaultReferenceModules, function () {
                     if (value == "1") {
                         return "公办学校";
                     } else if (value == "2") {
-                        return "国有民办";
-                    } else if (value == "3") {
                         return "民办学校";
                     } else {
                         return "其他";
@@ -137,13 +135,13 @@ function fillForm(itemid) {
             $("#ckLL4").attr("checked", false);
             var values = data.LearnLive.split("，");
             for (var i = 0; i < values.length; i++) {
-                if (values[i].length > 0 && values[i] == "幼儿园") {
+                if (values[i].length > 0 && values[i] == "小学") {
                     $("#ckLL1").attr("checked", "checked");
-                } else if (values[i].length > 0 && values[i] == "小学") {
-                    $("#ckLL2").attr("checked", "checked");
                 } else if (values[i].length > 0 && values[i] == "初中") {
-                    $("#ckLL3").attr("checked", "checked");
+                    $("#ckLL2").attr("checked", "checked");
                 } else if (values[i].length > 0 && values[i] == "高中") {
+                    $("#ckLL3").attr("checked", "checked");
+                } else if (values[i].length > 0 && values[i] == "局机关") {
                     $("#ckLL4").attr("checked", "checked");
                 }
             }
@@ -175,13 +173,13 @@ function saveData() {
 
     var data = '';
     if ($("#ckLL1").attr("checked") == "checked") {
-        data = data + "幼儿园，";
-    } if ($("#ckLL2").attr("checked") == "checked") {
         data = data + "小学，";
-    } if ($("#ckLL3").attr("checked") == "checked") {
+    } if ($("#ckLL2").attr("checked") == "checked") {
         data = data + "初中，";
-    } if ($("#ckLL4").attr("checked") == "checked") {
+    } if ($("#ckLL3").attr("checked") == "checked") {
         data = data + "高中，";
+    } if ($("#ckLL4").attr("checked") == "checked") {
+        data = data + "局机关，";
     }
     data = data.substring(0, data.length - 1);
 
