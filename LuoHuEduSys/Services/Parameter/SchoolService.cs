@@ -184,6 +184,10 @@ namespace Services.Parameter
                 case "SchoolName":
                     strSql += " order by SchoolName " + order;
                     break;
+                case "SchoolNo":
+                    strSql += "order by SchoolNo " + order;
+                    break;
+                    
             }
 
 

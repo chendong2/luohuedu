@@ -78,12 +78,20 @@ namespace BusinessObject.Course
         //[ScriptIgnore]
         public DateTime TimeStart{ get; set; }
 
-        public string TimeStartStr { get { return TimeStart.ToString("yyyy-MM-dd HH:mm"); } }
+        public string TimeStartStr
+        {
+            get { return TimeStart.ToString("yyyy-MM-dd HH:mm"); } 
+            set { TimeStart = Convert.ToDateTime(value); }
+        }
         /// 上课时间结束
         //[ScriptIgnore]
         public DateTime TimeEnd{ get; set; }
 
-        public string TimeEndStr { get { return TimeEnd.ToString("yyyy-MM-dd HH:mm"); } }
+        public string TimeEndStr
+        {
+            get { return TimeEnd.ToString("yyyy-MM-dd HH:mm"); } 
+            set { TimeEnd = Convert.ToDateTime(value); }
+        }
 
         /// 课程代码
         public string CourseCode{ get; set; }

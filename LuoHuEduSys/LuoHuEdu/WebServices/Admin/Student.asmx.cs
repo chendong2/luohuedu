@@ -122,5 +122,17 @@ namespace LuoHuEdu.WebServices.Admin
             }
         }
 
+        /// <summary>
+        /// 获取所有教师信息
+        /// </summary>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<StudentBo> GetAllStudents()
+        {
+            var student = new StudentService();
+            return student.GetAllStudents();
+        }
+
     }
 }

@@ -169,6 +169,7 @@ function addData() {
     getAllSchool("ddlOrganizationalName",true );
     getTheYear();
     getAllSubject("Subject", true);
+    getAllStudent("ddlTeacherId", true);
     resetFormAndClearValidate('ff');
 }
 
@@ -201,6 +202,7 @@ function fillForm(itemid) {
     getAllSchool("ddlOrganizationalName", true);
     getAllSubject("Subject", true);
     getTheYear();
+    getAllStudent("ddlTeacherId", true);
     ajaxCRUD({
         url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
         data: "{id:'" + itemid + "'}",
@@ -284,6 +286,22 @@ function getAllSubject(ddlRoute, isSimpleSearch) {
     });
 }
 
+//获取所有培训类型数据，用于绑定下拉框
+function getAllStudent(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Admin/Student.asmx/GetAllStudents';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'Name': '请选择' });
+            }
+            initCombobox(ddlRoute, "Id", "Name", data, true);
+        }
+    });
+}
 
 
 //保存表单数据

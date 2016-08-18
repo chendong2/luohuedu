@@ -33,7 +33,7 @@ using(easyloader.defaultReferenceModules, function () {
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
-        sortName: 'SchoolName',
+        sortName: 'SchoolNo',
         sortOrder: 'desc',
         rownumbers: true,
         pagination: true,

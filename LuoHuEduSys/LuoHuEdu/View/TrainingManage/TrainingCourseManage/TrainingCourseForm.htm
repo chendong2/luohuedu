@@ -104,13 +104,13 @@
                         课程开始时间:
                     </td>
                     <td class="td_left">
-                        <input type="text" class="easyui-datetimebox" name="TimeStart" id="txtTimeStart" maxlength="20" style="width: 145px;" />
+                        <input type="text" class="easyui-datetimebox" name="TimeStartStr" id="txtTimeStart" maxlength="20" style="width: 145px;" />
                     </td>
                     <td class="td_right">
                         课程结束时间:
                     </td>
                     <td class="td_left">
-                        <input type="text" class="easyui-datetimebox" name="TimeEnd" id="txtTimeEnd" maxlength="20" style="width: 145px;" />
+                        <input type="text" class="easyui-datetimebox" name="TimeEndStr" id="txtTimeEnd" maxlength="20" style="width: 145px;" />
                     </td>
                 </tr>
                 <tr>
@@ -143,7 +143,18 @@
                         </select>
                     </td>
                 </tr>
-
+                
+                 <tr>
+                    <td class="td_right">
+                        授课教师:
+                    </td>
+                    <td class="td_left">
+                         <select style="width: 145px;" class="easyui-combobox" name="TeacherId" id="ddlTeacherId" class="easyui-validatebox" data-options="required:true">
+                           
+                        </select>
+                    </td>
+                    
+                </tr>
             </tbody>
         </table>
     </div>

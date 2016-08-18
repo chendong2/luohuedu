@@ -234,7 +234,7 @@ namespace Services.Course.CourseControl
                 LogHelper.WriteLog(string.Format("StudentExemptionService.DeleteCourseStudent({0})异常", ids), ex);
                 return false;
             }
-            return false;
+            return true;
         }
         #endregion
 

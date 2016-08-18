@@ -476,7 +476,7 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
         }
         #endregion 
 
-        #region "培训课程信息加权限判断"
+        #region "我是授课教师"
         public Page<CourseBo> GetRoleCourseList(int page, int rows, string order, string sort, CourseBo courseBo, string studentId)
         {
             int count = 0;
