@@ -292,7 +292,7 @@ function saveData() {
         return;
     }
 
-    var hidValue = $("#Hid").val();
+    var hidValue = $("#HtcId").val();
     var basicUrl = '/WebServices/Course/CourseWebServices.asmx/';
 
     var wsMethod = '';
