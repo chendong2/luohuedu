@@ -137,7 +137,10 @@ function loadPartialHtml() {
         panel('registerSetTemplate', {
             href: '/View/TrainingManage/TrainingCourseManage/RegisterSet.htm',
             onLoad: function () {
-                
+                //获取所有公办学校
+                getAllPublicSchool();
+                //获取所有民办学校
+                getAllPrivateSchool();
             }
         });
         panel('courseAuditFormTemplate', {
@@ -412,26 +415,46 @@ function closeFormDialog(id) {
 //点击“报名设置”按钮
 function registerSet(courseid) {
 
-    //获取所有公办学校
-    getAllPublicSchool();
-    //获取所有民办学校
-    getAllPrivateSchool();
-
     ajaxCRUD({
         url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
         data: "{id:'" + courseid + "'}",
         success: function (data) {
-            
+
             openDialog('registerSetDlg', {
                 title: '报名设置',
-                iconCls: 'icon-edit'
+                iconCls: 'icon-edit',
+                onOpen: function () {
+
+                }
             });
+            //公办学校数据填充
+            fillCheckField('PlcSchool', data['PlcSchool']);
+
+            //民办学校数据填充
+            fillCheckField('PriSchool', data['PriSchool']); 
 
             //JSON数据填充表单
             loadDataToForm('registerSetForm', data);
+
+            
         }
     });
 
+}
+
+function fillCheckField(name, val) {
+    var form = $('#registerSetForm');
+    var rr = $('input[name="' + name + '"][type=radio], input[name="' + name + '"][type=checkbox]', form);
+    $.fn.prop ? rr.prop('checked', false) : rr.attr('checked', false);
+    rr.each(function () {
+        var f = $(this);
+        //修改：之前只能对应一个复选框，现在可以对应多个，可自动绑定
+        $.each(val.split(','), function (i, item) {
+            if (f.val() == String(item)) {
+                $.fn.prop ? f.prop("checked", true) : f.attr("checked", true);
+            }
+        });
+    });
 }
 
 //保存“报名设置”表单数据
@@ -494,10 +517,22 @@ function getAllPublicSchool() {
         url: webserviceUrl,
         data: '{}',
         success: function (dataList) {
-            $.each(dataList,function (index, schoolBo) {
-                var trHtml = '<tr><td class="td_right"><input type="checkbox" name="PlcSchool" value="' + schoolBo.Id + '"/></td><td class="td_left">' + schoolBo.SchoolName + '</td></tr>';
-                $('#PublicSchoolTbl').empty();
-                $('#PublicSchoolTbl').append(trHtml);
+            $('#PublicSchoolTbl').empty();
+            var tdArr = new Array();
+            $.each(dataList, function (index, schoolBo) {
+
+                //索引为偶数时则清除数组
+                if (index % 2 == 0) {
+                    tdArr.splice(0, tdArr.length);
+                }
+
+                var tdHtml = '<td class="td_right"><input type="checkbox" name="PlcSchool" value="' + schoolBo.Id + '"/></td><td class="td_left">' + schoolBo.SchoolName + '</td>';
+                tdArr.push(tdHtml);
+
+                //索引为奇数时则添加一行
+                if (index % 2 != 0) {
+                    $('#PublicSchoolTbl').append('<tr>' + tdArr.join('') + '</tr>');
+                }
             });
         }
     });
@@ -511,10 +546,22 @@ function getAllPrivateSchool() {
         url: webserviceUrl,
         data: '{}',//
         success: function (dataList) {
+            $('#PrivateSchoolTbl').empty();
+            var tdArr = new Array();
             $.each(dataList, function (index, schoolBo) {
-                var trHtml = '<tr><td class="td_right"><input type="checkbox" name="PriSchool" value="' + schoolBo.Id + '"/></td><td class="td_left">' + schoolBo.SchoolName + '</td></tr>';
-                $('#PrivateSchoolTbl').empty();
-                $('#PrivateSchoolTbl').append(trHtml);
+
+                //索引为偶数时则清除数组
+                if (index % 2 == 0) {
+                    tdArr.splice(0, tdArr.length);
+                }
+                
+                var tdHtml = '<td class="td_right"><input type="checkbox" name="PriSchool" value="' + schoolBo.Id + '"/></td><td class="td_left">' + schoolBo.SchoolName + '</td>';
+                tdArr.push(tdHtml);
+
+                //索引为奇数时则添加一行
+                if (index % 2 != 0) {
+                    $('#PrivateSchoolTbl').append('<tr>' + tdArr.join('') + '</tr>');
+                }
             });
         }
     });
