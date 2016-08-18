@@ -12,12 +12,20 @@ using(easyloader.defaultReferenceModules, function () {
         columns: [[
             { field: 'Id', checkbox: true },
              { field: '1', title: '报名', width: 60, formatter: function (value, rec) {
-                 return '<a style="color:red;cursor:pointer" onclick="baoming(\'' + rec.Id + '\')" href="javascript:void(0)">报名</a>';
+                 if ($.cookie('perList').indexOf("课程报名") > -1) {
+                     return '<a style="color:red;cursor:pointer" onclick="baoming(\'' + rec.Id + '\')" href="javascript:void(0)">报名</a>';
+                 } else {
+                     return '';
+                 }
              }
              },
-            { field: 'CourseName', title: '课程名称', width:80, formatter: function (value, rec) {
-                return '<a style="color:red;cursor:pointer" onclick="kecheng(\'' + rec.Id + '\')" href="javascript:void(0)">' + value + '</a>';
-            } 
+            { field: 'CourseName', title: '课程名称', width: 80, formatter: function (value, rec) {
+                if ($.cookie('perList').indexOf("课程浏览") > -1) {
+                    return '<a style="color:red;cursor:pointer" onclick="kecheng(\'' + rec.Id + '\')" href="javascript:void(0)">' + value + '</a>';
+                } else {
+                    return '';
+                }
+            }
             },
             { field: 'TheYear', title: '年度', width: 80 },
             { field: 'TrainType', title: '培训类型', width: 80 },
@@ -37,7 +45,7 @@ using(easyloader.defaultReferenceModules, function () {
 
             { field: 'Address', title: '培训地址', width: 70, sortable: true },
             { field: 'MaxNumber', title: '额定人数', width: 70, sortable: true },
-            { field: 'SetApply', title: '超出额定人数设定', width:100 },
+            { field: 'SetApply', title: '超出额定人数设定', width: 100 },
             { field: 'SchoolName', title: '组织单位名称', width: 100 },
             { field: 'TimeStartStr', title: '培训开始', width: 70 },
             { field: 'TimeEndStr', title: '培训结束', width: 70 },
