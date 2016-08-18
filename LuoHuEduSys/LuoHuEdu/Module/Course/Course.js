@@ -197,7 +197,17 @@ function getTheYear() {
 function baoming(id) {
     $.messager.confirm('课程报名', '确定要报名此课程吗？', function (r) {
         if (r) {
-            baomingData(id);
+            ajaxCRUD({
+                url: '/WebServices/Course/AllCourseServices.asmx/CanBaoMing',
+                data: "{courseId:'" + id + "'}",
+                success: function (data) {
+                    if (data == true) {
+                        baomingData(id);
+                    } else {
+                        msgShow('提示', '报名名额已满,您已无法报名！', 'info');
+                    }
+                }
+            });
         }
     });
 }

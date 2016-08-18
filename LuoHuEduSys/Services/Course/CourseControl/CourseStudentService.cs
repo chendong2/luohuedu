@@ -275,5 +275,49 @@ namespace Services.Course.CourseControl
             }
         }
 
+
+        //判断课程是否还允许报名
+        public bool CanBaoMing(string courseId)
+        {
+            CourseService courseService = new CourseService();
+            var courseBo=courseService.GetCourseById(courseId);
+            if(courseBo.SetApply==1)//允许超额报名
+            {
+                return true;
+            }else
+            {
+                int maxNumber = courseBo.MaxNumber;
+
+                string sql = @"select id from tb_coursestudent where 1=1  ";
+
+                //sql 查询条件拼接
+                var wheres = new StringBuilder();
+                var paras = new DynamicParameters();
+                if (!string.IsNullOrEmpty(courseId))
+                {
+                    wheres.Append(" and CourseId=@CourseId ");
+                    paras.Add("CourseId", courseId);
+                }
+                //加where条件
+                sql += wheres;
+                try
+                {
+                    using (var context = DataBaseConnection.GetMySqlConnection())
+                    {
+                        var list = context.Query<CourseStudentBo>(sql, paras).ToList();
+
+                        return list.Count < maxNumber; //报名人数小于额定人数,可以报名
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.WriteLog(string.Format("StudentService.CanBaoMing({0})", courseId), ex);
+                    return false;
+                }
+
+            }
+
+        }
+
     }
 }
