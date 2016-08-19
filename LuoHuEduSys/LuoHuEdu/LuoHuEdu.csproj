@@ -1092,6 +1092,7 @@
     <Content Include="Common\Scripts\JQuery\FormValidator\css\validationEngine.jquery.css" />
     <Content Include="Common\Scripts\JQuery\FormValidator\jquery.validationEngine-zh_CN.js" />
     <Content Include="Common\Scripts\JQuery\FormValidator\jquery.validationEngine.js" />
+    <Content Include="Common\Scripts\JQuery\jquery-1.7.2.min.js" />
     <Content Include="Common\Scripts\JQuery\jquery.d.checkbox\css\jquery.d.checkbox.css" />
     <Content Include="Common\Scripts\JQuery\jquery.d.checkbox\images\checkbox.png" />
     <Content Include="Common\Scripts\JQuery\jquery.d.checkbox\images\radio.png" />
