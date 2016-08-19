@@ -124,7 +124,7 @@
             menus_1.push({ "menuid": "13", "menuname": "历史课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
         }
         if (perStr.indexOf("我是授课教师") > -1) {
-            menus_1.push({ "menuid": "14", "menuname": "我是授课教师", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Ticket/TicketList/TicketList.htm") %>' });
+            menus_1.push({ "menuid": "14", "menuname": "我是授课教师", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyTeacher/MyTeacherList.htm") %>' });
         }
 
         if (perStr.indexOf("培训浏览") > -1 || perStr.indexOf("培训审核") > -1 || perStr.indexOf("培训锁定") > -1) {
