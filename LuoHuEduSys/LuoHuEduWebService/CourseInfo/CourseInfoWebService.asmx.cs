@@ -66,7 +66,14 @@ namespace LuoHuEduWebService.CourseInfo
             if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return null;
             var courseStudentFace=new CourseStudentFace();
             var list = courseStudentFace.GetCourseStudentByCourseId(courseId);
-            return new JavaScriptSerializer().Serialize(list);
+            if (list.Count > 0)
+            {
+                return new JavaScriptSerializer().Serialize(list);
+            }
+            else
+            {
+                return "";
+            }
         }
 
         /// <summary>
@@ -80,7 +87,7 @@ namespace LuoHuEduWebService.CourseInfo
         [ScriptMethod]
         [WebMethod]
         [SoapHeader("htSoapHeader", Direction = SoapHeaderDirection.InOut | SoapHeaderDirection.Fault)]
-        public bool Registration(DateTime signDate, DateTime signOutDate, string studentId, string courseId)
+        public bool Registration(string signDate, string signOutDate, string studentId, string courseId)
         {
             if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return false;
             var course=new CourseStudentService();

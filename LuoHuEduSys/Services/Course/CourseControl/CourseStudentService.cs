@@ -178,7 +178,7 @@ namespace Services.Course.CourseControl
        /// <param name="studentId"></param>
        /// <param name="courseId"></param>
        /// <returns></returns>
-        public bool Registration(DateTime signDate, DateTime signOutDate, string studentId, string courseId)
+        public bool Registration(string signDate, string signOutDate, string studentId, string courseId)
         {
             try
             {

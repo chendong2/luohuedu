@@ -43,7 +43,12 @@ namespace BusinessObject.AdminBo
 
         public DateTime? Birthday { get; set; }
 
-        public string BirthdayStr { get; set; }
+
+        public string BirthdayStr
+        {
+            get { return Birthday.HasValue ? Birthday.Value.ToString("yyyy-MM-dd") : ""; }
+            set { Birthday = string.IsNullOrEmpty(value) ? (DateTime?)null : Convert.ToDateTime(value); }
+        }
 
         public string Origin { get; set; }
 

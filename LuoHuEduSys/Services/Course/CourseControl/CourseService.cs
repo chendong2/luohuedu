@@ -373,7 +373,7 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
             if (!String.IsNullOrEmpty(beginDate.ToString()) && !String.IsNullOrEmpty(endDate.ToString()))
             {
 
-                strSql += " and CourseDate BETWEEN @beginDate and @endDate ";
+                strSql += " and TimeStart BETWEEN @beginDate and @endDate ";
             }
             try
             {

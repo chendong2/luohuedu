@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web.Script.Serialization;
@@ -75,21 +76,21 @@ namespace BusinessObject.Course
         public string CourseDate{ get; set; }
 
         /// 上课时间开始
-        //[ScriptIgnore]
+        [ScriptIgnore]
         public DateTime TimeStart{ get; set; }
 
         public string TimeStartStr
         {
-            get { return TimeStart.ToString("yyyy-MM-dd HH:mm"); } 
-            set { TimeStart = Convert.ToDateTime(value); }
+            get { return TimeStart.ToString("yyyy-MM-dd HH:mm:ss"); } 
+            set { TimeStart = Convert.ToDateTime(TimeStart); }
         }
         /// 上课时间结束
-        //[ScriptIgnore]
+        [ScriptIgnore]
         public DateTime TimeEnd{ get; set; }
 
         public string TimeEndStr
         {
-            get { return TimeEnd.ToString("yyyy-MM-dd HH:mm"); } 
+            get { return TimeEnd.ToString("yyyy-MM-dd HH:mm:ss"); } 
             set { TimeEnd = Convert.ToDateTime(value); }
         }
 
