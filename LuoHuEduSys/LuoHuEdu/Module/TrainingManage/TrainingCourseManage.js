@@ -215,6 +215,9 @@ function fillForm(itemid) {
                 iconCls: 'icon-edit'
             });
             $("#HidName").val(data.SubjetName);
+
+            $('#txtTimeStart').datebox('setValue', data.TimeStartStr);
+            $('#txtTimeEnd').datebox('setValue', data.TimeEndStr);
             //JSON数据填充表单
             loadDataToForm('ff', data);
         }
