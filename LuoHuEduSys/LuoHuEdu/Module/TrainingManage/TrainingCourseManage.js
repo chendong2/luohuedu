@@ -427,41 +427,12 @@ function registerSet(courseid) {
 
                 }
             });
-            //公办学校数据填充
-            fillCheckField('PlcSchool', data['PlcSchool']);
-
-            //民办学校数据填充
-            fillCheckField('PriSchool', data['PriSchool']); 
-
+            
             //JSON数据填充表单
             loadDataToForm('registerSetForm', data);
-
-            
         }
     });
 
-}
-
-function fillCheckField(name, val) {
-    var form = $('#registerSetForm');
-    var rr = $('input[name="' + name + '"][type=radio], input[name="' + name + '"][type=checkbox]', form);
-    $.fn.prop ? rr.prop('checked', false) : rr.attr('checked', false);
-    rr.each(function () {
-        var f = $(this);
-//        if (f.val() == String(val)) {
-//            $.fn.prop ? f.prop("checked", true) : f.attr("checked", true);
-//        }
-        //修改：之前只能对应一个复选框，现在可以对应多个，可自动绑定
-        if (val != null) {
-
-            $.each(val.split(','), function (i, item) {
-                if (f.val() == String(item)) {
-                    $.fn.prop ? f.prop("checked", true) : f.attr("checked", true);
-                }
-            });
-        }
-        
-    });
 }
 
 //保存“报名设置”表单数据
