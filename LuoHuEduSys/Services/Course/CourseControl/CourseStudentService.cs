@@ -166,8 +166,9 @@ namespace Services.Course.CourseControl
             catch (Exception ex)
             {
                 LogHelper.WriteLog(string.Format("CourseStudentService.AddCourseStudent({0})异常", studentBo), ex);
+                return false;
             }
-            return false;
+            
         }
 
        /// <summary>
@@ -209,6 +210,58 @@ namespace Services.Course.CourseControl
                 LogHelper.WriteLog(string.Format("CourseStudentService.Registration({0},{1},{2},{3})", signDate, signOutDate, studentId, courseId), ex);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 批量增加报名数据方法
+        /// </summary>
+        /// <param name="studentBo">BO</param>
+        /// <param name="ids">学员ID集合</param>
+        /// <returns></returns>
+        public bool BatchAddCourseStudent(CourseStudentDto studentBo,string ids)
+        {
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var strSql = @"INSERT INTO `tb_coursestudent`
+                                    (`Id`,
+                                     `CourseNumber`,
+                                     `StudentId`,
+                                     `Sign`,
+                                     `feedback`,
+                                     `TaskName`,
+                                     `TaskUrl`,
+                                     `SignDate`,
+                                     `SignOutDate`,
+                                     `CourseId`)
+                                    VALUES (@Id,
+                                            @CourseNumber,
+                                            @StudentId,
+                                            @Sign,
+                                            @feedback,
+                                            @TaskName,
+                                            @TaskUrl,
+                                            @SignDate,
+                                            @SignOutDate,
+                                            @CourseId);";
+                    string[] idArray = ids.Split(',');
+
+                    for (int i = 0; i < idArray.Length; i++)
+                    {
+
+                        studentBo.Id = Guid.NewGuid().ToString();
+                        studentBo.StudentId = idArray[i];
+                        connection.Execute(strSql, studentBo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.BatchAddCourseStudent({0},{1})异常", studentBo, ids), ex);
+                return false;
+            }
+            return true;
         }
 
 

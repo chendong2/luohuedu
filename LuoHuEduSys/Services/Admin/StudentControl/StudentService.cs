@@ -281,6 +281,10 @@ namespace Services.Admin.StudentControl
                 {
                     strSql += "and SchoolName like @SchoolName ";
                 }
+                if (studentBo.SchoolId != null)
+                {
+                    strSql += "and SchoolId=@SchoolId";
+                }
             }
 
             switch (sort)

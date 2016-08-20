@@ -152,8 +152,19 @@ namespace LuoHuEdu.WebServices.Course
             var courseStudent = new CourseStudentService();
             return courseStudent.DeleteCourseStudent(ids);
         }
-
-
+        /// <summary>
+        /// 批量新增报名数据
+        /// </summary>
+        /// <param name="studentBo"></param>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool BatchAddCourseStudent(CourseStudentDto studentBo, string ids)
+        {
+            var courseStudent = new CourseStudentService();
+            return courseStudent.BatchAddCourseStudent(studentBo, ids);
+        }
         #endregion
     }
 }
