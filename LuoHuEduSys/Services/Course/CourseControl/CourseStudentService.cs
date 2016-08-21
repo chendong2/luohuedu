@@ -234,7 +234,7 @@ namespace Services.Course.CourseControl
                                      `TaskUrl`,
                                      `SignDate`,
                                      `SignOutDate`,
-                                     `CourseId`)
+                                     `CourseId`,Period)
                                     VALUES (@Id,
                                             @CourseNumber,
                                             @StudentId,
@@ -244,7 +244,7 @@ namespace Services.Course.CourseControl
                                             @TaskUrl,
                                             @SignDate,
                                             @SignOutDate,
-                                            @CourseId);";
+                                            @CourseId,@Period);";
                     string[] idArray = ids.Split(',');
 
                     for (int i = 0; i < idArray.Length; i++)
@@ -371,6 +371,7 @@ namespace Services.Course.CourseControl
             }
 
         }
+
 
     }
 }

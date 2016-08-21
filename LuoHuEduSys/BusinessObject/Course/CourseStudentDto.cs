@@ -26,5 +26,12 @@ namespace BusinessObject.Course
         public DateTime SignOutDate { get; set; }
         //课程ID
         public string CourseId { get; set; }
+
+        /// <summary>
+        /// 学分
+        /// </summary>
+        public int Period { get; set; }
+
+        public int IsCalculate { get; set; }
     }
 }
