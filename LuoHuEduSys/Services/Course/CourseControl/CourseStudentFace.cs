@@ -43,5 +43,33 @@ namespace Services.Course.CourseControl
                 return null;
             }
         }
+
+        public List<CourseStudentWSBo> GetCourseStudentByCourseIdNew(string courseId)
+        {
+            string strSql = string.Format(@"SELECT c.`Id`,s.IDNo,s.`UserName`,s.`Sex`,sc.`SchoolName`,s.`Id` AS StudentId,c.`CourseId`,co.`CourseName` 
+                                            FROM `tb_coursestudent` c
+                                            INNER JOIN `tb_student` s ON c.`StudentId`=s.`Id`
+                                            INNER JOIN tb_school sc ON sc.`Id`=s.`SchoolId`
+                                            INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
+                                            WHERE c.`CourseId`=@CourseId");
+            try
+            {
+                using (var context = DataBaseConnection.GetMySqlConnection())
+                {
+                    var list = context.Query<CourseStudentWSBo>(strSql,
+                                                 new
+                                                 {
+                                                     CourseId = courseId
+                                                 }).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentFace.GetCourseStudentByCourseId({0})异常", courseId), ex);
+                return null;
+            }
+        }
+        
     }
 }
