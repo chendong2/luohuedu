@@ -732,7 +732,7 @@ function deleteStudentManageDatasAjax(str) {
 // 选择学员列表参数设置
 // 列表参数设置
 var chooseStudentDataGridOptions = {
-    title: '学员信息',
+    title: '',
     columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
@@ -848,7 +848,7 @@ function chooseStudentSearch() {
     // 选择学员列表参数设置
     // 列表参数设置
     var chooseStudentDataGridOptions = {
-        title: '学员信息',
+        title: '',
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
