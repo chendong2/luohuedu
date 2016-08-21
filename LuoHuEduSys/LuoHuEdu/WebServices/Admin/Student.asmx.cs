@@ -134,5 +134,18 @@ namespace LuoHuEdu.WebServices.Admin
             return student.GetAllStudents();
         }
 
+
+        /// <summary>
+        /// 获取所有考勤信息
+        /// </summary>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<StudentBo> GetKaoqingList(string courseId)
+        {
+            var student = new StudentService();
+            return student.GetKaoqingList(courseId);
+        }
+
     }
 }

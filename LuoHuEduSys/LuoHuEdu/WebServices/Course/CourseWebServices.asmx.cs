@@ -138,7 +138,7 @@ namespace LuoHuEdu.WebServices.Course
         public List<CourseStudentWSBo> GetCourseStudentByCourseId(string courseId)
         {
             var courseStudent = new CourseStudentFace();
-            var list = courseStudent.GetCourseStudentByCourseId(courseId);
+            var list = courseStudent.GetCourseStudentByCourseIdNew(courseId);
             return list;
         }
 

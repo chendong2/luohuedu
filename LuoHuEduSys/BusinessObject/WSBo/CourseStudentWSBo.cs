@@ -31,5 +31,15 @@ namespace BusinessObject.WSBo
         /// </summary>
         public string CourseName { get; set; }
 
+        /// <summary>
+        /// 报名表主键courseStudent表主键ID
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
+        /// 学校名称
+        /// </summary>
+        public string SchoolName { get; set; }
+
     }
 }
