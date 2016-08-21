@@ -21,7 +21,7 @@ namespace Services.Course.CourseControl
         /// <returns></returns>
         public List<CourseStudentWSBo> GetCourseStudentByCourseId(string courseId)
         {
-            string strSql = string.Format(@"SELECT s.IDNo,s.`UserName`,s.`Id` AS StudentId,c.`CourseId`,co.`CourseName` FROM `tb_coursestudent` c
+            string strSql = string.Format(@"SELECT s.IDNo,s.Name,s.`Id` AS StudentId,c.`CourseId`,co.`CourseName` FROM `tb_coursestudent` c
                                             INNER JOIN `tb_student` s ON c.`StudentId`=s.`Id`
                                             INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
                                             WHERE c.`CourseId`=@CourseId");
@@ -46,7 +46,7 @@ namespace Services.Course.CourseControl
 
         public List<CourseStudentWSBo> GetCourseStudentByCourseIdNew(string courseId)
         {
-            string strSql = string.Format(@"SELECT c.`Id`,s.IDNo,s.`UserName`,s.`Sex`,sc.`SchoolName`,s.`Id` AS StudentId,c.`CourseId`,co.`CourseName` 
+            string strSql = string.Format(@"SELECT c.`Id`,s.IDNo,s.`Name`,s.`Sex`,sc.`SchoolName`,s.`Id` AS StudentId,c.`CourseId`,co.`CourseName` 
                                             FROM `tb_coursestudent` c
                                             INNER JOIN `tb_student` s ON c.`StudentId`=s.`Id`
                                             INNER JOIN tb_school sc ON sc.`Id`=s.`SchoolId`
