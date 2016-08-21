@@ -155,13 +155,19 @@ function loadPartialHtml() {
 
             }
         });
+        panel('kqTemplate', {
+            href: '/View/TrainingManage/TrainingCourseManage/KaoqingList.htm',
+             onLoad: function () {
+
+            }
+        });
         panel('chooseStudentTemplate', {
             href: '/View/TrainingManage/TrainingCourseManage/ChooseStudent.htm',
+
             onLoad: function () {
 
             }
         });
-
     }
 }
 
@@ -992,26 +998,19 @@ function chooseStudentData() {
     });
 }
 
+
+
+var cousrIdCD;
 //点击“学员管理”按钮
 function kaoQing() {
     var row = getSelectedRow('dg');
-    alert(row.Id);
-    openDialog('kgDlg', {
-        title: '考勤管理',
-        iconCls: 'icon-edit',
-        onOpen: function () {
-            //初始化列表组件
-            iniDataGrid('kgDG', kqDataGridOptions);
-        }
-    });
-
-}
+    cousrIdCD = row.Id;
 
 
-// 列表参数设置
-var kqDataGridOptions = {
+    // 列表参数设置
+    var kqDataGridOptions = {
 
-    columns: [[
+        columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
             { field: 'Sex', title: '性别', width: 60, sortable: false,
@@ -1036,33 +1035,42 @@ var kqDataGridOptions = {
                 }
             }
         ]],
-    singleSelect: false,
-    toolbar: '#KaoqingToolbar',
-    sortName: 'Name',
-    sortOrder: 'desc',
-    rownumbers: true,
-    pagination: true,
-    loader: function (param, success, error) {
-        var studentData = {
-            page: param.page,
-            rows: param.rows,
-            order: param.order,
-            sort: param.sort,
-            courseId: {}
-        };
-        var paramStr = JSON.stringify(studentData);
+        singleSelect: false,
+        toolbar: '#KaoqingToolbar',
+        sortName: 'Name',
+        sortOrder: 'desc',
+        rownumbers: true,
+        pagination: true,
+        loader: function (param, success, error) {
+            var studentData = {
+                page: param.page,
+                rows: param.rows,
+                order: param.order,
+                sort: param.sort,
+                courseId: cousrIdCD
+            };
+            var paramStr = JSON.stringify(studentData);
 
-        ajaxCRUD({
-            url: '/WebServices/Admin/Student.asmx/GetKaoqingList',
-            data: paramStr,
-            success: function (data) {
-                success(data);
-            },
-            error: function () {
-                error.apply(this, arguments);
-            }
-        });
+            ajaxCRUD({
+                url: '/WebServices/Admin/Student.asmx/GetKaoqingList',
+                data: paramStr,
+                success: function (data) {
+                    success(data);
+                },
+                error: function () {
+                    error.apply(this, arguments);
+                }
+            });
 
-    }
-};
+        }
+    };
+    openDialog('kgDlg', {
+        title: '考勤管理',
+        iconCls: 'icon-edit',
+        onOpen: function () {
+            //初始化列表组件
+            iniDataGrid('kgDG', kqDataGridOptions);
+        }
+    });
 
+}

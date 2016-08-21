@@ -475,16 +475,59 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
 
 
         //获取考勤列表数据
-        public List<StudentBo> GetKaoqingList(string courseId)
+        public Page<StudentBo> GetKaoqingList(int page, int rows, string sort, string order, string courseId)
         {
-            List<StudentBo> list;
-            using (var connection = DataBaseConnection.GetMySqlConnection())
+            int count = 0;
+            int pageIndex = 0;
+            int pageSize = 0;
+            if (page < 0)
             {
-                var sqlStr = @"SELECT  co.id,st.Name,st.Sex,sc.schoolname,st.office,st.telephone,cs.Sign FROM tb_student st INNER JOIN tb_coursestudent cs ON st.id=cs.studentId 
-INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.schoolid=sc.id WHERE  cs.CourseId=@CourseId ";
-                list = connection.Query<StudentBo>(sqlStr, new { CourseId = courseId }).ToList();
+                pageIndex = 0;
             }
-            return list;
+            else
+            {
+                pageIndex = (page - 1) * rows;
+            }
+            pageSize = page * rows;
+            var pageList = new Page<StudentBo>();
+            var sqlStr = @"SELECT  co.id,st.Name,st.Sex,sc.schoolname,st.office,st.telephone,cs.Sign,st.Birthday FROM tb_student st INNER JOIN tb_coursestudent cs ON st.id=cs.studentId 
+INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.schoolid=sc.id WHERE  1=1  ";
+
+            if (!string.IsNullOrEmpty(courseId))
+            {
+                sqlStr += "  and cs.CourseId=@CourseId  ";
+            }
+
+          
+            sqlStr += " order by Name " + order;
+
+
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                count = context.Query<StudentBo>(sqlStr,
+                                            new
+                                            {
+                                                CourseId = courseId,
+                                            }).Count();
+                sqlStr += " limit @pageindex,@pagesize";
+
+                var list = context.Query<StudentBo>(sqlStr,
+                                                new
+                                                {
+                                                    CourseId = courseId,
+                                                    pageindex = pageIndex,
+                                                    pagesize = pageSize
+                                                }).ToList();
+
+
+                pageList.ListT = list;
+                pageList.PageIndex = page;
+                pageList.PageSize = rows;
+                pageList.TotalCount = count;
+                pageList.PageCount = count;
+            }
+
+            return pageList;
 
         }
     }

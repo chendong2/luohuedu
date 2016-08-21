@@ -7,6 +7,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using BusinessObject.AdminBo;
 using BusinessObject.Parameter;
+using Domain.common;
 using Services.Admin.StudentControl;
 
 namespace LuoHuEdu.WebServices.Admin
@@ -141,10 +142,10 @@ namespace LuoHuEdu.WebServices.Admin
         /// <returns></returns>
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public List<StudentBo> GetKaoqingList(string courseId)
+        public Page<StudentBo> GetKaoqingList(int page, int rows, string sort, string order, string courseId)
         {
             var student = new StudentService();
-            return student.GetKaoqingList(courseId);
+            return student.GetKaoqingList(page,rows,sort,order, courseId);
         }
 
     }
