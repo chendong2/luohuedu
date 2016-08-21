@@ -658,6 +658,8 @@ function studentManage(courseid) {
         }
     };
 
+    $("#HsmCourseId").val(courseid);
+
     openDialog('studentManageDlg', {
         title: '学员管理',
         iconCls: 'icon-edit',
@@ -681,6 +683,7 @@ function StudentSearch() {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
+                courseId: $("#HsmCourseId").val(),
                 studentBo: {
                     Name: $("#txtName").val().trim(),
                     SchoolName: $("#txtSchoolName").val().trim()
@@ -689,7 +692,7 @@ function StudentSearch() {
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseStudentByCourseId',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -970,21 +973,24 @@ function chooseStudentData() {
     }
 
     var ids = idArr.join(',');
+
+    var studentData = {
+        ids:ids,
+        studentBo : {
+            CourseId :$("#HsmCourseId").val()
+        }
+    };
     
+    var paramStr = JSON.stringify(studentData); 
+
     ajaxCRUD({
         url: '/WebServices/Course/CourseWebServices.asmx/BatchAddCourseStudent',
-        data: jsonDataStr,
+        data: paramStr,
         success: function (data) {
-            var msg = '';
-            if (hidValue.length > 0) {
-                msg = "修改成功"; //修改
-            } else {
-                msg = "新增成功"; //新增
-            }
             if (data == true) {
-                msgShow('提示', msg, 'info');
-                closeFormDialog('dlg');
-                refreshTable('dg');
+                msgShow('提示', '选择学员成功', 'info');
+                closeFormDialog('chooseStudentDlg');
+                refreshTable('studentManageDG');
             } else {
                 msgShow('提示', '提交失败', 'info');
             }
