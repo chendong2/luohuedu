@@ -41,5 +41,8 @@ namespace BusinessObject.WSBo
         /// </summary>
         public string SchoolName { get; set; }
 
+        //1男2女
+        public int Sex { get; set; }
+
     }
 }

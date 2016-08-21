@@ -1317,7 +1317,6 @@
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageList.htm" />
     <Content Include="View\TrainingManage\TeacherMessage\TeacherMessageList.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\ChooseStudent.htm" />
-    <Content Include="View\TrainingManage\TrainingCourseManage\KaoqingList.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\CourseAudit.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\RegisterSet.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\StudentManage.htm" />
@@ -1548,6 +1547,7 @@
     <Folder Include="Export\DataSet\" />
     <Folder Include="Export\WebService\" />
     <Folder Include="Models\" />
+    <Folder Include="View\CourseStudenttemp\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessObject\BusinessObject.csproj">
