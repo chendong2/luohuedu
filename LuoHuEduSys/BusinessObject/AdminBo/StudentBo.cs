@@ -99,5 +99,7 @@ namespace BusinessObject.AdminBo
         public int exTime { get; set; }
         public int total { get; set; }
         public int Countc { get; set; }
+
+        public int Sign { get; set; }
     }
 }

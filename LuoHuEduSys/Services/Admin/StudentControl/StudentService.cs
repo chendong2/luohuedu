@@ -472,5 +472,20 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
             return list;
 
         }
+
+
+        //获取考勤列表数据
+        public List<StudentBo> GetKaoqingList(string courseId)
+        {
+            List<StudentBo> list;
+            using (var connection = DataBaseConnection.GetMySqlConnection())
+            {
+                var sqlStr = @"SELECT  co.id,st.Name,st.Sex,sc.schoolname,st.office,st.telephone,cs.Sign FROM tb_student st INNER JOIN tb_coursestudent cs ON st.id=cs.studentId 
+INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.schoolid=sc.id WHERE  cs.CourseId=@CourseId ";
+                list = connection.Query<StudentBo>(sqlStr, new { CourseId = courseId }).ToList();
+            }
+            return list;
+
+        }
     }
 }
