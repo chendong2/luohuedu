@@ -283,7 +283,7 @@ namespace Services.Admin.StudentControl
                 }
                 if (studentBo.SchoolId != null)
                 {
-                    strSql += "and SchoolId=@SchoolId";
+                    strSql += "and SchoolId=@SchoolId ";
                 }
             }
 
