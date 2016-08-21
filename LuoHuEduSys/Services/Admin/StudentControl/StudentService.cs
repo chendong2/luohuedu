@@ -475,7 +475,7 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
 
 
         //获取考勤列表数据
-        public Page<StudentBo> GetKaoqingList(int page, int rows, string sort, string order, string courseId)
+        public Page<StudentBo> GetKaoqingList(int page, int rows, string sort, string order, StudentBo studentBo)
         {
             int count = 0;
             int pageIndex = 0;
@@ -490,12 +490,25 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
             }
             pageSize = page * rows;
             var pageList = new Page<StudentBo>();
-            var sqlStr = @"SELECT  co.id,st.Name,st.Sex,sc.schoolname,st.office,st.telephone,cs.Sign,st.Birthday FROM tb_student st INNER JOIN tb_coursestudent cs ON st.id=cs.studentId 
+            var sqlStr = @"SELECT  cs.id,st.Name,st.Sex,sc.schoolname,st.office,st.telephone,cs.Sign,st.Birthday FROM tb_student st INNER JOIN tb_coursestudent cs ON st.id=cs.studentId 
 INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.schoolid=sc.id WHERE  1=1  ";
 
-            if (!string.IsNullOrEmpty(courseId))
+            if (studentBo != null )
             {
-                sqlStr += "  and cs.CourseId=@CourseId  ";
+                if (!string.IsNullOrEmpty(studentBo.courseId))
+                {
+                    sqlStr += "  and cs.CourseId=@CourseId  ";
+                }
+
+                if (!string.IsNullOrEmpty(studentBo.Name))
+                {
+                    sqlStr += "  and st.Name like @Name  ";
+                }
+
+                if (!string.IsNullOrEmpty(studentBo.SchoolName))
+                {
+                    sqlStr += "  and sc.SchoolName like @SchoolName  ";
+                }
             }
 
           
@@ -507,14 +520,19 @@ INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.scho
                 count = context.Query<StudentBo>(sqlStr,
                                             new
                                             {
-                                                CourseId = courseId,
+                                                Name = string.Format("%{0}%", studentBo.Name),
+                                                SchoolName = string.Format("%{0}%", studentBo.SchoolName),
+                                                CourseId = studentBo.courseId,
                                             }).Count();
                 sqlStr += " limit @pageindex,@pagesize";
 
                 var list = context.Query<StudentBo>(sqlStr,
                                                 new
                                                 {
-                                                    CourseId = courseId,
+
+                                                    Name = string.Format("%{0}%", studentBo.Name),
+                                                    SchoolName = string.Format("%{0}%", studentBo.SchoolName),
+                                                    CourseId = studentBo.courseId,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();

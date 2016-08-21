@@ -1033,6 +1033,15 @@ function kaoQing() {
                         return "已签";
                     }
                 }
+            },
+            { field: 'Sign1', title: '操作', width: 80, sortable: false,
+                formatter: function (value, rec) {
+                    if (rec.Sign == "1") {
+                        return '<a style="color:red;cursor:pointer" onclick="qiandao(\'' + rec.Id + '\')" href="javascript:void(0)">签到</a>';
+                    } else {
+                        return '<a style="color:red;cursor:pointer" onclick="quxiao(\'' + rec.Id + '\')" href="javascript:void(0)">取消签到</a>';
+                    }
+                }
             }
         ]],
         singleSelect: false,
@@ -1047,7 +1056,9 @@ function kaoQing() {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                courseId: cousrIdCD
+                studentBo: {
+                    courseId: cousrIdCD
+                }
             };
             var paramStr = JSON.stringify(studentData);
 
@@ -1073,4 +1084,114 @@ function kaoQing() {
         }
     });
 
+}
+
+function KaoqingSearch() {
+
+    // 列表参数设置
+    var kqDataGridOptions = {
+
+        columns: [[
+            { field: 'Id', checkbox: true },
+            { field: 'Name', title: '姓名', width: 80, sortable: false },
+            { field: 'Sex', title: '性别', width: 60, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "男";
+                    } else {
+                        return "女";
+                    }
+                }
+            },
+            { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
+            { field: 'Office', title: '职务', width: 80, sortable: false },
+            { field: 'Telephone', title: '手机', width: 80, sortable: false },
+            { field: 'Sign', title: '状态', width: 80, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "未签";
+                    } else {
+                        return "已签";
+                    }
+                }
+            },
+            { field: 'Sign1', title: '操作', width: 80, sortable: false,
+                formatter: function (value, rec) {
+                    if (rec.Sign == "1") {
+                        return '<a style="color:red;cursor:pointer" onclick="qiandao(\'' + rec.Id + '\')" href="javascript:void(0)">签到</a>';
+                    } else {
+                        return '<a style="color:red;cursor:pointer" onclick="quxiao(\'' + rec.Id + '\')" href="javascript:void(0)">取消签到</a>';
+                    }
+                }
+            }
+        ]],
+        singleSelect: false,
+        toolbar: '#KaoqingToolbar',
+        sortName: 'Name',
+        sortOrder: 'desc',
+        rownumbers: true,
+        pagination: true,
+        loader: function (param, success, error) {
+            var studentData = {
+                page: param.page,
+                rows: param.rows,
+                order: param.order,
+                sort: param.sort,
+                studentBo: {
+                    Name: $("#txtCDName").val().trim(),
+                    SchoolName: $("#txtCDSchoolName").val().trim(),
+                    courseId: cousrIdCD
+                }
+            };
+            var paramStr = JSON.stringify(studentData);
+
+            ajaxCRUD({
+                url: '/WebServices/Admin/Student.asmx/GetKaoqingList',
+                data: paramStr,
+                success: function (data) {
+                    success(data);
+                },
+                error: function () {
+                    error.apply(this, arguments);
+                }
+            });
+
+        }
+    };
+
+    iniDataGrid('kgDG', kqDataGridOptions);
+
+}
+
+
+function qiandao(id) {
+    ajaxCRUD({
+        url: '/WebServices/Admin/Student.asmx/StudentQianDao',
+        data: "{id:'" + id + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '签到成功', 'info');
+                refreshTable('kgDG');
+            } else {
+                msgShow('提示', '签到失败', 'info');
+            }
+        }
+    });
+}
+
+
+function quxiao(id) {
+    ajaxCRUD({
+        url: '/WebServices/Admin/Student.asmx/CancelQianDao',
+        data: "{id:'" + id + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '取消签到成功', 'info');
+                refreshTable('kgDG');
+            } else {
+                msgShow('提示', '取消签到失败', 'info');
+            }
+        }
+    });
+    
 }

@@ -101,5 +101,7 @@ namespace BusinessObject.AdminBo
         public int Countc { get; set; }
 
         public int Sign { get; set; }
+
+        public string courseId;
     }
 }

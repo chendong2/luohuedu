@@ -373,5 +373,71 @@ namespace Services.Course.CourseControl
         }
 
 
+        //取消签到
+        public bool CancelQianDao(string id)
+        {
+            if (id == null)
+                throw new ArgumentNullException("id");
+            try
+            {
+                string sqlStr = @"UPDATE `tb_coursestudent` SET `Sign` =1 WHERE `Id` = @Id;";
+                CourseStudentDto st = new CourseStudentDto();
+                st.Id = id;
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    int row = connection.Execute(sqlStr, new { Id=st.Id});
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.CancelQianDao(id)", id), ex);
+                return false;
+            }
+
+        }
+
+
+        //签到
+        public bool StudentQianDao(string id)
+        {
+            if (id == null)
+                throw new ArgumentNullException("id");
+            try
+            {
+                string sqlStr = @"UPDATE tb_coursestudent SET SIGN =2 WHERE Id = @Id;";
+                CourseStudentDto st=new CourseStudentDto();
+                st.Id = id;
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    int row = connection.Execute(sqlStr, new { Id=st.Id});
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.StudentQianDao(id)", id), ex);
+                return false;
+            }
+
+        }
+
+
     }
 }

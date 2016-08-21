@@ -9,6 +9,7 @@ using BusinessObject.AdminBo;
 using BusinessObject.Parameter;
 using Domain.common;
 using Services.Admin.StudentControl;
+using Services.Course.CourseControl;
 
 namespace LuoHuEdu.WebServices.Admin
 {
@@ -142,10 +143,10 @@ namespace LuoHuEdu.WebServices.Admin
         /// <returns></returns>
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public object GetKaoqingList(int page, int rows, string sort, string order, string courseId)
+        public object GetKaoqingList(int page, int rows, string sort, string order, StudentBo studentBo)
         {
             var student = new StudentService();
-            var list=student.GetKaoqingList(page,rows,sort,order, courseId);
+            var list = student.GetKaoqingList(page, rows, sort, order, studentBo);
             if (list != null)
             {
                 return new
@@ -158,6 +159,25 @@ namespace LuoHuEdu.WebServices.Admin
             {
                 return new { total = 0, rows = 0 };
             }
+        }
+
+
+        //签到
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool StudentQianDao(String id)
+        {
+            var studentService = new CourseStudentService();
+            return studentService.StudentQianDao(id);
+        }
+
+        //取消签到
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool CancelQianDao(String id)
+        {
+            var courseStudentService = new CourseStudentService();
+            return courseStudentService.CancelQianDao(id);
         }
 
     }
