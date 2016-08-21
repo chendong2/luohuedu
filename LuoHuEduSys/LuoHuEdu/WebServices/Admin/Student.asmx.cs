@@ -142,10 +142,22 @@ namespace LuoHuEdu.WebServices.Admin
         /// <returns></returns>
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public Page<StudentBo> GetKaoqingList(int page, int rows, string sort, string order, string courseId)
+        public object GetKaoqingList(int page, int rows, string sort, string order, string courseId)
         {
             var student = new StudentService();
-            return student.GetKaoqingList(page,rows,sort,order, courseId);
+            var list=student.GetKaoqingList(page,rows,sort,order, courseId);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
         }
 
     }

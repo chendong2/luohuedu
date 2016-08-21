@@ -524,7 +524,6 @@ INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.scho
                 pageList.PageIndex = page;
                 pageList.PageSize = rows;
                 pageList.TotalCount = count;
-                pageList.PageCount = count;
             }
 
             return pageList;
