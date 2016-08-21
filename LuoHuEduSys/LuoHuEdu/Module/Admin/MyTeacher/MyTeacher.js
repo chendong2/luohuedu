@@ -48,7 +48,7 @@ using(easyloader.defaultReferenceModules, function () {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                courseBo: { StudentId: $.cookie('UserId') }
+                courseBo: { TeacherId: $.cookie('UserId') }
             };
             var paramStr = JSON.stringify(courseData);
 
