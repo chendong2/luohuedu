@@ -111,7 +111,7 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
 
             string strSql = string.Format(@"SELECT sc.SchoolName,st.Name AS teachername,tt.TrainType,CourseName,TimeStart,TimeEnd,co.Period 
                                             FROM tb_course co INNER JOIN tb_student st ON co.TeacherId=st.id 
-                                            INNER JOIN tb_school sc ON st.SchoolId=sc.Id INNER JOIN tb_traintype tt ON co.traintype=tt.id  WHERE 1=1  ");
+                                            INNER JOIN tb_school sc ON st.SchoolId=sc.Id INNER JOIN tb_traintype tt ON co.traintype=tt.id  WHERE 1=1 and CourseState=2 ");
             if (courseBo != null)
             {
                 if (courseBo.SchoolName != null)
