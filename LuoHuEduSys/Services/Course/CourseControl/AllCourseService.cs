@@ -80,7 +80,7 @@ WHERE TheYear =@TheYear AND TrainType=@TrainType AND st.Id=@Id
             {
                 var sqlStr =
                     @"SELECT  b.Period FROM tb_student st INNER JOIN 
-(SELECT ct.StudentId,SUM(Period) AS Period,tb_traintype.TrainType,TheYear  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId AND SIGN=2 
+(SELECT ct.StudentId,SUM(co.Period) AS Period,tb_traintype.TrainType,TheYear  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId AND SIGN=2 
 INNER JOIN tb_traintype ON tb_traintype.id=co.TrainType 
 GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid where TheYear =@TheYear and TrainType=@TrainType and StudentId=@StudentId ";
                 courseBo = connection.Query<CourseBo>(sqlStr, new { TheYear = theYear, TrainType = trainType, studentid = userId }).FirstOrDefault();

@@ -363,11 +363,11 @@ SELECT stsc.Id,stsc.Name,RegistrationCode,Profession,stsc.SchoolName,TrainTypeNa
  LEFT JOIN tb_school ON st.SchoolId=tb_school.Id)stsc LEFT JOIN 
 
 (SELECT StudentId,b.Period,TheYear,tt.TrainType,tt.Id FROM tb_traintype tt INNER  JOIN(
-SELECT ct.StudentId,SUM(Period) AS Period,TrainType,TheYear  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId AND SIGN=2 
+SELECT ct.StudentId,SUM(co.Period) AS Period,TrainType,TheYear  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId AND SIGN=2 
 GROUP BY ct.StudentId,TrainType,TheYear )b   ON tt.id=b.TrainType) ttb ON  ttb.StudentId=stsc.id AND stsc.TrainTypeName=ttb.TrainType)ststtb 
 GROUP BY Id,NAME,RegistrationCode,Profession,SchoolName,SchoolId,TheYear)xxb 
 LEFT JOIN (
-SELECT StudentId,TheYear,COUNT(Period) AS Countc  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId 
+SELECT StudentId,TheYear,COUNT(co.Period) AS Countc  FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId 
 GROUP BY StudentId,TheYear)ccb ON xxb.Id=ccb.StudentId AND xxb.TheYear=ccb.TheYear 
 LEFT JOIN (
 SELECT studentid,TheYear,SUM(StuTime) AS maTime FROM tb_student st INNER JOIN tb_studenttrain stt ON st.id=stt.StudentID 
