@@ -148,9 +148,9 @@
         if (perStr.indexOf("学员信息管理") > -1) {
             menus_2.push({ "menuid": "27", "menuname": "学员信息管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/Student/StudentList.htm") %>' });
         }
-        //if (perStr.indexOf("权限管理") > -1) {
+       if (perStr.indexOf("权限管理") > -1) {
             menus_2.push({ "menuid": "28", "menuname": "权限管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/UserPermissions/PermissionsList.htm") %>' });
-        //}
+       }
 
         if (perStr.indexOf("校本研修登记") > -1) {
             menus_3.push({ "menuid": "31", "menuname": "校本研修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentTrain/StudentTrainList.htm") %>' });

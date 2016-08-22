@@ -281,9 +281,9 @@ namespace Services.Admin.StudentControl
                 {
                     strSql += "and SchoolName like @SchoolName ";
                 }
-                if (studentBo.SchoolId != null)
+                if (studentBo.SchoolId != null && studentBo.SchoolId != "0" && studentBo.SchoolId.Length>0)
                 {
-                    strSql += "and SchoolId=@SchoolId ";
+                    strSql += "and tb_student.SchoolId=@SchoolId ";
                 }
             }
 
@@ -302,7 +302,8 @@ namespace Services.Admin.StudentControl
                                             {
                                                 Name = string.Format("%{0}%", studentBo.Name),
                                                 IDNo = string.Format("%{0}%", studentBo.IDNo),
-                                                SchoolName = string.Format("%{0}%", studentBo.SchoolName)
+                                                SchoolName = string.Format("%{0}%", studentBo.SchoolName),
+                                                SchoolId = studentBo.SchoolId
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
@@ -312,6 +313,7 @@ namespace Services.Admin.StudentControl
                                                       Name = string.Format("%{0}%", studentBo.Name),
                                                       IDNo = string.Format("%{0}%", studentBo.IDNo),
                                                       SchoolName = string.Format("%{0}%", studentBo.SchoolName),
+                                                      SchoolId = studentBo.SchoolId,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
