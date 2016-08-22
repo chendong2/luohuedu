@@ -135,11 +135,22 @@ namespace LuoHuEdu.WebServices.Course
         /// <returns></returns>
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public List<CourseStudentWSBo> GetCourseStudentByCourseId(string courseId)
+        public object GetCourseStudentByCourseId(int page, int rows, string order, string sort, string courseId)
         {
             var courseStudent = new CourseStudentFace();
-            var list = courseStudent.GetCourseStudentByCourseIdNew(courseId);
-            return list;
+            var list = courseStudent.GetCourseStudentByCourseIdNew(page,rows,order,sort, courseId);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
         }
 
 

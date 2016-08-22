@@ -44,24 +44,52 @@ namespace Services.Course.CourseControl
             }
         }
 
-        public List<CourseStudentWSBo> GetCourseStudentByCourseIdNew(string courseId)
+        public Page<CourseStudentWSBo> GetCourseStudentByCourseIdNew(int page, int rows, string order, string sort, string courseId)
         {
             string strSql = string.Format(@"SELECT c.`Id`,s.IDNo,s.`Name`,s.`Sex`,sc.`SchoolName`,s.`Id` AS StudentId,c.`CourseId`,co.`CourseName` 
                                             FROM `tb_coursestudent` c
                                             INNER JOIN `tb_student` s ON c.`StudentId`=s.`Id`
                                             INNER JOIN tb_school sc ON sc.`Id`=s.`SchoolId`
                                             INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
-                                            WHERE c.`CourseId`=@CourseId");
+                                            WHERE c.`CourseId`=@CourseId ");
+
+
+            int count = 0;
+            int pageIndex = 0;
+            int pageSize = 0;
+            if (page < 0)
+            {
+                pageIndex = 0;
+            }
+            else
+            {
+                pageIndex = (page - 1) * rows;
+            }
+            pageSize = page * rows;
+            var pageList = new Page<CourseStudentWSBo>();
+
             try
             {
                 using (var context = DataBaseConnection.GetMySqlConnection())
                 {
+                    count = context.Query<CourseStudentWSBo>(strSql,
+                        new
+                        {
+                            CourseId = courseId
+                        }).Count();
+
+                    strSql += " limit @pageindex,@pagesize";
                     var list = context.Query<CourseStudentWSBo>(strSql,
                                                  new
                                                  {
-                                                     CourseId = courseId
+                                                     CourseId = courseId,
+                                                     pageIndex=@pageIndex,
+                                                     pageSize=@pageSize
                                                  }).ToList();
-                    return list;
+                    pageList.ListT = list;
+                    pageList.PageIndex = page;
+                    pageList.PageSize = rows;
+                    pageList.TotalCount = count;
                 }
             }
             catch (Exception ex)
@@ -69,6 +97,7 @@ namespace Services.Course.CourseControl
                 LogHelper.WriteLog(string.Format("CourseStudentFace.GetCourseStudentByCourseId({0})异常", courseId), ex);
                 return null;
             }
+            return pageList;
         }
         
     }
