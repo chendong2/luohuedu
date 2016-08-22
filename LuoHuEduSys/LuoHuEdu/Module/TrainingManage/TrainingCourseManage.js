@@ -971,6 +971,26 @@ function getAllSchool(ddlRoute, isSimpleSearch) {
 
 function chooseStudentData() {
 
+    //检测学员是否重复选择
+    var studentManageDataRows = $("#studentManageDG").datagrid('getData').rows;
+    var studentNameArr = [];
+    var chooseStudentRows = $('#chooseStudentDG').datagrid('getSelections');
+    for (var csi = 0; csi < chooseStudentRows.length; csi++) {
+        var chooseStudentRow = chooseStudentRows[csi];
+
+        $.each(studentManageDataRows, function (index, studentManageDataRow) {
+            if (chooseStudentRow.Id == studentManageDataRow.StudentId) {
+                studentNameArr.push(chooseStudentRow.Name);
+            }
+        });
+    }
+
+    if (studentNameArr.length > 0) {
+        msgShow('提示', studentNameArr.join('、')+"学员已被选择过，不需要重复选择", 'info');
+        return false;
+    }
+    
+    //添加新学员
     var idArr = [];
     var rows = $('#chooseStudentDG').datagrid('getSelections');
     for (var i = 0; i < rows.length; i++) {
