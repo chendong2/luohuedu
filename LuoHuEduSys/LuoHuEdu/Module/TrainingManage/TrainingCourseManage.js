@@ -1083,6 +1083,7 @@ function kaoQing(id) {
         iconCls: 'icon-edit',
         onOpen: function () {
             //初始化列表组件
+            getAllCDSchool();
             iniDataGrid('kgDG', kqDataGridOptions);
         }
     });
@@ -1142,7 +1143,7 @@ function KaoqingSearch() {
                 sort: param.sort,
                 studentBo: {
                     Name: $("#txtCDName").val().trim(),
-                    SchoolName: $("#txtCDSchoolName").val().trim(),
+                    SchoolName: $("#ddlCDSchooseSchool").combobox('getValue'),
                     courseId: cousrIdCD
                 }
             };
@@ -1196,5 +1197,21 @@ function quxiao(id) {
             }
         }
     });
-    
+
+}
+
+
+//获取所有学校数据，用于绑定下拉框
+function getAllCDSchool() {
+    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetAllSchoolNew';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            data.unshift({ 'Id': '请选择', 'SchoolName': '请选择' });
+            initCombobox("ddlCDSchooseSchool", "SchoolName", "SchoolName", data, true);
+        }
+    });
+    $("#ddlCDSchooseSchool").combobox('setValue', '请选择');
 }

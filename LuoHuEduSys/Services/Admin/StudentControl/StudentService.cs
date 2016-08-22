@@ -505,7 +505,7 @@ INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.scho
                     sqlStr += "  and st.Name like @Name  ";
                 }
 
-                if (!string.IsNullOrEmpty(studentBo.SchoolName))
+                if (!string.IsNullOrEmpty(studentBo.SchoolName) && studentBo.SchoolName!="请选择")
                 {
                     sqlStr += "  and sc.SchoolName like @SchoolName  ";
                 }
