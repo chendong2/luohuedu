@@ -44,6 +44,12 @@ using(easyloader.defaultReferenceModules, function () {
                     return btn;
                 }
             },
+            { field: 'kaoqing', title: '考勤', width: 50,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="kaoQing(\'' + rec.Id + '\')" href="javascript:void(0)">考勤</a>';
+                    return btn;
+                }
+            },
             { field: 'CourseName', title: '课程名称', width: 150 },
             { field: 'TheYear', title: '年度', width: 150 },
             { field: 'TrainType', title: '培训类型', width: 140 },
@@ -999,14 +1005,11 @@ function chooseStudentData() {
 }
 
 
-
-var cousrIdCD;
+var cousrIdCD="";
 //点击“学员管理”按钮
-function kaoQing() {
-    var row = getSelectedRow('dg');
-    cousrIdCD = row.Id;
+function kaoQing(id) {
 
-
+    cousrIdCD = id;
     // 列表参数设置
     var kqDataGridOptions = {
 
