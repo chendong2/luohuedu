@@ -12,17 +12,9 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'TeacherName', title: '教师姓名', width: 90, sortable: false },
             { field: 'TrainType', title: '课程类型', width: 90, sortable: false },
             { field: 'CourseName', title: '授课内容', width: 380, sortable: false },
-            { field: 'TimeStart', title: '开始时间', width: 70, sortable: false,
-                formatter: function (value) {
-                    value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-                    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-                }
+            { field: 'TimeStartStr', title: '开始时间', width: 120, sortable: false
             },
-            { field: 'TimeEnd', title: '结束时间', width: 70, sortable: false,
-                 formatter: function (value) {
-                     value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-                     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-                 }
+            { field: 'TimeEndStr', title: '结束时间', width: 120, sortable: false
              },
             { field: 'Period', title: '授课课时', width: 60, sortable: false }
         ]],
