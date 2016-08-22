@@ -716,18 +716,18 @@ function StudentSearch() {
 
 //批量删除前台提示
 function deleteStudentManageDatas() {
-    deleteItems('dg', deleteStudentManageDatasAjax);
+    deleteItems('studentManageDG', deleteStudentManageDatasAjax);
 }
 
 //批量删除后台AJAX处理
 function deleteStudentManageDatasAjax(str) {
     ajaxCRUD({
-        url: '/WebServices/Course/CourseWebServices.asmx/DeleteCousrseByIds',
+        url: '/WebServices/Course/CourseWebServices.asmx/DeleteCourseStudent',
         data: "{ids:'" + str + "'}",
         success: function (data) {
             if (data == true) {
                 msgShow('提示', '删除成功', 'info');
-                refreshTable('dg');
+                refreshTable('studentManageDG');
             } else {
                 msgShow('提示', '删除失败', 'info');
             }
