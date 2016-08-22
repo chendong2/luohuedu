@@ -188,7 +188,7 @@ EXISTS( SELECT * FROM tb_student st INNER JOIN tb_subject su ON st.`FirstTeachin
 INNER JOIN tb_subject su1 ON st.`SecondTeaching`=su1.`Id`
 WHERE POSITION(st.StudyPeriod IN c.TeachingObject)>0 AND POSITION(st.Staffing IN c.ObjectEstablish)>0  
  AND (POSITION(su.`SubjectName` IN c.ObjectSubject)>0 OR POSITION(su1.`SubjectName` IN c.ObjectSubject)>0) 
-and st.`Id`=@StudentId )) AND CourseState=2 ");
+and st.`Id`=@StudentId )) AND CourseState=2 AND c.Requirement!=2 ");
            if (courseBo != null)
           {
                //课程名称查询
