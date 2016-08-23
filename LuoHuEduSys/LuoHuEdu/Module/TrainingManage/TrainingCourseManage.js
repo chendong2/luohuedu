@@ -14,51 +14,38 @@ using(easyloader.defaultReferenceModules, function () {
             {field:
                 'opt',
                 title: '报名设置',
-                width: 50,
+                width: 80,
                 formatter: function(value, rec) {
                     var btn = '<a class="editcls" onclick="registerSet(\''+ rec.Id +'\')" href="javascript:void(0)">报名设置</a>';
                     return btn;
                 }
             },
-            {field:'Aduit', title:'审核',width:50,  
+            {field:'Aduit', title:'审核',width:60,  
                 formatter: function(value, rec) {
                     var btn = '<a class="editcls" onclick="courseAudit(\'' + rec.Id + '\')" href="javascript:void(0)">审核</a>';
                     return btn;
                 } 
             },
-             { field: 'Lock', title: '锁定', width: 50,
-                 formatter: function (value, rec) {
-                     var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">锁定</a>';
-                     return btn;
-                 }
-             },
-            { field: 'Report', title: '报表', width: 50,
-                formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="editData1()" href="javascript:void(0)">查看</a>';
-                    return btn;
-                }
-            },
-            {field: 'Manage', title: '管理', width: 50,
+             
+            {field: 'Manage', title: '管理', width:60,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="studentManage(\'' + rec.Id + '\')" href="javascript:void(0)">学员管理</a>';
                     return btn;
                 }
             },
-            { field: 'kaoqing', title: '考勤', width: 50,
+            { field: 'kaoqing', title: '考勤管理', width: 80,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="kaoQing(\'' + rec.Id + '\')" href="javascript:void(0)">考勤</a>';
                     return btn;
                 }
             },
-            { field: 'CourseName', title: '课程名称', width: 150 },
+            { field: 'CourseName', title: '课程名称', width: 180 },
             { field: 'TheYear', title: '年度', width: 150 },
             { field: 'TrainType', title: '培训类型', width: 140 },
-
             { field: 'SubjectName', title: '培训科目', width: 80 },
             { field: 'Phone', title: '联系电话', width: 80 },
             { field: 'Period', title: '学时', width: 80 },
             { field: 'Cost', title: '培训费用', width: 80 },
-            { field: 'SetCheck', title: '考勤设定', width: 50 },
             { field: 'IsMust', title: '种类', width: 60, formatter: function (value) {
                 if (value == 1)
                     return '<span>选修</span>';
@@ -66,10 +53,8 @@ using(easyloader.defaultReferenceModules, function () {
                     return '<font>必修</font>';
             }
             },
-
             { field: 'Address', title: '培训地址', width: 70, sortable: true },
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
-            { field: 'SetApply', title: '超出额定人数设定', width: 80 },
             { field: 'SchoolName', title: '组织单位名称', width: 80 },
             { field: 'TimeStartStr', title: '培训开始', width: 50 },
             { field: 'TimeEndStr', title: '培训结束', width: 50 },
