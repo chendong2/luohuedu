@@ -57,6 +57,7 @@ using(easyloader.defaultReferenceModules, function () {
                 data: paramStr,
                 success: function (data) {
                     success(data);
+                    getTheYearSerch();
                 },
                 error: function () {
                     error.apply(this, arguments);
@@ -82,7 +83,16 @@ using(easyloader.defaultReferenceModules, function () {
     });
 
 });
-
+//获取年份数据，用于绑定下拉框
+function getTheYearSerch() {
+    var currentYear = new Date().getFullYear();
+    $("#TheYearSerch").empty();
+    for (var i = 1; i <= 15; i++) {
+        var data = currentYear - i + "-" + (currentYear - i + 1);
+        var option = "<option  value='" + data + "'>" + data + "</option>";
+        $("#TheYearSerch").append(option);
+    }
+}
 //easyloader.defaultTime为700ms
 setTimeout(loadPartialHtml, easyloader.defaultTime);
 
@@ -315,9 +325,8 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 courseBo: {
-                    Name: $("#txtName").val().trim(),
-                    IDNo: $("#txtIDNo").val().trim(),
-                    SchoolName: $("#txtSchoolName").val().trim()
+                    TheYear: $("#TheYearSerch").val().trim(),
+                    TeacherId: $.cookie('UserId')
                 }
             };
             var paramStr = JSON.stringify(studentData);

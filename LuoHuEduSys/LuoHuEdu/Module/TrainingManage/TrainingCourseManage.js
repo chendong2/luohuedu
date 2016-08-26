@@ -394,9 +394,7 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 courseBo: {
-                    Name: $("#txtName").val().trim(),
-                    IDNo: $("#txtIDNo").val().trim(),
-                    SchoolName: $("#txtSchoolName").val().trim()
+                    TheYear: $("#TheYearSerch").val().trim()
                 }
             };
             var paramStr = JSON.stringify(studentData);
