@@ -73,7 +73,7 @@ function saveData() {
         data: jsonDataStr,
         success: function (data) {
             var msg = '';
-            msg = "修改成功"; //修改  msg = "新增成功,用户初始密码为六个零000000"; //新增
+            msg = "修改成功,您的初始权限已经配置，请重新刷新页面获取权限！";
             
             if (data == true) {
                 msgShow('提示', msg, 'info');

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Configuration;
 using System.Data;
 using Domain.common;
+using Services.Admin.Permissions;
 using Page = System.Web.UI.Page;
 
 namespace HuaTongCallCenter
@@ -17,6 +19,14 @@ namespace HuaTongCallCenter
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //获取权限
+            var pService = new PermissionsService();
+            string perList = pService.getUserPermissionsList(HttpContext.Current.Session["UserId"].ToString());
+            Session.Add("perList", perList);
+
+            HttpCookie perListC = new HttpCookie("perList") { Value = HttpUtility.UrlEncode(perList, Encoding.GetEncoding("UTF-8")), Path = "/" };
+            Response.Cookies.Add(perListC);
+
             if (!IsPostBack)
             {
                 lblUser.Text = UserInfo.GetUserName();

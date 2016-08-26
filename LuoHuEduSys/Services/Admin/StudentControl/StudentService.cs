@@ -6,6 +6,7 @@ using BusinessObject.AdminBo;
 using Dapper;
 using Domain.common;
 using Huatong.DAO;
+using Services.Admin.Permissions;
 using Services.Course.CourseControl;
 
 namespace Services.Admin.StudentControl
@@ -184,6 +185,20 @@ namespace Services.Admin.StudentControl
                     int row = connection.Execute(sqlStr, studentBo);
                     if (row > 0)
                     {
+                        //完善信息后，给用户分配初始权限
+                        var ps = new PermissionsService();
+                        var perList = ps.GetUserNoHasPermissionsList(studentBo.Id);
+                        for (int i = 0; i < perList.Count; i++)
+                        {
+                            var userPermissionsBo = new UserPermissionsBo()
+                            {
+                                Id = Guid.NewGuid().ToString(),
+                                PermissionsId = perList[i].Id,
+                                UserId = studentBo.Id
+                            };
+                            sqlStr = @"INSERT INTO pub_userpermissions(Id,PermissionsId,UserId) VALUES(@Id,@PermissionsId,@UserId);";
+                            connection.Execute(sqlStr, userPermissionsBo);
+                        }
                         return true;
                     }
                     else

@@ -41,6 +41,7 @@ namespace Services.Admin.Permissions
                         sqlStr = @"INSERT INTO pub_userpermissions(Id,PermissionsId,UserId) VALUES(@Id,@PermissionsId,@UserId);";
                         connection.Execute(sqlStr, userPermissionsBo);
                     }
+
                 }
                 return true;
             }
@@ -73,6 +74,7 @@ WHEN ModuleName='系统设置' THEN 7 ELSE 8 END),Soft ";
             return userPerList;
         }
 
+        //获取用户权限
         public string getUserPermissionsList(string userId)
         {
             string perStrList = string.Empty;
@@ -96,5 +98,28 @@ WHEN ModuleName='系统设置' THEN 7 ELSE 8 END),Soft ";
             }
             return perStrList;
         }
+
+        //完善信息用户,为用户分配初始权限,获取用户没有的培训信息权限 
+        public List<UserPermissionsBo> GetUserNoHasPermissionsList(string userId)
+        {
+            List<UserPermissionsBo> userPerList = null;
+
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"SELECT  * FROM pub_permissions WHERE SubModuleNAME='培训信息' AND id NOT IN (SELECT PermissionsId FROM pub_userpermissions WHERE UserId=@UserId)";
+                    userPerList = connection.Query<UserPermissionsBo>(sqlStr, new { UserId = userId }).ToList();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.GetStudentById({0})异常", userId), ex);
+            }
+            return userPerList;
+        }
+
+
     }
 }
