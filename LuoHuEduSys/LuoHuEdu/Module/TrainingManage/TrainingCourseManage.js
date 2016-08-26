@@ -82,6 +82,7 @@ using(easyloader.defaultReferenceModules, function () {
                 data: paramStr,
                 success: function (data) {
                     success(data);
+                    getTheYearSerch();
                 },
                 error: function () {
                     error.apply(this, arguments);
@@ -108,11 +109,18 @@ using(easyloader.defaultReferenceModules, function () {
 
 });
 
+//获取年份数据，用于绑定下拉框
+function getTheYearSerch() {
+    var currentYear = new Date().getFullYear();
+    $("#TheYearSerch").empty();
+    for (var i = 1; i <= 15; i++) {
+        var data = currentYear - i + "-" + (currentYear - i + 1);
+        var option = "<option  value='" + data + "'>" + data + "</option>";
+        $("#TheYearSerch").append(option);
+    }
+}
 //easyloader.defaultTime为700ms
 setTimeout(loadPartialHtml, easyloader.defaultTime);
-
-
-
 
 //预先加载表单页面，提升打开表单弹出层的性能
 function loadPartialHtml() {
