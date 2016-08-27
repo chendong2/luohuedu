@@ -108,7 +108,7 @@ WHEN ModuleName='系统设置' THEN 7 ELSE 8 END),Soft ";
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"SELECT  * FROM pub_permissions WHERE SubModuleNAME='培训信息' AND id NOT IN (SELECT PermissionsId FROM pub_userpermissions WHERE UserId=@UserId)";
+                    var sqlStr = @"SELECT  * FROM pub_permissions WHERE (SubModuleNAME='培训信息' or SubModuleNAME='用户信息') AND id NOT IN (SELECT PermissionsId FROM pub_userpermissions WHERE UserId=@UserId)";
                     userPerList = connection.Query<UserPermissionsBo>(sqlStr, new { UserId = userId }).ToList();
 
                 }
