@@ -56,6 +56,11 @@ namespace Services.Course.CourseControl
                 {
                     strSql += " and c.CourseCode=@CourseCode ";
                 }
+                //课程代码查询
+                if (courseBo.TeacherId != null)
+                {
+                    strSql += " and c.TeacherId=@TeacherId ";
+                }
             }
 
             switch (sort)
