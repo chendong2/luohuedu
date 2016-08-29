@@ -11,30 +11,28 @@ using(easyloader.defaultReferenceModules, function () {
     var dataGridOptions = {
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'CourseName', title: '课程名称', width: 150 },
+            { field: 'CourseName', title: '课程名称', width: 150, sortable: true },
             { field: 'TheYear', title: '年度', width: 150 },
             { field: 'TrainType', title: '培训类型', width: 140 },
 
-            { field: 'SubjectName', title: '培训科目', width: 80 },
+            { field: 'SubjectName', title: '培训科目', width: 100 },
             { field: 'Phone', title: '联系电话', width: 80 },
             { field: 'Period', title: '学时', width: 80 },
             { field: 'Cost', title: '培训费用', width: 80 },
-            { field: 'SetCheck', title: '考勤设定', width: 50 },
             { field: 'IsMust', title: '种类', width: 60, formatter: function (value) {
                 if (value == 1)
                     return '<span>选修</span>';
                 else
-                    return '<font>必修</font>';
+                    return '<span>必修</span>';
             }
             },
 
-            { field: 'Address', title: '培训地址', width: 70, sortable: true },
+            { field: 'Address', title: '培训地址', width: 150, sortable: true },
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
-            { field: 'SetApply', title: '超出额定人数设定', width: 80 },
             { field: 'SchoolName', title: '组织单位名称', width: 80 },
-            { field: 'TimeStartStr', title: '培训开始', width: 50 },
-            { field: 'TimeEndStr', title: '培训结束', width: 50 },
-            { field: 'CourseCode', title: '课程代码', width: 50 }
+            { field: 'TimeStartStr', title: '培训开始', width: 150 },
+            { field: 'TimeEndStr', title: '培训结束', width: 150 },
+            { field: 'CourseCode', title: '课程代码', width:100 }
 
         ]],
         singleSelect: false,
@@ -44,7 +42,6 @@ using(easyloader.defaultReferenceModules, function () {
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
-            //alert();
             var studentData = {
                 page: param.page,
                 rows: param.rows,
@@ -86,8 +83,8 @@ using(easyloader.defaultReferenceModules, function () {
 
 });
 
-//easyloader.defaultTime为700ms
-setTimeout(loadPartialHtml, easyloader.defaultTime);
+////easyloader.defaultTime为700ms
+//setTimeout(loadPartialHtml, easyloader.defaultTime);
 
 
 //关闭弹出层
