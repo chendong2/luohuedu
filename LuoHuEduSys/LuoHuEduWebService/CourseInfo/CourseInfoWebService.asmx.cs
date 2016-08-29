@@ -96,7 +96,7 @@ namespace LuoHuEduWebService.CourseInfo
 
         [ScriptMethod]
         [WebMethod]
-        [SoapHeader("htSoapHeader", Direction = SoapHeaderDirection.InOut | SoapHeaderDirection.Fault)]
+       [SoapHeader("htSoapHeader", Direction = SoapHeaderDirection.InOut | SoapHeaderDirection.Fault)]
         public bool BatchRegistration(string jsonParm)
         {
             if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return false;

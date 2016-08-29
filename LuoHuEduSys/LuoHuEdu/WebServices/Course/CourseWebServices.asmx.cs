@@ -43,7 +43,25 @@ namespace LuoHuEdu.WebServices.Course
                 return new { total = 0, rows = 0 };
             }
         }
-
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetRoleCourseList(int page, int rows, string order, string sort, CourseBo courseBo)
+        {
+            var courseService = new CourseService();
+            var list = courseService.GetRoleCourseList(page, rows, sort, order, courseBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
         /// <summary>
         /// 根据学员ID获取学员报名的课程数据信息
         /// </summary>

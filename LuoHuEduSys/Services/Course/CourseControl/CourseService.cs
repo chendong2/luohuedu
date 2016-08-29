@@ -482,7 +482,7 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
         #endregion 
 
         #region "我是授课教师"
-        public Page<CourseBo> GetRoleCourseList(int page, int rows, string order, string sort, CourseBo courseBo, string studentId)
+        public Page<CourseBo> GetRoleCourseList(int page, int rows, string order, string sort, CourseBo courseBo)
         {
             int count = 0;
             int pageIndex = 0;
@@ -504,26 +504,23 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
 					                        INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`                                
                                             WHERE 1=1
                                              ");
-
-            //允许所有教师报名
-            if (courseBo.Requirement != 2)
+            if (courseBo != null)
             {
-                
+                //课程名称查询
+                if (courseBo.CourseName != null)
+                {
+                    strSql += "and c.CourseName Like @CourseName ";
+                }
+                //授课教师ID
+                if (courseBo.TeacherId != null)
+                {
+                    strSql += " and c.TeacherId=@TeacherId ";
+                }
+                if (courseBo.TheYear != null)
+                {
+                    strSql += "and c.TheYear=@TheYear ";
+                }
             }
-            //if (courseBo != null)
-            //{
-            //    //课程名称查询
-            //    if (courseBo.CourseName != null)
-            //    {
-            //        strSql += "and c.CourseName Like @CourseName ";
-            //    }
-            //    //课程代码查询
-            //    if (courseBo.CourseCode != null)
-            //    {
-            //        strSql += " and c.CourseCode=@CourseCode ";
-            //    }
-            //}
-
             switch (sort)
             {
                 case "TheYear":
@@ -537,14 +534,18 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
                 count = context.Query<CourseBo>(strSql,
                                             new
                                             {
-                                                StudentId = studentId
+                                                EducationtName = string.Format("%{0}%", courseBo.CourseName),
+                                                TeacherId = courseBo.TeacherId,
+                                                TheYear=courseBo.TheYear
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
                 var list = context.Query<CourseBo>(strSql,
                                                 new
                                                 {
-                                                    StudentId = studentId,
+                                                    EducationtName = string.Format("%{0}%", courseBo.CourseName),
+                                                    TeacherId = courseBo.TeacherId,
+                                                    TheYear=courseBo.TheYear,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
