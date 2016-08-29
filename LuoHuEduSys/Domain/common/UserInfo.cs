@@ -87,7 +87,7 @@ namespace Domain.common
         }
 
         //判读用户是否有权限
-        public bool havePermissions(string name)
+        public static bool havePermissions(string name)
         {
             if (HttpContext.Current.Session["perList"] == null)
             {
