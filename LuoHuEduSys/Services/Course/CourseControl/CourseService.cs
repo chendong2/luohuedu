@@ -7,6 +7,7 @@ using BusinessObject.Course;
 using Dapper;
 using Domain.common;
 using Huatong.DAO;
+using Services.Admin.StudentControl;
 
 namespace Services.Course.CourseControl
 {
@@ -63,6 +64,20 @@ namespace Services.Course.CourseControl
                 }
             }
 
+            string adminSchoolId = string.Empty;
+
+            if (Domain.common.UserInfo.havePermissions("学校管理员") && !Domain.common.UserInfo.havePermissions("系统管理员"))
+            {
+
+                string userId = Domain.common.UserInfo.GetUserId().ToString();
+                var studentService=new StudentService();
+
+                var adminBo = studentService.GetAllStudentById1(userId);
+                adminSchoolId = adminBo.SchoolId;
+
+                strSql += " and c.OrganizationalName=@adminSchoolId ";
+            }
+
             switch (sort)
             {
                 case "TheYear":
@@ -76,7 +91,8 @@ namespace Services.Course.CourseControl
                 count = context.Query<CourseBo>(strSql,
                                             new
                                             {
-                                                EducationtName = string.Format("%{0}%", courseBo.CourseName)
+                                                EducationtName = string.Format("%{0}%", courseBo.CourseName),
+                                                adminSchoolId = adminSchoolId
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
@@ -84,6 +100,7 @@ namespace Services.Course.CourseControl
                                                 new
                                                 {
                                                     CourseName = string.Format("%{0}%", courseBo.CourseName),
+                                                    adminSchoolId = adminSchoolId,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
