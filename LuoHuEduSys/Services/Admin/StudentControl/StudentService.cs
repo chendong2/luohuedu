@@ -302,6 +302,19 @@ namespace Services.Admin.StudentControl
                 }
             }
 
+
+            string adminSchoolId = string.Empty;
+
+            if (Domain.common.UserInfo.havePermissions("学校管理员") && !Domain.common.UserInfo.havePermissions("系统管理员"))
+            {
+
+                string userId = Domain.common.UserInfo.GetUserId().ToString();
+                var adminBo=GetAllStudentById1(userId);
+                adminSchoolId = adminBo.SchoolId;
+
+                strSql += " and tb_student.SchoolId=@adminSchoolId ";
+            }
+
             switch (sort)
             {
                 case "Name":
@@ -318,7 +331,8 @@ namespace Services.Admin.StudentControl
                                                 Name = string.Format("%{0}%", studentBo.Name),
                                                 IDNo = string.Format("%{0}%", studentBo.IDNo),
                                                 SchoolName = string.Format("%{0}%", studentBo.SchoolName),
-                                                SchoolId = studentBo.SchoolId
+                                                SchoolId = studentBo.SchoolId,
+                                                adminSchoolId = adminSchoolId
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
@@ -329,8 +343,9 @@ namespace Services.Admin.StudentControl
                                                       IDNo = string.Format("%{0}%", studentBo.IDNo),
                                                       SchoolName = string.Format("%{0}%", studentBo.SchoolName),
                                                       SchoolId = studentBo.SchoolId,
-                                                    pageindex = pageIndex,
-                                                    pagesize = pageSize
+                                                      adminSchoolId = adminSchoolId,
+                                                      pageindex = pageIndex,
+                                                      pagesize = pageSize
                                                 }).ToList();
 
                 pageList.ListT = list;
