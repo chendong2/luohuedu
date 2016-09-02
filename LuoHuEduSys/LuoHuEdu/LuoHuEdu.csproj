@@ -1278,6 +1278,9 @@
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteForm.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteList.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteView.htm" />
+    <Content Include="View\CourseStudenttemp\CourseForm.htm" />
+    <Content Include="View\CourseStudenttemp\CourseList.htm" />
+    <Content Include="View\CourseStudenttemp\TrainingCourseForm.htm" />
     <Content Include="View\Course\CourseForm.htm" />
     <Content Include="View\Course\CourseList.htm" />
     <Content Include="View\Course\TrainingCourseForm.htm" />
@@ -1548,7 +1551,7 @@
     <Folder Include="Export\DataSet\" />
     <Folder Include="Export\WebService\" />
     <Folder Include="Models\" />
-    <Folder Include="View\CourseStudenttemp\" />
+    <Folder Include="View\OldCourseInfo\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessObject\BusinessObject.csproj">

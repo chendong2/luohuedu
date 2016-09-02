@@ -13,7 +13,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'Id', checkbox: true },
              { field: '1', title: '报名', width: 60, formatter: function (value, rec) {
                  if ($.cookie('perList').indexOf("课程报名") > -1) {
-                     return '<a style="color:red;cursor:pointer" onclick="baoming(\'' + rec.Id + '\')" href="javascript:void(0)">报名</a>';
+                     return '<a style="cursor:pointer" onclick="baoming(\'' + rec.Id + '\')" href="javascript:void(0)">报名</a>';
                  } else {
                      return '';
                  }
@@ -21,7 +21,7 @@ using(easyloader.defaultReferenceModules, function () {
              },
             { field: 'CourseName', title: '课程名称', width: 80, formatter: function (value, rec) {
                 if ($.cookie('perList').indexOf("课程浏览") > -1) {
-                    return '<a style="color:red;cursor:pointer" onclick="kecheng(\'' + rec.Id + '\')" href="javascript:void(0)">' + value + '</a>';
+                    return '<a style="cursor:pointer" onclick="kecheng(\'' + rec.Id + '\')" href="javascript:void(0)">' + value + '</a>';
                 } else {
                     return '';
                 }
