@@ -8,6 +8,7 @@ using System.Web.Services;
 using BusinessObject.Course;
 using BusinessObject.WSBo;
 using Services.Course.CourseControl;
+using Services.Course.CourseStudentTemp;
 
 namespace LuoHuEdu.WebServices.Course
 {
@@ -194,6 +195,41 @@ namespace LuoHuEdu.WebServices.Course
             var courseStudent = new CourseStudentService();
             return courseStudent.BatchAddCourseStudent(studentBo, ids);
         }
+        #endregion
+
+
+        #region "历史数据查询处理方法汇总"
+
+        /// <summary>
+        /// 获取历史考勤数据（excel导入）
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="rows"></param>
+        /// <param name="order"></param>
+        /// <param name="sort"></param>
+        /// <param name="courseStudentTempBo"></param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetCourseStudent(int page, int rows, string order, string sort,
+            CourseStudentTempBo courseStudentTempBo)
+        {
+            var courseStudent = new CourseStudentTempService();
+            var list = courseStudent.GetCourseStudent(page, rows, order, sort, courseStudentTempBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
+
         #endregion
     }
 }

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>华通呼叫中心系统</title>
+    <link rel="stylesheet" type="text/css" href="/Common/Scripts/ifram/jquery-core-easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="/Common/Scripts/ifram/jquery-core-easyui/themes/icon.css" />
+    <link href="/App_Themes/Gray/Styles/Gray.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/App_Themes/Global/Reset.css" />
+</head>
+<body id="layout" class="easyui-layout" scroll="no" style="vertical-align: top;">
+    <div region="center" border="false">
+        <table id="dg"></table>
+    </div>
+    <div id="toolbar" style="display: none;">
+            <span style="float: left">
+                <a href="#" class="easyui-linkbutton " iconcls="icon-add" plain="true" onclick="addData();">新增</a>
+                <a href="#" class="easyui-linkbutton " iconcls="icon-edit" plain="true" onclick="editData();">编辑</a> 
+                <a href="#" class="easyui-linkbutton " iconcls="icon-remove" plain="true" onclick="deleteDatas();">删除</a>  
+            </span>
+        <div  class="search_middle">
+            <span class="span_text">年度:</span>
+              <select style="width: 145px;"  name="TheYearSerch" id="TheYearSerch" class="easyui-validatebox" data-options="required:true">
+              </select>
+            <a class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="Search();" style="cursor: pointer;text-decoration: none">
+                搜索
+            </a>
+        </div>
+        <div  class="advanced_search">
+            <a class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="openAdvancedSearch();" style="cursor: pointer;text-decoration: none">
+                高级搜索
+                <span>>></span>
+            </a>
+        </div>
+    </div>
+    <div id="formTemplate" style="display: none">
+    </div>
+    <div id='divCache'>
+    </div>    
+    <div id="registerSetTemplate" style="display: none">
+    </div>
+    <div id="courseAuditFormTemplate" style="display: none">
+    </div>
+    <div id="studentManageTemplate" style="display: none">
+    </div>
+    <div id="chooseStudentTemplate" style="display: none">
+    </div>
+    <div id="kqTemplate" style="display: none">
+    </div>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery.min.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-template/handlebars.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/easyloader.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-common-easyui/easyui.config.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/jquery-common-easyui/easyui.public.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/json2.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/ifram/Printer/LodopFuncs.js"></script>
+    <script src="/Module/TrainingManage/TrainingCourseManage.js" type="text/javascript"></script>
+</body>
+</html>
