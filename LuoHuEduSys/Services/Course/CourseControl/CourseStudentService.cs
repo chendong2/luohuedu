@@ -439,5 +439,66 @@ namespace Services.Course.CourseControl
         }
 
 
+        //根据考勤ID获取考勤数据
+        public CourseStudentDto GetCourseStudentById(string id)
+        {
+            if (id == null)
+                throw new ArgumentNullException("id");
+            var courseStudentBo = new CourseStudentDto { };
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"select * from tb_coursestudent where Id=@Id";
+                    courseStudentBo = connection.Query<CourseStudentDto>(sqlStr, new { Id = id }).FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.GetCourseStudentById({0})异常", id), ex);
+            }
+            return courseStudentBo;
+        }
+
+
+        /// <summary>
+        /// 修改学生学时
+        /// </summary>
+        /// <param name="courseStudentBo"></param>
+        /// <returns></returns>
+        public bool UpdatePeroid(CourseStudentDto courseStudentBo)
+        {
+            if (courseStudentBo == null)
+                throw new ArgumentNullException("courseStudentBo");
+            try
+            {
+                string sqlStr = @"UPDATE `tb_coursestudent`
+                                    SET 
+                                      `Period` = @Period 
+                                       WHERE `Id` = @Id;";
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    int row = connection.Execute(sqlStr, courseStudentBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.UpdatePeroid(studentBo)", courseStudentBo), ex);
+                return false;
+            }
+
+        }
+
+
     }
 }

@@ -234,6 +234,7 @@ namespace LuoHuEdu.WebServices.Course
         #endregion
 
 
+        //获取新的考勤管理数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
         public object GetCourseStudentNew(int page, int rows, string order, string sort,
@@ -253,6 +254,27 @@ namespace LuoHuEdu.WebServices.Course
             {
                 return new { total = 0, rows = 0 };
             }
+        }
+
+
+        //根据ID获取考勤数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public CourseStudentDto GetCourseStudentById(string id)
+        {
+            var courseStudentService = new CourseStudentService();
+            return courseStudentService.GetCourseStudentById(id);
+        }
+
+        /// <summary>
+        /// 修改学生学时
+        /// </summary>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool UpdatePeroid(CourseStudentDto courseStudentBo)
+        {
+            var courseStudentService = new CourseStudentService();
+            return courseStudentService.UpdatePeroid(courseStudentBo);
         }
     }
 }

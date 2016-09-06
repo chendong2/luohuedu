@@ -1235,7 +1235,7 @@
     <Content Include="Module\Admin\Student.js" />
     <Content Include="Module\Carrental\CarrentalOrder.js" />
     <Content Include="Module\Carrental\CarrentalRoute.js" />
-    <Content Include="Module\Course\CourseStudentTempNew.js" />
+    <Content Include="Module\Course\AttendanceReport.js" />
     <Content Include="Module\Course\Course.js" />
     <Content Include="Module\Course\CourseStudentTemp.js" />
     <Content Include="Module\Customer\CallNum.js" />
@@ -1269,8 +1269,6 @@
     <Content Include="View\Admin\Student\StudentList.htm" />
     <Content Include="View\Admin\UserPermissions\PermissionsForm.htm" />
     <Content Include="View\Admin\UserPermissions\PermissionsList.htm" />
-    <Content Include="View\AttendanceReport\TrainingCourseForm.htm" />
-    <Content Include="View\AttendanceReport\TrainingCourseList.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderAdvancedSearch.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderCancelForm.htm" />
     <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderEditForm.htm" />
@@ -1282,9 +1280,8 @@
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteForm.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteList.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteView.htm" />
-    <Content Include="View\CourseStudenttempNew\CourseForm.htm" />
-    <Content Include="View\CourseStudenttempNew\CourseList.htm" />
-    <Content Include="View\CourseStudenttempNew\TrainingCourseForm.htm" />
+    <Content Include="View\AttendanceReport\CourseForm.htm" />
+    <Content Include="View\AttendanceReport\CourseList.htm" />
     <Content Include="View\CourseStudenttemp\CourseForm.htm" />
     <Content Include="View\CourseStudenttemp\CourseList.htm" />
     <Content Include="View\CourseStudenttemp\TrainingCourseForm.htm" />

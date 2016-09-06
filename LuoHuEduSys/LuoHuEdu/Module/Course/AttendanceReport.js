@@ -11,8 +11,17 @@ using(easyloader.defaultReferenceModules, function () {
     var dataGridOptions = {
         columns: [[
             { field: 'Id', checkbox: true },
+            { field:
+                'opt',
+                title: '修改学时',
+                width: 70,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="updatePeriod(\'' + rec.Id + '\')" href="javascript:void(0)">修改学时</a>';
+                    return btn;
+                }
+            },
             { field: 'Name', title: '学员姓名', width: 80 },
-            { field: 'CourseName', title: '课程名称', width:150 },
+            { field: 'CourseName', title: '课程名称', width:200 },
             { field: 'TheYear', title: '年度', width: 80 },
             { field: 'TimeStart', title: '课程开始时间', width: 120 },
             { field: 'TimeEnd', title: '课程结束时间', width: 120 },          
@@ -97,28 +106,23 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/CourseStudenttemp/CourseForm.htm',
+            href: '/View/AttendanceReport/CourseForm.htm',
             onLoad: function () {
             }
         });
     }
 }
 
-function kecheng(id) {
+function updatePeriod(id) {
 
-    getAllTrainType("ddlTrainType", true);
-    getAllSchool("ddlOrganizationalName", true);
-    getAllSubject("Subject", true);
-    getTheYear();
     ajaxCRUD({
-        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
+        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseStudentById',
         data: "{id:'" + id + "'}",
         success: function (data) {
             openDialog('dlg', {
-                title: '课程信息查看',
+                title: '修改学时',
                 iconCls: 'icon-edit'
             });
-            $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
             loadDataToForm('ff', data);
         }
@@ -126,6 +130,33 @@ function kecheng(id) {
 }
 
 
+//保存表单数据
+function saveData() {
+    if (!formValidate('ff')) {
+        return;
+    }
+
+    var formUrl = '/WebServices/Course/CourseWebServices.asmx/UpdatePeroid';
+
+    var form2JsonObj = form2Json("ff");
+    var form2JsonStr = JSON.stringify(form2JsonObj);
+    var jsonDataStr = "{courseStudentBo:" + form2JsonStr + "}";
+
+    ajaxCRUD({
+        url: formUrl,
+        data: jsonDataStr,
+        success: function (data) {
+            var msg = "修改成功"; //修改
+            if (data == true) {
+                msgShow('提示', msg, 'info');
+                closeFormDialog();
+                refreshTable('dg');
+            } else {
+                msgShow('提示', '提交失败', 'info');
+            }
+        }
+    });
+} // end saveData()
 
 
 function Search() {
