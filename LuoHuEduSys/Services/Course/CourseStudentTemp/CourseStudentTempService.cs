@@ -48,7 +48,7 @@ namespace Services.Course.CourseStudentTemp
                 }
                 if (!string.IsNullOrEmpty(courseStudentTempBo.Name))
                 {
-                    sql += "and Name=@Name ";
+                    sql += "and Name Like @Name ";
                 }
             }
             string orderby = " ORDER BY CourseName,StartDate " +order;
@@ -62,7 +62,7 @@ namespace Services.Course.CourseStudentTemp
                                              new
                                              {
                                                  EducationtName = string.Format("%{0}%", courseStudentTempBo.CourseName),
-                                                 Name = courseStudentTempBo.Name
+                                                 Name = string.Format("%{0}%", courseStudentTempBo.Name)
                                              }).Count();
 
                     sql += " limit @pageindex,@pagesize";
@@ -71,7 +71,7 @@ namespace Services.Course.CourseStudentTemp
                                                new
                                                {
                                                    CourseName = string.Format("%{0}%", courseStudentTempBo.CourseName),
-                                                   Name = courseStudentTempBo.Name,
+                                                   Name = string.Format("%{0}%", courseStudentTempBo.Name),
                                                    pageindex = pageIndex,
                                                    pagesize = pageSize
                                                }).ToList();
