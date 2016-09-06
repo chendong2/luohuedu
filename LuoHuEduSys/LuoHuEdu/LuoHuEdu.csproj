@@ -1235,6 +1235,7 @@
     <Content Include="Module\Admin\Student.js" />
     <Content Include="Module\Carrental\CarrentalOrder.js" />
     <Content Include="Module\Carrental\CarrentalRoute.js" />
+    <Content Include="Module\Course\CourseStudentTempNew.js" />
     <Content Include="Module\Course\Course.js" />
     <Content Include="Module\Course\CourseStudentTemp.js" />
     <Content Include="Module\Customer\CallNum.js" />
@@ -1281,6 +1282,9 @@
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteForm.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteList.htm" />
     <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteView.htm" />
+    <Content Include="View\CourseStudenttempNew\CourseForm.htm" />
+    <Content Include="View\CourseStudenttempNew\CourseList.htm" />
+    <Content Include="View\CourseStudenttempNew\TrainingCourseForm.htm" />
     <Content Include="View\CourseStudenttemp\CourseForm.htm" />
     <Content Include="View\CourseStudenttemp\CourseList.htm" />
     <Content Include="View\CourseStudenttemp\TrainingCourseForm.htm" />

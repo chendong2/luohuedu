@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Admin\Permissions\PermissionsService.cs" />
     <Compile Include="Admin\StudentControl\StudentService.cs" />
+    <Compile Include="Course\AttendanceReport\AttendanceReportService.cs" />
     <Compile Include="Course\CourseControl\AllCourseService.cs" />
     <Compile Include="Course\CourseControl\CourseService.cs" />
     <Compile Include="Course\CourseControl\CourseStudentFace.cs" />

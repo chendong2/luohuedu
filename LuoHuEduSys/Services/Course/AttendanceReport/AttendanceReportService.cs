@@ -36,7 +36,10 @@ namespace Services.Course.AttendanceReport
             pageSize = page * rows;
             var pageList = new Page<AttendanceReportBo>();
 
-            string sql = @"SELECT * FROM  tb_coursestudenttemp WHERE 1=1 ";
+            string sql = @"SELECT c.`Id`,co.`CourseName`,co.`TimeStart`,co.`TimeEnd`,s.`Name` ,co.`TheYear`,co.`Period`,sc.`SchoolName`,c.`SignDate`,c.`SignOutDate` FROM `tb_coursestudent` c
+            INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
+            INNER JOIN  tb_school sc ON sc.`Id`=co.`OrganizationalName`
+            INNER JOIN `tb_student` s ON s.`Id`=c.`StudentId` where 1=1 ";
 
             //sql 查询条件拼接
 
@@ -44,14 +47,14 @@ namespace Services.Course.AttendanceReport
             {
                 if (!string.IsNullOrEmpty(attendanceReportBo.CourseName))
                 {
-                    sql += "and CourseName Like @CourseName ";
+                    sql += "and co.CourseName Like @CourseName ";
                 }
                 if (!string.IsNullOrEmpty(attendanceReportBo.Name))
                 {
-                    sql += "and Name=@Name ";
+                    sql += "and s.Name Like @Name ";
                 }
             }
-            string orderby = " ORDER BY CourseName,StartDate " + order;
+            string orderby = " ORDER BY CourseName,TimeStart " + order;
             //加where条件
             sql += orderby;
             try
@@ -61,8 +64,8 @@ namespace Services.Course.AttendanceReport
                     count = context.Query<AttendanceReportBo>(sql,
                                              new
                                              {
-                                                 EducationtName = string.Format("%{0}%", attendanceReportBo.CourseName),
-                                                 Name = attendanceReportBo.Name
+                                                 CourseName = string.Format("%{0}%", attendanceReportBo.CourseName),
+                                                 Name = string.Format("%{0}%", attendanceReportBo.Name)
                                              }).Count();
 
                     sql += " limit @pageindex,@pagesize";
@@ -71,7 +74,7 @@ namespace Services.Course.AttendanceReport
                                                new
                                                {
                                                    CourseName = string.Format("%{0}%", attendanceReportBo.CourseName),
-                                                   Name = attendanceReportBo.Name,
+                                                   Name = string.Format("%{0}%", attendanceReportBo.Name),
                                                    pageindex = pageIndex,
                                                    pagesize = pageSize
                                                }).ToList();
@@ -85,7 +88,7 @@ namespace Services.Course.AttendanceReport
             }
             catch (Exception ex)
             {
-                LogHelper.WriteLog(string.Format("CourseStudentTempService.GetCourseStudent(courseStudentTempBo)"), ex);
+                LogHelper.WriteLog(string.Format("AttendanceReportService.AttendanceReportBo(courseStudentTempBo)"), ex);
                 return pageList;
             }
 

@@ -7,6 +7,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using BusinessObject.Course;
 using BusinessObject.WSBo;
+using Services.Course.AttendanceReport;
 using Services.Course.CourseControl;
 using Services.Course.CourseStudentTemp;
 
@@ -231,5 +232,27 @@ namespace LuoHuEdu.WebServices.Course
         }
 
         #endregion
+
+
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetCourseStudentNew(int page, int rows, string order, string sort,
+            AttendanceReportBo attendanceReportBo)
+        {
+            var aPService = new AttendanceReportService();
+            var list = aPService.GetAttendanceReportList(page, rows, order, sort, attendanceReportBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
     }
 }

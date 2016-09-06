@@ -47,10 +47,10 @@ namespace BusinessObject.Course
 
 
         /// 签到时间
-        public DateTime SignDate { get; set; }
+        public string SignDate { get; set; }
 
         /// 签退时间
-        public DateTime SignOutDate { get; set; }
+        public string SignOutDate { get; set; }
 
         /// 签到（1未签，2已签）
         public int Sign { get; set; }

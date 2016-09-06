@@ -134,7 +134,7 @@
             menus_2.push({ "menuid": "22", "menuname": "考勤管理（旧）", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/CourseStudenttemp/CourseList.htm") %>' });
         }
         if (perStr.indexOf("考勤管理") > -1) {
-            menus_2.push({ "menuid": "29", "menuname": "考勤管理（新）", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/CourseStudenttemp/CourseList.htm") %>' });
+            menus_2.push({ "menuid": "29", "menuname": "考勤管理（新）", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/CourseStudenttempNew/CourseList.htm") %>' });
         }
         if (perStr.indexOf("授课教师信息") > -1) {
             menus_2.push({ "menuid": "23", "menuname": "授课教师信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TeacherMessage/TeacherMessageList.htm") %>' });
