@@ -11,6 +11,15 @@ namespace Services.Course.AttendanceReport
 {
     public class AttendanceReportService
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="rows"></param>
+        /// <param name="order"></param>
+        /// <param name="sort"></param>
+        /// <param name="attendanceReportBo"></param>
+        /// <returns></returns>
         public Page<AttendanceReportBo> GetAttendanceReportList(int page, int rows, string order, string sort, AttendanceReportBo attendanceReportBo)
         {
             int count = 0;
