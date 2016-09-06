@@ -449,8 +449,16 @@ namespace Services.Course.CourseControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"select * from tb_coursestudent where Id=@Id";
+                    var sqlStr = @"SELECT c.*,co.CourseName,s.Name FROM tb_coursestudent c INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId` INNER JOIN `tb_student` s ON s.`Id`=c.`StudentId` where c.Id=@Id";
                     courseStudentBo = connection.Query<CourseStudentDto>(sqlStr, new { Id = id }).FirstOrDefault();
+                    if(courseStudentBo.SignDate!=null&&courseStudentBo.SignDate!=DateTime.MinValue)
+                    {
+                        courseStudentBo.SignDateStr = courseStudentBo.SignDate.ToString();
+                    }
+                    if (courseStudentBo.SignOutDate != null && courseStudentBo.SignOutDate != DateTime.MinValue)
+                    {
+                        courseStudentBo.SignOutDateStr = courseStudentBo.SignOutDate.ToString();
+                    }
 
                 }
             }
@@ -475,7 +483,8 @@ namespace Services.Course.CourseControl
             {
                 string sqlStr = @"UPDATE `tb_coursestudent`
                                     SET 
-                                      `Period` = @Period 
+                                      `Period` = @Period,
+                                       `IsCalculate` = @IsCalculate 
                                        WHERE `Id` = @Id;";
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {

@@ -11,20 +11,11 @@ using(easyloader.defaultReferenceModules, function () {
     var dataGridOptions = {
         columns: [[
             { field: 'Id', checkbox: true },
-            { field:
-                'opt',
-                title: '修改学时',
-                width: 70,
-                formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="updatePeriod(\'' + rec.Id + '\')" href="javascript:void(0)">修改学时</a>';
-                    return btn;
-                }
-            },
             { field: 'Name', title: '学员姓名', width: 80 },
-            { field: 'CourseName', title: '课程名称', width:200 },
+            { field: 'CourseName', title: '课程名称', width: 200 },
             { field: 'TheYear', title: '年度', width: 80 },
             { field: 'TimeStart', title: '课程开始时间', width: 120 },
-            { field: 'TimeEnd', title: '课程结束时间', width: 120 },          
+            { field: 'TimeEnd', title: '课程结束时间', width: 120 },
             { field: 'Period', title: '学时', width: 80 },
             { field: 'SignDate', title: '签到时间', width: 120, formatter: function (value) {
                 if (value == "0001/1/1 0:00:00")
@@ -40,7 +31,7 @@ using(easyloader.defaultReferenceModules, function () {
                     return value;
             }
             },
-            { field: 'Sign', title: '是否签到', width: 80 , formatter: function (value) {
+            { field: 'Sign', title: '是否签到', width: 80, formatter: function (value) {
                 if (value == 1)
                     return '<span>未签到</span>';
                 else
@@ -83,6 +74,9 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             });
 
+        },
+        onDblClickRow: function (rowIndex, rowData) {
+            fillForm(rowData.Id);
         }
     };
 
@@ -113,18 +107,31 @@ function loadPartialHtml() {
     }
 }
 
-function updatePeriod(id) {
+//点击“编辑”按钮
+function editData() {
+    var row = getSelectedRow('dg');
+    if (row == null) {
+        msgShow('考勤信息编辑', '请选择要编辑的一行数据', '');
+    } else {
+        resetFormAndClearValidate('ff');
+        fillForm(row.Id);
+    }
+}
+
+
+function fillForm(id) {
 
     ajaxCRUD({
         url: '/WebServices/Course/CourseWebServices.asmx/GetCourseStudentById',
         data: "{id:'" + id + "'}",
         success: function (data) {
             openDialog('dlg', {
-                title: '修改学时',
+                title: '编辑考勤信息',
                 iconCls: 'icon-edit'
             });
             //JSON数据填充表单
             loadDataToForm('ff', data);
+            $("#sIsCalculate").val(data.IsCalculate);
         }
     });
 }

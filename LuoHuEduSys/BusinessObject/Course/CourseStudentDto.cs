@@ -24,6 +24,12 @@ namespace BusinessObject.Course
         public DateTime SignDate { get; set; }
         /// 签退时间
         public DateTime SignOutDate { get; set; }
+
+        /// 签到时间
+        public string SignDateStr { get; set; }
+        /// 签退时间
+        public string SignOutDateStr { get; set; }
+
         //课程ID
         public string CourseId { get; set; }
 
@@ -33,5 +39,15 @@ namespace BusinessObject.Course
         public int Period { get; set; }
 
         public int IsCalculate { get; set; }
+
+        /// <summary>
+        /// 学生姓名
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 课程名称
+        /// </summary>
+        public string CourseName { get; set; }
     }
 }

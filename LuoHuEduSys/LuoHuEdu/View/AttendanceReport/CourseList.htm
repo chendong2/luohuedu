@@ -13,15 +13,18 @@
     <table id="dg">
     </table>
 </div>
-<div id="toolbar" style="display: none">
-    <div class="search_middle">
-         <span class="span_text">姓名:</span><input id="txtName" type="text" maxlength="25"
-            class="txtbox_margin" /><span class="span_text">课程名称:</span><input id="txtCourseName" type="text" maxlength="25"
-            class="txtbox_margin" />
-        <a class="easyui-linkbutton" iconcls="icon-search" plain="true" onclick="Search();"
-           style="cursor: pointer; text-decoration: none">搜索 </a>
+    <div id="toolbar" style="display: none">
+        <span style="float: left">
+                <a href="#" class="easyui-linkbutton " iconcls="icon-edit" plain="true" onclick="editData();">编辑</a>  
+            </span>
+        <div class="search_middle">
+            <span class="span_text">姓名:</span><input id="txtName" type="text" maxlength="25"
+                                                     class="txtbox_margin" /><span class="span_text">课程名称:</span><input id="txtCourseName" type="text" maxlength="25"
+                                                                                                                        class="txtbox_margin" />
+            <a class="easyui-linkbutton" iconcls="icon-search" plain="true" onclick="Search();"
+               style="cursor: pointer; text-decoration: none">搜索 </a>
+        </div>
     </div>
-</div>
 <div id="viewTemplate" style="display: none"></div>
 <div id="formTemplate" style="display: none"></div>
 <script type="text/javascript" src="/Common/Scripts/ifram/jquery.min.js"></script>

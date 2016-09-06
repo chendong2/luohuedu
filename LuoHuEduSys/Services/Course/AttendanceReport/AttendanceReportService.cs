@@ -36,7 +36,7 @@ namespace Services.Course.AttendanceReport
             pageSize = page * rows;
             var pageList = new Page<AttendanceReportBo>();
 
-            string sql = @"SELECT c.`Id`,co.`CourseName`,co.`TimeStart`,co.`TimeEnd`,s.`Name` ,co.`TheYear`,c.`Period`,sc.`SchoolName`,c.`SignDate`,c.`SignOutDate` FROM `tb_coursestudent` c
+            string sql = @"SELECT c.`Id`,co.`CourseName`,co.`TimeStart`,co.`TimeEnd`,s.`Name` ,co.`TheYear`,c.`Period`,sc.`SchoolName`,c.`SignDate`,c.`SignOutDate`,Sign,IsCalculate FROM `tb_coursestudent` c
             INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
             INNER JOIN  tb_school sc ON sc.`Id`=co.`OrganizationalName`
             INNER JOIN `tb_student` s ON s.`Id`=c.`StudentId` where 1=1 ";

@@ -1,16 +1,66 @@
-﻿<div id="dlg" style="width: 250px; padding: 10px" data-options="buttons: '#dlg-buttons',
+﻿<div id="dlg" style="width: 550px; padding: 10px" data-options="buttons: '#dlg-buttons',
                                                                 closed: true,
                                                                 shadow:false,
                                                                 modal:true">
     <form id="ff" method="post">
-    <table class="custom_forms_popup">
-    <tr>
-        <td style="width: 20%" class="td_right">
-            学时:
-        </td>
-        <td class="td_left" style="width: 30%" >
-            <input id="txtPeriod" type="text" name="Period" style="width: 85px" maxlength="8"  class="easyui-validatebox" data-options="required:true" />
-        </td></tr>
+        <table class="custom_forms_popup">
+             <tr>
+                <td style="width: 20%" class="td_right">
+                    学员姓名:
+                </td>
+                <td class="td_left" style="width: 30%" >
+                    <input id="txtName" type="text" name="Name" style="width: 125px" disabled="disabled" readonly="readonly"/>
+                </td>
+                <td style="width: 20%" class="td_right">
+                    课程名称:
+                </td>
+                <td class="td_left" style="width: 30%" >
+                    <input id="txtCourseName" type="text" name="CourseName" style="width: 125px" disabled="disabled" readonly="readonly"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 20%" class="td_right">
+                    签到:
+                </td>
+                <td class="td_left" style="width: 30%" >
+                    <select  id="sSign" name="Sign"  style="width: 135px" disabled="disabled">
+                        <option value="1">未签到</option>
+                        <option value="2">已签到</option>
+                    </select>
+                </td>
+            
+                <td style="width: 20%" class="td_right">
+                    签到时间:
+                </td>
+                <td class="td_left" style="width: 30%" >
+                    <input id="txtSignDate" type="text" name="SignDateStr" style="width: 125px" disabled="disabled"  readonly="readonly"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 20%" class="td_right">
+                    签退时间:
+                </td>
+                <td class="td_left" style="width: 30%" >
+                    <input id="txtSignOutDate" type="text" name="SignOutDateStr" style="width: 125px" disabled="disabled" readonly="readonly"/>
+                </td>
+                <td style="width: 20%" class="td_right">
+                    学时:
+                </td>
+                <td class="td_left" style="width: 30%" >
+                    <input id="txtPeriod" type="text" name="Period" style="width: 125px" maxlength="8"  class="easyui-validatebox" data-options="required:true" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 20%" class="td_right">
+                    是否需要计算:
+                </td>
+                <td class="td_left" style="width: 30%" >
+                    <select id="sIsCalculate" name="IsCalculate" style="width: 135px">
+                        <option value="1">需要计算</option>
+                        <option value="2">不计算</option>
+                    </select>
+                </td>
+            </tr>
         </table>
     <div>
         <input id="HidId" type="hidden" name="Id"/>
