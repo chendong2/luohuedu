@@ -30,13 +30,12 @@ using(easyloader.defaultReferenceModules, function () {
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
-            //alert();
             var studentData = {
                 page: param.page,
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                courseStudentTempBo: {},
+                courseStudentTempBo: {}
             };
             var paramStr = JSON.stringify(studentData);
 
@@ -68,143 +67,7 @@ using(easyloader.defaultReferenceModules, function () {
 
 });
 
-//easyloader.defaultTime为700ms
-setTimeout(loadPartialHtml, easyloader.defaultTime);
 
-function loadPartialHtml() {
-    if ($('.window').length == 0) {
-        panel('formTemplate', {
-            href: '/View/CourseStudenttemp/CourseForm.htm',
-            onLoad: function () {
-            }
-        });
-    }
-}
-
-function kecheng(id) {
-
-    getAllTrainType("ddlTrainType", true);
-    getAllSchool("ddlOrganizationalName", true);
-    getAllSubject("Subject", true);
-    getTheYear();
-    ajaxCRUD({
-        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
-        data: "{id:'" + id + "'}",
-        success: function (data) {
-            openDialog('dlg', {
-                title: '课程信息查看',
-                iconCls: 'icon-edit'
-            });
-            $("#HidName").val(data.SubjetName);
-            //JSON数据填充表单
-            loadDataToForm('ff', data);
-        }
-    });
-}
-
-//获取所有培训类型数据，用于绑定下拉框
-function getAllTrainType(ddlRoute, isSimpleSearch) {
-    var webserviceUrl = '/WebServices/Parameter/TrainType.asmx/GetAllTrainTypeNew';
-    ajaxCRUD({
-        async: false,
-        url: webserviceUrl,
-        data: '{}',
-        success: function (data) {
-            if (isSimpleSearch) {
-                // 如果是搜索条件用的dll，那么加入请选择选项
-                data.unshift({ 'Id': 0, 'TrainType': '请选择' });
-            }
-            initCombobox(ddlRoute, "Id", "TrainType", data, true);
-        }
-    });
-}
-
-
-//获取所有培训类型数据，用于绑定下拉框
-function getAllSubject(ddlRoute, isSimpleSearch) {
-    var webserviceUrl = '/WebServices/Parameter/Subject.asmx/GetAllSubjectNew';
-    ajaxCRUD({
-        async: false,
-        url: webserviceUrl,
-        data: '{}',
-        success: function (data) {
-            if (isSimpleSearch) {
-                // 如果是搜索条件用的dll，那么加入请选择选项
-                data.unshift({ 'Id': 0, 'SubjectName': '请选择' });
-            }
-            initCombobox(ddlRoute, "Id", "SubjectName", data, true);
-        }
-    });
-}
-
-//获取所有学校数据，用于绑定下拉框
-function getAllSchool(ddlRoute, isSimpleSearch) {
-    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetAllSchoolNew';
-    $("#sSchool").empty();
-    ajaxCRUD({
-        async: false,
-        url: webserviceUrl,
-        data: '{}',
-        success: function (data) {
-            if (isSimpleSearch) {
-                // 如果是搜索条件用的dll，那么加入请选择选项
-                data.unshift({ 'Id': 0, 'SchoolName': '请选择' });
-            }
-            initCombobox(ddlRoute, "Id", "SchoolName", data, true);
-        }
-    });
-}
-
-//获取年份数据，用于绑定下拉框
-function getTheYear() {
-    var currentYear = new Date().getFullYear();
-    $("#TheYear").empty();
-    for (var i = 1; i <= 15; i++) {
-        var data = currentYear - i + "-" + (currentYear - i + 1);
-        var option = "<option  value='" + data + "'>" + data + "</option>";
-        $("#TheYear").append(option);
-    }
-}
-
-
-
-
-
-
-//批量删除前台提示
-function baoming(id) {
-    $.messager.confirm('课程报名', '确定要报名此课程吗？', function (r) {
-        if (r) {
-            ajaxCRUD({
-                url: '/WebServices/Course/AllCourseServices.asmx/CanBaoMing',
-                data: "{courseId:'" + id + "'}",
-                success: function (data) {
-                    if (data == true) {
-                        baomingData(id);
-                    } else {
-                        msgShow('提示', '报名名额已满,您已无法报名！', 'info');
-                    }
-                }
-            });
-        }
-    });
-}
-
-//批量删除后台AJAX处理
-function baomingData(str) {
-    ajaxCRUD({
-        url: '/WebServices/Course/AllCourseServices.asmx/AddCourseStudent',
-        data: "{userId:'" + $.cookie('UserId') + "',courseId:'" + str + "'}",
-        success: function (data) {
-            if (data == true) {
-                msgShow('提示', '报名成功', 'info');
-                refreshTable('dg');
-            } else {
-                msgShow('提示', '报名失败', 'info');
-            }
-        }
-    });
-}
 
 function Search() {
     // 列表参数设置
@@ -217,8 +80,7 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 courseStudentTempBo: {CourseName: $("#txtCourseName").val().trim(),
-                    Name:$("#txtName").val().trim()},
-               
+                    Name:$("#txtName").val().trim()}
             };
             var paramStr = JSON.stringify(studentData);
 
