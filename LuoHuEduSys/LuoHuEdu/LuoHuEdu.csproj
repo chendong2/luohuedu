@@ -1226,8 +1226,6 @@
     <Content Include="Module\Course\CourseStudentTemp.js" />
     <Content Include="Module\Customer\CallNum.js" />
     <Content Include="Module\Customer\CustomerInfo.js" />
-    <Content Include="Module\Free\FreeOrder.js" />
-    <Content Include="Module\Free\FreePackage.js" />
     <Content Include="Module\Parameter\MaintrainSet.js" />
     <Content Include="Module\Parameter\School.js" />
     <Content Include="Module\Parameter\EducationOffice.js" />
@@ -1236,10 +1234,6 @@
     <Content Include="Module\Parameter\Subject.js" />
     <Content Include="Module\System\PswChange.js" />
     <Content Include="Module\System\UserInfo.js" />
-    <Content Include="Module\Ticket\BanciList.js" />
-    <Content Include="Module\Ticket\BookForm.js" />
-    <Content Include="Module\Ticket\TicketList.js" />
-    <Content Include="Module\Ticket\TicketOrderStatisticsList.js" />
     <Content Include="Module\TrainingManage\TeacherMessage.js" />
     <Content Include="Module\TrainingManage\ExemptionManage.js" />
     <Content Include="Module\TrainingManage\TrainingCourseManage.js" />
@@ -1278,10 +1272,6 @@
     <Content Include="View\Customer\CustomerList.htm" />
     <Content Include="View\Customer\ExtentionForm.htm" />
     <Content Include="View\Customer\PhoneForm.htm" />
-    <Content Include="View\Free\FreeAdvancedSearch.htm" />
-    <Content Include="View\Free\FreeOrderList.htm" />
-    <Content Include="View\Free\FreeOrderPackageList.htm" />
-    <Content Include="View\Free\FreePackageForm.htm" />
     <Content Include="View\Parameter\MaintrainSet\MaintrainSetForm.htm" />
     <Content Include="View\Parameter\MaintrainSet\MaintrainSetList.htm" />
     <Content Include="View\Parameter\School\SchoolForm.htm" />
@@ -1296,16 +1286,6 @@
     <Content Include="View\Parameter\Subject\SubjectList.htm" />
     <Content Include="View\System\PswChange.htm" />
     <Content Include="View\System\UserInfo.htm" />
-    <Content Include="View\Ticket\TicketBook\BanciList.htm" />
-    <Content Include="View\Ticket\TicketBook\BookForm.htm" />
-    <Content Include="View\Ticket\TicketBook\SelectSeatForm.htm" />
-    <Content Include="View\Ticket\TicketBook\SubmitForm.htm" />
-    <Content Include="View\Ticket\TicketList\TicketAdvancedSearch.htm" />
-    <Content Include="View\Ticket\TicketList\TicketCancelForm.htm" />
-    <Content Include="View\Ticket\TicketList\TicketForm.htm" />
-    <Content Include="View\Ticket\TicketList\TicketList.htm" />
-    <Content Include="View\Ticket\TicketStatistics\TicketOrderStatisticsAdvancedSearch.htm" />
-    <Content Include="View\Ticket\TicketStatistics\TicketOrderStatisticsList.htm" />
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageForm.htm" />
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageList.htm" />
     <Content Include="View\TrainingManage\TeacherMessage\TeacherMessageList.htm" />
