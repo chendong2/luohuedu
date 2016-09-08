@@ -27,6 +27,11 @@ namespace HuaTongCallCenter
             HttpCookie perListC = new HttpCookie("perList") { Value = HttpUtility.UrlEncode(perList, Encoding.GetEncoding("UTF-8")), Path = "/" };
             Response.Cookies.Add(perListC);
 
+            if(perList.Length<1)
+            {
+                this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "提示", "<script type='text/javascript'>msgShow('提示', '请进入个人信息页面完善您的真实信息，否则将无法使用本系统！', 'info');</script>");       
+            }
+
             if (!IsPostBack)
             {
                 lblUser.Text = UserInfo.GetUserName();

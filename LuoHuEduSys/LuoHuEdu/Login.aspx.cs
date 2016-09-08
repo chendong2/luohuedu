@@ -14,6 +14,7 @@ using System.Xml;
 using Domain.common;
 using Services.Admin.Permissions;
 using Services.Admin.StudentControl;
+using Services.Parameter;
 using Page = System.Web.UI.Page;
 using BusinessObject.AdminBo;
 namespace HuaTongCallCenter
@@ -51,12 +52,18 @@ namespace HuaTongCallCenter
                       string schoolcode = dt.Rows[0][3].ToString();
 
                       StudentBo stBo = studentService.GetAllStudentByLoginid(loginid);
+                      var ss=new SchoolService();
+                      string schoolId = ss.GetSchoolIdBycode(schoolcode);
+                    
                       if (stBo!= null)
                       {
+                          stBo.SchoolId = schoolId;
+                          studentService.UpdateStudent(stBo);
+
                           Session.Add("UserId", stBo.Id);
                           Session.Add("UserName", stBo.UserName);
-                          HttpCookie useridC = new HttpCookie("UserId") { Value = stBo.Id.ToString(CultureInfo.InvariantCulture), Path = "/" };
-                          HttpCookie userNameC = new HttpCookie("UserName") { Value = stBo.UserName, Path = "/" };
+                          var useridC = new HttpCookie("UserId") { Value = stBo.Id.ToString(CultureInfo.InvariantCulture), Path = "/" };
+                          var userNameC = new HttpCookie("UserName") { Value = stBo.UserName, Path = "/" };
                           Response.Cookies.Add(useridC);
                           Response.Cookies.Add(userNameC);
 
@@ -65,7 +72,7 @@ namespace HuaTongCallCenter
                           string perList = pService.getUserPermissionsList(stBo.Id);
                           Session.Add("perList", perList);
 
-                          HttpCookie perListC = new HttpCookie("perList") { Value = HttpUtility.UrlEncode(perList, Encoding.GetEncoding("UTF-8")), Path = "/" };
+                          var  perListC = new HttpCookie("perList") { Value = HttpUtility.UrlEncode(perList, Encoding.GetEncoding("UTF-8")), Path = "/" };
                           Response.Cookies.Add(perListC);
                       }
                       else
@@ -75,6 +82,7 @@ namespace HuaTongCallCenter
                           sBo.UserName = username;
                           sBo.LoginId = loginid;
                           sBo.Sex = sex;
+                          sBo.SchoolId = schoolId;
                           studentService.AddStudent(sBo);
 
                           Session.Add("UserId", sBo.Id);
