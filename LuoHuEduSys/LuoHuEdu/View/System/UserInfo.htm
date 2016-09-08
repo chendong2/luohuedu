@@ -22,7 +22,7 @@
                         <input type="hidden" name="Name"/>
                     </td>
                        <td style="width: 20%" class="td_right">
-                     编制设定:
+                     <span style="color: red">*</span>编制设定:
                  </td>
             <td class="td_left">
                 <select id="Staffing" name='Staffing' >
@@ -40,7 +40,7 @@
                         </select>
                     </td>
                     <td style="width: 20%" class="td_right">
-                        身份证号:
+                        <span style="color: red">*</span>身份证号:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtIDNo" type="text" name="IDNo" style="width: 185px" maxlength="20" class="easyui-validatebox"
@@ -49,7 +49,7 @@
                 </tr>
                 <tr>
                     <td style="width: 20%" class="td_right">
-                        性别:
+                        <span style="color: red">*</span>性别:
                     </td>
                     <td class="td_left">
                         <select id="sSex" name='Sex'>
@@ -58,7 +58,7 @@
                         </select>
                     </td>
                     <td style="width: 20%" class="td_right">
-                        出生日期:
+                        <span style="color: red">*</span>出生日期:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtBirthday" type="text" name="BirthdayStr" style="width:185px" maxlength="20"
@@ -67,14 +67,14 @@
                 </tr>
                 <tr>
                     <td style="width: 20%" class="td_right">
-                        籍贯:
+                        <span style="color: red">*</span>籍贯:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtOrigin" type="text" name="Origin" style="width: 185px" maxlength="20"
                             class="easyui-validatebox" data-options="required:true" />
                     </td>
                     <td style="width: 20%" class="td_right">
-                        民族:
+                        <span style="color: red">*</span>民族:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtMinority" type="text" name="Minority" style="width: 185px" maxlength="20"
@@ -83,14 +83,14 @@
                 </tr>
                 <tr>
                     <td style="width: 20%" class="td_right">
-                        专业:
+                        <span style="color: red">*</span>专业:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtProfession" type="text" name="Profession" style="width: 185px" maxlength="20"
                             class="easyui-validatebox" data-options="required:true" />
                     </td>
                     <td style="width: 20%" class="td_right">
-                        职称:
+                        <span style="color: red">*</span>职称:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtProfessiontitles" type="text" name="Professiontitles" style="width: 185px"
@@ -99,14 +99,14 @@
                 </tr>
                 <tr>
                     <td style="width: 20%" class="td_right">
-                        毕业院校:
+                        <span style="color: red">*</span>毕业院校:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtGraduated" type="text" name="Graduated" style="width: 185px" maxlength="20"
                             class="easyui-validatebox" data-options="required:true" />
                     </td>
                     <td style="width: 20%" class="td_right">
-                        最高学历:
+                        <span style="color: red">*</span>最高学历:
                     </td>
                     <td class="td_left">
                         <select id="sHighDegree" name='HighDegree'>
@@ -121,7 +121,7 @@
                 </tr>
                 <tr>
                     <td style="width: 20%" class="td_right">
-                        任课学段:
+                        <span style="color: red">*</span>任课学段:
                     </td>
                     <td class="td_left">
                         <select id="sStudyPeriod" name='StudyPeriod'>
@@ -133,7 +133,7 @@
                         </select>
                     </td>
                     <td style="width: 20%" class="td_right">
-                        是否班主任:
+                        <span style="color: red">*</span>是否班主任:
                     </td>
                     <td class="td_left">
                         <select id="sInCharge" name='InCharge'>
@@ -167,7 +167,7 @@
                 </select>
                     </td>
                     <td style="width: 20%" class="td_right">
-                        家庭住址:
+                        <span style="color: red">*</span>家庭住址:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtAddress" type="text" name="Address" data-options="required:true" style="width: 185px"
@@ -192,7 +192,7 @@
                 </tr>
                 <tr>
                     <td style="width: 20%" class="td_right">
-                        手机:
+                        <span style="color: red">*</span>手机:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtTelephone" type="text" data-options="required:true" name="Telephone"
@@ -212,14 +212,21 @@
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtHighHonor" type="text" name="HighHonor" style="width: 185px" maxlength="20"
-                            class="easyui-validatebox" />
+                               class="easyui-validatebox" />
                     </td>
                     <td style="width: 20%" class="td_right">
-                        市注册码:
+                        <span style="color: red">*</span>市注册码:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtRegistrationCode" type="text" name="RegistrationCode" style="width: 185px"
-                            maxlength="20" class="easyui-validatebox" data-options="required:true" />
+                               maxlength="20" class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr >
+                    <td colspan="4" style="color: red;text-align: left;font-size: 14px;">
+                        备注: <span>1、红色星号为必填项。</span><br/>
+                              <span style="margin-left: 35px;">2、“任课学段”请如实填写，不同任课学段的老师会有不同的培训课程。</span><br/>
+                              <span style="margin-left: 35px;">3、“第一任教学科”、“第二任教学科”请如实填写，不同教学科的老师会有不同的培训课程。</span>
                     </td>
                 </tr>
             </table>
