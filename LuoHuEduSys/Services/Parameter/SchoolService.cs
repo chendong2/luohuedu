@@ -293,5 +293,32 @@ namespace Services.Parameter
         }
 
 
+
+        /// <summary>
+        /// 根据学校编号获取学校Id
+        /// </summary>
+        /// <param name="id">单位id</param>
+        public string GetSchoolIdBycode(string schoolNo)
+        {
+            if (schoolNo == null)
+                throw new ArgumentNullException("schoolNo");
+            var SchoolBo = new SchoolBo { };
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlStr = @"select * from tb_school where SchoolNo=@SchoolNo";
+                    SchoolBo = connection.Query<SchoolBo>(sqlStr, new { SchoolNo = schoolNo }).FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("SchoolService.GetSchoolIdBycode({0})异常", schoolNo), ex);
+            }
+            return SchoolBo.Id;
+        }
+
+
     }
 }
