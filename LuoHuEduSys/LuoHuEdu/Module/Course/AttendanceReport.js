@@ -176,8 +176,8 @@ function Search() {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                attendanceReportBo: {CourseName: $("#txtCourseName").val().trim(),
-                    Name:$("#txtName").val().trim()}
+                attendanceReportBo: {CourseName: $("#txtCourseName").val(),
+                    Name:$("#txtName").val()}
                
             };
             var paramStr = JSON.stringify(studentData);

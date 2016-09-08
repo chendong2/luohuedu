@@ -1221,6 +1221,7 @@
     <Content Include="Module\Admin\Student.js" />
     <Content Include="Module\Carrental\CarrentalOrder.js" />
     <Content Include="Module\Carrental\CarrentalRoute.js" />
+    <Content Include="Module\Course\AttendanceReport.js" />
     <Content Include="Module\Course\Course.js" />
     <Content Include="Module\Course\CourseStudentTemp.js" />
     <Content Include="Module\Customer\CallNum.js" />

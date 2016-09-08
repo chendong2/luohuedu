@@ -325,7 +325,7 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 courseBo: {
-                    TheYear: $("#TheYearSerch").val().trim(),
+                    TheYear: $("#TheYearSerch").val(),
                     TeacherId: $.cookie('UserId')
                 }
             };

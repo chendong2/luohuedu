@@ -247,7 +247,7 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 courseBo: {
-                    CourseName: $("#txtCourseName").val().trim()
+                    CourseName: $("#txtCourseName").val()
                 },
                 studentId: $.cookie('UserId')
             };

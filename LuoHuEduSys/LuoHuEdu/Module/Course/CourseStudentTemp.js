@@ -79,8 +79,8 @@ function Search() {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                courseStudentTempBo: {CourseName: $("#txtCourseName").val().trim(),
-                    Name:$("#txtName").val().trim()}
+                courseStudentTempBo: {CourseName: $("#txtCourseName").val(),
+                    Name:$("#txtName").val()}
             };
             var paramStr = JSON.stringify(studentData);
 
