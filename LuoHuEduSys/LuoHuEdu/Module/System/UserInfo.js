@@ -77,7 +77,7 @@ function saveData() {
             
             if (data == true) {
                 msgShow('提示', msg, 'info');
-                closeFormDialog();
+//                closeFormDialog();
                 refreshTable('dg');
             } else {
                 msgShow('提示', '提交失败', 'info');
