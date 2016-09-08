@@ -127,7 +127,7 @@ function getAllExemption() {
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 var value = data[i].toString().split('******');
-                var option = "<input name='ExemptionId' type='radio'   value='" + value[1] + "' />" + value[0];
+                var option = "<input disabled='disabled' name='ExemptionId' type='radio'   value='" + value[1] + "' />" + value[0];
                 if (i < data.length - 1) {
                     option = option + "<br/>";
                 }
