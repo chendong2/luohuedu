@@ -241,6 +241,16 @@ namespace Services.Course.CourseControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
+                    string courseSql = @"select * from tb_course where Id=@courseId";
+
+                    var coursebo = connection.Query<CourseBo>(courseSql, new { Id = studentBo.CourseId }).FirstOrDefault();
+                    int period = 0;
+                    if (coursebo != null)
+                    {
+                        period = coursebo.Period;
+                    }
+                    studentBo.Period = period;
+
                     var strSql = @"INSERT INTO `tb_coursestudent`
                                     (`Id`,
                                      `CourseNumber`,
