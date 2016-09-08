@@ -130,6 +130,15 @@ namespace Services.Course.CourseControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
+                    string courseSql = @"select * from tb_course where Id=@courseId";
+
+                    var coursebo = connection.Query<CourseBo>(courseSql, new { Id = studentBo.CourseId }).FirstOrDefault();
+                    int period = 0;
+                    if (coursebo != null)
+                    {
+                        period = coursebo.Period;
+                    }
+                    studentBo.Period = period;
                     studentBo.Id = Guid.NewGuid().ToString();
                     var strSql = @"INSERT INTO `tb_coursestudent`
                                     (`Id`,
@@ -141,7 +150,7 @@ namespace Services.Course.CourseControl
                                      `TaskUrl`,
                                      `SignDate`,
                                      `SignOutDate`,
-                                     `CourseId`)
+                                     `CourseId`,Period)
                                     VALUES (@Id,
                                             @CourseNumber,
                                             @StudentId,
@@ -151,7 +160,7 @@ namespace Services.Course.CourseControl
                                             @TaskUrl,
                                             @SignDate,
                                             @SignOutDate,
-                                            @CourseId);";
+                                            @CourseId,@Period);";
                     int row = connection.Execute(strSql, studentBo);
                     if (row > 0)
                     {
@@ -185,7 +194,15 @@ namespace Services.Course.CourseControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    string sql = @"UPDATE `tb_coursestudent` SET `SignDate`=@SignDate,`SignOutDate`=@SignOutDate WHERE `StudentId`=@StudentId AND                                            `CourseId`=@CourseId";
+
+                    //string courseSql = @"select * from tb_course where Id=@courseId";
+
+                    //var coursebo = connection.Query<CourseBo>(courseSql, new { Id = courseId }).FirstOrDefault();
+
+
+                    string sql = @"UPDATE `tb_coursestudent` SET `SignDate`=@SignDate,`SignOutDate`=@SignOutDate,Sign=2,IsCalculate=1
+                                    WHERE `StudentId`=@StudentId AND                                            
+                                    `CourseId`=@CourseId";
                     int row = connection.Execute(sql, new
                     {
                         SignDate = signDate,
@@ -380,7 +397,7 @@ namespace Services.Course.CourseControl
                 throw new ArgumentNullException("id");
             try
             {
-                string sqlStr = @"UPDATE `tb_coursestudent` SET `Sign` =1 WHERE `Id` = @Id;";
+                string sqlStr = @"UPDATE `tb_coursestudent` SET `Sign` =1,IsCalculate=2 WHERE `Id` = @Id;";
                 CourseStudentDto st = new CourseStudentDto();
                 st.Id = id;
                 using (var connection = DataBaseConnection.GetMySqlConnection())
@@ -413,7 +430,7 @@ namespace Services.Course.CourseControl
                 throw new ArgumentNullException("id");
             try
             {
-                string sqlStr = @"UPDATE tb_coursestudent SET SIGN =2 WHERE Id = @Id;";
+                string sqlStr = @"UPDATE tb_coursestudent SET SIGN =2,IsCalculate=1 WHERE Id = @Id;";
                 CourseStudentDto st=new CourseStudentDto();
                 st.Id = id;
                 using (var connection = DataBaseConnection.GetMySqlConnection())
