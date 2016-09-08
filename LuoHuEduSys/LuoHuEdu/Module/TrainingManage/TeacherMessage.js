@@ -62,8 +62,8 @@ using(easyloader.defaultReferenceModules, function () {
 
 });
 
-//easyloader.defaultTime为700ms
-setTimeout(loadPartialHtml, easyloader.defaultTime);
+////easyloader.defaultTime为700ms
+//setTimeout(loadPartialHtml, easyloader.defaultTime);
 
 
 function Search() {
