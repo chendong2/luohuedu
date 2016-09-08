@@ -400,23 +400,16 @@
     <Content Include="App_Themes\Global\Images\user_icon.png" />
     <Content Include="App_Themes\Global\Images\user_icon2.png" />
     <Content Include="App_Themes\Global\Images\view_icon.png" />
-    <Content Include="App_Themes\Global\Images\wall.jpg" />
-    <Content Include="App_Themes\Global\Images\wall11.jpg" />
+    <Content Include="App_Themes\Global\Images\wall1111.jpg" />
+    <Content Include="App_Themes\Global\Images\wall222.jpg" />
     <Content Include="App_Themes\Global\Images\welcome.jpg" />
     <Content Include="App_Themes\Global\Images\xie_yi_icon.png" />
     <Content Include="App_Themes\Global\Images\zhen_min_icob.png" />
     <Content Include="App_Themes\Global\indeximage\bjl.jpg" />
     <Content Include="App_Themes\Global\indeximage\btn.png" />
     <Content Include="App_Themes\Global\indeximage\denglu22.png" />
-    <Content Include="App_Themes\Global\indeximage\denglu1.png" />
     <Content Include="App_Themes\Global\indeximage\denglu.png" />
     <Content Include="App_Themes\Global\indeximage\index1.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index11.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index1111.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index12.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index21.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index211.jpg" />
-    <Content Include="App_Themes\Global\indeximage\index4.jpg" />
     <Content Include="App_Themes\Global\indexs.css" />
     <Content Include="App_Themes\Global\Reset.css" />
     <Content Include="App_Themes\Global\stypebiao.css" />
@@ -511,9 +504,6 @@
     <Content Include="Common\Libs\CanYouLib.ExcelLib.XML" />
     <Content Include="Common\Libs\CanYouLib.Framework.dll" />
     <Content Include="Common\Libs\FileUpload.dll" />
-    <Content Include="Common\Libs\NPOI 1.2.5\.net 4.0\Ionic.Zip.dll" />
-    <Content Include="Common\Libs\NPOI 1.2.5\.net 4.0\NPOI.dll" />
-    <Content Include="Common\Libs\NPOI 1.2.5\.net 4.0\NPOI.XML" />
     <Content Include="Common\Scripts\fineupload\edit.gif" />
     <Content Include="Common\Scripts\fineupload\fineuploader-3.7.1.min.css" />
     <Content Include="Common\Scripts\fineupload\fineuploader-3.7.1.min.js" />
@@ -524,7 +514,6 @@
     <Content Include="Common\Scripts\ifram\jquery-common-easyui\control.data.js" />
     <Content Include="Common\Scripts\ifram\jquery-common-easyui\easyui.config.js" />
     <Content Include="Common\Scripts\ifram\jquery-common-easyui\easyui.public.js" />
-    <Content Include="Common\Scripts\ifram\jquery-core-easyui\changelog.txt" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\demo\accordion\actions.html" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\demo\accordion\ajax.html" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\demo\accordion\basic.html" />
@@ -668,8 +657,6 @@
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\easyloader.js" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\jquery-1.8.0.min.js" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\jquery.easyui.min.js" />
-    <Content Include="Common\Scripts\ifram\jquery-core-easyui\licence_gpl.txt" />
-    <Content Include="Common\Scripts\ifram\jquery-core-easyui\license_commercial.txt" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\locale\easyui-lang-af.js" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\locale\easyui-lang-ar.js" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\locale\easyui-lang-bg.js" />
@@ -726,7 +713,6 @@
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\plugins\jquery.treegrid.js" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\plugins\jquery.validatebox.js" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\plugins\jquery.window.js" />
-    <Content Include="Common\Scripts\ifram\jquery-core-easyui\readme.txt" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\src\easyloader.js" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\src\jquery.accordion.js" />
     <Content Include="Common\Scripts\ifram\jquery-core-easyui\src\jquery.calendar.js" />
@@ -1549,6 +1535,7 @@
   <ItemGroup>
     <Folder Include="App_Themes\Menu\SmallImages\" />
     <Folder Include="Common\Components\" />
+    <Folder Include="Common\Libs\NPOI 1.2.5\.net 4.0\" />
     <Folder Include="Common\UploadFiles\File\" />
     <Folder Include="Common\UploadFiles\Images\" />
     <Folder Include="Export\DataSet\" />
