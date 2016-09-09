@@ -27,7 +27,7 @@ namespace LuoHuEduWebService.Course
 
             var course = new CourseStudentService();
             var list = course.GetCourseStudent(idNo, yearNo, isAll);
-            return new JavaScriptSerializer().Serialize(list);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(list);
         }
     }
 }

@@ -766,6 +766,7 @@
     <file relUrl="App_Themes/Global/Images/pwd_icon.png" publishTime="07/07/2016 18:31:56" />
     <file relUrl="App_Themes/EasyUI/Themes/gray/images/validatebox_pointer.gif" publishTime="07/07/2016 18:31:56" />
     <file relUrl="Common/Scripts/ifram/jquery-core-easyui/themes/metro/images/pagination_icons.png" publishTime="09/08/2016 15:35:00" />
+    <file relUrl="bin/LuoHuEdu.pdb" publishTime="09/09/2016 10:52:39" />
     <file relUrl="Common/Scripts/JQuery/JqueryUI/external/qunit.js" publishTime="09/08/2016 15:35:09" />
     <file relUrl="Common/Scripts/Msbox/msgbox.css" publishTime="09/08/2016 15:35:14" />
     <file relUrl="Common/Scripts/JQuery/jquery.jmsajax.min.js" publishTime="09/08/2016 15:35:09" />
@@ -813,6 +814,7 @@
     <file relUrl="App_Themes/EasyUI/Themes/gray/images/messager_warning.gif" publishTime="07/07/2016 18:31:56" />
     <file relUrl="App_Themes/EasyUI/Themes/icons/back.png" publishTime="07/07/2016 18:31:56" />
     <file relUrl="Common/Scripts/ifram/jquery-core-easyui/themes/metro/tabs.css" publishTime="09/08/2016 15:35:02" />
+    <file relUrl="bin/LuoHuEdu.dll" publishTime="09/09/2016 10:52:39" />
     <file relUrl="Common/Scripts/JQuery/EasyUI/easyloader.js" publishTime="09/08/2016 15:35:05" />
     <file relUrl="Common/Scripts/ifram/jquery-core-easyui/themes/default/images/panel_title_bg.png" publishTime="09/08/2016 15:34:53" />
     <file relUrl="bin/MySql.Data.dll" publishTime="07/07/2016 18:31:56" />

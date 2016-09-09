@@ -43,7 +43,7 @@ namespace LuoHuEduWebService.CourseInfo
             var list = course.GetCourses(courseName, courseCode, beginDate, endDate);
             if (list.Count > 0)
             {
-                return new JavaScriptSerializer().Serialize(list);
+                return JsonConvert.SerializeObject(list);
             }
             else
             {
@@ -68,7 +68,7 @@ namespace LuoHuEduWebService.CourseInfo
             var list = courseStudentFace.GetCourseStudentByCourseId(courseId);
             if (list.Count > 0)
             {
-                return new JavaScriptSerializer().Serialize(list);
+                return JsonConvert.SerializeObject(list);
             }
             else
             {
