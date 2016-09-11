@@ -1251,17 +1251,6 @@
     <Content Include="View\Admin\UserPermissions\PermissionsList.htm" />
     <Content Include="View\AttendanceReport\CourseForm.htm" />
     <Content Include="View\AttendanceReport\CourseList.htm" />
-    <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderAdvancedSearch.htm" />
-    <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderCancelForm.htm" />
-    <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderEditForm.htm" />
-    <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderForm.htm" />
-    <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderList.htm" />
-    <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderTransfer.htm" />
-    <Content Include="View\Carrental\CarrentalOrder\CarrentalOrderView.htm" />
-    <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteAdvancedSearch.htm" />
-    <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteForm.htm" />
-    <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteList.htm" />
-    <Content Include="View\Carrental\CarrentalRoute\CarrentalRouteView.htm" />
     <Content Include="View\CourseStudenttemp\CourseForm.htm" />
     <Content Include="View\CourseStudenttemp\CourseList.htm" />
     <Content Include="View\CourseStudenttemp\TrainingCourseForm.htm" />

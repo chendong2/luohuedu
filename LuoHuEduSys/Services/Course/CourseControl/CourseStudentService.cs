@@ -21,12 +21,25 @@ namespace Services.Course.CourseControl
         /// <returns></returns>
         public List<CourseStudentBo> GetCourseStudent(string idNo, string yearNo, string isAll)
         {
-            string sql = @"SELECT Name,IDNO,YearNo,TermNo,CASE CourseType
+            //合并新数据和之前导入的数据
+            string sql = @"SELECT * FROM (
+                            SELECT s.`Name` ,s.`IDNo`,co.`TheYear` AS YearNo,0 AS TermNo,tr.TrainType,co.`CourseName`,'面授' AS 'StudyType',c.`Period`,
+                            DATE_FORMAT(co.`TimeStart`, '%Y-%m-%d') AS StartDate,DATE_FORMAT(co.`TimeEnd`, '%Y-%m-%d') 
+                            AS EndDate,sc.`SchoolName` AS TrainDept
+                            FROM `tb_coursestudent` c
+                            INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
+                            INNER JOIN  tb_school sc ON sc.`Id`=co.`OrganizationalName`
+                            INNER JOIN `tb_student` s ON s.`Id`=c.`StudentId`
+                            INNER JOIN `tb_traintype` tr ON co.TrainType=tr.`Id`
+                            UNION ALL
+                            SELECT NAME,IDNO,YearNo,TermNo,CASE CourseType
                             WHEN '集中培训' THEN '专业科目'
                             WHEN '专项培训' THEN '专业科目'
                             WHEN '校本培训' THEN '个人选修'
                             ELSE CourseType
-                            END AS CourseType,CourseName,StudyType,Period,DATE_FORMAT(StartDate, '%Y-%m-%d') AS StartDate,DATE_FORMAT(EndDate, '%Y-%m-%d') AS                                EndDate,TrainDept FROM tb_coursestudenttemp where 1=1 ";
+                            END AS CourseType,CourseName,StudyType,Period,DATE_FORMAT(StartDate, '%Y-%m-%d') AS StartDate,DATE_FORMAT(EndDate, '%Y-%m-%d') 
+                            AS EndDate,TrainDept FROM tb_coursestudenttemp) AS tb1 
+                            WHERE 1=1 ";
 
             //sql 查询条件拼接
             var wheres = new StringBuilder();
