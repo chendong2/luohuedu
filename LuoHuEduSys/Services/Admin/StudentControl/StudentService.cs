@@ -284,15 +284,15 @@ namespace Services.Admin.StudentControl
             string strSql = string.Format(@"SELECT tb_student.*,tb_school.SchoolName from tb_student left join tb_school on tb_student.SchoolId=tb_school.Id where 1=1 and Birthday IS NOT NULL  ");
             if (studentBo != null)
             {
-                if (studentBo.Name != null)
+                if (!string.IsNullOrEmpty(studentBo.Name))
                 {
                     strSql += "and Name like @Name ";
                 }
-                if (studentBo.IDNo != null)
+                if (!string.IsNullOrEmpty(studentBo.IDNo))
                 {
                     strSql += "and IDNo like @IDNo ";
                 }
-                if (studentBo.SchoolName != null)
+                if (!string.IsNullOrEmpty(studentBo.SchoolName))
                 {
                     strSql += "and SchoolName like @SchoolName ";
                 }
