@@ -493,13 +493,13 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
             return StudentBo;
         }
 
-        public List<StudentBo> GetAllStudents()
+        public List<StudentFaceBo> GetAllStudents()
         {
-             List<StudentBo> list;
+            List<StudentFaceBo> list;
              using (var connection = DataBaseConnection.GetMySqlConnection())
              {
-                 var sqlStr = @"select * from tb_student";
-                 list = connection.Query<StudentBo>(sqlStr, new { }).ToList();
+                 var sqlStr = @"select Id,Name from tb_student";
+                 list = connection.Query<StudentFaceBo>(sqlStr, new { }).ToList();
              }
             return list;
 

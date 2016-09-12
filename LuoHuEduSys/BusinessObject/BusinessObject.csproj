@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminBo\StudentFaceBo.cs" />
     <Compile Include="AdminBo\UserPermissionsBo.cs" />
     <Compile Include="CourseStudentBo.cs" />
     <Compile Include="CourseStudentMessageBo.cs" />

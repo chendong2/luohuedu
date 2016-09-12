@@ -130,9 +130,10 @@ namespace LuoHuEdu.WebServices.Admin
         /// <returns></returns>
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
-        public List<StudentBo> GetAllStudents()
+        public List<StudentFaceBo> GetAllStudents()
         {
             var student = new StudentService();
+
             return student.GetAllStudents();
         }
 
