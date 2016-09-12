@@ -32,10 +32,10 @@ using(easyloader.defaultReferenceModules, function () {
             }
             },
             { field: 'Sign', title: '是否签到', width: 80, formatter: function (value) {
-                if (value == 1)
-                    return '<span>未签到</span>';
+                if (value == 2)
+                    return '<span>已签到</span>';
                 else
-                    return '<font>已签到</font>';
+                    return '<font>未签到</font>';
             }
             },
             { field: 'IsCalculate', title: '是否计算', width: 80, formatter: function (value) {

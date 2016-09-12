@@ -280,7 +280,7 @@ namespace Services.Parameter
         public List<SchoolBo> GetPriSchoolByType()
         {
             List<SchoolBo> list;
-            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=3 ");
+            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=2 ");
 
             using (var context = DataBaseConnection.GetMySqlConnection())
             {

@@ -242,6 +242,7 @@ namespace Services.Course.CourseControl
             }
         }
 
+
         /// <summary>
         /// 批量增加报名数据方法
         /// </summary>
@@ -254,10 +255,11 @@ namespace Services.Course.CourseControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    string courseSql = @"select * from tb_course where Id=@courseId";
-
-                    var coursebo = connection.Query<CourseBo>(courseSql, new { Id = studentBo.CourseId }).FirstOrDefault();
+                    string courseSql = @"select Period from tb_course where Id = @courseId ";
                     int period = 0;
+                    var coursebo = connection.Query<CourseBo>(courseSql, new { courseId = studentBo.CourseId }).FirstOrDefault();
+
+                    
                     if (coursebo != null)
                     {
                         period = coursebo.Period;
