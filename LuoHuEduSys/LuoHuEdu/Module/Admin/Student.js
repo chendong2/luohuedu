@@ -43,8 +43,10 @@ using(easyloader.defaultReferenceModules, function () {
                         return "本科";
                     } else if (value == "5") { 
                         return "硕士";
-                    }else{ 
+                    }else  if (value == "6"){ 
                         return "博士";
+                    } else {
+                        return "";
                     }
                 }
             },
@@ -179,13 +181,15 @@ function fillForm(itemid) {
 //获取全部的免修数据
 function getAllSchool() {
     $("#sSchool").empty();
+    var option = "<option value=''>请选择</option>";
+    $("#sSchool").append(option);
     ajaxCRUD({
         url: '/WebServices/Parameter/School.asmx/GetAllSchool',
         async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 var value = data[i].toString().split('******');
-                var option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
+                option = "<option value='" + value[1] + "'>" + value[0] + "</option>";
                 $("#sSchool").append(option);
             }
         }

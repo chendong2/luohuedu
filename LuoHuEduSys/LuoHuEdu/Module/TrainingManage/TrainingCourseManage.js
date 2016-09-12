@@ -764,8 +764,10 @@ var chooseStudentDataGridOptions = {
                         return "本科";
                     } else if (value == "5") {
                         return "硕士";
-                    } else {
+                    } else if (value == "6") {
                         return "博士";
+                    } else {
+                        return "";
                     }
                 }
             },
@@ -880,8 +882,10 @@ function chooseStudentSearch() {
                         return "本科";
                     } else if (value == "5") {
                         return "硕士";
-                    } else {
+                    } else if (value == "6") {
                         return "博士";
+                    } else {
+                        return "";
                     }
                 }
             },

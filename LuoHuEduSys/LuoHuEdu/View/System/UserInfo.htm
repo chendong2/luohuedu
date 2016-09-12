@@ -109,13 +109,15 @@
                         <span style="color: red">*</span>最高学历:
                     </td>
                     <td class="td_left">
-                        <select id="sHighDegree" name='HighDegree'>
+                        <select id="sHighDegree" name='HighDegree' class="easyui-validatebox" data-options="required:true">
+                             <option value="">请选择</option>
                             <option value="1">高中</option>
                             <option value="2">中专</option>
                             <option value="3">大专</option>
                             <option value="4">本科</option>
                             <option value="5">硕士</option>
                             <option value="6">博士</option>
+                            <option value="7">其他</option>
                         </select>
                     </td>
                 </tr>
@@ -124,7 +126,8 @@
                         <span style="color: red">*</span>任课学段:
                     </td>
                     <td class="td_left">
-                        <select id="sStudyPeriod" name='StudyPeriod'>
+                        <select id="sStudyPeriod" name='StudyPeriod' class="easyui-validatebox" data-options="required:true">
+                            <option value="">请选择</option>
                             <option value="1">幼儿</option>
                             <option value="2">小学</option>
                             <option value="3">初中</option>
@@ -215,7 +218,7 @@
                                class="easyui-validatebox" />
                     </td>
                     <td style="width: 20%" class="td_right">
-                        <span style="color: red">*</span>市注册码:
+                        市注册码:
                     </td>
                     <td class="td_left" style="width: 30%">
                         <input id="txtRegistrationCode" type="text" name="RegistrationCode" style="width: 185px"
