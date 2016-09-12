@@ -228,7 +228,7 @@ namespace Services.Admin.StudentControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"select tb_student.*,tb_school.SchoolName from tb_student inner join tb_school on tb_student.SchoolId=tb_school.Id where tb_student.Id=@Id";
+                    var sqlStr = @"select tb_student.*,tb_school.SchoolName from tb_student left join tb_school on tb_student.SchoolId=tb_school.Id where tb_student.Id=@Id";
                     StudentBo = connection.Query<StudentBo>(sqlStr, new { Id = id }).FirstOrDefault();
 
                 }
