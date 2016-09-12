@@ -169,11 +169,11 @@ namespace Services.Parameter
             string strSql = string.Format(@"SELECT tb_school.Id,SchoolName,SchoolNo,case when tb_educationoffice.EducationtName is null then '' else tb_educationoffice.EducationtName end as Administrative,SchoolType,LearnLive,Address,Phone from tb_school left join tb_educationoffice on tb_school.Administrative=tb_educationoffice.Id  where 1=1  ");
             if (schoolBo != null)
             {
-                if (schoolBo.SchoolName != null)
+                if (!string.IsNullOrEmpty(schoolBo.SchoolName))
                 {
                     strSql += "and SchoolName like @SchoolName ";
                 }
-                if (schoolBo.SchoolNo != null)
+                if (!string.IsNullOrEmpty(schoolBo.SchoolNo))
                 {
                     strSql += "and SchoolNo like @SchoolNo ";
                 }

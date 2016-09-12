@@ -167,12 +167,12 @@ namespace Services.Parameter
             string strSql = string.Format(@"SELECT * from tb_traintype where 1=1 ");
             if (trainTypeBo != null)
             {
-                if (trainTypeBo.TrainType != null)
+                if (!string.IsNullOrEmpty(trainTypeBo.TrainType))
                 {
                     strSql += "and TrainType like @TrainType ";
                 }
 
-                if (trainTypeBo.TrainCode != null)
+                if (!string.IsNullOrEmpty(trainTypeBo.TrainCode))
                 {
                     strSql += "and TrainCode like @TrainCode ";
                 }

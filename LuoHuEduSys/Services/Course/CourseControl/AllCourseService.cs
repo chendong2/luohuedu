@@ -114,12 +114,12 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
                                             INNER JOIN tb_school sc ON st.SchoolId=sc.Id INNER JOIN tb_traintype tt ON co.traintype=tt.id  WHERE 1=1 and CourseState=2 ");
             if (courseBo != null)
             {
-                if (courseBo.SchoolName != null)
+                if (!string.IsNullOrEmpty(courseBo.SchoolName))
                 {
                     strSql += "and sc.SchoolName like @SchoolName ";
                 }
 
-                if (courseBo.TeacherName != null)
+                if (!string.IsNullOrEmpty(courseBo.TeacherName))
                 {
                     strSql += "and st.Name like @TeacherName ";
                 }
@@ -192,7 +192,7 @@ and st.`Id`=@StudentId )) AND CourseState=2 AND c.Requirement!=2 ");
            if (courseBo != null)
           {
                //课程名称查询
-           if (courseBo.CourseName != null)
+           if (!string.IsNullOrEmpty(courseBo.CourseName))
               {
                    strSql += "and c.CourseName Like @CourseName ";
               }

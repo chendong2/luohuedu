@@ -167,15 +167,15 @@ namespace Services.Parameter
             string strSql = string.Format(@"SELECT * from tb_maintrainset  where 1=1 ");
             if (maintrainSetBo != null)
             {
-                if (maintrainSetBo.ProgrameName != null)
+                if (!string.IsNullOrEmpty(maintrainSetBo.ProgrameName))
                 {
                     strSql += "and ProgrameName like @ProgrameName ";
                 }
-                if (maintrainSetBo.SubProgrameName != null)
+                if (!string.IsNullOrEmpty(maintrainSetBo.SubProgrameName))
                 {
                     strSql += "and SubProgrameName like @SubProgrameName ";
                 }
-                if (maintrainSetBo.SunProgrameName != null)
+                if (!string.IsNullOrEmpty(maintrainSetBo.SunProgrameName))
                 {
                     strSql += "and SunProgrameName like @SunProgrameName ";
                 }

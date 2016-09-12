@@ -167,7 +167,7 @@ namespace Services.Parameter
             string strSql = string.Format(@"SELECT * from tb_exemption where 1=1 ");
             if (exemptionBo != null)
             {
-                if (exemptionBo.ExemptionReason != null)
+                if (!string.IsNullOrEmpty(exemptionBo.ExemptionReason))
                 {
                     strSql += "and ExemptionReason like @ExemptionReason ";
                 }

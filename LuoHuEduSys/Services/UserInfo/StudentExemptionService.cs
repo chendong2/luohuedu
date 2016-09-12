@@ -170,7 +170,7 @@ namespace Services.UserInfo
             string strSql = string.Format(@"SELECT se.*,ex.ExemptionReason,st.UserName FROM tb_studentExemption se INNER JOIN tb_exemption ex ON  se.ExemptionId=ex.Id INNER JOIN  tb_student st ON se.StudentId=st.Id WHERE 1=1 ");
             if (studentExemptionBo != null)
             {
-                if (studentExemptionBo.UserName != null)
+                if (!string.IsNullOrEmpty(studentExemptionBo.UserName))
                 {
                     strSql += "and UserName like @UserName ";
                 }
