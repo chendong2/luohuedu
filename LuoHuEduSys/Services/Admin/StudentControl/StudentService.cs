@@ -281,7 +281,7 @@ namespace Services.Admin.StudentControl
             pageSize = page * rows;
             var pageList = new Page<StudentBo>();
 
-            string strSql = string.Format(@"SELECT tb_student.*,tb_school.SchoolName from tb_student inner join tb_school on tb_student.SchoolId=tb_school.Id where 1=1 and Birthday IS NOT NULL  ");
+            string strSql = string.Format(@"SELECT tb_student.*,tb_school.SchoolName from tb_student left join tb_school on tb_student.SchoolId=tb_school.Id where 1=1 and Birthday IS NOT NULL  ");
             if (studentBo != null)
             {
                 if (studentBo.Name != null)
