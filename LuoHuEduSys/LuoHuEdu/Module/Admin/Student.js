@@ -25,12 +25,7 @@ using(easyloader.defaultReferenceModules, function () {
             },
             { field: 'Profession', title: '专业', width: 80, sortable: false },
             { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
-            { field: 'Birthday', title: '生日', width: 100, sortable: false ,
-                formatter: function (value) {
-                    value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-                    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-                }
-            },
+            { field: 'BirthdayStr', title: '生日', width: 100, sortable: false },
             { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {

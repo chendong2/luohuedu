@@ -58,9 +58,14 @@ namespace Services.Course.CourseControl
                     strSql += " and c.CourseCode=@CourseCode ";
                 }
                 //课程代码查询
-                if (string.IsNullOrEmpty(courseBo.TeacherId))
+                if (!string.IsNullOrEmpty(courseBo.TeacherId))
                 {
                     strSql += " and c.TeacherId=@TeacherId ";
+                }
+                //课程代码查询
+                if (!string.IsNullOrEmpty(courseBo.TheYear))
+                {
+                    strSql += " and c.TheYear=@TheYear ";
                 }
             }
 
