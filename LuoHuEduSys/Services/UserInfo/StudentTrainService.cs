@@ -171,7 +171,7 @@ namespace Services.UserInfo
             string strSql = string.Format(@"SELECT se.*,ex.ProgrameName,ex.SubProgrameName,ex.SunProgrameName,ex.StuTime,st.UserName FROM tb_studentTrain se INNER JOIN tb_maintrainset ex ON se.ProgramId=ex.Id INNER JOIN  tb_student st ON se.StudentId=st.Id WHERE 1=1 ");
             if (studentTrainBo != null)
             {
-                if (studentTrainBo.UserName != null)
+                if (!string.IsNullOrEmpty(studentTrainBo.UserName))
                 {
                     strSql += "and UserName like @UserName ";
                 }

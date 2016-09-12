@@ -167,7 +167,7 @@ namespace Services.Parameter
             string strSql = string.Format(@"SELECT * from tb_educationoffice  where 1=1 ");
             if (educationOfficeBo != null)
             {
-                if (educationOfficeBo.EducationtName != null)
+                if (!string.IsNullOrEmpty(educationOfficeBo.EducationtName))
                 {
                     strSql += "and EducationtName like @EducationtName ";
                 }

@@ -405,7 +405,7 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
 )mmb ON xxb.Id=mmb.studentid AND xxb.TheYear=mmb.TheYear WHERE 1=1 ");
             if (studentBo != null)
             {
-                if (studentBo.TheYear != null)
+                if (!string.IsNullOrEmpty(studentBo.TheYear))
                 {
                     strSql += "and xxb.TheYear = @TheYear ";
                 }

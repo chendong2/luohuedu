@@ -511,16 +511,16 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
             if (courseBo != null)
             {
                 //课程名称查询
-                if (courseBo.CourseName != null)
+                if (!string.IsNullOrEmpty(courseBo.CourseName))
                 {
                     strSql += "and c.CourseName Like @CourseName ";
                 }
                 //授课教师ID
-                if (courseBo.TeacherId != null)
+                if (!string.IsNullOrEmpty(courseBo.TeacherId))
                 {
                     strSql += " and c.TeacherId=@TeacherId ";
                 }
-                if (courseBo.TheYear != null)
+                if (!string.IsNullOrEmpty(courseBo.TheYear))
                 {
                     strSql += "and c.TheYear=@TheYear ";
                 }

@@ -167,7 +167,7 @@ namespace Services.Parameter
             string strSql = string.Format(@"SELECT * from tb_subject where 1=1 ");
             if (subjectBo != null)
             {
-                if (subjectBo.SubjectName != null)
+                if (!string.IsNullOrEmpty(subjectBo.SubjectName))
                 {
                     strSql += "and subjectname like @SubjectName";
                 }
