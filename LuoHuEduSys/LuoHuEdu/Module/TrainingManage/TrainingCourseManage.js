@@ -40,6 +40,16 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             },
             { field: 'CourseName', title: '课程名称', width: 180 },
+              { field: 'CourseState', title: '状态', width:100, formatter: function (value) {
+                  if (value == 1)
+                      return '<span style="red">待审核状态</span>';
+                  else if (value == 2)
+                      return '<span>审核通过并开放</span>';
+                  else if (value == 3)
+                      return '<span>审核不通过</span>';
+                  return '<span style="red">待审核状态</span>';
+              }
+              },
             { field: 'TheYear', title: '年度', width: 150 },
             { field: 'TrainType', title: '培训类型', width: 140 },
             { field: 'SubjectName', title: '培训科目', width: 80 },
@@ -50,7 +60,7 @@ using(easyloader.defaultReferenceModules, function () {
                 if (value == 1)
                     return '<span>选修</span>';
                 else
-                    return '<font>必修</font>';
+                    return '<span>必修</span>';
             }
             },
             { field: 'Address', title: '培训地址', width: 130, sortable: true },
