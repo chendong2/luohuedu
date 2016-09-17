@@ -170,10 +170,10 @@ function fillForm(itemid) {
                 async: false,
                 url: webserviceUrl,
                 data: "{schoolId:'" + schoolId + "'}",
-                success: function (data) {
+                success: function (data1) {
                     // 如果是搜索条件用的dll，那么加入请选择选项
-                    data.unshift({ 'Id': 0, 'Name': '请选择' });
-                    initCombobox("ddlTeacherId", "Id", "Name", data, true);
+                    data1.unshift({ 'Id': 0, 'Name': '请选择' });
+                    initCombobox("ddlTeacherId", "Id", "Name", data1, true);
                 }
             });
 
