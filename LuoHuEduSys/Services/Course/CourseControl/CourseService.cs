@@ -160,7 +160,9 @@ namespace Services.Course.CourseControl
                                   `ModifiyBy` = @ModifiyBy,
                                   `ModifiyOn` = @ModifiyOn,
                                   `MainComment` = @MainComment,
-                                  `TeacherName` = @TeacherName
+                                  `TeacherName` = @TeacherName,
+                                    WaiPingName=@WaiPingName,
+                                    ReMark=@ReMark 
                                    WHERE `Id` = @Id;"; 
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
