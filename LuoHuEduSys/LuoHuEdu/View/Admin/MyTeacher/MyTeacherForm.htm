@@ -213,24 +213,3 @@
     <a class="easyui-linkbutton" onclick=" saveData(); ">确定</a>
     <a class="easyui-linkbutton" onclick=" closeFormDialog('dlg'); ">取消</a>
 </div>
-
-<script type="text/javascript">
-    $(function () {
-        $('#ddlOrganizationalName').combobox({
-            onChange: function () {
-                var schoolId = $("#ddlOrganizationalName").combobox('getValue');
-                var webserviceUrl = '/WebServices/Admin/Student.asmx/GetAllStudentsBySchoolId';
-                ajaxCRUD({
-                    async: false,
-                    url: webserviceUrl,
-                    data: "{schoolId:'" + schoolId + "'}",
-                    success: function (data) {
-                        // 如果是搜索条件用的dll，那么加入请选择选项
-                        data.unshift({ 'Id': 0, 'Name': '请选择' });
-                        initCombobox("ddlTeacherId", "Id", "Name", data, true);
-                    }
-                });
-            }
-        });
-    });
-</script>

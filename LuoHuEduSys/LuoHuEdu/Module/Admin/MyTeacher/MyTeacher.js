@@ -47,7 +47,7 @@ using(easyloader.defaultReferenceModules, function () {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                courseBo: {  }
+                courseBo: { TeacherId: $.cookie('UserId') }
             };
             var paramStr = JSON.stringify(courseData);
 
@@ -126,10 +126,8 @@ function addData() {
     getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName", true);
     getTheYear();
-    getAllSubject("Subject", true);
-    data = [];
-    data.push({ "Name": "请选择", "Id": 0 });
-    initCombobox("ddlTeacherId", "Id", "Name", data, true);
+    getAllSubject("Subject", true); 
+    getAllStudent("ddlTeacherId", true);
     resetFormAndClearValidate('ff');
 }
 
@@ -149,6 +147,7 @@ function editData() {
 function fillForm(itemid) {
     getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName", true);
+    getAllStudent("ddlTeacherId", true);
     getAllSubject("Subject", true);
     getTheYear();
     ajaxCRUD({
@@ -164,24 +163,26 @@ function fillForm(itemid) {
             $('#txtTimeStart').datebox('setValue', data.TimeStartStr);
             $('#txtTimeEnd').datebox('setValue', data.TimeEndStr);
             loadDataToForm('ff', data);
-            var schoolId = $("#ddlOrganizationalName").combobox('getValue');
-            var webserviceUrl = '/WebServices/Admin/Student.asmx/GetAllStudentsBySchoolId';
-            ajaxCRUD({
-                async: false,
-                url: webserviceUrl,
-                data: "{schoolId:'" + schoolId + "'}",
-                success: function (data1) {
-                    // 如果是搜索条件用的dll，那么加入请选择选项
-                    data1.unshift({ 'Id': 0, 'Name': '请选择' });
-                    initCombobox("ddlTeacherId", "Id", "Name", data1, true);
-                }
-            });
-
-            $("#ddlTeacherId").combobox('setValue', data.TeacherId);
         }
     });
 }
 
+//获取所有培训类型数据，用于绑定下拉框
+function getAllStudent(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Admin/Student.asmx/GetAllStudents';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'Name': '请选择' });
+            }
+            initCombobox(ddlRoute, "Id", "Name", data, true);
+        }
+    });
+}
 
 //获取年份数据，用于绑定下拉框
 function getTheYear() {
@@ -324,7 +325,8 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 courseBo: {
-                    TheYear: $("#TheYearSerch").val()
+                    TheYear: $("#TheYearSerch").val(),
+                    TeacherId: $.cookie('UserId')
                 }
             };
             var paramStr = JSON.stringify(studentData);

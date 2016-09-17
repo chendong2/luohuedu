@@ -191,7 +191,11 @@ function addData() {
         iconCls: 'icon-add'
     });
     getAllTrainType("ddlTrainType", true);
-    getAllSchool("ddlOrganizationalName",true );
+    getAllSchool("ddlOrganizationalName", true);
+    getAllSchool("ddlSchoolName", true);
+    data = [];
+    data.push({ "Name": "请选择", "Id": 0 });
+    initCombobox("ddlTeacherId", "Id", "Name", data, true);
     getTheYear();
     getAllSubject("Subject", true);
 //    getAllStudent("ddlTeacherId", true);
@@ -225,6 +229,7 @@ function editData1() {
 function fillForm(itemid) {
     getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName", true);
+    getAllSchool("ddlSchoolName", true);
     getAllSubject("Subject", true);
     getTheYear();
 //    getAllStudent("ddlTeacherId", true);
@@ -242,6 +247,19 @@ function fillForm(itemid) {
             $('#txtTimeEnd').datebox('setValue', data.TimeEndStr);
             //JSON数据填充表单
             loadDataToForm('ff', data);
+
+            ajaxCRUD({
+                async: false,
+                url: '/WebServices/Admin/Student.asmx/GetAllStudentById',
+                data: "{id:'" + data.TeacherId + "'}",
+                success: function (data1) {
+                    // 如果是搜索条件用的dll，那么加入请选择选项
+                    $("#ddlSchoolName").combobox('setValue', data1.SchoolId);
+                }
+            });
+
+
+            $("#ddlTeacherId").combobox('setValue', data.TeacherId);
         }
     });
 }

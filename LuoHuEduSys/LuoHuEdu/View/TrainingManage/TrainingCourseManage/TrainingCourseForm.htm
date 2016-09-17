@@ -1,4 +1,4 @@
-﻿<div id="dlg" style="width:800px; height: 520px" data-options="buttons: '#dlg-button',
+﻿<div id="dlg" style="width:800px; height: 550px" data-options="buttons: '#dlg-button',
                                                                                             closed: true,
                                                                                             shadow:false,
                                                                                             modal:true">
@@ -144,8 +144,25 @@
                         </select>
                     </td>
                 </tr>
-                
-                 <tr>
+                <tr>
+                    <td class="td_right">
+                        选择学校:
+                    </td>
+                    <td class="td_left">
+                         <select style="width: 145px;" class="easyui-combobox" name="SchoolId" id="ddlSchoolName" class="easyui-validatebox" data-options="required:true">
+                           
+                        </select>
+                    </td>
+                    <td class="td_right">
+                        授课教师:
+                    </td>
+                    <td class="td_left">
+                       <select style="width: 145px;" class="easyui-combobox" name="TeacherId" id="ddlTeacherId" class="easyui-validatebox" data-options="required:true">
+                           
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td class="td_right">
                         外聘教师:
                     </td>
@@ -217,3 +234,25 @@
     <a class="easyui-linkbutton" onclick=" saveData(); ">确定</a>
     <a class="easyui-linkbutton" onclick=" closeFormDialog('dlg'); ">取消</a>
 </div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#ddlSchoolName').combobox({
+            onChange: function () {
+                var schoolId = $("#ddlSchoolName").combobox('getValue');
+                var webserviceUrl = '/WebServices/Admin/Student.asmx/GetAllStudentsBySchoolId';
+                ajaxCRUD({
+                    async: false,
+                    url: webserviceUrl,
+                    data: "{schoolId:'" + schoolId + "'}",
+                    success: function (data) {
+                        // 如果是搜索条件用的dll，那么加入请选择选项
+                        data.unshift({ 'Id': 0, 'Name': '请选择' });
+                        initCombobox("ddlTeacherId", "Id", "Name", data, true);
+                    }
+                });
+            }
+        });
+    });
+</script>
