@@ -229,7 +229,7 @@ namespace Services.Course.CourseControl
                              `OrganizationalName`,`DesignIdea`,`TrainingAim`,`Distinctive`,`EffectAnalysis`,
                              `CourseDate`,`TimeStart`,`TimeEnd`,`CourseCode`, `Requirement`,`TeachingObject`,`ObjectEstablish`,`ObjectSubject`,
                              `CourseState`,`AduitTime`,`FirstAduit`,`EndAduit`,`CenterAduit`,`AttendanceName`,
-                             `AttendanceUrl`,`Locked`,`Assessmentlevel`,`CreatedBy`,`CreatedOn`,`ModifiyBy`,`ModifiyOn`,WaiPingName,ReMark)
+                             `AttendanceUrl`,`Locked`,`Assessmentlevel`,`CreatedBy`,`CreatedOn`,`ModifiyBy`,`ModifiyOn`,`WaiPingName`,`ReMark`)
                               VALUES (@Id,@TeacherId,@CourseName,@TheYear,@TrainType,@Subject,@Phone, @Period,@Cost,@ChargeObj, @SetCheck,
                             @IsMust,@Address,@MaxNumber,@SetApply,@OrganizationalName,@DesignIdea,@TrainingAim,
                             @Distinctive,@EffectAnalysis,@CourseDate,
@@ -523,11 +523,11 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
                     strSql += "and c.CourseName Like @CourseName ";
                 }
                 //授课教师ID
-                if (string.IsNullOrEmpty(courseBo.TeacherId))
+                if (!string.IsNullOrEmpty(courseBo.TeacherId))
                 {
                     strSql += " and c.TeacherId=@TeacherId ";
                 }
-                if (string.IsNullOrEmpty(courseBo.TheYear))
+                if (!string.IsNullOrEmpty(courseBo.TheYear))
                 {
                     strSql += "and c.TheYear=@TheYear ";
                 }

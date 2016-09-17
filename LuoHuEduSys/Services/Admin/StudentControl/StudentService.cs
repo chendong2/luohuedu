@@ -579,5 +579,21 @@ INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.scho
             return pageList;
 
         }
+
+
+        /// <summary>
+        /// 根据学校获取所有教师信息
+        /// </summary>
+        public List<StudentFaceBo> GetAllStudentsBySchoolId(string schoolId)
+        {
+            List<StudentFaceBo> list;
+            using (var connection = DataBaseConnection.GetMySqlConnection())
+            {
+                var sqlStr = @"select Id,Name from tb_student where SchoolId=@SchoolId";
+                list = connection.Query<StudentFaceBo>(sqlStr, new { SchoolId = schoolId }).ToList();
+            }
+            return list;
+
+        }
     }
 }

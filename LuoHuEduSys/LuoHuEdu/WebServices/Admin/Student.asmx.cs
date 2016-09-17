@@ -181,5 +181,18 @@ namespace LuoHuEdu.WebServices.Admin
             return courseStudentService.CancelQianDao(id);
         }
 
+
+        /// <summary>
+        /// 根据学校获取所有教师信息
+        /// </summary>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<StudentFaceBo> GetAllStudentsBySchoolId(string schoolId)
+        {
+            var student = new StudentService();
+
+            return student.GetAllStudentsBySchoolId(schoolId);
+        }
     }
 }

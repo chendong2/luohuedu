@@ -194,5 +194,11 @@ namespace BusinessObject.Course
         /// </summary>
         public string StudentId { get; set; }
 
+        /// 外聘教师姓名（不在系统中的教师）
+        public string WaiPingName { get; set; }
+
+        /// 备注外聘
+        public string ReMark { get; set; }
+
     }
 }
