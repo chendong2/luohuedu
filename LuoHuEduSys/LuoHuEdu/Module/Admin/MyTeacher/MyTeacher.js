@@ -8,7 +8,7 @@ using(easyloader.defaultReferenceModules, function () {
 
     // 列表参数设置
     var dataGridOptions = {
-        title: '培训课程管理',
+        title: '我是授课教师',
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'CourseName', title: '课程名称', width: 150, sortable: true },
@@ -269,6 +269,7 @@ function saveData() {
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
+    form2JsonObj.TeacherId = $.cookie('UserId');
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
     //console.log(jsonDataStr);
