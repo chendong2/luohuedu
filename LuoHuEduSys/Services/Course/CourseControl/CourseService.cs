@@ -40,9 +40,9 @@ namespace Services.Course.CourseControl
             var pageList = new Page<CourseBo>();
 
             string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
-                                            INNER JOIN tb_subject AS s ON c.Subject=s.Id
-                                            INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
-					                        INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`                                         
+                                            left JOIN tb_subject AS s ON c.Subject=s.Id
+                                            left JOIN tb_traintype AS t ON c.TrainType=t.Id 
+					                        left JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`                                         
                                             WHERE 1=1 
                                              ");
             if (courseBo != null)
@@ -97,7 +97,10 @@ namespace Services.Course.CourseControl
                                             new
                                             {
                                                 EducationtName = string.Format("%{0}%", courseBo.CourseName),
-                                                adminSchoolId = adminSchoolId
+                                                adminSchoolId = adminSchoolId,
+                                                TheYear = courseBo.TheYear,
+                                                TeacherId=courseBo.TeacherId
+
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
@@ -106,6 +109,8 @@ namespace Services.Course.CourseControl
                                                 {
                                                     CourseName = string.Format("%{0}%", courseBo.CourseName),
                                                     adminSchoolId = adminSchoolId,
+                                                     TheYear = courseBo.TheYear,
+                                                    TeacherId=courseBo.TeacherId,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
