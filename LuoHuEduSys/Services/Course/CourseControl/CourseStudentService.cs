@@ -19,11 +19,10 @@ namespace Services.Course.CourseControl
         /// <param name="yearNo"></param>
         /// <param name="isAll"></param>
         /// <returns></returns>
-        public List<CourseStudentBo> GetCourseStudent(string idNo, string yearNo, string isAll)
+        public List<CourseStudentBo> GetCourseStudentNew(string idNo, string yearNo, string isAll)
         {
             //合并新数据和之前导入的数据
-            string sql = @"SELECT * FROM (
-                            SELECT s.`Name` ,s.`IDNo`,co.`TheYear` AS YearNo,0 AS TermNo,tr.TrainType,co.`CourseName`,'面授' AS 'StudyType',c.`Period`,
+            string sql = @"SELECT s.`Name` ,s.`IDNo`,co.`TheYear` AS YearNo,0 AS TermNo,tr.TrainType,co.`CourseName`,'面授' AS 'StudyType',c.`Period`,
                             DATE_FORMAT(co.`TimeStart`, '%Y-%m-%d') AS StartDate,DATE_FORMAT(co.`TimeEnd`, '%Y-%m-%d') 
                             AS EndDate,sc.`SchoolName` AS TrainDept
                             FROM `tb_coursestudent` c
@@ -31,14 +30,56 @@ namespace Services.Course.CourseControl
                             INNER JOIN  tb_school sc ON sc.`Id`=co.`OrganizationalName`
                             INNER JOIN `tb_student` s ON s.`Id`=c.`StudentId`
                             INNER JOIN `tb_traintype` tr ON co.TrainType=tr.`Id`
-                            UNION ALL
+                            WHERE 1=1 ";
+
+            //sql 查询条件拼接
+            var wheres = new StringBuilder();
+            var paras = new DynamicParameters();
+            if (!string.IsNullOrEmpty(idNo))
+            {
+                wheres.Append(" and s.IDNO = @IdNo");
+                paras.Add("IdNo", idNo);
+            }
+            if (isAll != "All")
+            {
+                if (!string.IsNullOrEmpty(yearNo))
+                {
+                    wheres.Append(" and co.`TheYear`=@YearNo ");
+                    paras.Add("YearNo", yearNo);
+                }
+            }
+            //string group = " GROUP BY IDNO,CourseName ";
+            //加where条件
+            sql += wheres;
+            try
+            {
+                using (var context = DataBaseConnection.GetMySqlConnection())
+                {
+                    var list = context.Query<CourseStudentBo>(sql, paras).ToList();
+
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.Login({0},{1},{2})", idNo, yearNo, isAll), ex);
+                return null;
+            }
+
+
+        }
+
+        public List<CourseStudentBo> GetCourseStudentJiu(string idNo, string yearNo, string isAll)
+        {
+            //合并新数据和之前导入的数据
+            string sql = @"
                             SELECT NAME,IDNO,YearNo,TermNo,CASE CourseType
                             WHEN '集中培训' THEN '专业科目'
                             WHEN '专项培训' THEN '专业科目'
                             WHEN '校本培训' THEN '个人选修'
                             ELSE CourseType
                             END AS CourseType,CourseName,StudyType,Period,DATE_FORMAT(StartDate, '%Y-%m-%d') AS StartDate,DATE_FORMAT(EndDate, '%Y-%m-%d') 
-                            AS EndDate,TrainDept FROM tb_coursestudenttemp) AS tb1 
+                            AS EndDate,TrainDept FROM tb_coursestudenttemp  
                             WHERE 1=1 ";
 
             //sql 查询条件拼接
@@ -77,6 +118,62 @@ namespace Services.Course.CourseControl
 
 
         }
+
+        public List<CourseStudentBo> GetCourseStudent(string idNo, string yearNo, string isAll)
+        {
+            //合并新数据和之前导入的数据
+            string sql = @"SELECT NAME,IDNO,YearNo,TermNo,CASE CourseType
+                            WHEN '集中培训' THEN '专业科目'
+                            WHEN '专项培训' THEN '专业科目'
+                            WHEN '校本培训' THEN '个人选修'
+                            ELSE CourseType
+                            END AS CourseType,CourseName,StudyType,Period,DATE_FORMAT(StartDate, '%Y-%m-%d') AS StartDate,DATE_FORMAT(EndDate, '%Y-%m-%d') 
+                            AS EndDate,TrainDept FROM tb_coursestudenttempOld where 1=1  ";
+            
+            //sql 查询条件拼接
+            var wheres = new StringBuilder();
+            var paras = new DynamicParameters();
+            if (!string.IsNullOrEmpty(idNo))
+            {
+                wheres.Append(" and IDNO = @IdNo");
+                paras.Add("IdNo", idNo);
+            }
+            if (isAll != "All")
+            {
+                if (!string.IsNullOrEmpty(yearNo))
+                {
+                    wheres.Append(" and YearNo=@YearNo ");
+                    paras.Add("YearNo", yearNo);
+                }
+            }
+            //string group = " GROUP BY IDNO,CourseName";
+            //加where条件
+            sql += wheres;
+            try
+            {
+                using (var context = DataBaseConnection.GetMySqlConnection())
+                {
+                    var list = context.Query<CourseStudentBo>(sql, paras).ToList();
+                    var listnew = GetCourseStudentNew(idNo, yearNo, isAll);
+                    var listjiu = GetCourseStudentJiu(idNo, yearNo, isAll);
+                    if (listnew.Count > 0)
+                    {
+                        listnew.ForEach(list.Add);
+                    }
+                    if (listjiu.Count > 0)
+                    {
+                        listjiu.ForEach(list.Add);
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.Login({0},{1},{2})", idNo, yearNo, isAll), ex);
+                return null;
+            }
+        }
+
 
         #endregion
 

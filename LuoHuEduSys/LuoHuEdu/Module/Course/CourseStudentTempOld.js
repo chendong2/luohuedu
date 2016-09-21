@@ -35,7 +35,7 @@ using(easyloader.defaultReferenceModules, function () {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                courseStudentTempOld: {}
+                courseStudentTemp: {}
             };
             var paramStr = JSON.stringify(studentData);
 
@@ -79,13 +79,13 @@ function Search() {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                courseStudentTempBo: {CourseName: $("#txtCourseName").val(),
+                courseStudentTemp: { CourseName: $("#txtCourseName").val(),
                     Name:$("#txtName").val()}
             };
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseStudent',
+                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseStudentOld',
                 data: paramStr,
                 success: function (data) {
                     success(data);

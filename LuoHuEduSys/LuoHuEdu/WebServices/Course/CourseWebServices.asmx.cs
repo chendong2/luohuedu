@@ -261,10 +261,10 @@ namespace LuoHuEdu.WebServices.Course
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
         public object GetCourseStudentOld(int page, int rows, string order, string sort,
-            CourseStudentTempOldBo courseStudentTempOld)
+            CourseStudentTempBo courseStudentTemp)
         {
             var aPService = new CourseStudentTempOldService();
-            var list = aPService.GetCourseStudent(page, rows, order, sort, courseStudentTempOld);
+            var list = aPService.GetCourseStudent(page, rows, order, sort, courseStudentTemp);
             if (list != null)
             {
                 return new
