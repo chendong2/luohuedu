@@ -1,0 +1,258 @@
+﻿<div id="dlg" style="width:800px; height: 550px" data-options="buttons: '#dlg-button',
+                                                                                            closed: true,
+                                                                                            shadow:false,
+                                                                                            modal:true">
+    <style type="text/css">
+        .custom_forms tr td input[type="text"]
+        {
+            width: auto;
+            }
+    </style>
+<form id="ff" method="post">
+<div id="formTabs" class="easyui-tabs">
+    <div title="基本信息" style="padding: 10px;">
+        <table class="custom_forms_popup">
+            <tbody>
+                <tr>
+                    <td class="td_right">
+                        年度设定:
+                    </td>
+                    <td class="td_left">
+                        <select style="width: 145px;"  name="TheYear" id="TheYear" class="easyui-validatebox" data-options="required:true">
+                           
+                        </select>
+                    </td>
+                    <td class="td_right">
+                        培训类型:
+                    </td>
+                    <td class="td_left">
+                        <select id="ddlTrainType" name="TrainType"  class="easyui-combobox" style="width: 140px;" class="easyui-validatebox" data-options="required:true">
+                                       
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        培训科目:
+                    </td>
+                    <td class="td_left">
+                        <select style="width: 145px;" class="easyui-combobox" comboname="Subject" id="Subject" class="easyui-validatebox" data-options="required:true">
+                           
+                        </select>
+                    </td>
+                    <td class="td_right">
+                        课程名称:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" name="CourseName" maxlength="50" style="width: 136px" class="easyui-validatebox" data-options="required:true">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        授课教师电话:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" name="Phone" maxlength="20" style="width: 136px"  class="easyui-validatebox" data-options="required:true">
+                    </td>
+                    <td class="td_right">
+                        学时:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" name="Period" maxlength="20" style="width: 136px" class="easyui-validatebox" data-options="required:true" >
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        培训费用:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" name="Cost" maxlength="20" style="width: 136px" class="easyui-validatebox" data-options="required:true">
+                    </td>
+                    <td class="td_right">
+                        收费对象:
+                    </td>
+                    <td class="td_left">
+                        <select style="width: 145px;" class="easyui-combobox" name="ChargeObj" id="ChargeObj" class="easyui-validatebox" data-options="required:true">
+                            <option value="1">所有</option>
+                            <option value="2">在编教师</option>
+                            <option value="3">非在编教师</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        考勤设定:
+                    </td>
+                    <td class="td_left">
+                        <select style="width: 145px;" class="easyui-combobox" name="SetCheck" id="SetCheck" class="easyui-validatebox" data-options="required:true">
+                            <option value="1">签到考勤</option>
+                            <option value="2">课时量考勤</option>
+                        </select>
+                    </td>
+                    <td class="td_right">
+                        选修/必修:
+                    </td>
+                    <td class="td_left">
+                        <select style="width: 145px;" class="easyui-combobox" name="IsMust" id="ddlIsMust" class="easyui-validatebox" data-options="required:true">
+                            <option value="1">选修</option>
+                            <option value="2">必修</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        课程开始时间:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" class="easyui-datetimebox" name="TimeStart" id="txtTimeStart" maxlength="20" style="width: 145px;" class="easyui-validatebox" data-options="required:true"/>
+                        <!--<input type="text" class="easyui-datebox" name="AduitTimeStr" id="txtAduitTime" style="width: 145px;"></input>-->
+                    </td>
+                    <td class="td_right">
+                        课程结束时间:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" class="easyui-datetimebox" name="TimeEnd" id="txtTimeEnd" maxlength="20" style="width: 145px;" class="easyui-validatebox" data-options="required:true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        培训地点:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" name="Address" id="txtAddress" maxlength="20" style="width:320px;" class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                    <td class="td_right">
+                        额定人数:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" name="MaxNumber" id="txtMaxNumber" maxlength="20" style="width:145px;" class="easyui-validatebox" data-options="required:true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        预报设定:
+                    </td>
+                    <td class="td_left">
+                        超出额定人数允许报名<input type="checkbox" name="SetApply" value="1" />
+                    </td>
+                    <td class="td_right">
+                        组织单位:
+                    </td>
+                    <td class="td_left">
+                        <select style="width: 145px;" class="easyui-combobox" name="OrganizationalName" id="ddlOrganizationalName" class="easyui-validatebox" data-options="required:true">
+                           
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        选择学校:
+                    </td>
+                    <td class="td_left">
+                         <select style="width: 145px;" class="easyui-combobox" name="SchoolId" id="ddlSchoolName" class="easyui-validatebox" data-options="required:true">
+                           
+                        </select>
+                    </td>
+                    <td class="td_right">
+                        授课教师:
+                    </td>
+                    <td class="td_left">
+                       <select style="width: 145px;" class="easyui-combobox" name="TeacherId" id="ddlTeacherId" class="easyui-validatebox" data-options="required:true">
+                           
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_right">
+                        外聘教师:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" name="WaiPingName" id="txtWaiPingName" maxlength="20" style="width:145px;"  />
+                    </td>
+                    
+                     <td class="td_right">
+                        备注信息:
+                    </td>
+                    <td class="td_left">
+                        <input type="text" name="ReMark" id="txtReMark" maxlength="50" style="width:145px;"  />
+                    </td>
+                 </tr>
+            </tbody>
+        </table>
+    </div>
+    <div title="课程特色" style="padding: 10px;" id="Price">
+        <table class="custom_forms_popup">
+            <tr>
+                <td class="td_right">
+                    设计思想:
+                </td>
+                <td class="td_left">
+                   <textarea rows="2" cols="100" id="txtDesignIdea" name='DesignIdea' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td_right">
+                   培训目标:
+                </td>
+                <td class="td_left">
+                    <textarea rows="2" cols="100" id="txtTrainingAim" name='TrainingAim' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td_right">
+                   课程主要内容:
+                </td>
+                <td class="td_left">
+                     <textarea rows="2" cols="100" id="txtMainComment" name='MainComment' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td_right">
+                    课程开发特色:
+                </td>
+                <td class="td_left">
+                    <textarea rows="2" cols="100" id="txtDistinctive" name='Distinctive' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td_right">
+                   预期效果分析:
+                </td>
+                <td class="td_left">
+                     <textarea rows="2" cols="100" id="txtEffectAnalysis" name='EffectAnalysis' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div>
+    <input id="HtcId" type="hidden" name="Id" />
+</div>
+</form>
+</div>
+<div id="dlg-button">
+    <a class="easyui-linkbutton" onclick=" saveData(); ">确定</a>
+    <a class="easyui-linkbutton" onclick=" closeFormDialog('dlg'); ">取消</a>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#ddlSchoolName').combobox({
+            onChange: function () {
+                var schoolId = $("#ddlSchoolName").combobox('getValue');
+                var webserviceUrl = '/WebServices/Admin/Student.asmx/GetAllStudentsBySchoolId';
+                ajaxCRUD({
+                    async: false,
+                    url: webserviceUrl,
+                    data: "{schoolId:'" + schoolId + "'}",
+                    success: function (data) {
+                        // 如果是搜索条件用的dll，那么加入请选择选项
+                        data.unshift({ 'Id': 0, 'Name': '请选择' });
+                        initCombobox("ddlTeacherId", "Id", "Name", data, true);
+                    }
+                });
+            }
+        });
+    });
+</script>

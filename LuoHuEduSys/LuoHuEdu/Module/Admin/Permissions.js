@@ -12,6 +12,7 @@ using(easyloader.defaultReferenceModules, function () {
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
+            { field: 'LoginId', title: 'LoginId', width: 80, sortable: false },
             { field: 'IDNo', title: '身份证', width: 180, sortable: false },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Sex', title: '性别', width: 60, sortable: false,

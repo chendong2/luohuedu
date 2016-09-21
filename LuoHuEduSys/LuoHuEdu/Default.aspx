@@ -179,17 +179,18 @@
             menus_4.push({ "menuid": "44", "menuname": "免修设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Parameter/Exemption/ExemptionList.htm") %>' });
         } if (perStr.indexOf("教办设置") > -1) {
             menus_4.push({ "menuid": "45", "menuname": "教办设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Parameter/EducationOffice/EducationOfficeList.htm") %>' });
-        } if (perStr.indexOf("单位设置") > -1) {
+        } if (perStr.indexOf("单位设置") > -1) {    
             menus_4.push({ "menuid": "46", "menuname": "单位设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Parameter/School/SchoolList.htm") %>' });
         }
             menus_3.push({ "menuid": "34", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/UserInfo.htm") %>' });
-//         menus_5.push({ "menuid": "51", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/UserInfo.htm") %>' });
-        
-        
-        //        menus_4.push({ "menuid": "42", "menuname": "消费记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
-        //        menus_4.push({ "menuid": "43", "menuname": "充值记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
 
+            if (perStr.indexOf("校本培训") > -1) {
+                menus_5.push({ "menuid": "51", "menuname": "校本培训", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/xiaobenyanxiu/TrainingCourseList.htm") %>' });
+            }
+            
         
+        
+
         var _menus = { "menus": [
                         ]
         };
@@ -206,7 +207,7 @@
             _menus.menus.push({ "menuid": "4", "icon": "icon-sys", "menuname": "参数管理", "menus": menus_4 });
         }
         if (menus_5.length>0) {
-            _menus.menus.push({ "menuid": "5", "icon": "icon-sys", "menuname": "系统设置", "menus": menus_5 });
+            _menus.menus.push({ "menuid": "5", "icon": "icon-sys", "menuname": "校本管理", "menus": menus_5 });
         }    
     </script>
 </body>

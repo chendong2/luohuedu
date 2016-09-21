@@ -344,6 +344,41 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
         }
 
         /// <summary>
+        /// 课程锁定方法
+        /// </summary>
+        /// <param name="courseBo"></param>
+        /// <returns></returns>
+        public bool SetLockCourse(CourseBo courseBo)
+        {
+            if (courseBo == null)
+                throw new ArgumentNullException("courseBo");
+            try
+            {
+                var sqlStr = @"UPDATE `tb_course` SET Locked=@Locked
+                                WHERE Id=@Id
+                                ";
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    int row = connection.Execute(sqlStr, courseBo);
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("EducationOfficeService.AduitSet({0})异常", courseBo), ex);
+                return false;
+            }
+        }
+
+        /// <summary>
         /// 课程审批方法
         /// </summary>
         /// <param name="courseBo"></param>

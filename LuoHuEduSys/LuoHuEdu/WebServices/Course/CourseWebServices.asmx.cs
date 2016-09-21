@@ -300,5 +300,16 @@ namespace LuoHuEdu.WebServices.Course
             var courseStudentService = new CourseStudentService();
             return courseStudentService.UpdatePeroid(courseStudentBo);
         }
+
+        /// <summary>
+        /// 锁定课程
+        /// </summary>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool SetLockCourse(CourseBo courseBo)
+        {
+            var course = new CourseService();
+            return course.SetLockCourse(courseBo);
+        }
     }
 }
