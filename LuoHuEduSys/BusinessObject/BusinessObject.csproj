@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminBo\LinshiBo.cs" />
     <Compile Include="AdminBo\StudentFaceBo.cs" />
     <Compile Include="AdminBo\UserPermissionsBo.cs" />
     <Compile Include="CourseStudentBo.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Course\CourseStudentBo.cs" />
     <Compile Include="Course\CourseStudentDto.cs" />
     <Compile Include="Course\CourseStudentTemp.cs" />
+    <Compile Include="Course\CourseStudentTempOld.cs" />
     <Compile Include="Parameter\StudentExemptionBo.cs" />
     <Compile Include="Parameter\MaintrainSetBo.cs" />
     <Compile Include="Parameter\SchoolBo.cs" />

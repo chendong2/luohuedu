@@ -257,6 +257,30 @@ namespace LuoHuEdu.WebServices.Course
         }
 
 
+        //老系统数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetCourseStudentOld(int page, int rows, string order, string sort,
+            CourseStudentTempOldBo courseStudentTempOld)
+        {
+            var aPService = new CourseStudentTempOldService();
+            var list = aPService.GetCourseStudent(page, rows, order, sort, courseStudentTempOld);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
+
+
+
         //根据ID获取考勤数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]

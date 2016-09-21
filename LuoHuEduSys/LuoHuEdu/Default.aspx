@@ -131,8 +131,11 @@
         if (perStr.indexOf("培训浏览") > -1 || perStr.indexOf("培训审核") > -1 || perStr.indexOf("培训锁定") > -1) {
             menus_2.push({ "menuid": "21", "menuname": "培训管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TrainingCourseManage/TrainingCourseList.htm") %>' });
         }
-        if (perStr.indexOf("考勤管理（旧）") > -1) {
+        if (perStr.indexOf("考勤管理") > -1) {
             menus_2.push({ "menuid": "22", "menuname": "考勤管理（旧）", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/CourseStudenttemp/CourseList.htm") %>' });
+        }
+        if (perStr.indexOf("老数据") > -1) {
+            menus_2.push({ "menuid": "66", "menuname": "老系统数据", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/OldCourseInfo/CourseList.htm") %>' });
         }
         if (perStr.indexOf("考勤管理") > -1) {
             menus_2.push({ "menuid": "29", "menuname": "考勤管理（新）", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/AttendanceReport/CourseList.htm") %>' });
@@ -156,9 +159,9 @@
             menus_2.push({ "menuid": "28", "menuname": "权限管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/UserPermissions/PermissionsList.htm") %>' });
        }
 
-        if (perStr.indexOf("校本研修登记") > -1) {
-            menus_3.push({ "menuid": "31", "menuname": "校本研修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentTrain/StudentTrainList.htm") %>' });
-        }
+//        if (perStr.indexOf("校本研修登记") > -1) {
+//            menus_3.push({ "menuid": "31", "menuname": "校本研修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentTrain/StudentTrainList.htm") %>' });
+//        }
         if (perStr.indexOf("免修登记") > -1) {
             menus_3.push({ "menuid": "32", "menuname": "免修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentExemption/StudentExemptionList.htm") %>' });
         }
@@ -179,8 +182,8 @@
         } if (perStr.indexOf("单位设置") > -1) {
             menus_4.push({ "menuid": "46", "menuname": "单位设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Parameter/School/SchoolList.htm") %>' });
         }
-        
-         menus_5.push({ "menuid": "51", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/UserInfo.htm") %>' });
+            menus_3.push({ "menuid": "34", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/UserInfo.htm") %>' });
+//         menus_5.push({ "menuid": "51", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/UserInfo.htm") %>' });
         
         
         //        menus_4.push({ "menuid": "42", "menuname": "消费记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/PswChange.htm") %>' });
@@ -204,9 +207,7 @@
         }
         if (menus_5.length>0) {
             _menus.menus.push({ "menuid": "5", "icon": "icon-sys", "menuname": "系统设置", "menus": menus_5 });
-        }
-
-        
+        }    
     </script>
 </body>
 </html>

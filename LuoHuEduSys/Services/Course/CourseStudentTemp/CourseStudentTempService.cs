@@ -61,7 +61,7 @@ namespace Services.Course.CourseStudentTemp
                     count = context.Query<CourseStudentTempBo>(sql,
                                              new
                                              {
-                                                 EducationtName = string.Format("%{0}%", courseStudentTempBo.CourseName),
+                                                 CourseName = string.Format("%{0}%", courseStudentTempBo.CourseName),
                                                  Name = string.Format("%{0}%", courseStudentTempBo.Name)
                                              }).Count();
 

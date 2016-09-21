@@ -1228,6 +1228,7 @@
     <Content Include="Module\Course\AttendanceReport.js" />
     <Content Include="Module\Course\Course.js" />
     <Content Include="Module\Course\CourseStudentTemp.js" />
+    <Content Include="Module\Course\CourseStudentTempOld.js" />
     <Content Include="Module\Customer\CallNum.js" />
     <Content Include="Module\Customer\CustomerInfo.js" />
     <Content Include="Module\Parameter\MaintrainSet.js" />
@@ -1265,6 +1266,9 @@
     <Content Include="View\Customer\CustomerList.htm" />
     <Content Include="View\Customer\ExtentionForm.htm" />
     <Content Include="View\Customer\PhoneForm.htm" />
+    <Content Include="View\OldCourseInfo\CourseForm.htm" />
+    <Content Include="View\OldCourseInfo\CourseList.htm" />
+    <Content Include="View\OldCourseInfo\TrainingCourseForm.htm" />
     <Content Include="View\Parameter\MaintrainSet\MaintrainSetForm.htm" />
     <Content Include="View\Parameter\MaintrainSet\MaintrainSetList.htm" />
     <Content Include="View\Parameter\School\SchoolForm.htm" />
@@ -1515,7 +1519,6 @@
     <Folder Include="Export\DataSet\" />
     <Folder Include="Export\WebService\" />
     <Folder Include="Models\" />
-    <Folder Include="View\OldCourseInfo\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessObject\BusinessObject.csproj">
@@ -1539,7 +1542,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>26849</DevelopmentServerPort>
+          <DevelopmentServerPort>23007</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

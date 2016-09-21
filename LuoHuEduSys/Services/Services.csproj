@@ -51,6 +51,7 @@
     <Compile Include="Course\CourseControl\CourseStudentFace.cs" />
     <Compile Include="Course\CourseControl\CourseStudentService.cs" />
     <Compile Include="Course\CourseStudentTemp\CourseStudentTempService.cs" />
+    <Compile Include="Course\CourseStudentTemp\CourseStudentTempOldService.cs" />
     <Compile Include="UserInfo\StudentTrainService.cs" />
     <Compile Include="UserInfo\StudentExemptionService.cs" />
     <Compile Include="Parameter\MaintrainSetService.cs" />

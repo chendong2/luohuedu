@@ -595,5 +595,22 @@ INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.scho
             return list;
 
         }
+
+
+
+        /// <summary>
+        /// 获取所有的身份证号，供前端循环调用判断
+        /// </summary>
+        /// <returns></returns>
+        public List<LinshiBo> GetListIdNo()
+        {
+            List<LinshiBo> list;
+            using (var connection = DataBaseConnection.GetMySqlConnection())
+            {
+                var sqlStr = @"SELECT  DISTINCT `IDNo` FROM `tb_student` WHERE IDNO IS NOT NULL ";
+                list = connection.Query<LinshiBo>(sqlStr, new { }).ToList();
+            }
+            return list; 
+        }
     }
 }
