@@ -373,7 +373,7 @@ namespace Services.Course.CourseControl
                                      `TaskUrl`,
                                      `SignDate`,
                                      `SignOutDate`,
-                                     `CourseId`,Period,)
+                                     `CourseId`,Period)
                                     VALUES (@Id,
                                             @CourseNumber,
                                             @StudentId,
