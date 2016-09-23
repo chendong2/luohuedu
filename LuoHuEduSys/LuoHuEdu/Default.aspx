@@ -185,7 +185,7 @@
             menus_3.push({ "menuid": "34", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/UserInfo.htm") %>' });
 
             if (perStr.indexOf("校本培训") > -1) {
-                menus_5.push({ "menuid": "51", "menuname": "校本培训", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/xiaobenyanxiu/TrainingCourseList.htm") %>' });
+                menus_5.push({ "menuid": "51", "menuname": "校本培训", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/xiaobenyanxiu/XiaoBenTrainingCourseList.htm") %>' });
             }
             
         

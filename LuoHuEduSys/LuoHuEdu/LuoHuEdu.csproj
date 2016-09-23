@@ -1246,6 +1246,7 @@
     <Content Include="Module\UserInfo\StudentTrain.js" />
     <Content Include="Module\UserInfo\StudentExemption.js" />
     <Content Include="Module\UserInfo\CourseInfo.js" />
+    <Content Include="Module\xiaobenpeixun\TrainingCourseManage.js" />
     <Content Include="View\Admin\MyCourse\MyCourseList.htm" />
     <Content Include="View\Admin\MyTeacher\MyTeacherList.htm" />
     <Content Include="View\Admin\MyTeacher\MyTeacherForm.htm" />
@@ -1302,6 +1303,15 @@
     <Content Include="View\UserInfo\StudentTrain\StudentTrainList.htm" />
     <Content Include="View\UserInfo\StudentExemption\StudentExemptionForm.htm" />
     <Content Include="View\UserInfo\StudentExemption\StudentExemptionList.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenChooseStudent.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenCourseAudit.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenKaoqingList.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenRegisterSet.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenStudentManage.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenTrainingCourseAdvancedSearch.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenTrainingCourseForm.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenTrainingCourseList.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenTrainingCourseView.htm" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

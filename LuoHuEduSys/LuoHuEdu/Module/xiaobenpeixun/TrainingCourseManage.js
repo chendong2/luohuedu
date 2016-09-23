@@ -11,22 +11,7 @@ using(easyloader.defaultReferenceModules, function () {
         title: '培训课程管理',
         columns: [[
             { field: 'Id', checkbox: true },
-            {field:
-                'opt',
-                title: '报名设置',
-                width: 80,
-                formatter: function(value, rec) {
-                    var btn = '<a class="editcls" onclick="registerSet(\''+ rec.Id +'\')" href="javascript:void(0)">报名设置</a>';
-                    return btn;
-                }
-            },
-            {field:'Aduit', title:'审核',width:60,  
-                formatter: function(value, rec) {
-                    var btn = '<a class="editcls" onclick="courseAudit(\'' + rec.Id + '\')" href="javascript:void(0)">审核</a>';
-                    return btn;
-                } 
-            },
-             
+
             {field: 'Manage', title: '管理', width:60,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="studentManage(\'' + rec.Id + '\')" href="javascript:void(0)">学员管理</a>';
@@ -136,7 +121,7 @@ setTimeout(loadPartialHtml, easyloader.defaultTime);
 function loadPartialHtml() {
     if ($('.window').length == 0) {
         panel('formTemplate', {
-            href: '/View/TrainingManage/TrainingCourseManage/TrainingCourseForm.htm',
+            href: '/View/xiaobenyanxiu/XiaoBenTrainingCourseForm.htm',
             onLoad: function () {
                 //                setValidatebox('Name', {
                 //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
@@ -144,7 +129,7 @@ function loadPartialHtml() {
             }
         });
         panel('registerSetTemplate', {
-            href: '/View/TrainingManage/TrainingCourseManage/RegisterSet.htm',
+            href: '/View/xiaobenyanxiu/XiaoBenRegisterSet.htm',
             onLoad: function () {
                 //获取所有公办学校
                 getAllPublicSchool();
@@ -153,25 +138,25 @@ function loadPartialHtml() {
             }
         });
         panel('courseAuditFormTemplate', {
-            href: '/View/TrainingManage/TrainingCourseManage/CourseAudit.htm',
+            href: '/View/xiaobenyanxiu/XiaoBenCourseAudit.htm',
             onLoad: function () {
 
             }
         });
         panel('studentManageTemplate', {
-            href: '/View/TrainingManage/TrainingCourseManage/StudentManage.htm',
+            href: '/View/xiaobenyanxiu/XiaoBenStudentManage.htm',
             onLoad: function () {
 
             }
         });
         panel('kqTemplate', {
-            href: '/View/TrainingManage/TrainingCourseManage/KaoqingList.htm',
+            href: '/View/xiaobenyanxiu/XiaoBenKaoqingList.htm',
              onLoad: function () {
 
             }
         });
         panel('chooseStudentTemplate', {
-            href: '/View/TrainingManage/TrainingCourseManage/ChooseStudent.htm',
+            href: '/View/xiaobenyanxiu/XiaoBenChooseStudent.htm',
 
             onLoad: function () {
 
@@ -182,7 +167,7 @@ function loadPartialHtml() {
 
 
 
-var moduleName = '培训课程管理-';
+var moduleName = '校本培训-';
 
 //点击“新增”按钮
 function addData() {
@@ -190,15 +175,17 @@ function addData() {
         title: moduleName + '新增',
         iconCls: 'icon-add'
     });
-    getAllTrainType("ddlTrainType", true);
+    $("#ddlTrainType").combobox({ disabled: true });
+
+    
+    //getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName", true);
     getAllSchool("ddlSchoolName", true);
-    data = [];
+    var data = [];
     data.push({ "Name": "请选择", "Id": 0 });
     initCombobox("ddlTeacherId", "Id", "Name", data, true);
     getTheYear();
     getAllSubject("Subject", true);
-//    getAllStudent("ddlTeacherId", true);
     resetFormAndClearValidate('ff');
 }
 
@@ -227,7 +214,7 @@ function editData1() {
 
 //获取JSON数据并填充到相应表单
 function fillForm(itemid) {
-    getAllTrainType("ddlTrainType", true);
+    //getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName", true);
     getAllSchool("ddlSchoolName", true);
     getAllSubject("Subject", true);
@@ -242,7 +229,6 @@ function fillForm(itemid) {
                 iconCls: 'icon-edit'
             });
             $("#HidName").val(data.SubjetName);
-
             $('#txtTimeStart').datebox('setValue', data.TimeStartStr);
             $('#txtTimeEnd').datebox('setValue', data.TimeEndStr);
             //JSON数据填充表单
@@ -306,7 +292,9 @@ function getAllTrainType(ddlRoute, isSimpleSearch) {
                 // 如果是搜索条件用的dll，那么加入请选择选项
                 data.unshift({ 'Id': 0, 'TrainType': '请选择' });
             }
+            
             initCombobox(ddlRoute, "Id", "TrainType", data, true);
+            
         }
     });
 }
@@ -360,12 +348,15 @@ function saveData() {
     if (hidValue.length > 0) {
         wsMethod = "UpdateCourse"; //修改
     } else {
-        wsMethod = "AddCourse"; //新增
+        wsMethod = "AddCourseXiaoBen"; //新增
     }
     
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
+    form2JsonObj.CourseState = 2;
+    form2JsonObj.AduitTime = new Date();
+    form2JsonObj.SchoolId = $.cookie('SchoolId');
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
     //console.log(jsonDataStr);

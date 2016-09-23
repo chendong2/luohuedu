@@ -92,6 +92,10 @@ namespace HuaTongCallCenter
                           Response.Cookies.Add(useridC);
                           Response.Cookies.Add(userNameC);
 
+                          Session.Add("SchoolId", sBo.SchoolId);
+                          HttpCookie schoolIdC = new HttpCookie("SchoolId") { Value = sBo.SchoolId, Path = "/" };
+                          Response.Cookies.Add(schoolIdC);
+
                           //获取权限
                           var pService = new PermissionsService();
                           string perList = pService.getUserPermissionsList(sBo.Id);
@@ -196,10 +200,13 @@ namespace HuaTongCallCenter
 
             Session.Add("UserId", bo.Id);
             Session.Add("UserName", bo.UserName);
+            Session.Add("SchoolId",bo.SchoolId);
             HttpCookie useridC = new HttpCookie("UserId") { Value = bo.Id.ToString(CultureInfo.InvariantCulture), Path = "/" };
             HttpCookie userNameC = new HttpCookie("UserName") { Value = bo.UserName, Path = "/" };
+            HttpCookie schoolIdC = new HttpCookie("SchoolId") { Value = bo.SchoolId, Path = "/" };
             Response.Cookies.Add(useridC);
             Response.Cookies.Add(userNameC);
+            Response.Cookies.Add(schoolIdC);
 
             //获取权限
             var pService = new PermissionsService();

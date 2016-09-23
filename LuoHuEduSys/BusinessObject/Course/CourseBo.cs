@@ -200,5 +200,7 @@ namespace BusinessObject.Course
         /// 备注外聘
         public string ReMark { get; set; }
 
+        public string SchoolId { get; set; }
+
     }
 }

@@ -12,6 +12,7 @@ using(easyloader.defaultReferenceModules, function () {
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '学员姓名', width: 80 },
+            { field: 'IDNO', title: '身份证号', width: 130 },
             { field: 'CourseName', title: '课程名称', width:200 },
             { field: 'YearNo', title: '年度', width: 80 },
             { field: 'CourseType', title: '课程类型', width: 80 },

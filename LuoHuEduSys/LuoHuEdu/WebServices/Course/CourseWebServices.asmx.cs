@@ -10,6 +10,7 @@ using BusinessObject.WSBo;
 using Services.Course.AttendanceReport;
 using Services.Course.CourseControl;
 using Services.Course.CourseStudentTemp;
+using Services.Parameter;
 
 namespace LuoHuEdu.WebServices.Course
 {
@@ -106,6 +107,47 @@ namespace LuoHuEdu.WebServices.Course
             var courseService = new CourseService();
             return courseService.AddCourse(courseBo);
         }
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool DeleteCousrseByIds(string ids)
+        {
+            var courseService = new CourseService();
+            return courseService.DeleteCousrseByIds(ids);
+        }
+
+
+        /// <summary>
+        /// 校本培训课程新增方法
+        /// </summary>
+        /// <param name="courseBo"></param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool AddCourseXiaoBen(CourseBo courseBo)
+        {
+
+            var school=new SchoolService();
+           
+
+            var schoolbo=school.GetSchoolById(courseBo.SchoolId);
+            //给权限默认赋值，表示只有该学校可以报名
+            if (schoolbo != null)
+            {
+                if (schoolbo.SchoolType=="1")
+                {
+                    courseBo.PlcSchool = courseBo.SchoolId;
+                }
+                if (schoolbo.SchoolType == "2")
+                {
+                    courseBo.PriSchool = courseBo.SchoolId;
+                }
+            }
+
+            var courseService = new CourseService();
+            return courseService.AddCourse(courseBo);
+        }
+
+
 
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
