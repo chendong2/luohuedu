@@ -62,7 +62,7 @@ function saveData() {
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
-    console.log(form2JsonObj);
+    form2JsonObj.SchoolId = $("#sSchool").val();
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{studentBo:" + form2JsonStr + "}";
 
