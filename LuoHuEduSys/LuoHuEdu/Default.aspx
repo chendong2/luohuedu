@@ -131,7 +131,7 @@
         if (perStr.indexOf("培训浏览") > -1 || perStr.indexOf("培训审核") > -1 || perStr.indexOf("培训锁定") > -1) {
             menus_2.push({ "menuid": "21", "menuname": "培训管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TrainingCourseManage/TrainingCourseList.htm") %>' });
         }
-        if (perStr.indexOf("考勤管理") > -1) {
+        if (perStr.indexOf("考勤管理（老）") > -1) {
             menus_2.push({ "menuid": "22", "menuname": "考勤管理（旧）", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/CourseStudenttemp/CourseList.htm") %>' });
         }
         if (perStr.indexOf("老数据") > -1) {

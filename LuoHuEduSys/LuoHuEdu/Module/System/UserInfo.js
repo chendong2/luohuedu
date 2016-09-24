@@ -8,9 +8,6 @@ ajaxCRUD({
     success: function (data) {
         //JSON数据填充表单
         loadDataToForm('ff', data);
-//        var bir = $("#txtBirthday").val();
-//        bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a); });
-//        $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
     }
 });
 
@@ -65,6 +62,7 @@ function saveData() {
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
+    console.log(form2JsonObj);
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{studentBo:" + form2JsonStr + "}";
 

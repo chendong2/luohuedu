@@ -234,7 +234,7 @@ namespace Services.Course.CourseControl
                              `OrganizationalName`,`DesignIdea`,`TrainingAim`,`Distinctive`,`EffectAnalysis`,
                              `CourseDate`,`TimeStart`,`TimeEnd`,`CourseCode`, `Requirement`,`TeachingObject`,`ObjectEstablish`,`ObjectSubject`,
                              `CourseState`,`AduitTime`,`FirstAduit`,`EndAduit`,`CenterAduit`,`AttendanceName`,
-                             `AttendanceUrl`,`Locked`,`Assessmentlevel`,`CreatedBy`,`CreatedOn`,`ModifiyBy`,`ModifiyOn`,`WaiPingName`,`ReMark`)
+                             `AttendanceUrl`,`Locked`,`Assessmentlevel`,`CreatedBy`,`CreatedOn`,`ModifiyBy`,`ModifiyOn`,`WaiPingName`,`ReMark`,PlcSchool,PriSchool)
                               VALUES (@Id,@TeacherId,@CourseName,@TheYear,@TrainType,@Subject,@Phone, @Period,@Cost,@ChargeObj, @SetCheck,
                             @IsMust,@Address,@MaxNumber,@SetApply,@OrganizationalName,@DesignIdea,@TrainingAim,
                             @Distinctive,@EffectAnalysis,@CourseDate,
@@ -257,7 +257,7 @@ namespace Services.Course.CourseControl
                             @CreatedBy,
                             @CreatedOn,
                             @ModifiyBy,
-                            @ModifiyOn,@WaiPingName,@ReMark);";
+                            @ModifiyOn,@WaiPingName,@ReMark,@PlcSchool,@PriSchool);";
                     int row = connection.Execute(strSql, courseBo);
                     if (row > 0)
                     {

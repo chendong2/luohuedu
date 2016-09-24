@@ -59,7 +59,6 @@ using(easyloader.defaultReferenceModules, function () {
         rownumbers: true,
         pagination: true,
         loader: function (param, success, error) {
-            //alert();
             var studentData = {
                 page: param.page,
                 rows: param.rows,

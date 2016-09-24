@@ -127,8 +127,10 @@ namespace LuoHuEdu.WebServices.Course
         {
 
             var school=new SchoolService();
-           
 
+            courseBo.Requirement = 0;
+            courseBo.CourseState = 2;
+            courseBo.AduitTime = DateTime.Now;
             var schoolbo=school.GetSchoolById(courseBo.SchoolId);
             //给权限默认赋值，表示只有该学校可以报名
             if (schoolbo != null)
