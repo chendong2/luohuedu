@@ -116,12 +116,12 @@ namespace BusinessObject.Course
         /// 审核时间
         /// </summary>
         [ScriptIgnore]
-        public DateTime AduitTime{ get; set; }
+        public DateTime? AduitTime{ get; set; }
 
         public string AduitTimeStr
         {
-            get { return AduitTime.ToString("yyyy-MM-dd"); }
-            set {AduitTime= Convert.ToDateTime(value); }
+            get { return AduitTime.HasValue ? AduitTime.Value.ToString("yyyy-MM-dd") : ""; }
+            set { AduitTime = string.IsNullOrEmpty(value) ? (DateTime?)null : Convert.ToDateTime(value); }
         }
         /// 学科评审意见（初审）
         public string FirstAduit{ get; set; }

@@ -193,8 +193,13 @@ function addData() {
 function editData() {
     var row = getSelectedRow('dg');
     if (row == null) {
-        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
-    } else {
+        msgShow(moduleName + '编辑', '请选择要编辑的一行数据！', '');
+    }
+    else if (row.CourseState == 2) {
+        msgShow(moduleName + '编辑', '审核通过的课程不能编辑！', '');
+    }
+    else {
+
         resetFormAndClearValidate('ff');
         fillForm(row.Id);
     }

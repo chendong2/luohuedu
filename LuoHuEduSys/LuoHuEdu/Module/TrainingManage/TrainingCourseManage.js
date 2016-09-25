@@ -26,7 +26,12 @@ using(easyloader.defaultReferenceModules, function () {
                     return btn;
                 } 
             },
-             
+              { field: 'SuoDing', title: '锁定', width: 60,
+                  formatter: function (value, rec) {
+                      var btn = '<a class="editcls" onclick="lockedCourse(\'' + rec.Id + '\')" href="javascript:void(0)">锁定</a>';
+                      return btn;
+                  }
+              },
             {field: 'Manage', title: '管理', width:60,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="studentManage(\'' + rec.Id + '\')" href="javascript:void(0)">学员管理</a>';
@@ -158,6 +163,12 @@ function loadPartialHtml() {
 
             }
         });
+        panel('lockedTemplate', {
+            href: '/View/TrainingManage/TrainingCourseManage/LockedCourse.htm',
+            onLoad: function () {
+
+            }
+        });
         panel('studentManageTemplate', {
             href: '/View/TrainingManage/TrainingCourseManage/StudentManage.htm',
             onLoad: function () {
@@ -193,7 +204,7 @@ function addData() {
     getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName", true);
     getAllSchool("ddlSchoolName", true);
-    data = [];
+    var data = [];
     data.push({ "Name": "请选择", "Id": 0 });
     initCombobox("ddlTeacherId", "Id", "Name", data, true);
     getTheYear();
@@ -206,8 +217,13 @@ function addData() {
 function editData() {
     var row = getSelectedRow('dg');
     if (row == null) {
-        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
-    } else {
+        msgShow(moduleName + '编辑', '请选择要编辑的一行数据！', '');
+    } 
+    else if (row.CourseState == 2) {
+        msgShow(moduleName + '编辑', '审核通过的课程不能编辑！', '');
+    }
+    else {
+        
         resetFormAndClearValidate('ff');
         fillForm(row.Id);
     }
@@ -582,6 +598,49 @@ function getAllPrivateSchool() {
         }
     });
 }
+
+//点击“审核”按钮
+function lockedCourse(courseid) {
+    ajaxCRUD({
+        url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
+        data: "{id:'" + courseid + "'}",
+        success: function (data) {
+            openDialog('lockedDlg', {
+                title: '课程审核',
+                iconCls: 'icon-edit'
+            });
+            //JSON数据填充表单
+            loadDataToForm('lockedForm', data);
+        }
+    });
+}
+//保存“课程审核”表单数据
+function saveLockedAuditSetData() {
+    var basicUrl = '/WebServices/Course/CourseWebServices.asmx/SetLockCourse';
+    var form2JsonObj = form2Json("lockedForm");
+    var form2JsonStr = JSON.stringify(form2JsonObj);
+    var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
+    //console.log(jsonDataStr);
+
+    ajaxCRUD({
+        url: basicUrl,
+        data: jsonDataStr,
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '修改成功', 'info');
+                closeFormDialog('lockedDlg');
+                refreshTable('dg');
+            } else {
+                msgShow('提示', '提交失败', 'info');
+            }
+        }
+    });
+
+} //saveCourseAuditSetData
+
+
+
+
 
 //点击“审核”按钮
 function courseAudit(courseid) {

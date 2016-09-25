@@ -354,7 +354,7 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
                 throw new ArgumentNullException("courseBo");
             try
             {
-                var sqlStr = @"UPDATE `tb_course` SET Locked=@Locked
+                var sqlStr = @"UPDATE `tb_course` SET Locked=@Locked,Assessmentlevel=@Assessmentlevel 
                                 WHERE Id=@Id
                                 ";
                 using (var connection = DataBaseConnection.GetMySqlConnection())

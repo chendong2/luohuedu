@@ -1,0 +1,53 @@
+﻿<div id="lockedDlg" style="width: 400px;" data-options="buttons: '#lockedDlg-button',
+                                                                        closed: true,
+                                                                        shadow:false,
+                                                                        modal:true">
+    <style type="text/css">
+        .custom_forms tr td input[type="text"]
+        {
+            width: auto;
+        }
+    </style>
+    <form id="lockedForm" method="post">
+        <div id="formTabs" class="easyui-tabs">
+        <table class="custom_forms_popup">
+                <tbody>
+                    <tr>
+                        <td class="td_right" style="width: 130px">
+                            设定课程状态:
+                        </td>
+                        <td class="td_left">
+                            <select style="width: 145px;" name="Locked" id="Locked">
+                                <option value="1">锁定</option>
+                                <option value="2">解锁</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td class="td_right" style="width: 130px">
+                            评定等级:
+                        </td>
+                        <td class="td_left">
+                            <select style="width: 145px;" name="Assessmentlevel" id="Assessmentlevel">
+                                <option value="0">请选择</option>
+                                <option value="1">A+</option>
+                                <option value="2">A</option>
+                                <option value="3">A-</option>
+                                <option value="4">B</option>
+                                <option value="5">C</option>
+                                <option value="6">D</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    <div>
+        <input id="Hid" type="hidden" name="Id" />
+    </div>
+    </form>
+</div>
+<div id="lockedDlg-button">
+    <a class="easyui-linkbutton" onclick="saveLockedAuditSetData()">确定</a> <a class="easyui-linkbutton"
+        onclick="closeFormDialog('lockedDlg');">取消</a>
+</div>

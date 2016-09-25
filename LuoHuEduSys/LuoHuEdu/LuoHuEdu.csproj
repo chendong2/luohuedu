@@ -1290,6 +1290,7 @@
     <Content Include="View\TrainingManage\TrainingCourseManage\ChooseStudent.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\CourseAudit.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\KaoqingList.htm" />
+    <Content Include="View\TrainingManage\TrainingCourseManage\Locked.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\RegisterSet.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\StudentManage.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\TrainingCourseAdvancedSearch.htm" />
