@@ -26,7 +26,16 @@ using(easyloader.defaultReferenceModules, function () {
                     return '';
                 }
             }
-            },
+        },
+             { field: 'Locked', title: '状态', width: 100, formatter: function (value) {
+                 if (value == 1)
+                     return '<span style="red">已锁定</span>';
+                 else if (value == 2)
+                     return '<span>未锁定</span>';
+                 else
+                     return '<span>未设置</span>';
+             }
+             },
             { field: 'TheYear', title: '年度', width: 80 },
             { field: 'TrainType', title: '培训类型', width: 80 },
 

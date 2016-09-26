@@ -26,7 +26,15 @@ using(easyloader.defaultReferenceModules, function () {
                     return '<span>必修</span>';
             }
             },
-
+             { field: 'Locked', title: '状态', width: 100, formatter: function (value) {
+                 if (value == 1)
+                     return '<span style="red">已锁定</span>';
+                 else if (value == 2)
+                     return '<span>未锁定</span>';
+                 else
+                     return '<span>未设置</span>';
+             }
+             },
             { field: 'Address', title: '培训地址', width: 150, sortable: true },
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
             { field: 'SchoolName', title: '组织单位名称', width: 80 },

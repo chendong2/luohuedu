@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Configuration;
@@ -88,7 +89,7 @@ namespace HuaTongCallCenter
             Session.Contents.Remove("UserId");
             Session.Contents.Remove("UserName");
             Session.Contents.Remove("perList");
-            Response.Redirect("~/Login.aspx");
+            Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.186/Login.aspx");
         }
     }
 }
