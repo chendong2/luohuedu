@@ -238,16 +238,7 @@ function editData() {
     }
 }
 
-//点击“编辑”按钮
-function editData1() {
-    var row = getSelectedRow('dg');
-    if (row == null) {
-        msgShow(moduleName + '编辑', '请选择要编辑的一行数据', '');
-    } else {
-        resetFormAndClearValidate('ff');
-        fillForm(row.Id);
-    }
-}
+
 
 
 //获取JSON数据并填充到相应表单
@@ -257,7 +248,6 @@ function fillForm(itemid) {
     getAllSchool("ddlSchoolName", true);
     getAllSubject("Subject", true);
     getTheYear();
-//    getAllStudent("ddlTeacherId", true);
     ajaxCRUD({
         url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
         data: "{id:'" + itemid + "'}",
@@ -353,24 +343,6 @@ function getAllSubject(ddlRoute, isSimpleSearch) {
         }
     });
 }
-
-////获取所有培训类型数据，用于绑定下拉框
-//function getAllStudent(ddlRoute, isSimpleSearch) {
-//    var webserviceUrl = '/WebServices/Admin/Student.asmx/GetAllStudents';
-//    ajaxCRUD({
-//        async: false,
-//        url: webserviceUrl,
-//        data: '{}',
-//        success: function (data) {
-//            if (isSimpleSearch) {
-//                // 如果是搜索条件用的dll，那么加入请选择选项
-//                data.unshift({ 'Id': 0, 'Name': '请选择' });
-//            }
-//            initCombobox(ddlRoute, "Id", "Name", data, true);
-//        }
-//    });
-//}
-
 
 //保存表单数据
 function saveData() {
@@ -1139,6 +1111,7 @@ function kaoQing(id) {
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Office', title: '职务', width: 80, sortable: false },
             { field: 'Telephone', title: '手机', width: 80, sortable: false },
+            { field: 'Period', title: '学分', width: 80, sortable: false },
             { field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
@@ -1221,6 +1194,7 @@ function KaoqingSearch() {
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Office', title: '职务', width: 80, sortable: false },
             { field: 'Telephone', title: '手机', width: 80, sortable: false },
+            { field: 'Period', title: '学分', width: 80, sortable: false },
             { field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
@@ -1276,6 +1250,23 @@ function KaoqingSearch() {
 
     iniDataGrid('kgDG', kqDataGridOptions);
 
+}
+
+
+//点击“编辑”按钮
+function jiesuan() {
+    ajaxCRUD({
+        url: '/WebServices/Admin/Student.asmx/CourseJieSuan',
+        data: "{id:'" + cousrIdCD + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '结算成功', 'info');
+                refreshTable('kgDG');
+            } else {
+                msgShow('提示', '结算失败', 'info');
+            }
+        }
+    });
 }
 
 

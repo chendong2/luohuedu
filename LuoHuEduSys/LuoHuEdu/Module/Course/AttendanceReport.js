@@ -39,11 +39,11 @@ using(easyloader.defaultReferenceModules, function () {
                     return '<font>未签到</font>';
             }
             },
-            { field: 'IsCalculate', title: '是否计算', width: 80, formatter: function (value) {
+            { field: 'IsCalculate', title: '是否结算', width: 80, formatter: function (value) {
                 if (value == 1)
-                    return '<span>需要计算</span>';
+                    return '<span>已结算</span>';
                 else
-                    return '<font>不计算</font>';
+                    return '<font>未结算</font>';
             }
             }
         ]],

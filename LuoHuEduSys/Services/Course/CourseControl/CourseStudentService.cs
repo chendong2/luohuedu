@@ -352,17 +352,19 @@ namespace Services.Course.CourseControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    string courseSql = @"select Period from tb_course where Id = @courseId ";
-                    int period = 0;
-                    var coursebo = connection.Query<CourseBo>(courseSql, new { courseId = studentBo.CourseId }).FirstOrDefault();
+                    //string courseSql = @"select Period from tb_course where Id = @courseId ";
+                    //int period = 0;
+                    //var coursebo = connection.Query<CourseBo>(courseSql, new { courseId = studentBo.CourseId }).FirstOrDefault();
 
                     
-                    if (coursebo != null)
-                    {
-                        period = coursebo.Period;
-                    }
-                    studentBo.Period = period;
-
+                    //if (coursebo != null)
+                    //{
+                    //    period = coursebo.Period;
+                    //}
+                    //studentBo.Period = period;
+                    //添加学员的时候不添加学分，学分默认都为0.点结算的时候才给学分。
+                    studentBo.Sign = 1;
+                    studentBo.IsCalculate = 2;
                     var strSql = @"INSERT INTO `tb_coursestudent`
                                     (`Id`,
                                      `CourseNumber`,
@@ -646,7 +648,45 @@ namespace Services.Course.CourseControl
             }
 
         }
+        /// <summary>
+        /// 课程结算功能
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool CourseJieSun(string id)
+        {
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
 
+                    string courseSql = @"select * from tb_course where Id=@courseId";
+
+                    var coursebo = connection.Query<CourseBo>(courseSql, new { courseId = id }).FirstOrDefault();
+                    int aa = 0;
+                    if (coursebo != null)
+                    {
+                        aa = coursebo.Period;
+                    }
+
+                    var sqlStr = @"UPDATE `tb_coursestudent` SET Period=@Period,IsCalculate=1,Sign=2 WHERE CourseId=@CourseId";
+                    int row = connection.Execute(sqlStr, new { Period = aa, CourseId = id });
+                    if (row > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.CourseJieSun({0})异常", id), ex);
+                return false;
+            }
+        }
 
     }
 }

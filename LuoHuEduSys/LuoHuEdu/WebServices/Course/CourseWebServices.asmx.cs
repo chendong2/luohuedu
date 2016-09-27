@@ -131,10 +131,12 @@ namespace LuoHuEdu.WebServices.Course
             courseBo.Requirement = 0;
             courseBo.CourseState = 2;
             courseBo.AduitTime = DateTime.Now;
+            courseBo.Locked = 2;//新增默认未锁定
             var schoolbo=school.GetSchoolById(courseBo.SchoolId);
             //给权限默认赋值，表示只有该学校可以报名
             if (schoolbo != null)
             {
+
                 if (schoolbo.SchoolType=="1")
                 {
                     courseBo.PlcSchool = courseBo.SchoolId;
@@ -143,6 +145,7 @@ namespace LuoHuEdu.WebServices.Course
                 {
                     courseBo.PriSchool = courseBo.SchoolId;
                 }
+                courseBo.OrganizationalName = courseBo.SchoolId;//组织单位默认赋值为学校管理员所在的单位
             }
 
             var courseService = new CourseService();

@@ -185,9 +185,6 @@ function addData() {
         iconCls: 'icon-add'
     });
     $("#ddlTrainType").combobox({ disabled: true });
-
-    
-    //getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName", true);
     getAllSchool("ddlSchoolName", true);
     var data = [];
@@ -331,23 +328,6 @@ function getAllSubject(ddlRoute, isSimpleSearch) {
     });
 }
 
-////获取所有培训类型数据，用于绑定下拉框
-//function getAllStudent(ddlRoute, isSimpleSearch) {
-//    var webserviceUrl = '/WebServices/Admin/Student.asmx/GetAllStudents';
-//    ajaxCRUD({
-//        async: false,
-//        url: webserviceUrl,
-//        data: '{}',
-//        success: function (data) {
-//            if (isSimpleSearch) {
-//                // 如果是搜索条件用的dll，那么加入请选择选项
-//                data.unshift({ 'Id': 0, 'Name': '请选择' });
-//            }
-//            initCombobox(ddlRoute, "Id", "Name", data, true);
-//        }
-//    });
-//}
-
 
 //保存表单数据
 function saveData() {
@@ -368,12 +348,9 @@ function saveData() {
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
-//    form2JsonObj.CourseState = 2;
-//    form2JsonObj.AduitTime = new Date();
     form2JsonObj.SchoolId = $.cookie('SchoolId');
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
-    //console.log(jsonDataStr);
     ajaxCRUD({
         url: formUrl,
         data: jsonDataStr,

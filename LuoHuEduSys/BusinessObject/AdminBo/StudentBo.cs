@@ -102,6 +102,8 @@ namespace BusinessObject.AdminBo
 
         public int Sign { get; set; }
 
+        public int Period { get; set; }
+
         public string courseId;
     }
 }
