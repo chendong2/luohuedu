@@ -227,9 +227,12 @@ function editData() {
     var row = getSelectedRow('dg');
     if (row == null) {
         msgShow(moduleName + '编辑', '请选择要编辑的一行数据！', '');
-    } 
+    }
     else if (row.CourseState == 2) {
-        msgShow(moduleName + '编辑', '审核通过的课程不能编辑！', '');
+        msgShow(moduleName + '编辑', '审核通过或则锁定的课程不能编辑！', '');
+    }
+    else if (row.Locked == 1) {
+        msgShow(moduleName + '编辑', '锁定的课程不能编辑！', '');
     }
     else {
         
@@ -365,7 +368,6 @@ function saveData() {
     var form2JsonObj = form2Json("ff");
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
-    //console.log(jsonDataStr);
     ajaxCRUD({
         url: formUrl,
         data: jsonDataStr,

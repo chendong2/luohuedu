@@ -104,6 +104,8 @@ namespace LuoHuEdu.WebServices.Course
         [WebMethod(EnableSession = true)]
         public bool AddCourse(CourseBo courseBo)
         {
+            courseBo.Locked = 2;
+
             var courseService = new CourseService();
             return courseService.AddCourse(courseBo);
         }
@@ -128,7 +130,7 @@ namespace LuoHuEdu.WebServices.Course
 
             var school=new SchoolService();
 
-            courseBo.Requirement = 0;
+            courseBo.Requirement =0;
             courseBo.CourseState = 2;
             courseBo.AduitTime = DateTime.Now;
             courseBo.Locked = 2;//新增默认未锁定

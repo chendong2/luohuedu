@@ -96,7 +96,7 @@ namespace Services.Course.CourseControl
                 count = context.Query<CourseBo>(strSql,
                                             new
                                             {
-                                                EducationtName = string.Format("%{0}%", courseBo.CourseName),
+                                                CourseName = string.Format("%{0}%", courseBo.CourseName),
                                                 adminSchoolId = adminSchoolId,
                                                 TheYear = courseBo.TheYear,
                                                 TeacherId=courseBo.TeacherId

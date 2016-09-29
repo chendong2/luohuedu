@@ -202,7 +202,10 @@ function editData() {
         msgShow(moduleName + '编辑', '请选择要编辑的一行数据！', '');
     }
     else if (row.CourseState == 2) {
-        msgShow(moduleName + '编辑', '审核通过的课程不能编辑！', '');
+        msgShow(moduleName + '编辑', '审核通过或则锁定的课程不能编辑！', '');
+    }
+    else if (row.Locked == 1) {
+        msgShow(moduleName + '编辑', '锁定的课程不能编辑！', '');
     }
     else {
 
@@ -404,7 +407,8 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 courseBo: {
-                    TheYear: $("#TheYearSerch").val().trim()
+                    TheYear: $("#TheYearSerch").val().trim(),
+                    CourseName: $("#txtCourseName").val().trim()
                 }
             };
             var paramStr = JSON.stringify(studentData);

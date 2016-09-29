@@ -37,7 +37,7 @@ GROUP BY ct.StudentId,TrainType,TheYear)b ON st.id=b.studentid where TheYear =@T
             using (var connection = DataBaseConnection.GetMySqlConnection())
             {
                 var sqlStr =
-                    @"SELECT COUNT(Period) AS  Period FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId   
+                    @"SELECT COUNT(ct.Period) AS  Period FROM  tb_coursestudent ct INNER JOIN tb_course co  ON co.id=ct.CourseId   
                       where TheYear =@TheYear  and StudentId=@StudentId ";
                 courseBo = connection.Query<CourseBo>(sqlStr, new { TheYear = theYear, studentid = userId }).FirstOrDefault();
             }
@@ -178,17 +178,18 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
             var pageList = new Page<CourseBo>();
 
             string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
-INNER JOIN tb_subject AS s ON c.Subject=s.Id
-INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
-INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName` 
-WHERE c.`Id` NOT IN(
-SELECT courseId FROM tb_coursestudent cs WHERE cs.`StudentId`=@StudentId 
-) AND ( c.Requirement=1 OR                
-EXISTS( SELECT * FROM tb_student st INNER JOIN tb_subject su ON st.`FirstTeaching`=su.`Id` 
-INNER JOIN tb_subject su1 ON st.`SecondTeaching`=su1.`Id`
-WHERE POSITION(st.StudyPeriod IN c.TeachingObject)>0 AND POSITION(st.Staffing IN c.ObjectEstablish)>0  
- AND (POSITION(su.`SubjectName` IN c.ObjectSubject)>0 OR POSITION(su1.`SubjectName` IN c.ObjectSubject)>0) 
-and st.`Id`=@StudentId )) AND CourseState=2 AND c.Requirement!=2  and c.Locked=2 ");
+                                            INNER JOIN tb_subject AS s ON c.Subject=s.Id
+                                            INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
+                                            INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName` 
+                                            WHERE c.`Id` NOT IN(
+                                            SELECT courseId FROM tb_coursestudent cs WHERE cs.`StudentId`=@StudentId 
+                                            ) AND ( c.Requirement=1 OR                
+                                            EXISTS( SELECT * FROM tb_student st INNER JOIN tb_subject su ON st.`FirstTeaching`=su.`Id` 
+                                            INNER JOIN tb_subject su1 ON st.`SecondTeaching`=su1.`Id`
+                                            WHERE POSITION(st.StudyPeriod IN c.TeachingObject)>0 AND POSITION(st.Staffing IN c.ObjectEstablish)>0  
+                                             AND (POSITION(su.`SubjectName` IN c.ObjectSubject)>0 OR POSITION(su1.`SubjectName` IN c.ObjectSubject)>0) 
+                                            and st.`Id`=@StudentId )) AND CourseState=2 AND c.Requirement!=2  and c.Locked=2 ");
+
            if (courseBo != null)
           {
                //课程名称查询

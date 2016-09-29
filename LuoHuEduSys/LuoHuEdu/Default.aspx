@@ -149,9 +149,9 @@
         if (perStr.indexOf("免修审核") > -1) {
             menus_2.push({ "menuid": "25", "menuname": "免修审核", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/ExemptionManage/ExemptionManageList.htm") %>' });
         }
-        if (perStr.indexOf("学员管理") > -1) {
-            menus_2.push({ "menuid": "26", "menuname": "学员管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/Student/StudentCourseList.htm") %>' });
-        }
+//        if (perStr.indexOf("学员管理") > -1) {
+//            menus_2.push({ "menuid": "26", "menuname": "学员管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/Student/StudentCourseList.htm") %>' });
+//        }
         if (perStr.indexOf("学员信息管理") > -1) {
             menus_2.push({ "menuid": "27", "menuname": "学员信息管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/Student/StudentList.htm") %>' });
         }
