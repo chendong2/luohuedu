@@ -67,6 +67,16 @@ namespace Services.Course.CourseControl
                 {
                     strSql += " and c.TheYear=@TheYear ";
                 }
+                //课程代码查询
+                if (!string.IsNullOrEmpty(courseBo.OrganizationalName) &&courseBo.OrganizationalName!="0")
+                {
+                    strSql += " and c.OrganizationalName=@OrganizationalName ";
+                }
+                //课程代码查询
+                if (!string.IsNullOrEmpty(courseBo.TrainType) && courseBo.TrainType != "0")
+                {
+                    strSql += " and c.TrainType=@TrainType ";
+                }
             }
 
             string adminSchoolId = string.Empty;
@@ -99,7 +109,9 @@ namespace Services.Course.CourseControl
                                                 CourseName = string.Format("%{0}%", courseBo.CourseName),
                                                 adminSchoolId = adminSchoolId,
                                                 TheYear = courseBo.TheYear,
-                                                TeacherId=courseBo.TeacherId
+                                                TeacherId=courseBo.TeacherId,
+                                                OrganizationalName=courseBo.OrganizationalName,
+                                                TrainType = courseBo.TrainType
 
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
@@ -111,6 +123,8 @@ namespace Services.Course.CourseControl
                                                     adminSchoolId = adminSchoolId,
                                                      TheYear = courseBo.TheYear,
                                                     TeacherId=courseBo.TeacherId,
+                                                     OrganizationalName=courseBo.OrganizationalName,
+                                                     TrainType = courseBo.TrainType,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();

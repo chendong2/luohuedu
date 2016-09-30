@@ -44,7 +44,7 @@ using(easyloader.defaultReferenceModules, function () {
                     return btn;
                 }
             },
-            { field: 'CourseName', title: '课程名称', width: 180 },
+            { field: 'CourseName', title: '课程名称', width: 180 ,sortable: true},
               { field: 'CourseState', title: '状态', width:100, formatter: function (value) {
                   if (value == 1)
                       return '<span style="red">待审核状态</span>';
@@ -55,7 +55,7 @@ using(easyloader.defaultReferenceModules, function () {
                   return '<span style="red">待审核状态</span>';
               }
           },
-            { field: 'Locked', title: '状态', width: 100, formatter: function (value) {
+            { field: 'Locked', title: '状态', width: 100,sortable: true, formatter: function (value) {
                 if (value == 1)
                     return '<span style="red">已锁定</span>';
                 else if (value == 2)
@@ -64,7 +64,7 @@ using(easyloader.defaultReferenceModules, function () {
                     return '<span>未设置</span>';
             }
             },
-            { field: 'TheYear', title: '年度', width: 150 },
+            { field: 'TheYear', title: '年度', width: 150, sortable: true },
             { field: 'TrainType', title: '培训类型', width: 140 },
             { field: 'SubjectName', title: '培训科目', width: 80 },
             { field: 'Phone', title: '联系电话', width: 80 },
@@ -107,6 +107,8 @@ using(easyloader.defaultReferenceModules, function () {
                 success: function (data) {
                     success(data);
                     getTheYearSerch();
+                    getTrainType("ddlTraintypeSerch", true);
+                    getAllSchool("ddlSchoolSerch", true);
                 },
                 error: function () {
                     error.apply(this, arguments);
@@ -132,6 +134,24 @@ using(easyloader.defaultReferenceModules, function () {
     });
 
 });
+
+
+//获取所有培训类型数据，用于绑定下拉框
+function getTrainType(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Parameter/TrainType.asmx/GetAllTrainTypeNew';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'TrainType': '请选择' });
+            }
+            initCombobox(ddlRoute, "Id", "TrainType", data, true);
+        }
+    });
+}
 
 //获取年份数据，用于绑定下拉框
 function getTheYearSerch() {
@@ -421,7 +441,10 @@ function Search() {
                 order: param.order,
                 sort: param.sort,
                 courseBo: {
-                    TheYear: $("#TheYearSerch").val().trim()
+                    TheYear: $("#TheYearSerch").val(),
+                    CourseName: $("#txtCourseName").val(),
+                    OrganizationalName: $("#ddlSchoolSerch").combobox('getValue'),
+                    TrainType: $("#ddlTraintypeSerch").combobox('getValue')
                 }
             };
             var paramStr = JSON.stringify(studentData);

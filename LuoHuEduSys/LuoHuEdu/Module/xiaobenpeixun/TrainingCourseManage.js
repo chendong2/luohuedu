@@ -87,6 +87,7 @@ using(easyloader.defaultReferenceModules, function () {
                 success: function (data) {
                     success(data);
                     getTheYearSerch();
+                 
                 },
                 error: function () {
                     error.apply(this, arguments);
@@ -408,7 +409,9 @@ function Search() {
                 sort: param.sort,
                 courseBo: {
                     TheYear: $("#TheYearSerch").val().trim(),
-                    CourseName: $("#txtCourseName").val().trim()
+                    CourseName: $("#txtCourseName").val().trim(),
+                    OrganizationalName:$("#ddlChooseSchool").combobox('getValue'),
+                    TrainType: $("#ddlTraintype1").combobox('getValue')
                 }
             };
             var paramStr = JSON.stringify(studentData);
