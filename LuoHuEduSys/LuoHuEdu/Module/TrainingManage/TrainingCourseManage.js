@@ -85,7 +85,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'CourseCode', title: '课程代码', width: 80 }
 
         ]],
-        singleSelect: false,
+        singleSelect: true,
         toolbar: '#toolbar',
         sortName: 'CourseDate',
         sortOrder: 'desc',
@@ -698,6 +698,9 @@ function saveCourseAuditSetData() {
 //点击“学员管理”按钮
 function studentManage(courseid) {
 
+    var row = getSelectedRow('dg');
+   
+     
     // 学员管理列表参数设置
     var studentManageDataGridOptions = {
 
@@ -749,15 +752,22 @@ function studentManage(courseid) {
     };
 
     $("#HsmCourseId").val(courseid);
-
-    openDialog('studentManageDlg', {
-        title: '学员管理',
-        iconCls: 'icon-edit',
-        onOpen: function () {
-            //初始化列表组件
-            iniDataGrid('studentManageDG', studentManageDataGridOptions);
-        }
-    });
+    if (row == null) {
+        msgShow(moduleName + '学员管理', '请选择一行数据！', '');
+    }
+    else if (row.Locked == 1) {
+        msgShow(moduleName + '学员管理', '锁定的课程不能编辑学员！', '');
+    } else {
+        openDialog('studentManageDlg', {
+            title: '学员管理',
+            iconCls: 'icon-edit',
+            onOpen: function () {
+                //初始化列表组件
+                iniDataGrid('studentManageDG', studentManageDataGridOptions);
+            }
+        });
+    }
+   
 
 }
 

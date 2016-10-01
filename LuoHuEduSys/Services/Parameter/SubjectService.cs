@@ -38,7 +38,7 @@ namespace Services.Parameter
 
                     String id = Guid.NewGuid().ToString();
                     subjectBo.Id = id;
-                    var sqlStr = @"INSERT INTO tb_subject(Id,SubjectName) VALUES(@Id,@SubjectName);";
+                    var sqlStr = @"INSERT INTO tb_subject(Id,SubjectName,IsTeachingSubject) VALUES(@Id,@SubjectName,@IsTeachingSubject);";
                     int row = connection.Execute(sqlStr, subjectBo);
                     if (row > 0)
                     {
@@ -102,7 +102,7 @@ namespace Services.Parameter
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    var sqlStr = @"update tb_subject set SubjectName=@SubjectName where Id=@Id";
+                    var sqlStr = @"update tb_subject set SubjectName=@SubjectName,IsTeachingSubject=@IsTeachingSubject where Id=@Id";
                     int row = connection.Execute(sqlStr, subjectBo);
                     if (row > 0)
                     {

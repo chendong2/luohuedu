@@ -240,9 +240,9 @@ namespace Services.Course.CourseControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    string courseSql = @"select * from tb_course where Id=@courseId";
+                    string courseSql = @"select * from tb_course where Id=@CourseId";
 
-                    var coursebo = connection.Query<CourseBo>(courseSql, new { Id = studentBo.CourseId }).FirstOrDefault();
+                    var coursebo = connection.Query<CourseBo>(courseSql, new { CourseId = studentBo.CourseId }).FirstOrDefault();
                     int period = 0;
                     if (coursebo != null)
                     {

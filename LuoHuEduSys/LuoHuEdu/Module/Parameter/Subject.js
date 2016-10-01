@@ -11,7 +11,14 @@ using(easyloader.defaultReferenceModules, function () {
         title: '科目设置',
         columns: [[
             { field: 'Id', checkbox: true },
-            { field: 'SubjectName', title: '科目名称', width: 180, sortable: false }
+            { field: 'SubjectName', title: '科目名称', width: 180, sortable: false },
+            { field: 'IsTeachingSubject', title: '是否教学科目', width: 60, formatter: function (value) {
+                if (value == 1)
+                    return '<span>是</span>';
+                else
+                    return '<span>否</span>';
+            } 
+        }
         ]],
         singleSelect: false,
         toolbar: '#toolbar',
