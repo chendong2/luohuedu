@@ -49,5 +49,16 @@ namespace BusinessObject.Course
         /// 课程名称
         /// </summary>
         public string CourseName { get; set; }
+
+        /// <summary>
+        /// 学校名称
+        /// </summary>
+        public string SchoolName { get; set; }
+
+        /// <summary>
+        /// 职务
+        /// </summary>
+        public string Office { get; set; }
+
     }
 }

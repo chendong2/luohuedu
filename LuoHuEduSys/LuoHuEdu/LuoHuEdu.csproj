@@ -1288,6 +1288,7 @@
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageList.htm" />
     <Content Include="View\TrainingManage\TeacherMessage\TeacherMessageList.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\ChooseStudent.htm" />
+    <Content Include="View\TrainingManage\TrainingCourseManage\KaoqingPrint.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\CourseAudit.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\KaoqingList.htm" />
     <Content Include="View\TrainingManage\TrainingCourseManage\LockedCourse.htm" />

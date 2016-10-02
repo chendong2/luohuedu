@@ -1290,18 +1290,7 @@ function KaoqingSearch() {
 
 //点击“编辑”按钮
 function jiesuan() {
-    ajaxCRUD({
-        url: '/WebServices/Admin/Student.asmx/CourseJieSuan',
-        data: "{id:'" + cousrIdCD + "'}",
-        success: function (data) {
-            if (data == true) {
-                msgShow('提示', '结算成功', 'info');
-                refreshTable('kgDG');
-            } else {
-                msgShow('提示', '结算失败', 'info');
-            }
-        }
-    });
+    window.open("/View/TrainingManage/TrainingCourseManage/KaoqingPrint.htm?courseId=" + cousrIdCD);
 }
 
 

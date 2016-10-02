@@ -6,6 +6,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using BusinessObject.AdminBo;
 using BusinessObject.Course;
+using BusinessObject.Parameter;
 using Services.Admin.StudentControl;
 using Services.Course.CourseControl;
 
@@ -121,5 +122,17 @@ namespace LuoHuEdu.WebServices.Course
             var courseService = new CourseStudentService();
             return courseService.CanBaoMing(courseId);
         }
+
+
+        //获取考勤打印列表数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public List<CourseStudentDto> GetPrintCourseStudentData(string courseId)
+        {
+
+            var courseService = new AllCourseService();
+            return courseService.GetPrintCourseStudentData(courseId);
+        }
+
     }
 }
