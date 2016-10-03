@@ -213,7 +213,7 @@ namespace Services.Parameter
         public string[] GetAllSubject()
         {
             List<SubjectBo> list;
-            string strSql = string.Format(@"SELECT * from tb_subject where 1=1 ");
+            string strSql = string.Format(@"SELECT * from tb_subject where IsTeachingSubject=1 ");
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
 
