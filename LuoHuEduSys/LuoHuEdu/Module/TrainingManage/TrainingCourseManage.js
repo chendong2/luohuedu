@@ -38,6 +38,7 @@ using(easyloader.defaultReferenceModules, function () {
                     return btn;
                 }
             },
+            
             { field: 'kaoqing', title: '考勤管理', width: 80,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="kaoQing(\'' + rec.Id + '\')" href="javascript:void(0)">考勤</a>';
@@ -238,13 +239,24 @@ function addData() {
     initCombobox("ddlTeacherId", "Id", "Name", data, true);
     getTheYear();
     getAllSubject("Subject", true);
-//    getAllStudent("ddlTeacherId", true);
+    $('#KaoQingMorningOne').timespinner({ required: false });
+    $('#KaoQingAfternoonOne').timespinner({ required: false });
+    $('#KaoQingNightOne').timespinner({ required: false });
+    $('#KaoQingMorningTwo').timespinner({ required: false });
+    $('#KaoQingAfternoonTwo').timespinner({ required: false });
+    $('#KaoQingNightTwo').timespinner({ required: false });
     resetFormAndClearValidate('ff');
 }
 
 //点击“编辑”按钮
 function editData() {
     var row = getSelectedRow('dg');
+    $('#KaoQingMorningOne').timespinner({ required: false });
+    $('#KaoQingAfternoonOne').timespinner({ required: false });
+    $('#KaoQingNightOne').timespinner({ required: false });
+    $('#KaoQingMorningTwo').timespinner({ required: false });
+    $('#KaoQingAfternoonTwo').timespinner({ required: false });
+    $('#KaoQingNightTwo').timespinner({ required: false });
     if (row == null) {
         msgShow(moduleName + '编辑', '请选择要编辑的一行数据！', '');
     }
@@ -473,28 +485,45 @@ function closeFormDialog(id) {
 }
 
 //点击“报名设置”按钮
-function registerSet(courseid) {
-
+function registerSet(courseid) { 
     ajaxCRUD({
         url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
         data: "{id:'" + courseid + "'}",
         success: function (data) {
-
             openDialog('registerSetDlg', {
                 title: '报名设置',
                 iconCls: 'icon-edit',
                 onOpen: function () {
-
+                  
                 }
             });
-            
+
             //JSON数据填充表单
             loadDataToForm('registerSetForm', data);
+//           
+//            $("input[name='TeachingObject']").attr("checked", "checked");
+//            $("input[name='ObjectEstablish']").attr("checked", "checked");
         }
     });
 
 }
 
+function selectAll() {
+    $("input[name='PlcSchool']").attr("checked", true);
+}
+
+function noSelectAll() {
+    $("input[name='PlcSchool']").attr("checked", false);
+}
+
+
+function selectAllMingban() {
+    $("input[name='PriSchool']").attr("checked", true);
+}
+
+function noSelectAllMingban() {
+    $("input[name='PriSchool']").attr("checked", false);
+}
 //保存“报名设置”表单数据
 function saveRegisterSetData() {
     

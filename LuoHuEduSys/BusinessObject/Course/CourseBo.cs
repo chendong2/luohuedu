@@ -202,5 +202,38 @@ namespace BusinessObject.Course
 
         public string SchoolId { get; set; }
 
+
+        public string KaoQingDateOne { get; set; }
+
+        public string KaoQingMorningOne { get; set; }
+
+        public string KaoQingAfternoonOne { get; set; }
+
+        public string KaoQingNightOne { get; set; }
+
+        public int MorningPeriodOne { get; set; }
+
+        public int AfternoonPeriodOne { get; set; }
+
+        public int NightPeriodOne { get; set; }
+
+
+        //--------------------------
+
+
+        public string KaoQingDateTwo { get; set; }
+
+        public string KaoQingMorningTwo { get; set; }
+
+        public string KaoQingAfternoonTwo { get; set; }
+
+        public string KaoQingNightTwo { get; set; }
+
+        public int MorningPeriodTwo { get; set; }
+
+        public int AfternoonPeriodTwo { get; set; }
+
+        public int NightPeriodTwo { get; set; }
+
     }
 }

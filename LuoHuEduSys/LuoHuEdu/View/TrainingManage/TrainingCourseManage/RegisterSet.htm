@@ -29,15 +29,15 @@
                             授课对象:
                         </td>
                         <td class="td_left">
-                            <input type="checkbox" name="TeachingObject" value="1"/>幼儿教师
+                            <input type="checkbox" name="TeachingObject" id="TeachingObject1" value="1"/>幼儿教师
                             &nbsp;&nbsp;
-                            <input type="checkbox" name="TeachingObject" value="2"/>小学教师
+                            <input type="checkbox" name="TeachingObject" id="TeachingObject2" value="2"/>小学教师
                             &nbsp;&nbsp;
-                            <input type="checkbox" name="TeachingObject" value="3"/>初中教师
+                            <input type="checkbox" name="TeachingObject" id="TeachingObject3" value="3"/>初中教师
                             &nbsp;&nbsp;
-                            <input type="checkbox" name="TeachingObject" value="4"/>高中教师
+                            <input type="checkbox" name="TeachingObject" id="TeachingObject4" value="4"/>高中教师
                             &nbsp;&nbsp;
-                            <input type="checkbox" name="TeachingObject" value="5"/>其他
+                            <input type="checkbox" name="TeachingObject" id="TeachingObject5" value="5"/>其他
                         </td>
                     </tr>
                     <tr>
@@ -81,6 +81,10 @@
         </div>
         <div title="公办学校" style="padding: 10px;" id="PublicSchool">
             <table id="PublicSchoolTbl" class="custom_forms_popup">
+                <span style="float: left">
+                    <a href="#" class="easyui-linkbutton " iconcls="icon-add" plain="true" onclick="selectAll();">全选</a>
+                    <a href="#" class="easyui-linkbutton " iconcls="icon-edit" plain="true" onclick="noSelectAll();">全不选</a> 
+                </span>
                 <tr>
                     <td class="td_right">
                     </td>
@@ -90,6 +94,10 @@
             </table>
         </div>
         <div title="民办学校" style="padding: 10px;" id="PrivateSchool">
+             <span style="float: left">
+                    <a href="#" class="easyui-linkbutton " iconcls="icon-add" plain="true" onclick="selectAllMingban();">全选</a>
+                    <a href="#" class="easyui-linkbutton " iconcls="icon-edit" plain="true" onclick="noSelectAllMingban();">全不选</a> 
+             </span>
             <table id="PrivateSchoolTbl" class="custom_forms_popup">
                 <tr>
                     <td class="td_right">
