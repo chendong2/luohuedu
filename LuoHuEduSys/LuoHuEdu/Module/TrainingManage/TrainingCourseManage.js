@@ -508,6 +508,19 @@ function registerSet(courseid) {
 
 }
 
+function selectAllOne() {
+    $("input[name='TeachingObject']").attr("checked", true);
+    $("input[name='ObjectEstablish']").attr("checked", true);
+    $("input[name='ObjectSubject']").attr("checked", true);
+}
+
+function noSelectAllOne() {
+    $("input[name='TeachingObject']").attr("checked", false);
+    $("input[name='ObjectEstablish']").attr("checked", false);
+    $("input[name='ObjectSubject']").attr("checked", false);
+}
+
+
 function selectAll() {
     $("input[name='PlcSchool']").attr("checked", true);
 }

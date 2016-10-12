@@ -60,7 +60,7 @@
         <div id="tabs" class="easyui-tabs " fit="true" border="false">
             <div title="欢迎页" style="padding: 0px; overflow: hidden; color: red;" id="defaultTab"
                 closable="false">
-                <div style="width: 100%; height: 680px; background: url(/App_Themes/Global/Images/wall.jpg) center center;
+                <div style="width: 100%; height: 680px; background: url(/App_Themes/Global/Images/wall1111.jpg) center center;
                     overflow: hidden" id="startShow">
                 </div>
             </div>

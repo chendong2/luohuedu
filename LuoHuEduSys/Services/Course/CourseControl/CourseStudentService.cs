@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BusinessObject.AdminBo;
 using BusinessObject.Course;
 using Dapper;
 using Domain.common;
@@ -240,15 +241,15 @@ namespace Services.Course.CourseControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    string courseSql = @"select * from tb_course where Id=@CourseId";
+                    //string courseSql = @"select * from tb_course where Id=@CourseId";
 
-                    var coursebo = connection.Query<CourseBo>(courseSql, new { CourseId = studentBo.CourseId }).FirstOrDefault();
-                    int period = 0;
-                    if (coursebo != null)
-                    {
-                        period = coursebo.Period;
-                    }
-                    studentBo.Period = period;
+                    //var coursebo = connection.Query<CourseBo>(courseSql, new { CourseId = studentBo.CourseId }).FirstOrDefault();
+                    //int period = 0;
+                    //if (coursebo != null)
+                    //{
+                    //    period = coursebo.Period;
+                    //}
+                    //studentBo.Period = period;
                     studentBo.Id = Guid.NewGuid().ToString();
                     var strSql = @"INSERT INTO `tb_coursestudent`
                                     (`Id`,
@@ -260,7 +261,7 @@ namespace Services.Course.CourseControl
                                      `TaskUrl`,
                                      `SignDate`,
                                      `SignOutDate`,
-                                     `CourseId`,Period)
+                                     `CourseId`,Period,IDNo,SignMDate,SignADate,SignNDate)
                                     VALUES (@Id,
                                             @CourseNumber,
                                             @StudentId,
@@ -270,7 +271,7 @@ namespace Services.Course.CourseControl
                                             @TaskUrl,
                                             @SignDate,
                                             @SignOutDate,
-                                            @CourseId,@Period);";
+                                            @CourseId,@Period,@IDNo,@SignMDate,@SignADate,SignNDate);";
                     int row = connection.Execute(strSql, studentBo);
                     if (row > 0)
                     {
@@ -352,16 +353,10 @@ namespace Services.Course.CourseControl
             {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    //string courseSql = @"select Period from tb_course where Id = @courseId ";
-                    //int period = 0;
-                    //var coursebo = connection.Query<CourseBo>(courseSql, new { courseId = studentBo.CourseId }).FirstOrDefault();
+                    string courseSql = @"SELECT * FROM `tb_student` WHERE Id=@Id ";
 
-                    
-                    //if (coursebo != null)
-                    //{
-                    //    period = coursebo.Period;
-                    //}
-                    //studentBo.Period = period;
+                   // var studentbo = connection.Query<StudentBo>(courseSql, new { courseId = studentBo.CourseId }).FirstOrDefault();
+
                     //添加学员的时候不添加学分，学分默认都为0.点结算的时候才给学分。
                     studentBo.Sign = 1;
                     studentBo.IsCalculate = 2;
@@ -375,7 +370,7 @@ namespace Services.Course.CourseControl
                                      `TaskUrl`,
                                      `SignDate`,
                                      `SignOutDate`,
-                                     `CourseId`,Period)
+                                     `CourseId`,Period,IDNo,SignMDate,SignADate,SignNDate)
                                     VALUES (@Id,
                                             @CourseNumber,
                                             @StudentId,
@@ -385,12 +380,13 @@ namespace Services.Course.CourseControl
                                             @TaskUrl,
                                             @SignDate,
                                             @SignOutDate,
-                                            @CourseId,@Period);";
+                                            @CourseId,@Period,@IDNo,@SignMDate,@SignADate,SignNDate);";
                     string[] idArray = ids.Split(',');
 
                     for (int i = 0; i < idArray.Length; i++)
                     {
-
+                        var student = connection.Query<StudentBo>(courseSql, new { Id = idArray[i] }).FirstOrDefault();
+                        if (student != null) studentBo.IDNo = student.IDNo;
                         studentBo.Id = Guid.NewGuid().ToString();
                         studentBo.StudentId = idArray[i];
                         connection.Execute(strSql, studentBo);

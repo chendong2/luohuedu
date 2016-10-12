@@ -60,5 +60,25 @@ namespace BusinessObject.Course
         /// </summary>
         public string Office { get; set; }
 
+        /// <summary>
+        /// 身份证号
+        /// </summary>
+        public string IDNo { get; set; }
+
+        /// <summary>
+        /// 上午签到时间
+        /// </summary>
+        public string SignMDate { get; set; }
+
+        /// <summary>
+        /// 下午签到时间
+        /// </summary>
+        public string SignADate { get; set; }
+
+        /// <summary>
+        /// 晚上签到时间
+        /// </summary>
+        public string SignNDate { get; set; }
+
     }
 }

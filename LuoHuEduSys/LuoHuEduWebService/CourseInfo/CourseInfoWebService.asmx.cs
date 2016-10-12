@@ -54,6 +54,33 @@ namespace LuoHuEduWebService.CourseInfo
         }
 
         /// <summary>
+        /// 考勤数据上传方法
+        /// </summary>
+        /// <param name="courseId">课程ID</param>
+        /// <param name="idNo">身份证号</param>
+        /// <param name="signMDate">上午签到</param>
+        /// <param name="signADate">下午签到</param>
+        /// <param name="signNDate">晚上签到</param>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod]
+        [SoapHeader("htSoapHeader", Direction = SoapHeaderDirection.InOut | SoapHeaderDirection.Fault)]
+       public bool AddCourseStudent(string courseId, string idNo, string signMDate, string signADate, string signNDate)
+        {
+            var courseService = new CourseStudentService();
+            var studentBo = new CourseStudentDto();
+            studentBo.CourseId = courseId;
+            studentBo.IDNo = idNo;
+            studentBo.SignMDate = signMDate;
+            studentBo.SignADate = signADate;
+            studentBo.SignNDate = signNDate;
+            studentBo.Sign = 2;
+            studentBo.Feedback =1;
+            studentBo.Period = 0;
+            studentBo.IsCalculate = 2;
+            return courseService.AddCourseStudent(studentBo);
+        }
+        /// <summary>
         /// 根据课程ID获取报名信息
         /// </summary>
         /// <param name="courseId"></param>
@@ -104,5 +131,7 @@ namespace LuoHuEduWebService.CourseInfo
             var list = JsonConvert.DeserializeObject<List<CourseStudentDto>>(jsonParm);
             return course.BatchRegistration(list);
         }
+
+
     }
 }

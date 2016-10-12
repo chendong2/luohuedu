@@ -80,7 +80,8 @@ namespace HuaTongCallCenter
             {
                 Session.Contents.Remove("UserId");
                 Session.Contents.Remove("UserName");
-                Response.Redirect("~/Login.aspx");
+                //Response.Redirect("~/Login.aspx");
+                Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.186/Login.aspx");
             }
         }
 

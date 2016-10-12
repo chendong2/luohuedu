@@ -39,7 +39,7 @@ namespace Services.Course.AttendanceReport
             string sql = @"SELECT c.`Id`,co.`CourseName`,co.`TimeStart`,co.`TimeEnd`,s.`Name` ,co.`TheYear`,c.`Period`,sc.`SchoolName`,c.`SignDate`,c.`SignOutDate`,Sign,IsCalculate FROM `tb_coursestudent` c
             INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
             INNER JOIN  tb_school sc ON sc.`Id`=co.`OrganizationalName`
-            INNER JOIN `tb_student` s ON s.`Id`=c.`StudentId` where 1=1 ";
+            INNER JOIN `tb_student` s ON s.`IDNo`=c.`IDNo` where 1=1 ";
 
             //sql 查询条件拼接
 

@@ -44,11 +44,21 @@ namespace Services.Course.CourseControl
             }
         }
 
+        /// <summary>
+        /// 根据课程ID获取报名学员信息
+        /// M by laq 修改为通过身份证号关联
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="rows"></param>
+        /// <param name="order"></param>
+        /// <param name="sort"></param>
+        /// <param name="courseId"></param>
+        /// <returns></returns>
         public Page<CourseStudentWSBo> GetCourseStudentByCourseIdNew(int page, int rows, string order, string sort, string courseId)
         {
             string strSql = string.Format(@"SELECT c.`Id`,s.IDNo,s.`Name`,s.`Sex`,sc.`SchoolName`,s.`Id` AS StudentId,c.`CourseId`,co.`CourseName` 
                                             FROM `tb_coursestudent` c
-                                            INNER JOIN `tb_student` s ON c.`StudentId`=s.`Id`
+                                            INNER JOIN `tb_student` s ON c.`IDNo`=s.`IDNo`
                                             INNER JOIN tb_school sc ON sc.`Id`=s.`SchoolId`
                                             INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
                                             WHERE c.`CourseId`=@CourseId ");
