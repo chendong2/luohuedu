@@ -522,7 +522,7 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
             }
             pageSize = page * rows;
             var pageList = new Page<StudentBo>();
-            var sqlStr = @"SELECT  cs.id,st.Name,st.Sex,sc.schoolname,st.office,st.telephone,cs.Sign,cs.Period,st.Birthday FROM tb_student st INNER JOIN tb_coursestudent cs ON st.id=cs.studentId 
+            var sqlStr = @"SELECT  cs.id,st.Name,st.Sex,sc.schoolname,st.office,st.telephone,cs.Sign,cs.Period,st.Birthday FROM tb_student st INNER JOIN tb_coursestudent cs ON st.IDNo=cs.IDNo 
 INNER JOIN tb_course co ON cs.courseid=co.id  INNER JOIN tb_school sc ON st.schoolid=sc.id WHERE  1=1  ";
 
             if (studentBo != null )

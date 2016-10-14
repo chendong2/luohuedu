@@ -59,5 +59,7 @@ namespace BusinessObject.Course
         /// 是否计算
         /// </summary>
         public int IsCalculate { get; set; }
+
+        public string IDNo { get; set; }
     }
 }

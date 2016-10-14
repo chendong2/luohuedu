@@ -7,6 +7,7 @@ using BusinessObject.Course;
 using Dapper;
 using Domain.common;
 using Huatong.DAO;
+using Microsoft.SqlServer.Server;
 
 namespace Services.Course.CourseControl
 {
@@ -239,17 +240,15 @@ namespace Services.Course.CourseControl
 
             try
             {
+               
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
-                    //string courseSql = @"select * from tb_course where Id=@CourseId";
+                    string courseSql = @"SELECT * FROM `tb_student` WHERE Id=@Id ";
+                    var student = connection.Query<StudentBo>(courseSql, new { Id =studentBo.StudentId }).FirstOrDefault();
+                    if (student != null) studentBo.IDNo = student.IDNo;
+                    DeleteCourseStudentbyId(studentBo.CourseId, studentBo.IDNo);//每次进行插入前，先根据课程ID和学员身份证号删除原有的报名数据
 
-                    //var coursebo = connection.Query<CourseBo>(courseSql, new { CourseId = studentBo.CourseId }).FirstOrDefault();
-                    //int period = 0;
-                    //if (coursebo != null)
-                    //{
-                    //    period = coursebo.Period;
-                    //}
-                    //studentBo.Period = period;
+
                     studentBo.Id = Guid.NewGuid().ToString();
                     var strSql = @"INSERT INTO `tb_coursestudent`
                                     (`Id`,
@@ -271,7 +270,7 @@ namespace Services.Course.CourseControl
                                             @TaskUrl,
                                             @SignDate,
                                             @SignOutDate,
-                                            @CourseId,@Period,@IDNo,@SignMDate,@SignADate,SignNDate);";
+                                            @CourseId,@Period,@IDNo,@SignMDate,@SignADate,@SignNDate);";
                     int row = connection.Execute(strSql, studentBo);
                     if (row > 0)
                     {
@@ -401,6 +400,67 @@ namespace Services.Course.CourseControl
             return true;
         }
 
+        /// <summary>
+        /// 根据课程ID和身份证号取消报名（删除报名数据）
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <param name="IDNo"></param>
+        /// <returns></returns>
+        public bool DeleteCourseStudentbyId(string courseId, string IDNo)
+        {
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    var sqlstr = "delete from  tb_coursestudent where IDNo=@IDNo and CourseId=@CourseId;";
+
+                    int aa=connection.Execute(sqlstr, new {IDNo = IDNo, CourseId = courseId});
+                    return true;
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.DeleteCourseStudentbyId({0},{1})异常", courseId, IDNo), ex);
+                return false;
+            }
+           
+        }
+
+
+        /// <summary>
+        /// 取消报名方法
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
+        public bool DeleteCourseStudentNew(string courseId, string studentId)
+        {
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    string courseSql = @"SELECT * FROM `tb_student` WHERE Id=@Id ";
+                    var student = connection.Query<StudentBo>(courseSql, new { Id = studentId }).FirstOrDefault();
+                    string IDNo = "";
+                    if (student != null) IDNo = student.IDNo;
+
+                    var sqlstr = "delete from  tb_coursestudent where IDNo=@IDNo and CourseId=@CourseId;";
+
+                    int aa = connection.Execute(sqlstr, new { IDNo = IDNo, CourseId = courseId });
+                    return true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentService.DeleteCourseStudentbyId({0},{1})异常", courseId, studentId), ex);
+                return false;
+            }
+
+        }
+
+
 
         public bool DeleteCourseStudent(String ids)
         {
@@ -465,6 +525,51 @@ namespace Services.Course.CourseControl
             }
         }
 
+        /// <summary>
+        /// 报名验证方法
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="cousreId"></param>
+        /// <returns></returns>
+        public int IsBaoMing( string studentId,string cousreId)
+        {
+            string sqlstr = @"select * from tb_student where Id=@Id ";//查询学员表获取学员IDNo
+            string sqlCourseStudent = @"select * from tb_coursestudent where CourseId=@CourseId and IDNo=@IDNo;";//根据课程ID和身份证号获取学员报名数据
+
+            string strIdNo = "";
+            try
+            {
+                using (var context = DataBaseConnection.GetMySqlConnection())
+                {
+                    var student = context.Query<StudentBo>(sqlstr, new { Id = studentId }).FirstOrDefault();
+                    if (student != null)
+                    {
+                        strIdNo = student.IDNo;
+                    }
+                    else
+                    {
+                        return 0;//请补全身份证信息在进行报名。
+                    }
+
+                    var list = context.Query<CourseStudentDto>(sqlCourseStudent, new { CourseId = cousreId, IDNo = strIdNo }).ToList();
+                    if (list.Count > 0)
+                    {
+                        return 1;//标识已经报名，不能进行重复报名
+                    }
+                    else
+                    {
+                        return 2;//没有进行过报名，可以报名
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.CanBaoMing({0})", cousreId), ex);
+                return -1;
+            }
+        }
 
         //判断课程是否还允许报名
         public bool CanBaoMing(string courseId)
@@ -495,8 +600,15 @@ namespace Services.Course.CourseControl
                     using (var context = DataBaseConnection.GetMySqlConnection())
                     {
                         var list = context.Query<CourseStudentBo>(sql, paras).ToList();
+                        if (list.Count < maxNumber)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
 
-                        return list.Count < maxNumber; //报名人数小于额定人数,可以报名
                     }
                 }
                 catch (Exception ex)

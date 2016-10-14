@@ -18,7 +18,15 @@ using(easyloader.defaultReferenceModules, function () {
                      return '';
                  }
              }
-             },
+         },
+            { field: 'quxiaobaoming', title: '取消报名', width: 60, formatter: function (value, rec) {
+                if ($.cookie('perList').indexOf("课程报名") > -1) {
+                    return '<a style="cursor:pointer" onclick="deletebaomingData(\'' + rec.Id + '\')" href="javascript:void(0)">取消</a>';
+                } else {
+                    return '';
+                }
+            }
+            },
             { field: 'CourseName', title: '课程名称', width: 80, formatter: function (value, rec) {
                 if ($.cookie('perList').indexOf("课程浏览") > -1) {
                     return '<a style="cursor:pointer" onclick="kecheng(\'' + rec.Id + '\')" href="javascript:void(0)">' + value + '</a>';
@@ -218,7 +226,7 @@ function baoming(id) {
                 data: "{courseId:'" + id + "'}",
                 success: function (data) {
                     if (data == true) {
-                        baomingData(id);
+                        isbaomingData(id);
                     } else {
                         msgShow('提示', '报名名额已满,您已无法报名！', 'info');
                     }
@@ -228,14 +236,65 @@ function baoming(id) {
     });
 }
 
+//报名判断
+function isbaomingData(str) {
+    var row = getSelectedRow('dg');
+    ajaxCRUD({
+        url: '/WebServices/Course/AllCourseServices.asmx/IsBaoMing',
+        data: "{studentId:'" + $.cookie('UserId') + "',cousreId:'" + str + "'}",
+        success: function (data) {
+            if (data == 2) {
+                if (row == null) {
+                    msgShow(moduleName + '提示', '请把多选框打勾在进行报名！', '');
+                } else {
+                    baomingData(str);
+                }
+            }
+            if(data==1) {
+                msgShow('提示', '已经报名该课程,不能重复报名！', 'info');
+            } 
+            if(data==0){
+                msgShow('提示', '请补全个人信息中的身份证号！', 'info');
+            } 
+            if(data==-1){
+                msgShow('提示', '未知错误！', 'info');
+            }
+            
+        }
+    });
+}
+
+
+//批量删除后台AJAX处理
+function deletebaomingData(str) {
+    //var row = getSelectedRow('dg');
+    ajaxCRUD({
+        url: '/WebServices/Course/AllCourseServices.asmx/DeleteCourseStudentNew',
+        data: "{studentId:'" + $.cookie('UserId') + "',courseId:'" + str + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '报名已经取消！', 'info');
+                refreshTable('dg');
+            } else {
+                msgShow('提示', '取消报名失败', 'info');
+            }
+        }
+    });
+}
+
 //批量删除后台AJAX处理
 function baomingData(str) {
+    var row = getSelectedRow('dg');
     ajaxCRUD({
         url: '/WebServices/Course/AllCourseServices.asmx/AddCourseStudent',
         data: "{userId:'" + $.cookie('UserId') + "',courseId:'" + str + "'}",
         success: function (data) {
             if (data == true) {
-                msgShow('提示', '报名成功', 'info');
+                if (row.TrainType == "集中培训") {
+                    msgShow('提示', '报名成功，该课程启用身份证考勤，请携带身份证！', 'info');
+                } else {
+                    msgShow('提示', '报名成功！', 'info');
+                }
                 refreshTable('dg');
             } else {
                 msgShow('提示', '报名失败', 'info');

@@ -181,10 +181,8 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
                                             INNER JOIN tb_subject AS s ON c.Subject=s.Id
                                             INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
                                             INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName` 
-                                            WHERE c.`Id` NOT IN(
-                                            SELECT courseId FROM tb_coursestudent cs WHERE cs.`StudentId`=@StudentId 
-                                            )   AND c.Locked=2  AND CourseState=2 AND EXISTS( SELECT * FROM tb_student st left JOIN tb_subject su ON st.`FirstTeaching`=su.`Id`  
-left JOIN tb_subject su1 ON st.`SecondTeaching`=su1.`Id`
+                                            WHERE  c.Locked=2  AND CourseState=2 AND EXISTS( SELECT * FROM tb_student st LEFT JOIN tb_subject su ON st.`FirstTeaching`=su.`Id`  
+LEFT JOIN tb_subject su1 ON st.`SecondTeaching`=su1.`Id`
 WHERE POSITION(st.StudyPeriod IN c.TeachingObject)>0 AND POSITION(st.Staffing IN c.ObjectEstablish)>0  
 AND (POSITION(su.`SubjectName` IN c.ObjectSubject)>0 OR POSITION(su1.`SubjectName` IN c.ObjectSubject)>0) 
 AND (POSITION(st.`SchoolId` IN c.PlcSchool)>0  OR POSITION(st.`SchoolId` IN c.PriSchool)>0 )

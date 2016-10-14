@@ -67,6 +67,7 @@ namespace LuoHuEduWebService.CourseInfo
         [SoapHeader("htSoapHeader", Direction = SoapHeaderDirection.InOut | SoapHeaderDirection.Fault)]
        public bool AddCourseStudent(string courseId, string idNo, string signMDate, string signADate, string signNDate)
         {
+            if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return false;
             var courseService = new CourseStudentService();
             var studentBo = new CourseStudentDto();
             studentBo.CourseId = courseId;

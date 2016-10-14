@@ -113,6 +113,14 @@ namespace LuoHuEdu.WebServices.Course
             return courseService.AddCourseStudent(studentBo);
         }
 
+          //报名方法
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public int IsBaoMing( string studentId,string cousreId)
+        {
+            var courseService = new CourseStudentService();
+            return courseService.IsBaoMing(studentId, cousreId);
+        }
 
         //判断是否可以报名
         [ScriptMethod]
@@ -133,6 +141,13 @@ namespace LuoHuEdu.WebServices.Course
             var courseService = new AllCourseService();
             return courseService.GetPrintCourseStudentData(courseId);
         }
-
+        //取消报名
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool DeleteCourseStudentNew(string courseId, string studentId)
+        {
+            var courseService = new CourseStudentService();
+            return courseService.DeleteCourseStudentNew(courseId,studentId);
+        }
     }
 }
