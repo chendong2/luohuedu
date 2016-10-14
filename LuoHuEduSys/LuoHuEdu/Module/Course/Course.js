@@ -291,7 +291,7 @@ function baomingData(str) {
         success: function (data) {
             if (data == true) {
                 if (row.TrainType == "集中培训") {
-                    msgShow('提示', '报名成功，该课程启用身份证考勤，请携带身份证！', 'info');
+                    msgShow('提示', '报名成功，课程名称：' + row.CourseName + '，该课程启用身份证考勤，请携带身份证！', 'info');
                 } else {
                     msgShow('提示', '报名成功！', 'info');
                 }
