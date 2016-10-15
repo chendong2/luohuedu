@@ -134,8 +134,15 @@ function addData() {
     getAllTrainType("ddlTrainType", true);
     getAllSchool("ddlOrganizationalName", true);
     getTheYear();
-    getAllSubject("Subject", true); 
+    getAllSubject("Subject", true);
     getAllStudent("ddlTeacherId", true);
+
+    $('#KaoQingMorningOne').timespinner({ required: false });
+    $('#KaoQingAfternoonOne').timespinner({ required: false });
+    $('#KaoQingNightOne').timespinner({ required: false });
+    $('#KaoQingMorningTwo').timespinner({ required: false });
+    $('#KaoQingAfternoonTwo').timespinner({ required: false });
+    $('#KaoQingNightTwo').timespinner({ required: false });
     resetFormAndClearValidate('ff');
 }
 

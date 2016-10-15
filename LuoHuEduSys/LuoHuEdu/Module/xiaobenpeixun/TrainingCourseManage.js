@@ -1204,7 +1204,9 @@ function KaoqingSearch() {
     iniDataGrid('kgDG', kqDataGridOptions);
 
 }
-
+function PrintBaoMing() {
+    window.open("/View/TrainingManage/TrainingCourseManage/KaoqingPrint.htm?courseId=" + cousrIdCD);
+}
 
 function qiandao(id) {
     ajaxCRUD({
@@ -1239,17 +1241,4 @@ function quxiao(id) {
 }
 
 
-////获取所有学校数据，用于绑定下拉框
-//function getAllCDSchool() {
-//    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetAllSchoolNew';
-//    ajaxCRUD({
-//        async: false,
-//        url: webserviceUrl,
-//        data: '{}',
-//        success: function (data) {
-//            data.unshift({ 'Id': '请选择', 'SchoolName': '请选择' });
-//            initCombobox("ddlCDSchooseSchool", "SchoolName", "SchoolName", data, true);
-//        }
-//    });
-//    $("#ddlCDSchooseSchool").combobox('setValue', '请选择');
-//}
+

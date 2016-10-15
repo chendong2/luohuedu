@@ -167,7 +167,7 @@ namespace Services.UserInfo
             pageSize = page * rows;
             var pageList = new Page<StudentExemptionBo>();
 
-            string strSql = string.Format(@"SELECT se.*,ex.ExemptionReason,st.UserName FROM tb_studentExemption se INNER JOIN tb_exemption ex ON  se.ExemptionId=ex.Id INNER JOIN  tb_student st ON se.StudentId=st.Id WHERE 1=1 ");
+            string strSql = string.Format(@"SELECT se.*,ex.ExemptionReason,st.UserName FROM tb_studentExemption se left JOIN tb_exemption ex ON  se.ExemptionId=ex.Id INNER JOIN  tb_student st ON se.StudentId=st.Id WHERE 1=1 ");
             if (studentExemptionBo != null)
             {
                 if (!string.IsNullOrEmpty(studentExemptionBo.UserName))

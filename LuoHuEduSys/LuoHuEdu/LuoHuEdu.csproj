@@ -1305,6 +1305,7 @@
     <Content Include="View\UserInfo\StudentTrain\StudentTrainList.htm" />
     <Content Include="View\UserInfo\StudentExemption\StudentExemptionForm.htm" />
     <Content Include="View\UserInfo\StudentExemption\StudentExemptionList.htm" />
+    <Content Include="View\xiaobenyanxiu\XiaoBenKaoqingPrint.htm" />
     <Content Include="View\xiaobenyanxiu\XiaoBenChooseStudent.htm" />
     <Content Include="View\xiaobenyanxiu\XiaoBenCourseAudit.htm" />
     <Content Include="View\xiaobenyanxiu\XiaoBenKaoqingList.htm" />
