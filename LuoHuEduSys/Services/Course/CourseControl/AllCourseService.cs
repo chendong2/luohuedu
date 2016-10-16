@@ -181,7 +181,7 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
                                             INNER JOIN tb_subject AS s ON c.Subject=s.Id
                                             INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
                                             INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName` 
-                                            WHERE  c.Locked=2  AND  c.TimeEnd >DATE_SUB( DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL 0 DAY) AND CourseState=2 AND EXISTS( SELECT * FROM tb_student st LEFT JOIN tb_subject su ON st.`FirstTeaching`=su.`Id`  
+                                            WHERE  c.Locked=2  AND  c.TimeEnd >DATE_SUB( DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL 1 DAY) AND CourseState=2 AND EXISTS( SELECT * FROM tb_student st LEFT JOIN tb_subject su ON st.`FirstTeaching`=su.`Id`  
 LEFT JOIN tb_subject su1 ON st.`SecondTeaching`=su1.`Id`
 WHERE POSITION(st.StudyPeriod IN c.TeachingObject)>0 AND POSITION(st.Staffing IN c.ObjectEstablish)>0  
 AND (POSITION(su.`SubjectName` IN c.ObjectSubject)>0 OR POSITION(su1.`SubjectName` IN c.ObjectSubject)>0) 

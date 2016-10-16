@@ -118,6 +118,9 @@ using(easyloader.defaultReferenceModules, function () {
 function getTheYearSerch() {
     var currentYear = new Date().getFullYear();
     $("#TheYearSerch").empty();
+    var aa = currentYear + "-" + (currentYear + 1);
+    var option1 = "<option  value='" + aa + "'>" + aa + "</option>";
+    $("#TheYearSerch").append(option1);
     for (var i = 1; i <= 15; i++) {
         var data = currentYear - i + "-" + (currentYear - i + 1);
         var option = "<option  value='" + data + "'>" + data + "</option>";
@@ -270,11 +273,15 @@ function fillForm(itemid) {
 function getTheYear() {
     var currentYear = new Date().getFullYear();
     $("#TheYear").empty();
+    var aa = currentYear + "-" + (currentYear + 1);
+    var option1 = "<option  value='" + aa + "'>" + aa + "</option>";
+    $("#TheYear").append(option1);
     for (var i = 1; i <= 15; i++) {
         var data = currentYear - i + "-" + (currentYear - i + 1);
         var option = "<option  value='" + data + "'>" + data + "</option>";
         $("#TheYear").append(option);
     }
+   
 }
 
 //获取所有学校数据，用于绑定下拉框
@@ -353,6 +360,9 @@ function saveData() {
 
     var form2JsonObj = form2Json("ff");
     form2JsonObj.SchoolId = $.cookie('SchoolId');
+    form2JsonObj.TeachingObject = '1,2,3,4,5';
+    form2JsonObj.ObjectEstablish = '1,2';
+    form2JsonObj.ObjectSubject = '语文,数学,英语,体育与健康,音乐,美术,历史,生物学,化学,物理,科学,地理,思想品德,品德与社会,品德与生活,历史与社会,艺术,信息技术,政治';
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
     ajaxCRUD({

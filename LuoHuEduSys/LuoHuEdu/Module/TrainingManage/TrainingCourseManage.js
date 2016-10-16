@@ -158,6 +158,9 @@ function getTrainType(ddlRoute, isSimpleSearch) {
 function getTheYearSerch() {
     var currentYear = new Date().getFullYear();
     $("#TheYearSerch").empty();
+    var aa = currentYear + "-" + (currentYear + 1);
+    var option1 = "<option  value='" + aa + "'>" + aa + "</option>";
+    $("#TheYearSerch").append(option1);
     for (var i = 1; i <= 15; i++) {
         var data = currentYear - i + "-" + (currentYear - i + 1);
         var option = "<option  value='" + data + "'>" + data + "</option>";
@@ -319,6 +322,9 @@ function fillForm(itemid) {
 function getTheYear() {
     var currentYear = new Date().getFullYear();
     $("#TheYear").empty();
+    var aa = currentYear + "-" + (currentYear + 1);
+    var option1 = "<option  value='" + aa + "'>" + aa + "</option>";
+    $("#TheYear").append(option1);
     for (var i = 1; i <= 15; i++) {
         var data = currentYear - i + "-" + (currentYear - i + 1);
         var option = "<option  value='" + data + "'>" + data + "</option>";

@@ -130,7 +130,7 @@ namespace LuoHuEdu.WebServices.Course
 
             var school=new SchoolService();
 
-            courseBo.Requirement =0;
+            courseBo.Requirement =1;
             courseBo.CourseState = 2;
             courseBo.AduitTime = DateTime.Now;
             courseBo.Locked = 2;//新增默认未锁定
@@ -328,6 +328,27 @@ namespace LuoHuEdu.WebServices.Course
             }
         }
 
+        //老系统数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetCourseStudentSingle(int page, int rows, string order, string sort,
+            CourseStudentTempBo courseStudentTempBo, string userId)
+        {
+            var aPService = new CourseStudentTempOldService();
+            var list = aPService.GetCourseStudentSingle(page, rows, order, sort, courseStudentTempBo, userId);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
 
 
         //根据ID获取考勤数据

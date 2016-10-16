@@ -1229,6 +1229,7 @@
     <Content Include="Module\Course\Course.js" />
     <Content Include="Module\Course\CourseStudentTemp.js" />
     <Content Include="Module\Course\CourseStudentTempOld.js" />
+    <Content Include="Module\Course\CourseStudentTempOldSingle.js" />
     <Content Include="Module\Customer\CallNum.js" />
     <Content Include="Module\Customer\CustomerInfo.js" />
     <Content Include="Module\Parameter\MaintrainSet.js" />
@@ -1315,6 +1316,9 @@
     <Content Include="View\xiaobenyanxiu\XiaoBenTrainingCourseForm.htm" />
     <Content Include="View\xiaobenyanxiu\XiaoBenTrainingCourseList.htm" />
     <Content Include="View\xiaobenyanxiu\XiaoBenTrainingCourseView.htm" />
+    <Content Include="View\OldCourseInfoSingle\CourseForm.htm" />
+    <Content Include="View\OldCourseInfoSingle\CourseList.htm" />
+    <Content Include="View\OldCourseInfoSingle\TrainingCourseForm.htm" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

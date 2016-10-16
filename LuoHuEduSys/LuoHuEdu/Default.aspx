@@ -114,20 +114,23 @@
         var menus_5 = [];
 
         var perStr = decodeURIComponent($.cookie('perList'));
-        if (perStr.indexOf("课程浏览") > -1 || perStr.indexOf("课程报名") > -1) {
+        //if (perStr.indexOf("课程浏览") > -1 || perStr.indexOf("课程报名") > -1) {
             menus_1.push({ "menuid": "11", "menuname": "培训课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Course/CourseList.htm") %>' });
-        }
+        //}
 
-        if (perStr.indexOf("我的培训记录") > -1) {
+        //if (perStr.indexOf("我的培训记录") > -1) {
             menus_1.push({ "menuid": "12", "menuname": "我的培训记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
-        }
-        if (perStr.indexOf("历史课程信息") > -1) {
+        //}
+       // if (perStr.indexOf("历史课程信息") > -1) {
             menus_1.push({ "menuid": "13", "menuname": "历史课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
-        }
-        if (perStr.indexOf("我是授课教师") > -1) {
+       // }
+       
+       // if (perStr.indexOf("我是授课教师") > -1) {
             menus_1.push({ "menuid": "14", "menuname": "我是授课教师", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyTeacher/MyTeacherList.htm") %>' });
-        }
-
+       // }
+        //if (perStr.indexOf("历史课程信息") > -1) {
+            menus_1.push({ "menuid": "15", "menuname": "历史课程信息(老)", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/OldCourseInfoSingle/CourseList.htm") %>' });
+       // }
         if (perStr.indexOf("培训浏览") > -1 || perStr.indexOf("培训审核") > -1 || perStr.indexOf("培训锁定") > -1) {
             menus_2.push({ "menuid": "21", "menuname": "培训管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TrainingCourseManage/TrainingCourseList.htm") %>' });
         }
