@@ -9,64 +9,104 @@
 </head>
 <body id="layout" class="easyui-layout" scroll="no" style="vertical-align: top;">
     <div region="center" border="false">
-        <div style="width: 960px; margin: 50px 0 0 50px;font-size: 16px;">
+        <div style="width: 960px; margin: 50px 0 0 50px; font-size: 16px;">
             <form id="ff" method="post">
-            <div style="font-size: 18px;font-weight: bolder;">
+            <div style="font-size: 18px; font-weight: bolder;">
                 年度：
                 <select id="sTheYear" name="TheYear" onchange="fillData();">
                 </select>
             </div>
-                <table class="custom_forms_popup1" style="border:1px solid black">
+            <table class="custom_forms_popup1" style="border: 1px solid black">
+                <tr>
+                    <td colspan="8" style="text-align: center; font-weight: bolder;">
+                        提示学员每人本年度应达到的课时标准数明细表
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bolder; background-color: #f6f6f6;">
+                        年度
+                    </td>
+                    <td style="font-weight: bolder; background-color: #f6f6f6;">
+                        集中培训
+                    </td>
+                    <td style="font-weight: bolder; background-color: #f6f6f6;">
+                        校本培训
+                    </td>
+                    <td style="font-weight: bolder; background-color: #f6f6f6;">
+                        专项培训
+                    </td>
+                    <td style="font-weight: bolder; background-color: #f6f6f6;">
+                        学历培训
+                    </td>
+                    <td style="font-weight: bolder; background-color: #f6f6f6;">
+                        免修管理
+                    </td>
+                    <td style="font-weight: bolder; background-color: #f6f6f6;">
+                        校本研修
+                    </td>
+                    <td style="font-weight: bolder; background-color: #f6f6f6;">
+                        合计
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        1516
+                    </td>
+                    <td>
+                        30
+                    </td>
+                    <td>
+                        24
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <table id="tb2" class="custom_forms_popup1" style="border: 1px solid black">
                     <tr>
-                        <td colspan="8" style="text-align: center;font-weight: bolder;">
-                            提示学员每人本年度应达到的课时标准数明细表
+                        <td style="width: 8%; font-weight: bolder; background-color: #f6f6f6;">
+                            教师姓名
+                        </td>
+                        <td style="font-weight: bolder; background-color: #f6f6f6;">
+                            性别
+                        </td>
+                        <td style="width: 8%; font-weight: bolder; background-color: #f6f6f6;">
+                            专业
+                        </td>
+                        <td style="width: 10%; font-weight: bolder; background-color: #f6f6f6;">
+                            年度
+                        </td>
+                        <td id="kemu" style="font-weight: bolder; background-color: #f6f6f6;">
+                            培训科目数
                         </td>
                     </tr>
                     <tr>
-                        <td style="font-weight: bolder;background-color:#f6f6f6;">年度</td>
-                        <td style="font-weight: bolder;background-color:#f6f6f6;">集中培训</td>
-                        <td style="font-weight: bolder;background-color:#f6f6f6;">校本培训</td>
-                        <td style="font-weight: bolder;background-color:#f6f6f6;">专项培训</td>
-                        <td style="font-weight: bolder;background-color:#f6f6f6;">学历培训</td>
-                        <td style="font-weight: bolder;background-color:#f6f6f6;">免修管理</td>
-                        <td style="font-weight: bolder;background-color:#f6f6f6;">校本研修</td>
-                        <td style="font-weight: bolder;background-color:#f6f6f6;">合计</td>
-                    </tr>
-                    <tr>
-                        <td>1516</td>
-                        <td>30</td>
-                        <td>24</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td id="tdName" style="font-weight: bolder;">
+                        </td>
+                        <td id="tdSex" style="font-weight: bolder;">
+                        </td>
+                        <td id="tdProfession" style="font-weight: bolder;">
+                        </td>
+                        <td id="tdTheYear" style="font-weight: bolder;">
+                        </td>
+                        <td id="tdCount" style="font-weight: bolder;">
+                        </td>
                     </tr>
                 </table>
-                <div>
-                <table id="tb2" class="custom_forms_popup1"  style="border:1px solid black">
-                    <tr>
-                        <td style="width:8%;font-weight: bolder;background-color:#f6f6f6;">教师姓名</td>
-                        <td style="font-weight: bolder;background-color:#f6f6f6;">性别</td>
-                        <td style="width:8%;font-weight: bolder;background-color:#f6f6f6;">专业</td>
-                        <td style="width:10%;font-weight: bolder;background-color:#f6f6f6;">年度</td>
-                        <td id="kemu" style="font-weight: bolder;background-color:#f6f6f6;">培训科目数</td>
-                    </tr>
-                    <tr>
-                        <td id="tdName"  style="font-weight: bolder;"></td>
-                        <td id="tdSex"  style="font-weight: bolder;"></td>
-                        <td id="tdProfession" style="font-weight: bolder;"></td>
-                        <td id="tdTheYear" style="font-weight: bolder;"></td>
-                        <td id="tdCount"  style="font-weight: bolder;"></td>
-
-                    </tr>
-                </table>
-                 </div>
+            </div>
             <input id="HidId" type="hidden" name="Id" />
             </form>
         </div>
     </div>
-    
     <script type="text/javascript" src="/Common/Scripts/ifram/jquery.min.js"></script>
     <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/easyloader.js"></script>

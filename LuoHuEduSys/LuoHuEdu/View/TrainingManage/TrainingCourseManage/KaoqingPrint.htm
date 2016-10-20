@@ -64,7 +64,7 @@
            <td width="7%" height="20" align="center">校序号</td>
            <td width="10%" height="20" align="center">姓名</td>
            <td width="24%" align="center">学校</td>
-           <td width="15%" align="center">职务</td>
+           <td width="15%" align="center">任教学科</td>
            <td width="15%" align="center">课时</td>
            <td width="22%" align="center">签名</td>
        </tr>
@@ -93,6 +93,7 @@
                 url: '/WebServices/Course/AllCourseServices.asmx/GetPrintCourseStudentData',
                 data: "{courseId:'" + courseId + "'}",
                 success: function (data) {
+                    var tr;
                     if (data.length > 0) {
                         var tmep = "";
                         var j = 1;
@@ -100,15 +101,15 @@
                             if (data[i].SchoolName != tmep) {
                                 j = 1;
                             }
-                            var tr = "<tr><td height=20 align=center>" + (i + 1) + "</td><td align=center>" + j + "</td><td align=center>" + data[i].Name
-                                    + "</td><td align=center>" + data[i].SchoolName + "</td><td align=center>" + data[i].Office
-                                        + "</td><td align=center>" + data[i].Period + "</td><td align=left></td></tr>";
+                            tr = "<tr><td height=20 align=center>" + (i + 1) + "</td><td align=center>" + j + "</td><td align=center>" + data[i].Name
+                                + "</td><td align=center>" + data[i].SchoolName + "</td><td align=center>" + data[i].SubjectName
+                                + "</td><td align=center>" + "" + "</td><td align=left></td></tr>";
                             $("#tb").append(tr);
                             j++;
                         }
 
                     } else {
-                        var tr = "<tr><td  height='20' colspan='7' align='center'>暂无数据</td></tr>";
+                        tr = "<tr><td  height='20' colspan='7' align='center'>暂无数据</td></tr>";
                         $("#tb").append(tr);
                     }
                 }

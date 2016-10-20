@@ -462,7 +462,8 @@ function Search() {
                     TheYear: $("#TheYearSerch").val(),
                     CourseName: $("#txtCourseName").val(),
                     OrganizationalName: $("#ddlSchoolSerch").combobox('getValue'),
-                    TrainType: $("#ddlTraintypeSerch").combobox('getValue')
+                    TrainType: $("#ddlTraintypeSerch").combobox('getValue'),
+                    Locked: $("#ddlLockedSerch").combobox('getValue')
                 }
             };
             var paramStr = JSON.stringify(studentData);
@@ -1015,12 +1016,6 @@ function chooseStudentSearch() {
             },
             { field: 'Profession', title: '专业', width: 80, sortable: false },
             { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
-            { field: 'Birthday', title: '生日', width: 100, sortable: false,
-                formatter: function (value) {
-                    value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-                    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-                }
-            },
             { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {

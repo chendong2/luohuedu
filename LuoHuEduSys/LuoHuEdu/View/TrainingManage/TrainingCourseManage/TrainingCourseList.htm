@@ -10,35 +10,40 @@
 </head>
 <body id="layout" class="easyui-layout" scroll="no" style="vertical-align: top;">
     <div region="center" border="false">
-        <table id="dg"></table>
+        <table id="dg">
+        </table>
     </div>
     <div id="toolbar" style="display: none;">
-            <span style="float: left">
-                <a href="#" class="easyui-linkbutton " iconcls="icon-add" plain="true" onclick="addData();">新增</a>
-                <a href="#" class="easyui-linkbutton " iconcls="icon-edit" plain="true" onclick="editData();">编辑</a> 
-                <a href="#" class="easyui-linkbutton " iconcls="icon-remove" plain="true" onclick="deleteDatas();">删除</a>  
-            </span>
-        <div  class="search_middle">
+        <span style="float: left"><a href="#" class="easyui-linkbutton " iconcls="icon-add"
+            plain="true" onclick="addData();">新增</a> <a href="#" class="easyui-linkbutton " iconcls="icon-edit"
+                plain="true" onclick="editData();">编辑</a> <a href="#" class="easyui-linkbutton "
+                    iconcls="icon-remove" plain="true" onclick="deleteDatas();">删除</a> </span>
+        <div class="search_middle">
             <span class="span_text">年度:</span>
-            <select style="width: 145px;"  name="TheYearSerch" id="TheYearSerch" >
+            <select style="width: 145px;" name="TheYearSerch" id="TheYearSerch">
             </select>
             <span class="span_text">学校:</span>
-            <select id="ddlSchoolSerch" name="ddlSchoolSerch"  class="easyui-combobox" style="width: 140px;">
+            <select id="ddlSchoolSerch" name="ddlSchoolSerch" class="easyui-combobox" style="width: 140px;">
             </select>
-             <span class="span_text">培训类型:</span>
-            <select id="ddlTraintypeSerch" name="ddlTraintypeSerch"  class="easyui-combobox" style="width: 140px;">
+            <span class="span_text">培训类型:</span>
+            <select id="ddlTraintypeSerch" name="ddlTraintypeSerch" class="easyui-combobox" style="width: 140px;">
+            </select>
+            <span class="span_text">是否锁定:</span>
+            <select style="width: 145px;" class="easyui-combobox" name="ddlLockedSerch" id="ddlLockedSerch">
+                <option value="0">所有</option>
+                <option value="1">锁定</option>
+                <option value="2">未锁定</option>
             </select>
             <span class="span_text">课程名称:</span>
             <input id="txtCourseName" type="text" maxlength="25" class="txtbox_margin" />
-            <a class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="Search();" style="cursor: pointer;text-decoration: none">
-                搜索
-            </a>
+            <a class="easyui-linkbutton" iconcls="icon-search" plain="true" onclick="Search();"
+                style="cursor: pointer; text-decoration: none">搜索 </a>
         </div>
     </div>
     <div id="formTemplate" style="display: none">
     </div>
     <div id='divCache'>
-    </div>    
+    </div>
     <div id="registerSetTemplate" style="display: none">
     </div>
     <div id="courseAuditFormTemplate" style="display: none">
@@ -49,8 +54,7 @@
     </div>
     <div id="kqTemplate" style="display: none">
     </div>
-
-     <div id="lockedTemplate" style="display: none">
+    <div id="lockedTemplate" style="display: none">
     </div>
     <script type="text/javascript" src="/Common/Scripts/ifram/jquery.min.js"></script>
     <script type="text/javascript" src="/Common/Scripts/ifram/jquery-core-easyui/jquery.easyui.min.js"></script>

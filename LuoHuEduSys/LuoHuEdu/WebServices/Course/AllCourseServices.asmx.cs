@@ -137,7 +137,6 @@ namespace LuoHuEdu.WebServices.Course
         [WebMethod(EnableSession = true)]
         public List<CourseStudentDto> GetPrintCourseStudentData(string courseId)
         {
-
             var courseService = new AllCourseService();
             return courseService.GetPrintCourseStudentData(courseId);
         }

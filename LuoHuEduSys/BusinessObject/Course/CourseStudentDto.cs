@@ -80,5 +80,9 @@ namespace BusinessObject.Course
         /// </summary>
         public string SignNDate { get; set; }
 
+        public string FirstTeaching { get; set; }
+
+        public string SubjectName { get; set; }
+
     }
 }

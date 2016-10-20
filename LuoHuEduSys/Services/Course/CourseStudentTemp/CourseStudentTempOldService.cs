@@ -183,7 +183,7 @@ namespace Services.Course.CourseStudentTemp
 
                 }
             }
-            string orderby = " ORDER BY CourseName,StartDate " + order;
+            string orderby = " ORDER BY YearNo " + order;
             //加where条件
             sql += orderby;
             try

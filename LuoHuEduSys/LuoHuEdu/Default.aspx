@@ -3,8 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-   <%-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />--%>
-   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <%-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />--%>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
     <title>罗湖中小学继续教育系统</title>
     <link href="<%=Page.ResolveUrl("~/App_Themes/Global/global.css") %>" rel="stylesheet"
         type="text/css" />
@@ -18,6 +19,34 @@
         type="text/css" />
     <link href="<%=Page.ResolveUrl("~/App_Themes/Menu/BigMenu.css") %>" rel="stylesheet"
         type="text/css" />
+    <%--<link rel="stylesheet" type="text/css" href="/App_Themes/Global/Reset.css" />--%>
+    <style>
+            .custom_forms_popup2
+        {
+	        border-collapse: collapse;
+	        clear: both;
+	        font-size:14px;
+	        font-weight: normal;
+	        margin: 20px auto;
+	        text-align: center;
+	        vertical-align: middle;
+	        width:600px;
+	        word-break: break-all; 
+	        color:#333333; 
+	        border:none; 
+	        border-top:1px #dfdfdf dotted;
+        }
+
+        .custom_forms_popup2 td
+        {
+            border: 1px solid black;	  
+            vertical-align:middle;
+            text-align:center;
+            padding:5px;
+            height:25px;
+        }
+         
+    </style>
 </head>
 <body class="easyui-layout" scroll="no" style="vertical-align: top;">
     <noscript>
@@ -60,8 +89,46 @@
         <div id="tabs" class="easyui-tabs " fit="true" border="false">
             <div title="欢迎页" style="padding: 0px; overflow: hidden; color: red;" id="defaultTab"
                 closable="false">
-                <div style="width: 100%; height: 680px;
-                    overflow: hidden" id="startShow">
+                <div style="width: 100%; height: 680px; overflow: hidden; text-align: center;" id="startShow">
+                    <table width="600px;" class="custom_forms_popup2" style="border: 1px solid black">
+                        <tr>
+                            <td colspan="8" style="text-align: center; font-weight: bolder;">
+                                提示学员请根据自己的角色下载对应使用手册
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bolder; background-color: #f6f6f6;">
+                                序号
+                            </td>
+                            <td style="font-weight: bolder; background-color: #f6f6f6;">
+                                手册名称
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                30
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               2
+                            </td>
+                            <td>
+                                30
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                              3
+                            </td>
+                            <td>
+                                30
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -115,22 +182,22 @@
 
         var perStr = decodeURIComponent($.cookie('perList'));
         //if (perStr.indexOf("课程浏览") > -1 || perStr.indexOf("课程报名") > -1) {
-            menus_1.push({ "menuid": "11", "menuname": "培训课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Course/CourseList.htm") %>' });
-        //}
+        menus_1.push({ "menuid": "11", "menuname": "培训课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Course/CourseList.htm") %>' });
+        // }
 
-        //if (perStr.indexOf("我的培训记录") > -1) {
-            menus_1.push({ "menuid": "12", "menuname": "我的培训记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
-        //}
-       // if (perStr.indexOf("历史课程信息") > -1) {
-            menus_1.push({ "menuid": "13", "menuname": "历史课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
-       // }
-       
-       // if (perStr.indexOf("我是授课教师") > -1) {
-            menus_1.push({ "menuid": "14", "menuname": "我是授课教师", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyTeacher/MyTeacherList.htm") %>' });
-       // }
+        // if (perStr.indexOf("我的培训记录") > -1) {
+        menus_1.push({ "menuid": "12", "menuname": "我的培训记录", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
+        // }
         //if (perStr.indexOf("历史课程信息") > -1) {
-            menus_1.push({ "menuid": "15", "menuname": "历史课程信息(老)", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/OldCourseInfoSingle/CourseList.htm") %>' });
-       // }
+        menus_1.push({ "menuid": "13", "menuname": "历史课程信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyCourse/MyCourseList.htm") %>' });
+        // }
+
+        //if (perStr.indexOf("我是授课教师") > -1) {
+        menus_1.push({ "menuid": "14", "menuname": "我是授课教师", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/MyTeacher/MyTeacherList.htm") %>' });
+        // }
+        //if (perStr.indexOf("历史课程信息") > -1) {
+        menus_1.push({ "menuid": "15", "menuname": "历史课程信息(老)", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/OldCourseInfoSingle/CourseList.htm") %>' });
+        // }
         if (perStr.indexOf("培训浏览") > -1 || perStr.indexOf("培训审核") > -1 || perStr.indexOf("培训锁定") > -1) {
             menus_2.push({ "menuid": "21", "menuname": "培训管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/TrainingCourseManage/TrainingCourseList.htm") %>' });
         }
@@ -152,22 +219,22 @@
         if (perStr.indexOf("免修审核") > -1) {
             menus_2.push({ "menuid": "25", "menuname": "免修审核", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/TrainingManage/ExemptionManage/ExemptionManageList.htm") %>' });
         }
-//        if (perStr.indexOf("学员管理") > -1) {
-//            menus_2.push({ "menuid": "26", "menuname": "学员管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/Student/StudentCourseList.htm") %>' });
-//        }
+        //        if (perStr.indexOf("学员管理") > -1) {
+        //            menus_2.push({ "menuid": "26", "menuname": "学员管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/Student/StudentCourseList.htm") %>' });
+        //        }
         if (perStr.indexOf("学员信息管理") > -1) {
             menus_2.push({ "menuid": "27", "menuname": "学员信息管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/Student/StudentList.htm") %>' });
         }
-       if (perStr.indexOf("权限管理") > -1) {
+        if (perStr.indexOf("权限管理") > -1) {
             menus_2.push({ "menuid": "28", "menuname": "权限管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/UserPermissions/PermissionsList.htm") %>' });
-       }
-
-//        if (perStr.indexOf("校本研修登记") > -1) {
-//            menus_3.push({ "menuid": "31", "menuname": "校本研修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentTrain/StudentTrainList.htm") %>' });
-//        }
-        if (perStr.indexOf("免修登记") > -1) {
-            menus_3.push({ "menuid": "32", "menuname": "免修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentExemption/StudentExemptionList.htm") %>' });
         }
+
+        //        if (perStr.indexOf("校本研修登记") > -1) {
+        //            menus_3.push({ "menuid": "31", "menuname": "校本研修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentTrain/StudentTrainList.htm") %>' });
+        //        }
+        //        if (perStr.indexOf("免修登记") > -1) {
+        //            menus_3.push({ "menuid": "32", "menuname": "免修登记", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/StudentExemption/StudentExemptionList.htm") %>' });
+        //        }
         if (perStr.indexOf("培训详细列表") > -1) {
             menus_3.push({ "menuid": "33", "menuname": "培训详细列表", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/UserInfo/AllCourse/CourseInfo.htm") %>' });
         }
@@ -182,17 +249,17 @@
             menus_4.push({ "menuid": "44", "menuname": "免修设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Parameter/Exemption/ExemptionList.htm") %>' });
         } if (perStr.indexOf("教办设置") > -1) {
             menus_4.push({ "menuid": "45", "menuname": "教办设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Parameter/EducationOffice/EducationOfficeList.htm") %>' });
-        } if (perStr.indexOf("单位设置") > -1) {    
+        } if (perStr.indexOf("单位设置") > -1) {
             menus_4.push({ "menuid": "46", "menuname": "单位设置", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Parameter/School/SchoolList.htm") %>' });
         }
-            menus_3.push({ "menuid": "34", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/UserInfo.htm") %>' });
+        menus_3.push({ "menuid": "34", "menuname": "个人信息", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/System/UserInfo.htm") %>' });
 
-            if (perStr.indexOf("校本培训") > -1) {
-                menus_5.push({ "menuid": "51", "menuname": "校本培训", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/xiaobenyanxiu/XiaoBenTrainingCourseList.htm") %>' });
-            }
-            
-        
-        
+        if (perStr.indexOf("校本培训") > -1) {
+            menus_5.push({ "menuid": "51", "menuname": "校本培训", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/xiaobenyanxiu/XiaoBenTrainingCourseList.htm") %>' });
+        }
+
+
+
 
         var _menus = { "menus": [
                         ]
@@ -200,16 +267,16 @@
         if (menus_1.length > 0) {
             _menus.menus.push({ "menuid": "1", "icon": "icon-sys", "menuname": "培训信息", "menus": menus_1 });
         }
-        if (menus_2.length>0) {
+        if (menus_2.length > 0) {
             _menus.menus.push({ "menuid": "2", "icon": "icon-sys", "menuname": "培训管理", "menus": menus_2 });
         }
-        if (menus_3.length>0) {
+        if (menus_3.length > 0) {
             _menus.menus.push({ "menuid": "3", "icon": "icon-sys", "menuname": "用户信息", "menus": menus_3 });
         }
-        if (menus_4.length>0) {
+        if (menus_4.length > 0) {
             _menus.menus.push({ "menuid": "4", "icon": "icon-sys", "menuname": "参数管理", "menus": menus_4 });
         }
-        if (menus_5.length>0) {
+        if (menus_5.length > 0) {
             _menus.menus.push({ "menuid": "5", "icon": "icon-sys", "menuname": "校本管理", "menus": menus_5 });
         }    
     </script>

@@ -77,6 +77,11 @@ namespace Services.Course.CourseControl
                 {
                     strSql += " and c.TrainType=@TrainType ";
                 }
+                //课程代码查询
+                if ( courseBo.Locked !=0)
+                {
+                    strSql += " and c.Locked=@Locked ";
+                }
             }
 
             string adminSchoolId = string.Empty;
@@ -111,7 +116,8 @@ namespace Services.Course.CourseControl
                                                 TheYear = courseBo.TheYear,
                                                 TeacherId=courseBo.TeacherId,
                                                 OrganizationalName=courseBo.OrganizationalName,
-                                                TrainType = courseBo.TrainType
+                                                TrainType = courseBo.TrainType,
+                                                Locked=courseBo.Locked
 
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
@@ -125,6 +131,7 @@ namespace Services.Course.CourseControl
                                                     TeacherId=courseBo.TeacherId,
                                                      OrganizationalName=courseBo.OrganizationalName,
                                                      TrainType = courseBo.TrainType,
+                                                      Locked=courseBo.Locked,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();
