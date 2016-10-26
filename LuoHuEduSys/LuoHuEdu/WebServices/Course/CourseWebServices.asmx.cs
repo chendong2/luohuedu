@@ -134,6 +134,10 @@ namespace LuoHuEdu.WebServices.Course
             courseBo.CourseState = 2;
             courseBo.AduitTime = DateTime.Now;
             courseBo.Locked = 2;//新增默认未锁定
+            courseBo.TeachingObject="1,2,3,4,5";
+            courseBo.ObjectEstablish = "1,2";
+            courseBo.ObjectSubject ="语文,数学,英语,体育与健康,音乐,美术,历史,生物学,化学,物理,科学,地理,思想品德,品德与社会,品德与生活,历史与社会,艺术,信息技术,政治";
+            courseBo.SchoolId = HttpContext.Current.Session["SchoolId"].ToString();
             var schoolbo=school.GetSchoolById(courseBo.SchoolId);
             //给权限默认赋值，表示只有该学校可以报名
             if (schoolbo != null)

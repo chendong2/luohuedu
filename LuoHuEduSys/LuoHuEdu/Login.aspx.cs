@@ -62,6 +62,7 @@ namespace HuaTongCallCenter
 
                           Session.Add("UserId", stBo.Id);
                           Session.Add("UserName", stBo.UserName);
+                          Session.Add("SchoolId",stBo.SchoolId);
                           var useridC = new HttpCookie("UserId") { Value = stBo.Id.ToString(CultureInfo.InvariantCulture), Path = "/" };
                           var userNameC = new HttpCookie("UserName") { Value = stBo.UserName, Path = "/" };
                           Response.Cookies.Add(useridC);

@@ -1438,6 +1438,8 @@
     <None Include="Common\Scripts\ifram\jquery-core-easyui\demo\treegrid\treegrid_data3.json" />
     <None Include="Common\Scripts\ifram\jquery-core-easyui\demo\tree\tree_data1.json" />
     <None Include="Common\Scripts\ifram\jquery-core-easyui\demo\tree\tree_data2.json" />
+    <None Include="Common\UploadFiles\File\罗湖中小学继续教育系统使用手册 （学校管理员）.doc" />
+    <None Include="Common\UploadFiles\File\罗湖中小学继续教育系统使用手册%28普通教师%29.doc" />
     <None Include="Export\Common\Template\AgentTicketLineStatisticList.xls" />
     <None Include="Export\Common\Template\CarBanciStatisticsList.xls" />
     <None Include="Export\Common\Template\CarrentalOrderList.xls" />
@@ -1531,7 +1533,6 @@
     <Folder Include="App_Themes\Menu\SmallImages\" />
     <Folder Include="Common\Components\" />
     <Folder Include="Common\Libs\NPOI 1.2.5\.net 4.0\" />
-    <Folder Include="Common\UploadFiles\File\" />
     <Folder Include="Common\UploadFiles\Images\" />
     <Folder Include="Export\DataSet\" />
     <Folder Include="Export\WebService\" />
