@@ -131,7 +131,7 @@ namespace LuoHuEdu.WebServices.Course
             var school=new SchoolService();
 
             courseBo.Requirement =1;
-            courseBo.CourseState = 2;
+            courseBo.CourseState = 1;
             courseBo.AduitTime = DateTime.Now;
             courseBo.Locked = 2;//新增默认未锁定
             courseBo.TeachingObject="1,2,3,4,5";

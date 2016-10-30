@@ -239,7 +239,7 @@ AND st.`Id`=@StudentId ) AND c.Requirement=1 ");
         public List<CourseStudentDto> GetPrintCourseStudentData(string courseId)
         {
             List<CourseStudentDto> list;
-            string strSql = string.Format(@"SELECT NAME,sch.SchoolName,Office,s.SubjectName,cs.Period FROM tb_course co 
+            string strSql = string.Format(@"SELECT NAME,sch.SchoolName,Office,s.SubjectName,cs.Period,st.Telephone FROM tb_course co 
                                             INNER JOIN tb_coursestudent cs ON co.`Id`=cs.`CourseId` 
                                             INNER JOIN tb_student st ON st.`Id`=cs.`StudentId` 
                                             LEFT JOIN `tb_subject` s ON s.`Id`=st.`FirstTeaching`

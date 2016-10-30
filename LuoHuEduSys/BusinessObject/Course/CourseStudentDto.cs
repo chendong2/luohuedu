@@ -84,5 +84,7 @@ namespace BusinessObject.Course
 
         public string SubjectName { get; set; }
 
+        public string Telephone { get; set; }
+
     }
 }

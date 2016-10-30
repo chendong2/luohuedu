@@ -45,17 +45,21 @@ using(easyloader.defaultReferenceModules, function () {
                     return btn;
                 }
             },
-            { field: 'CourseName', title: '课程名称', width: 180 ,sortable: true},
-              { field: 'CourseState', title: '状态', width:100, formatter: function (value) {
+            { field: 'CourseName', title: '课程名称', width: 250, sortable: true },
+            { field: 'TrainType', title: '培训类型', width: 80 },
+            { field: 'TheYear', title: '年度', width: 150, sortable: true },
+            { field: 'SchoolName', title: '组织单位', width: 100 },
+
+            { field: 'CourseState', title: '状态', width:100, formatter: function (value) {
                   if (value == 1)
-                      return '<span style="red">待审核状态</span>';
+                      return '<span style="color:red">待审</span>';
                   else if (value == 2)
-                      return '<span>审核通过并开放</span>';
+                      return '<span  style="color:green">已审并开放</span>';
                   else if (value == 3)
-                      return '<span>审核不通过</span>';
+                      return '<span>不通过</span>';
                   return '<span style="red">待审核状态</span>';
               }
-          },
+            },
             { field: 'Locked', title: '状态', width: 100,sortable: true, formatter: function (value) {
                 if (value == 1)
                     return '<span style="red">已锁定</span>';
@@ -65,8 +69,6 @@ using(easyloader.defaultReferenceModules, function () {
                     return '<span>未设置</span>';
             }
             },
-            { field: 'TheYear', title: '年度', width: 150, sortable: true },
-            { field: 'TrainType', title: '培训类型', width: 140 },
             { field: 'SubjectName', title: '培训科目', width: 80 },
             { field: 'Phone', title: '联系电话', width: 80 },
             { field: 'Period', title: '学时', width: 80 },
@@ -80,7 +82,7 @@ using(easyloader.defaultReferenceModules, function () {
             },
             { field: 'Address', title: '培训地址', width: 130, sortable: true },
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
-            { field: 'SchoolName', title: '组织单位名称', width: 100 },
+           
             { field: 'TimeStartStr', title: '培训开始', width: 120 },
             { field: 'TimeEndStr', title: '培训结束', width: 120 },
             { field: 'CourseCode', title: '课程代码', width: 80 }
@@ -1189,7 +1191,7 @@ function kaoQing(id) {
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Office', title: '职务', width: 80, sortable: false },
             { field: 'Telephone', title: '手机', width: 80, sortable: false },
-            { field: 'Period', title: '学分', width: 80, sortable: false },
+            { field: 'Period', title: '学时', width: 80, sortable: false },
             { field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {

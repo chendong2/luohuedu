@@ -9,7 +9,7 @@
 </head>
 <body id="layout" class="easyui-layout" scroll="no" style="vertical-align: top;">
     <div region="center" border="false">
-        <div style="width: 860px; margin: 50px 0 0 50px">
+        <div style="width: 860px; height: 700px; margin: 50px 0 0 50px">
             <form id="ff" method="post">
             <table class="custom_forms_popup">
                 <tr>
@@ -225,18 +225,23 @@
                                maxlength="20" />
                     </td>
                 </tr>
-                <tr >
+<!--                <tr >
                     <td colspan="4" style="color: red;text-align: left;font-size: 14px;">
                         备注: <span>1、红色星号为必填项。</span><br/>
                               <span style="margin-left: 35px;">2、“任课学段”请如实填写，不同任课学段的老师会有不同的培训课程。</span><br/>
                               <span style="margin-left: 35px;">3、“第一任教学科”、“第二任教学科”请如实填写，不同教学科的老师会有不同的培训课程。</span>
                     </td>
-                </tr>
+                </tr>-->
             </table>
             <input id="HidId" type="hidden" name="Id" />
             </form>
-            <div style="text-align: right; margin-top: 50px">
+            <div style="text-align: right; margin-top: 10px">
                 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveData();">确定</a>
+            </div>
+            <div>
+                  备注: <span>1、红色星号为必填项。</span><br/>
+                              <span style="margin-left: 35px;">2、“任课学段”请如实填写，不同任课学段的老师会有不同的培训课程。</span><br/>
+                              <span style="margin-left: 35px;">3、“第一任教学科”、“第二任教学科”请如实填写，不同教学科的老师会有不同的培训课程。</span>
             </div>
         </div>
     </div>
