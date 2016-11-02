@@ -288,5 +288,34 @@ namespace Services.Course.CourseStudentTemp
                 return false;
             }
         }
+
+        /// <summary>
+        /// 同步数据前先根据身份证号删除要已经同步的数据
+        /// </summary>
+        /// <param name="IDNo">身份证号</param>
+        /// <returns></returns>
+        public bool CourseStudentTempOldRemove(string IDNo)
+        {
+            string strSql = @"DELETE FROM tb_coursestudenttempold WHERE IDNO=@IDNO ";
+            try
+            {
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+                    int reslut = connection.Execute(strSql, new {IDNO = IDNo});
+                    if(reslut>0)
+                    {return true;}
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+               return false;
+            }
+        }
+
+
     }
 }

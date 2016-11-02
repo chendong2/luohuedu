@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using BusinessObject.Course;
 using BusinessObject.WSBo;
+using Services.Admin.StudentControl;
 using Services.Course.AttendanceReport;
 using Services.Course.CourseControl;
 using Services.Course.CourseStudentTemp;
@@ -81,7 +83,7 @@ namespace LuoHuEdu.WebServices.Course
             string studentId)
         {
             var courseService = new CourseService();
-            var list = courseService.GetMyCourseList(page, rows, sort, order, courseBo,studentId);
+            var list = courseService.GetMyCourseList(page, rows, sort, order, courseBo, studentId);
             if (list != null)
             {
                 return new
@@ -128,22 +130,22 @@ namespace LuoHuEdu.WebServices.Course
         public bool AddCourseXiaoBen(CourseBo courseBo)
         {
 
-            var school=new SchoolService();
+            var school = new SchoolService();
 
-            courseBo.Requirement =1;
+            courseBo.Requirement = 1;
             courseBo.CourseState = 1;
             courseBo.AduitTime = DateTime.Now;
             courseBo.Locked = 2;//新增默认未锁定
-            courseBo.TeachingObject="1,2,3,4,5";
+            courseBo.TeachingObject = "1,2,3,4,5";
             courseBo.ObjectEstablish = "1,2";
-            courseBo.ObjectSubject ="语文,数学,英语,体育与健康,音乐,美术,历史,生物学,化学,物理,科学,地理,思想品德,品德与社会,品德与生活,历史与社会,艺术,信息技术,政治";
+            courseBo.ObjectSubject = "语文,数学,英语,体育与健康,音乐,美术,历史,生物学,化学,物理,科学,地理,思想品德,品德与社会,品德与生活,历史与社会,艺术,信息技术,政治";
             courseBo.SchoolId = HttpContext.Current.Session["SchoolId"].ToString();
-            var schoolbo=school.GetSchoolById(courseBo.SchoolId);
+            var schoolbo = school.GetSchoolById(courseBo.SchoolId);
             //给权限默认赋值，表示只有该学校可以报名
             if (schoolbo != null)
             {
 
-                if (schoolbo.SchoolType=="1")
+                if (schoolbo.SchoolType == "1")
                 {
                     courseBo.PlcSchool = courseBo.SchoolId;
                 }
@@ -211,7 +213,7 @@ namespace LuoHuEdu.WebServices.Course
         public object GetCourseStudentByCourseId(int page, int rows, string order, string sort, string courseId)
         {
             var courseStudent = new CourseStudentFace();
-            var list = courseStudent.GetCourseStudentByCourseIdNew(page,rows,order,sort, courseId);
+            var list = courseStudent.GetCourseStudentByCourseIdNew(page, rows, order, sort, courseId);
             if (list != null)
             {
                 return new
@@ -384,6 +386,89 @@ namespace LuoHuEdu.WebServices.Course
         {
             var course = new CourseService();
             return course.SetLockCourse(courseBo);
+        }
+
+
+        /// <summary>
+        /// 区管理员同步所有数据的方法
+        /// </summary>
+        /// <returns></returns>
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool TongBuOldData()
+        {
+
+            WebClient webClient = new WebClient();
+            webClient.Encoding = System.Text.Encoding.UTF8;
+            StudentService student = new StudentService();
+            CourseStudentTempOldService courseStudentTemp = new CourseStudentTempOldService();
+            var list = student.GetListIdNo();
+            try
+            {
+                if (list.Count > 0)
+                {
+                    foreach (var linshiBo in list)
+                    {
+                        string strurl =
+                        @"http://219.223.7.19:81/api/api-jsonIdno.php?usid=szsjky&echostr=8e3340e111ef9e7e44f741b105242fcfe236c23e&IDNO=";
+                        strurl = strurl + linshiBo.IDNo;
+                        string result = webClient.DownloadString(strurl);
+                        var mm = Newtonsoft.Json.JsonConvert.DeserializeObject<IList<CourseStudentTempOldBo>>(result);
+                        if (mm != null)
+                        {
+                            if (mm.Count > 0)
+                            {
+                                foreach (var courseStudentTempBo in mm)
+                                {
+                                    courseStudentTemp.CourseStudentTempOldRemove(courseStudentTempBo.IDNO);
+                                    courseStudentTemp.AddCourseStudentTempOld(courseStudentTempBo);
+                                }
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool SingleTongBuOldData(string IDNo)
+        {
+            try
+            {
+                WebClient webClient = new WebClient();
+                webClient.Encoding = System.Text.Encoding.UTF8;
+                StudentService student = new StudentService();
+                CourseStudentTempOldService courseStudentTemp = new CourseStudentTempOldService();
+                var list = student.GetListIdNo();
+                //同步个人数据
+                string strurl = @"http://219.223.7.19:81/api/api-jsonIdno.php?usid=szsjky&echostr=8e3340e111ef9e7e44f741b105242fcfe236c23e&IDNO=";
+                strurl = strurl + IDNo;
+                string result = webClient.DownloadString(strurl);
+                var mm = Newtonsoft.Json.JsonConvert.DeserializeObject<IList<CourseStudentTempOldBo>>(result);
+                if (mm != null)
+                {
+                    if (mm.Count > 0)
+                    {
+                        courseStudentTemp.CourseStudentTempOldRemove(IDNo);//同步数据前先删除数据
+                        foreach (var courseStudentTempBo in mm)
+                        {
+                            courseStudentTemp.AddCourseStudentTempOld(courseStudentTempBo);
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+           
         }
     }
 }

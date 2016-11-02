@@ -31,51 +31,7 @@ namespace HuaTongCallCenter
             var pService = new PermissionsService();
             string perList = pService.getUserPermissionsList(HttpContext.Current.Session["UserId"].ToString());
             Session.Add("perList", perList);
-            //注释掉的代码为同步抓取老系统考勤数据方法，不要删除
-            WebClient aa=new WebClient();
-            aa.Encoding = System.Text.Encoding.UTF8;
-            StudentService student =new StudentService();
-            CourseStudentTempOldService courseStudentTemp=new CourseStudentTempOldService();
-            //var list = student.GetListIdNo();
-            //if (list.Count > 0)
-            //{
-            //    foreach (var linshiBo in list)
-            //    {
-            //        string strurl =
-            //        @"http://219.223.7.19:81/api/api-jsonIdno.php?usid=szsjky&echostr=8e3340e111ef9e7e44f741b105242fcfe236c23e&IDNO=";
-            //        strurl=strurl+linshiBo.IDNo;
-            //        string result =aa.DownloadString(strurl);
-            //        var mm = Newtonsoft.Json.JsonConvert.DeserializeObject<IList<CourseStudentTempOldBo>>(result);
-            //        if (mm != null)
-            //        {
-            //            if (mm.Count > 0)
-            //            {
-            //                foreach (var courseStudentTempBo in mm)
-            //                {
-            //                    courseStudentTemp.AddCourseStudentTempOld(courseStudentTempBo);
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-
-            //同步个人数据
-            //string strurl =
-            //        @"http://219.223.7.19:81/api/api-jsonIdno.php?usid=szsjky&echostr=8e3340e111ef9e7e44f741b105242fcfe236c23e&IDNO=620105197701230058";
-            //        //strurl=strurl+linshiBo.IDNo;
-            //        string result =aa.DownloadString(strurl);
-            //        var mm = Newtonsoft.Json.JsonConvert.DeserializeObject<IList<CourseStudentTempOldBo>>(result);
-            //        if (mm != null)
-            //        {
-            //            if (mm.Count > 0)
-            //            {
-            //                foreach (var courseStudentTempBo in mm)
-            //                {
-            //                    courseStudentTemp.AddCourseStudentTempOld(courseStudentTempBo);
-            //                }
-            //            }
-            //        }
-
+  
             HttpCookie perListC = new HttpCookie("perList") { Value = HttpUtility.UrlEncode(perList, Encoding.GetEncoding("UTF-8")), Path = "/" };
             Response.Cookies.Add(perListC);
 
@@ -107,8 +63,8 @@ namespace HuaTongCallCenter
             Session.Contents.Remove("UserName");
             Session.Contents.Remove("perList");
          
-           Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=localhost:23007/Login.aspx");
-           // Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.186/Login.aspx");
+           //Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=localhost:23007/Login.aspx");
+           Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.186/Login.aspx");
         }
     }
 }

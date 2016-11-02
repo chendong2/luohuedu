@@ -11,12 +11,17 @@ using(easyloader.defaultReferenceModules, function () {
         title: '学员信息管理',
         columns: [[
             { field: 'Id', checkbox: true },
-            
+            { field: 'Manage', title: '操作', width: 80,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="TongBuCourse(\'' + rec.IDNo + '\')" href="javascript:void(0)">重新同步学时</a>';
+                    return btn;
+                }
+            },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
             { field: 'LoginId', title: 'LoginId', width: 80, sortable: false },
             { field: 'IDNo', title: '身份证', width: 180, sortable: false },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
-            { field: 'Sex', title: '性别', width: 60, sortable: false ,
+            { field: 'Sex', title: '性别', width: 60, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "男";
@@ -32,15 +37,15 @@ using(easyloader.defaultReferenceModules, function () {
                 formatter: function (value) {
                     if (value == "1") {
                         return "高中";
-                    } else if (value == "2") { 
+                    } else if (value == "2") {
                         return "中专";
-                    } else if (value == "3") { 
+                    } else if (value == "3") {
                         return "大专";
-                    } else if (value == "4") { 
+                    } else if (value == "4") {
                         return "本科";
-                    } else if (value == "5") { 
+                    } else if (value == "5") {
                         return "硕士";
-                    }else  if (value == "6"){ 
+                    } else if (value == "6") {
                         return "博士";
                     } else {
                         return "";
@@ -57,7 +62,7 @@ using(easyloader.defaultReferenceModules, function () {
                         return "初中";
                     } else if (value == "4") {
                         return "高中";
-                    }else {
+                    } else {
                         return "其他";
                     }
                 }
@@ -121,9 +126,11 @@ function loadPartialHtml() {
         panel('formTemplate', {
             href: '/View/Admin/Student/StudentForm.htm',
             onLoad: function () {
-//                setValidatebox('Name', {
-//                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
-//                });
+            }
+        });
+        panel('tongbuTemplate', {
+            href: '/View/Admin/Student/TongBuCourse.htm',
+            onLoad: function () {
             }
         });
     }
@@ -168,9 +175,9 @@ function fillForm(itemid) {
             $("#HidName").val(data.SubjetName);
             //JSON数据填充表单
             loadDataToForm('ff', data);
-//            var bir = $("#txtBirthday").val();
-//            bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-//            $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+            //            var bir = $("#txtBirthday").val();
+            //            bir.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
+            //            $("#txtBirthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
         }
     });
 }
@@ -276,6 +283,34 @@ function deleteDatasAjax(str) {
         }
     });
 }
+
+//点击“审核”按钮
+function TongBuCourse(idNo) {
+    openDialog('TongBuDlg', {
+        title: moduleName + '同步学时',
+        iconCls: 'icon-add'
+    });
+    
+}
+
+//保存“课程审核”表单数据
+function saveLockedAuditSetData() {
+    var row = getSelectedRow('dg');
+    ajaxCRUD({
+        url: '/WebServices/Course/CourseWebServices.asmx/SingleTongBuOldData',
+        data: "{IDNo:'" + row.IDNo + "'}",
+        success: function (data) {
+
+            if (data == true) {
+               msgShow('提示', '同步成功', 'info');
+               closeFormDialog('TongBuDlg');
+           } else {
+               msgShow('提示', '同步失败', 'info');
+           }
+        }
+    });
+
+} //saveCourseAuditSetData
 
 function Search() {
     // 列表参数设置

@@ -11,46 +11,13 @@ using(easyloader.defaultReferenceModules, function () {
         title: '培训课程管理',
         columns: [[
             { field: 'Id', checkbox: true },
-            {field:
-                'opt',
-                title: '报名设置',
-                width: 80,
-                formatter: function(value, rec) {
-                    var btn = '<a class="editcls" onclick="registerSet(\''+ rec.Id +'\')" href="javascript:void(0)">报名设置</a>';
-                    return btn;
-                }
-            },
-            {field:'Aduit', title:'审核',width:60,  
-                formatter: function(value, rec) {
-                    var btn = '<a class="editcls" onclick="courseAudit(\'' + rec.Id + '\')" href="javascript:void(0)">审核</a>';
-                    return btn;
-                } 
-            },
-              { field: 'SuoDing', title: '锁定', width: 60,
-                  formatter: function (value, rec) {
-                      var btn = '<a class="editcls" onclick="lockedCourse(\'' + rec.Id + '\')" href="javascript:void(0)">锁定</a>';
-                      return btn;
-                  }
-              },
-            {field: 'Manage', title: '管理', width:60,
-                formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="studentManage(\'' + rec.Id + '\')" href="javascript:void(0)">学员管理</a>';
-                    return btn;
-                }
-            },
             
-            { field: 'kaoqing', title: '考勤管理', width: 80,
-                formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="kaoQing(\'' + rec.Id + '\')" href="javascript:void(0)">考勤</a>';
-                    return btn;
-                }
-            },
             { field: 'CourseName', title: '课程名称', width: 250, sortable: true },
             { field: 'TrainType', title: '培训类型', width: 80 },
-            { field: 'TheYear', title: '年度', width: 150, sortable: true },
+            { field: 'TheYear', title: '年度', width: 80, sortable: true },
             { field: 'SchoolName', title: '组织单位', width: 100 },
 
-            { field: 'CourseState', title: '状态', width:100, formatter: function (value) {
+            { field: 'CourseState', title: '状态', width:80, formatter: function (value) {
                   if (value == 1)
                       return '<span style="color:red">待审</span>';
                   else if (value == 2)
@@ -60,7 +27,7 @@ using(easyloader.defaultReferenceModules, function () {
                   return '<span style="red">待审核状态</span>';
               }
             },
-            { field: 'Locked', title: '状态', width: 100,sortable: true, formatter: function (value) {
+            { field: 'Locked', title: '锁定', width: 60,sortable: true, formatter: function (value) {
                 if (value == 1)
                     return '<span style="red">已锁定</span>';
                 else if (value == 2)
@@ -71,8 +38,9 @@ using(easyloader.defaultReferenceModules, function () {
             },
             { field: 'SubjectName', title: '培训科目', width: 80 },
             { field: 'Phone', title: '联系电话', width: 80 },
-            { field: 'Period', title: '学时', width: 80 },
-            { field: 'Cost', title: '培训费用', width: 80 },
+            { field: 'Period', title: '学时', width: 40 },
+            { field: 'TimeStartStr', title: '培训开始', width: 120 },
+            { field: 'TimeEndStr', title: '培训结束', width: 120 },
             { field: 'IsMust', title: '种类', width: 60, formatter: function (value) {
                 if (value == 1)
                     return '<span>选修</span>';
@@ -82,10 +50,40 @@ using(easyloader.defaultReferenceModules, function () {
             },
             { field: 'Address', title: '培训地址', width: 130, sortable: true },
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
-           
-            { field: 'TimeStartStr', title: '培训开始', width: 120 },
-            { field: 'TimeEndStr', title: '培训结束', width: 120 },
-            { field: 'CourseCode', title: '课程代码', width: 80 }
+            { field:
+                'opt',
+                title: '报名设置',
+                width: 80,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="registerSet(\'' + rec.Id + '\')" href="javascript:void(0)">报名设置</a>';
+                    return btn;
+                }
+            },
+            { field: 'Aduit', title: '审核', width: 60,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="courseAudit(\'' + rec.Id + '\')" href="javascript:void(0)">审核</a>';
+                    return btn;
+                }
+            },
+              { field: 'SuoDing', title: '锁定', width: 60,
+                  formatter: function (value, rec) {
+                      var btn = '<a class="editcls" onclick="lockedCourse(\'' + rec.Id + '\')" href="javascript:void(0)">锁定</a>';
+                      return btn;
+                  }
+              },
+            { field: 'Manage', title: '管理', width: 60,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="studentManage(\'' + rec.Id + '\')" href="javascript:void(0)">学员管理</a>';
+                    return btn;
+                }
+            },
+
+            { field: 'kaoqing', title: '考勤管理', width: 80,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="kaoQing(\'' + rec.Id + '\')" href="javascript:void(0)">考勤</a>';
+                    return btn;
+                }
+            }
 
         ]],
         singleSelect: true,
@@ -663,7 +661,7 @@ function lockedCourse(courseid) {
         data: "{id:'" + courseid + "'}",
         success: function (data) {
             openDialog('lockedDlg', {
-                title: '课程审核',
+                title: '课程锁定',
                 iconCls: 'icon-edit'
             });
             //JSON数据填充表单
@@ -749,9 +747,7 @@ function saveCourseAuditSetData() {
 //点击“学员管理”按钮
 function studentManage(courseid) {
 
-    var row = getSelectedRow('dg');
-   
-     
+    var row = getSelectedRow('dg'); 
     // 学员管理列表参数设置
     var studentManageDataGridOptions = {
 

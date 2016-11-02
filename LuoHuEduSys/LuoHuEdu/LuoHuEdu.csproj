@@ -1251,6 +1251,7 @@
     <Content Include="View\Admin\MyCourse\MyCourseList.htm" />
     <Content Include="View\Admin\MyTeacher\MyTeacherList.htm" />
     <Content Include="View\Admin\MyTeacher\MyTeacherForm.htm" />
+    <Content Include="View\Admin\Student\TongBuCourse.htm" />
     <Content Include="View\Admin\Student\StudentCourseList.htm" />
     <Content Include="View\Admin\Student\StudentForm.htm" />
     <Content Include="View\Admin\Student\StudentList.htm" />
