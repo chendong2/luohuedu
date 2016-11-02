@@ -468,8 +468,9 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
         /// <returns></returns>
         public List<CourseBo> GetCourses(string courseName, string courseCode,DateTime beginDate,DateTime endDate)
         {
-            string strSql = string.Format(@"SELECT * from tb_course  where 1=1 ");
+            string strSql = string.Format(@"SELECT * from tb_course  WHERE  TrainType !='c038430c-1b54-4c91-9e60-993642e79163' ");
 
+            endDate = endDate.AddDays(1);
             if (!string.IsNullOrEmpty(courseName))
             {
                 strSql += "and CourseName =@CourseName ";

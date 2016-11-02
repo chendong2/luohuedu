@@ -96,7 +96,7 @@ using(easyloader.defaultReferenceModules, function () {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                courseBo: {}
+                courseBo: {Locked:2}
             };
             var paramStr = JSON.stringify(courseData);
 
