@@ -68,6 +68,15 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             },
             { field: 'Office', title: '职务', width: 80, sortable: false },
+             { field: 'State', title: '状态', width: 60, sortable: false,
+                 formatter: function (value) {
+                     if (value == "1") {
+                         return '<span style="color:green">在职</span>';
+                     } else {
+                         return '<span  style="color:red">离退休</span>';
+                     }
+                 }
+             },
              { field: 'Telephone', title: '手机', width: 100, sortable: false },
             { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
         ]],
@@ -303,7 +312,6 @@ function saveLockedAuditSetData() {
 
             if (data == true) {
                msgShow('提示', '同步成功', 'info');
-               closeFormDialog('TongBuDlg');
            } else {
                msgShow('提示', '同步失败', 'info');
            }

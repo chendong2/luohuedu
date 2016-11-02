@@ -11,7 +11,40 @@ using(easyloader.defaultReferenceModules, function () {
         title: '培训课程管理',
         columns: [[
             { field: 'Id', checkbox: true },
-            
+                        { field:
+                'opt',
+                title: '报名设置',
+                width: 80,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="registerSet(\'' + rec.Id + '\')" href="javascript:void(0)">报名设置</a>';
+                    return btn;
+                }
+            },
+            { field: 'Aduit', title: '审核', width: 60,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="courseAudit(\'' + rec.Id + '\')" href="javascript:void(0)">审核</a>';
+                    return btn;
+                }
+            },
+              { field: 'SuoDing', title: '锁定', width: 60,
+                  formatter: function (value, rec) {
+                      var btn = '<a class="editcls" onclick="lockedCourse(\'' + rec.Id + '\')" href="javascript:void(0)">锁定</a>';
+                      return btn;
+                  }
+              },
+            { field: 'Manage', title: '管理', width: 60,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="studentManage(\'' + rec.Id + '\')" href="javascript:void(0)">学员管理</a>';
+                    return btn;
+                }
+            },
+
+            { field: 'kaoqing', title: '考勤管理', width: 80,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls" onclick="kaoQing(\'' + rec.Id + '\')" href="javascript:void(0)">考勤</a>';
+                    return btn;
+                }
+            },
             { field: 'CourseName', title: '课程名称', width: 250, sortable: true },
             { field: 'TrainType', title: '培训类型', width: 80 },
             { field: 'TheYear', title: '年度', width: 80, sortable: true },
@@ -49,42 +82,7 @@ using(easyloader.defaultReferenceModules, function () {
             }
             },
             { field: 'Address', title: '培训地址', width: 130, sortable: true },
-            { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
-            { field:
-                'opt',
-                title: '报名设置',
-                width: 80,
-                formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="registerSet(\'' + rec.Id + '\')" href="javascript:void(0)">报名设置</a>';
-                    return btn;
-                }
-            },
-            { field: 'Aduit', title: '审核', width: 60,
-                formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="courseAudit(\'' + rec.Id + '\')" href="javascript:void(0)">审核</a>';
-                    return btn;
-                }
-            },
-              { field: 'SuoDing', title: '锁定', width: 60,
-                  formatter: function (value, rec) {
-                      var btn = '<a class="editcls" onclick="lockedCourse(\'' + rec.Id + '\')" href="javascript:void(0)">锁定</a>';
-                      return btn;
-                  }
-              },
-            { field: 'Manage', title: '管理', width: 60,
-                formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="studentManage(\'' + rec.Id + '\')" href="javascript:void(0)">学员管理</a>';
-                    return btn;
-                }
-            },
-
-            { field: 'kaoqing', title: '考勤管理', width: 80,
-                formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="kaoQing(\'' + rec.Id + '\')" href="javascript:void(0)">考勤</a>';
-                    return btn;
-                }
-            }
-
+            { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true }
         ]],
         singleSelect: true,
         toolbar: '#toolbar',
@@ -957,7 +955,7 @@ var chooseStudentDataGridOptions = {
         var paramStr = JSON.stringify(studentData);
 
         ajaxCRUD({
-            url: '/WebServices/Admin/Student.asmx/GetStudentList',
+            url: '/WebServices/Admin/Student.asmx/GetStudentListNew',
             data: paramStr,
             success: function (data) {
                 success(data);

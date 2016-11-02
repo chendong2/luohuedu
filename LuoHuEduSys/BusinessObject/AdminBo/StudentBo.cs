@@ -88,6 +88,7 @@ namespace BusinessObject.AdminBo
 
         public string RegistrationCode { get; set; }
 
+        public int State { get; set; }
 
         public string TheYear { get; set; }
 

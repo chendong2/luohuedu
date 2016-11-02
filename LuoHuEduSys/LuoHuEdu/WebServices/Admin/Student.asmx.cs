@@ -55,6 +55,7 @@ namespace LuoHuEdu.WebServices.Admin
             return studentService.DeleteStudentsByIds(ids);
         }
 
+
         //获取数据列表
         [ScriptMethod]
         [WebMethod(EnableSession = true)]
@@ -63,6 +64,30 @@ namespace LuoHuEdu.WebServices.Admin
 
             var student = new StudentService();
             var list = student.GetStudents(page, rows, sort, order, studentBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
+
+
+
+        //获取数据列表
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetStudentListNew(int page, int rows, string sort, string order, StudentBo studentBo)
+        {
+
+            var student = new StudentService();
+            var list = student.GetStudentsNew(page, rows, sort, order, studentBo);
             if (list != null)
             {
                 return new
