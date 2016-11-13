@@ -70,11 +70,21 @@ namespace LuoHuEduWebService.CourseInfo
             if (!htSoapHeader.ValideUser(htSoapHeader.UserName, htSoapHeader.PassWord)) return false;
             var courseService = new CourseStudentService();
             var studentBo = new CourseStudentDto();
+
+            var course = new CourseService();
+            var coursed= course.GetCourseById(courseId);
+
+
             studentBo.CourseId = courseId;
             studentBo.IDNo = idNo;
             studentBo.SignMDate = signMDate;
             studentBo.SignADate = signADate;
             studentBo.SignNDate = signNDate;
+
+            studentBo.PeriodM = coursed.MorningPeriodOne;
+            studentBo.PeriodA = coursed.AfternoonPeriodOne;
+            studentBo.PeriodN = coursed.NightPeriodOne;
+
             studentBo.Sign = 2;
             studentBo.Feedback =1;
             studentBo.Period = 0;

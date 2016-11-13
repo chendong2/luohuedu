@@ -11,22 +11,25 @@ using(easyloader.defaultReferenceModules, function () {
         title: '培训课程管理',
         columns: [[
             { field: 'Id', checkbox: true },
-                        { field:
-                'opt',
-                title: '报名设置',
-                width: 80,
-                formatter: function (value, rec) {
-                    var btn = '<a class="editcls" onclick="registerSet(\'' + rec.Id + '\')" href="javascript:void(0)">报名设置</a>';
-                    return btn;
-                }
-            },
-            { field: 'Aduit', title: '审核', width: 60,
+
+              { field: 'CourseName', title: '课程名称', width: 200, sortable: true },
+              
+              { field:
+                  'opt',
+                  title: '报名设置',
+                  width: 80,
+                  formatter: function (value, rec) {
+                      var btn = '<a class="editcls" onclick="registerSet(\'' + rec.Id + '\')" href="javascript:void(0)">报名设置</a>';
+                      return btn;
+                  }
+              },
+            { field: 'Aduit', title: '审核', width: 40,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="courseAudit(\'' + rec.Id + '\')" href="javascript:void(0)">审核</a>';
                     return btn;
                 }
             },
-              { field: 'SuoDing', title: '锁定', width: 60,
+              { field: 'SuoDing', title: '锁定', width:40,
                   formatter: function (value, rec) {
                       var btn = '<a class="editcls" onclick="lockedCourse(\'' + rec.Id + '\')" href="javascript:void(0)">锁定</a>';
                       return btn;
@@ -39,28 +42,30 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             },
 
-            { field: 'kaoqing', title: '考勤管理', width: 80,
+            { field: 'kaoqing', title: '考勤', width:40,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="kaoQing(\'' + rec.Id + '\')" href="javascript:void(0)">考勤</a>';
                     return btn;
                 }
             },
-            { field: 'CourseName', title: '课程名称', width: 250, sortable: true },
+            { field: 'SchoolName', title: '学校名称', width: 100 },
+            { field: 'Name', title: '授课教师', width: 80, sortable: true },
+            { field: 'DateTimeStartAndEnd', title: '课程起始', width: 150, sortable: true },
+             { field: 'Period', title: '学时', width: 40 },
             { field: 'TrainType', title: '培训类型', width: 80 },
-            { field: 'TheYear', title: '年度', width: 80, sortable: true },
-            { field: 'SchoolName', title: '组织单位', width: 100 },
-
-            { field: 'CourseState', title: '状态', width:80, formatter: function (value) {
-                  if (value == 1)
-                      return '<span style="color:red">待审</span>';
-                  else if (value == 2)
-                      return '<span  style="color:green">已审并开放</span>';
-                  else if (value == 3)
-                      return '<span>不通过</span>';
-                  return '<span style="red">待审核状态</span>';
-              }
+            { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
+             { field: 'YiBao', title: '已报人数', width:60, sortable: true },
+            { field: 'CourseState', title: '状态', width: 80, formatter: function (value) {
+                if (value == 1)
+                    return '<span style="color:red">待审</span>';
+                else if (value == 2)
+                    return '<span  style="color:green">已审并开放</span>';
+                else if (value == 3)
+                    return '<span>不通过</span>';
+                return '<span style="red">待审核状态</span>';
+            }
             },
-            { field: 'Locked', title: '锁定', width: 60,sortable: true, formatter: function (value) {
+            { field: 'Locked', title: '锁定', width: 60, sortable: true, formatter: function (value) {
                 if (value == 1)
                     return '<span style="red">已锁定</span>';
                 else if (value == 2)
@@ -70,19 +75,8 @@ using(easyloader.defaultReferenceModules, function () {
             }
             },
             { field: 'SubjectName', title: '培训科目', width: 80 },
-            { field: 'Phone', title: '联系电话', width: 80 },
-            { field: 'Period', title: '学时', width: 40 },
-            { field: 'TimeStartStr', title: '培训开始', width: 120 },
-            { field: 'TimeEndStr', title: '培训结束', width: 120 },
-            { field: 'IsMust', title: '种类', width: 60, formatter: function (value) {
-                if (value == 1)
-                    return '<span>选修</span>';
-                else
-                    return '<span>必修</span>';
-            }
-            },
-            { field: 'Address', title: '培训地址', width: 130, sortable: true },
-            { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true }
+            { field: 'Address', title: '培训地址', width: 130, sortable: true }
+            
         ]],
         singleSelect: true,
         toolbar: '#toolbar',
@@ -96,7 +90,7 @@ using(easyloader.defaultReferenceModules, function () {
                 rows: param.rows,
                 order: param.order,
                 sort: param.sort,
-                courseBo: {Locked:2}
+                courseBo: { Locked: 2 }
             };
             var paramStr = JSON.stringify(courseData);
 
@@ -208,7 +202,7 @@ function loadPartialHtml() {
         });
         panel('kqTemplate', {
             href: '/View/TrainingManage/TrainingCourseManage/KaoqingList.htm',
-             onLoad: function () {
+            onLoad: function () {
 
             }
         });
@@ -268,7 +262,7 @@ function editData() {
         msgShow(moduleName + '编辑', '锁定的课程不能编辑！', '');
     }
     else {
-        
+
         resetFormAndClearValidate('ff');
         fillForm(row.Id);
     }
@@ -305,7 +299,7 @@ function fillForm(itemid) {
                 data: "{id:'" + data.TeacherId + "'}",
                 success: function (data1) {
                     // 如果是搜索条件用的dll，那么加入请选择选项
-                    $("#ddlSchoolName").combobox('setValue', data1.SchoolId);
+                    $("#ddlSchoolName").combobox('setValue', data1.SchoolId);   
                 }
             });
 
@@ -398,7 +392,7 @@ function saveData() {
     } else {
         wsMethod = "AddCourse"; //新增
     }
-    
+
     var formUrl = basicUrl + wsMethod;
 
     var form2JsonObj = form2Json("ff");
@@ -490,7 +484,7 @@ function closeFormDialog(id) {
 }
 
 //点击“报名设置”按钮
-function registerSet(courseid) { 
+function registerSet(courseid) {
     ajaxCRUD({
         url: '/WebServices/Course/CourseWebServices.asmx/GetCourseById',
         data: "{id:'" + courseid + "'}",
@@ -499,15 +493,15 @@ function registerSet(courseid) {
                 title: '报名设置',
                 iconCls: 'icon-edit',
                 onOpen: function () {
-                  
+
                 }
             });
 
             //JSON数据填充表单
             loadDataToForm('registerSetForm', data);
-//           
-//            $("input[name='TeachingObject']").attr("checked", "checked");
-//            $("input[name='ObjectEstablish']").attr("checked", "checked");
+            //           
+            //            $("input[name='TeachingObject']").attr("checked", "checked");
+            //            $("input[name='ObjectEstablish']").attr("checked", "checked");
         }
     });
 
@@ -544,10 +538,10 @@ function noSelectAllMingban() {
 }
 //保存“报名设置”表单数据
 function saveRegisterSetData() {
-    
-//    if (!formValidate('registerSetForm')) {
-//        return;
-//    }
+
+    //    if (!formValidate('registerSetForm')) {
+    //        return;
+    //    }
     var basicUrl = '/WebServices/Course/CourseWebServices.asmx/ApplySet';
 
     var form2JsonObj = form2Json("registerSetForm");
@@ -571,13 +565,13 @@ function saveRegisterSetData() {
     if (form2JsonObj.PriSchool && $.isArray(form2JsonObj.PriSchool)) {
         form2JsonObj.PriSchool = form2JsonObj.PriSchool.join(',');
     }
-    
+
 
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
-    
+
     //console.log(jsonDataStr);
-    
+
     ajaxCRUD({
         url: basicUrl,
         data: jsonDataStr,
@@ -591,7 +585,7 @@ function saveRegisterSetData() {
             }
         }
     });
-    
+
 } //saveRegisterSetData
 
 //获取所有公办学校信息，用于多选框绑定数据
@@ -629,7 +623,7 @@ function getAllPrivateSchool() {
     ajaxCRUD({
         async: false,
         url: webserviceUrl,
-        data: '{}',//
+        data: '{}', //
         success: function (dataList) {
             $('#PrivateSchoolTbl').empty();
             var tdArr = new Array();
@@ -639,7 +633,7 @@ function getAllPrivateSchool() {
                 if (index % 2 == 0) {
                     tdArr.splice(0, tdArr.length);
                 }
-                
+
                 var tdHtml = '<td class="td_right"><input type="checkbox" name="PriSchool" value="' + schoolBo.Id + '"/></td><td class="td_left">' + schoolBo.SchoolName + '</td>';
                 tdArr.push(tdHtml);
 
@@ -718,7 +712,7 @@ function saveCourseAuditSetData() {
     //    if (!formValidate('courseAuditForm')) {
     //        return;
     //    }
-    
+
     var basicUrl = '/WebServices/Course/CourseWebServices.asmx/AduitSet';
     var form2JsonObj = form2Json("courseAuditForm");
     var form2JsonStr = JSON.stringify(form2JsonObj);
@@ -745,7 +739,7 @@ function saveCourseAuditSetData() {
 //点击“学员管理”按钮
 function studentManage(courseid) {
 
-    var row = getSelectedRow('dg'); 
+    var row = getSelectedRow('dg');
     // 学员管理列表参数设置
     var studentManageDataGridOptions = {
 
@@ -768,13 +762,13 @@ function studentManage(courseid) {
         sortName: 'Name',
         sortOrder: 'desc',
         rownumbers: true,
-        pagination: true,
+        pagination: false,
         loader: function (param, success, error) {
             var studentData = {
-                page: param.page,
-                rows: param.rows,
-                order: param.order,
-                sort: param.sort,
+                page: 1,
+                rows: 1000,
+                order: '',
+                sort: '',
                 courseId: courseid
             };
             var paramStr = JSON.stringify(studentData);
@@ -812,13 +806,13 @@ function studentManage(courseid) {
             }
         });
     }
-   
+
 
 }
 
 //学员管理搜索
 function StudentSearch() {
-    
+
     // 列表参数设置
     var dataGridOptions = {
         pageNumber: 1,
@@ -891,65 +885,20 @@ var chooseStudentDataGridOptions = {
                         return "女";
                     }
                 }
-            },
-            { field: 'Profession', title: '专业', width: 80, sortable: false },
-            { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
-            { field: 'Birthday', title: '生日', width: 100, sortable: false,
-                formatter: function (value) {
-                    value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-                    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-                }
-            },
-            { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
-                formatter: function (value) {
-                    if (value == "1") {
-                        return "高中";
-                    } else if (value == "2") {
-                        return "中专";
-                    } else if (value == "3") {
-                        return "大专";
-                    } else if (value == "4") {
-                        return "本科";
-                    } else if (value == "5") {
-                        return "硕士";
-                    } else if (value == "6") {
-                        return "博士";
-                    } else {
-                        return "";
-                    }
-                }
-            },
-            { field: 'StudyPeriod', title: '任课学段', width: 80, sortable: false,
-                formatter: function (value) {
-                    if (value == "1") {
-                        return "幼儿";
-                    } else if (value == "2") {
-                        return "小学";
-                    } else if (value == "3") {
-                        return "初中";
-                    } else if (value == "4") {
-                        return "高中";
-                    } else {
-                        return "其他";
-                    }
-                }
-            },
-            { field: 'Office', title: '职务', width: 80, sortable: false },
-             { field: 'Telephone', title: '手机', width: 100, sortable: false },
-            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
+            }
         ]],
     singleSelect: false,
     toolbar: '#chooseStudentToolbar',
     sortName: 'Name',
     sortOrder: 'desc',
     rownumbers: true,
-    pagination: true,
+    pagination: false,
     loader: function (param, success, error) {
         var studentData = {
-            page: param.page,
-            rows: param.rows,
-            order: param.order,
-            sort: param.sort,
+            page:1,
+            rows: 1000,
+            order: '',
+            sort: '',
             studentBo: {}
         };
         var paramStr = JSON.stringify(studentData);
@@ -967,7 +916,7 @@ var chooseStudentDataGridOptions = {
 
     },
     onDblClickRow: function (rowIndex, rowData) {
-        
+
     }
 };
 
@@ -980,7 +929,7 @@ function chooseStudent() {
     openDialog('chooseStudentDlg', {
         title: '选择学员',
         iconCls: 'icon-add',
-        onOpen:function () {
+        onOpen: function () {
             //初始化列表组件
             iniDataGrid('chooseStudentDG', chooseStudentDataGridOptions);
         }
@@ -1046,22 +995,20 @@ function chooseStudentSearch() {
                     }
                 }
             },
-            { field: 'Office', title: '职务', width: 80, sortable: false },
-             { field: 'Telephone', title: '手机', width: 100, sortable: false },
-            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
+            { field: 'Office', title: '职务', width: 80, sortable: false }
         ]],
         singleSelect: false,
         toolbar: '#chooseStudentToolbar',
         sortName: 'Name',
         sortOrder: 'desc',
         rownumbers: true,
-        pagination: true,
+        pagination: false,
         loader: function (param, success, error) {
             var studentData = {
-                page: param.page,
-                rows: param.rows,
-                order: param.order,
-                sort: param.sort,
+                page: 1,
+                rows: 1000,
+                order: '',
+                sort: '',
                 studentBo: {
                     SchoolId: $("#ddlChooseSchool").combobox('getValue')
                 }
@@ -1123,10 +1070,10 @@ function chooseStudentData() {
     }
 
     if (studentNameArr.length > 0) {
-        msgShow('提示', studentNameArr.join('、')+"学员已被选择过，不需要重复选择", 'info');
+        msgShow('提示', studentNameArr.join('、') + "学员已被选择过，不需要重复选择", 'info');
         return false;
     }
-    
+
     //添加新学员
     var idArr = [];
     var rows = $('#chooseStudentDG').datagrid('getSelections');
@@ -1138,13 +1085,13 @@ function chooseStudentData() {
     var ids = idArr.join(',');
 
     var studentData = {
-        ids:ids,
-        studentBo : {
-            CourseId :$("#HsmCourseId").val()
+        ids: ids,
+        studentBo: {
+            CourseId: $("#HsmCourseId").val()
         }
     };
-    
-    var paramStr = JSON.stringify(studentData); 
+
+    var paramStr = JSON.stringify(studentData);
 
     ajaxCRUD({
         url: '/WebServices/Course/CourseWebServices.asmx/BatchAddCourseStudent',
@@ -1162,7 +1109,7 @@ function chooseStudentData() {
 }
 
 
-var cousrIdCD="";
+var cousrIdCD = "";
 //点击“学员管理”按钮
 function kaoQing(id) {
 
@@ -1183,8 +1130,6 @@ function kaoQing(id) {
                 }
             },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
-            { field: 'Office', title: '职务', width: 80, sortable: false },
-            { field: 'Telephone', title: '手机', width: 80, sortable: false },
             { field: 'Period', title: '学时', width: 80, sortable: false },
             { field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
@@ -1195,15 +1140,9 @@ function kaoQing(id) {
                     }
                 }
             },
-            { field: 'Sign1', title: '操作', width: 80, sortable: false,
-                formatter: function (value, rec) {
-                    if (rec.Sign == "1") {
-                        return '<a style="color:red;cursor:pointer" onclick="qiandao(\'' + rec.Id + '\')" href="javascript:void(0)">签到</a>';
-                    } else {
-                        return '<a style="color:red;cursor:pointer" onclick="quxiao(\'' + rec.Id + '\')" href="javascript:void(0)">取消签到</a>';
-                    }
-                }
-            }
+            { field: 'SignMDate', title: '上午签到', width: 150, sortable: false },
+            { field: 'SignADate', title: '下午签到', width: 150, sortable: false },
+            { field: 'SignNDate', title: '晚上签到', width: 150, sortable: false }
         ]],
         singleSelect: false,
         toolbar: '#KaoqingToolbar',
@@ -1266,8 +1205,6 @@ function KaoqingSearch() {
                 }
             },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
-            { field: 'Office', title: '职务', width: 80, sortable: false },
-            { field: 'Telephone', title: '手机', width: 80, sortable: false },
             { field: 'Period', title: '学分', width: 80, sortable: false },
             { field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
@@ -1278,15 +1215,10 @@ function KaoqingSearch() {
                     }
                 }
             },
-            { field: 'Sign1', title: '操作', width: 80, sortable: false,
-                formatter: function (value, rec) {
-                    if (rec.Sign == "1") {
-                        return '<a style="color:red;cursor:pointer" onclick="qiandao(\'' + rec.Id + '\')" href="javascript:void(0)">签到</a>';
-                    } else {
-                        return '<a style="color:red;cursor:pointer" onclick="quxiao(\'' + rec.Id + '\')" href="javascript:void(0)">取消签到</a>';
-                    }
-                }
-            }
+            { field: 'KaoQingDateOne', title: '上午签到', width: 80, sortable: false },
+            { field: 'KaoQingMorningOne', title: '下午签到', width: 80, sortable: false },
+            { field: 'KaoQingAfternoonOne', title: '晚上签到', width: 80, sortable: false }
+          
         ]],
         singleSelect: false,
         toolbar: '#KaoqingToolbar',
@@ -1307,7 +1239,6 @@ function KaoqingSearch() {
                 }
             };
             var paramStr = JSON.stringify(studentData);
-
             ajaxCRUD({
                 url: '/WebServices/Admin/Student.asmx/GetKaoqingList',
                 data: paramStr,

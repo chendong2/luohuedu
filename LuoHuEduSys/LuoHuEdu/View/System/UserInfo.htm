@@ -157,16 +157,16 @@
                         第一任教学科（重要）:
                     </td>
                     <td class="td_left" style="width: 30%">
-                        <select id="sFirstTeaching" name='FirstTeaching'>
+                        <select id="sFirstTeaching" name='FirstTeaching' class="easyui-validatebox" data-options="required:true">
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 20%" class="td_right">
+                    <td style="width: 20%" class="td_right" class="easyui-validatebox" data-options="required:true">
                         第二任教学科（重要）:
                     </td>
                     <td class="td_left" style="width: 30%">
-                        <select id="sSecondTeaching" name='SecondTeaching' >
+                        <select id="sSecondTeaching" name='SecondTeaching'  class="easyui-validatebox" data-options="required:true">
                 </select>
                     </td>
                     <td style="width: 20%" class="td_right">
@@ -182,7 +182,7 @@
                         邮编:
                     </td>
                     <td class="td_left" style="width: 30%">
-                        <input id="txtPostCode" type="text" name="PostCode" style="width: 185px" maxlength="20"
+                        <input id="txtPostCode" type="text" name="PostCode" style="width: 185px" maxlength="8"
                             />
                     </td>
                     <td style="width: 20%" class="td_right">
@@ -241,7 +241,8 @@
             <div>
                   备注: <span>1、红色星号为必填项。</span><br/>
                               <span style="margin-left: 35px;">2、“任课学段”请如实填写，不同任课学段的老师会有不同的培训课程。</span><br/>
-                              <span style="margin-left: 35px;">3、“第一任教学科”、“第二任教学科”请如实填写，不同教学科的老师会有不同的培训课程。</span>
+                <span style="margin-left: 35px;">3、“第一任教学科”、“第二任教学科”请如实填写，不同教学科的老师会有不同的培训课程。</span>
+                 <span style="margin-left: 35px;">4、身份证号末尾的字符请大写！</span>
             </div>
         </div>
     </div>

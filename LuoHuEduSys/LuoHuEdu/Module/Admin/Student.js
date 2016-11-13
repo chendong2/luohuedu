@@ -274,7 +274,7 @@ function saveData() {
 
 //批量删除前台提示
 function deleteDatas() {
-    deleteItems('dg', deleteDatasAjax);
+    deleteItemsTest('dg', deleteDatasAjax);
 }
 
 //批量删除后台AJAX处理
@@ -292,6 +292,30 @@ function deleteDatasAjax(str) {
         }
     });
 }
+
+
+
+//批量删除
+function deleteItemsTest(tableId, fn) {
+    var items = getCheckedRows(tableId);
+    if (items.length < 1) {
+        $.messager.alert('删除', '当前没有选择删除项');
+    }
+    else {
+        $.messager.confirm('批量删除', '删除该用户会造成课时错误，会影响到他调离后回查课时，除了退休、辞职超过两年、账号重复，其他情况都不能删除!如果不删除请点取消!', function (r) {
+            if (r) {
+                var ids = [];
+                var ido = getColumnIds(tableId, 0);
+                for (var i = 0; i < items.length; i++) {
+                    ids.push(items[i][ido]);
+                }
+                //异步删除
+                fn(ids.join(","));
+            }
+        });
+    }
+}
+
 
 //点击“审核”按钮
 function TongBuCourse(idNo) {

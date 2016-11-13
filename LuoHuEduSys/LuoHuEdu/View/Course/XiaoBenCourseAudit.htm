@@ -1,0 +1,74 @@
+﻿<div id="courseAuditDlg" style="width: 800px;" data-options="buttons: '#cadlg-button',
+                                                                        closed: true,
+                                                                        shadow:false,
+                                                                        modal:true">
+    <style type="text/css">
+        .custom_forms tr td input[type="text"]
+        {
+            width: auto;
+        }
+    </style>
+    <div>
+        
+    </div>
+    <form id="courseAuditForm" method="post">
+    <div id="formTabs" class="easyui-tabs">
+        <table class="custom_forms_popup">
+                <tbody>
+                    <tr>
+                        <td class="td_right" style="width: 130px">
+                            设定课程状态:
+                        </td>
+                        <td class="td_left">
+                            <select style="width: 145px;" name="CourseState" id="CourseState">
+                                <option value="1">待审核状态</option>
+                                <option value="2">审核通过并开放</option>
+                                <option value="3">审核不通过</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_right">
+                            审核时间:
+                        </td>
+                        <td class="td_left">
+                            <!--<input type="text" class="easyui-datetimebox" name="AduitTime" id="txtAduitTime" maxlength="20" style="width: 145px;" />-->
+                            <input type="text" class="easyui-datebox" name="AduitTimeStr" id="txtAduitTime" style="width: 145px;"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_right">
+                            学科评审意见（初审）:
+                        </td>
+                        <td class="td_left">
+                            <textarea rows="2" cols="100" id="txtFirstAduit" name='FirstAduit' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_right">
+                            评审小组意见（终审）:
+                        </td>
+                        <td class="td_left">
+                            <textarea rows="2" cols="100" id="txtEndAduit" name='EndAduit' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_right">
+                            中心审批意见:
+                        </td>
+                        <td class="td_left">
+                            <textarea rows="2" cols="100" id="txtCenterAduit" name='CenterAduit' class="easyui-validatebox" data-options="validType:'maxLength[500]'" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    <div>
+        <input id="Hid" type="hidden" name="Id" />
+    </div>
+    </form>
+</div>
+<div id="cadlg-button">
+    <a class="easyui-linkbutton" onclick="saveCourseAuditSetData();">确定</a> <a class="easyui-linkbutton"
+        onclick="closeFormDialog('courseAuditDlg');">取消</a>
+</div>

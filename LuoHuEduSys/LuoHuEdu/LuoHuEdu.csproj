@@ -1255,6 +1255,7 @@
     <Content Include="View\Admin\Student\StudentCourseList.htm" />
     <Content Include="View\Admin\Student\StudentForm.htm" />
     <Content Include="View\Admin\Student\StudentList.htm" />
+    <Content Include="View\Admin\Student\DeleteStudents.htm" />
     <Content Include="View\Admin\UserPermissions\PermissionsForm.htm" />
     <Content Include="View\Admin\UserPermissions\PermissionsList.htm" />
     <Content Include="View\AttendanceReport\CourseForm.htm" />
@@ -1265,6 +1266,9 @@
     <Content Include="View\Course\CourseForm.htm" />
     <Content Include="View\Course\CourseList.htm" />
     <Content Include="View\Course\TrainingCourseForm.htm" />
+    <Content Include="View\Course\XiaoBenChooseStudent.htm" />
+    <Content Include="View\Course\XiaoBenCourseAudit.htm" />
+    <Content Include="View\Course\XiaoBenStudentManage.htm" />
     <Content Include="View\Customer\CustomerForm.htm" />
     <Content Include="View\Customer\CustomerList.htm" />
     <Content Include="View\Customer\ExtentionForm.htm" />

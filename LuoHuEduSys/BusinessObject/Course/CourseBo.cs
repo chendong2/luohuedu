@@ -81,7 +81,7 @@ namespace BusinessObject.Course
 
         public string TimeStartStr
         {
-            get { return TimeStart.ToString("yyyy-MM-dd HH:mm:ss"); } 
+            get { return TimeStart.ToString("yyyy-MM-dd HH:mm"); } 
             set { TimeStart = Convert.ToDateTime(TimeStart); }
         }
         /// 上课时间结束
@@ -90,10 +90,15 @@ namespace BusinessObject.Course
 
         public string TimeEndStr
         {
-            get { return TimeEnd.ToString("yyyy-MM-dd HH:mm:ss"); } 
+            get { return TimeEnd.ToString("yyyy-MM-dd HH:mm"); } 
             set { TimeEnd = Convert.ToDateTime(value); }
         }
 
+
+        public string DateTimeStartAndEnd
+        {
+            get { return String.Format("{0:d}", TimeStart) + "(" + string.Format("{0:t}", TimeStart) + "-" + string.Format("{0:t}",TimeEnd)+")"; }
+        }
         /// 课程代码
         public string CourseCode{ get; set; }
 
@@ -234,6 +239,15 @@ namespace BusinessObject.Course
         public int AfternoonPeriodTwo { get; set; }
 
         public int NightPeriodTwo { get; set; }
+
+        //-----------------
+
+        public int YiBao { get; set; }
+
+        /// <summary>
+        /// 获得的学时
+        /// </summary>
+        public int HuoDePeriod { get; set; }
 
     }
 }

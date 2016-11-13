@@ -260,7 +260,7 @@ namespace Services.Course.CourseControl
                                      `TaskUrl`,
                                      `SignDate`,
                                      `SignOutDate`,
-                                     `CourseId`,Period,IDNo,SignMDate,SignADate,SignNDate)
+                                     `CourseId`,Period,IDNo,SignMDate,SignADate,SignNDate,PeriodM,PeriodA,PeriodN)
                                     VALUES (@Id,
                                             @CourseNumber,
                                             @StudentId,
@@ -270,7 +270,7 @@ namespace Services.Course.CourseControl
                                             @TaskUrl,
                                             @SignDate,
                                             @SignOutDate,
-                                            @CourseId,@Period,@IDNo,@SignMDate,@SignADate,@SignNDate);";
+                                            @CourseId,@Period,@IDNo,@SignMDate,@SignADate,@SignNDate,@PeriodM,@PeriodA,@PeriodN);";
                     int row = connection.Execute(strSql, studentBo);
                     if (row > 0)
                     {
@@ -765,6 +765,68 @@ namespace Services.Course.CourseControl
         {
             try
             {
+                var courseStudentFace=new CourseStudentFace();
+                var list = courseStudentFace.GetCourseStudentByCourseIdNew(id);//获取该课程所有报名的学员
+              
+                using (var connection = DataBaseConnection.GetMySqlConnection())
+                {
+
+                    string courseSql = @"select * from tb_course where Id=@courseId";
+
+                    var coursebo = connection.Query<CourseBo>(courseSql, new { courseId = id }).FirstOrDefault();
+
+                    var sqlStr = @"UPDATE `tb_coursestudent` SET Period=@Period,IsCalculate=1,Sign=2 WHERE CourseId=@CourseId and Sign=2 and IDNo=@IDNo";
+
+                    foreach (var courseStudentDto in list)
+                    {
+                        var bbb = courseStudentDto.StudentId;
+                        var ccc = courseStudentDto.CourseId;
+                        int aa = 0;
+                        if (!string.IsNullOrEmpty(courseStudentDto.SignMDate) && courseStudentDto.PeriodM!=0)//判断是否设置了上午学分，考勤时间的上午是否上传
+                        {
+                            aa += courseStudentDto.PeriodM;
+                        }
+                        if (!string.IsNullOrEmpty(courseStudentDto.SignADate) && courseStudentDto.PeriodA != 0)//下午
+                        {
+                            aa += courseStudentDto.PeriodA;
+                        }
+                        if (!string.IsNullOrEmpty(courseStudentDto.SignNDate) && courseStudentDto.PeriodN != 0)//晚上
+                        {
+                            aa += courseStudentDto.PeriodN;
+                        }
+
+                        if (courseStudentDto.PeriodA == 0 && courseStudentDto.PeriodM == 0 &&
+                            courseStudentDto.PeriodN == 0)
+                        {
+                            if (coursebo != null) aa = coursebo.Period;
+                        }
+                        
+                         connection.Execute(sqlStr, new { Period = aa, CourseId = id,IDNo=courseStudentDto.IDNo });
+
+                      
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("StudentService.CourseJieSun({0})异常", id), ex);
+                return false;
+            }
+        }
+
+
+        
+
+        /// <summary>
+        /// 批量签到
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool CourseJieSun2(string id)
+        {
+            try
+            {
                 using (var connection = DataBaseConnection.GetMySqlConnection())
                 {
 
@@ -777,7 +839,7 @@ namespace Services.Course.CourseControl
                         aa = coursebo.Period;
                     }
 
-                    var sqlStr = @"UPDATE `tb_coursestudent` SET Period=@Period,IsCalculate=1,Sign=2 WHERE CourseId=@CourseId";
+                    var sqlStr = @"UPDATE `tb_coursestudent` SET IsCalculate=1,Sign=2 WHERE CourseId=@CourseId";
                     int row = connection.Execute(sqlStr, new { Period = aa, CourseId = id });
                     if (row > 0)
                     {

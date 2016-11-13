@@ -179,17 +179,7 @@ namespace Services.Parameter
                 }
             }
 
-            switch (sort)
-            {
-                case "SchoolName":
-                    strSql += " order by SchoolName " + order;
-                    break;
-                case "SchoolNo":
-                    strSql += "order by SchoolNo " + order;
-                    break;
-                    
-            }
-
+            strSql += " ORDER BY PaiXu ASC ";
 
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
@@ -244,7 +234,7 @@ namespace Services.Parameter
         public List<SchoolBo> GetAllSchoolNew()
         {
             List<SchoolBo> list;
-            string strSql = string.Format(@"SELECT * from tb_school where 1=1 ");
+            string strSql = string.Format(@"SELECT * from tb_school where 1=1 ORDER BY PaiXu ASC   ");
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
 
@@ -262,7 +252,7 @@ namespace Services.Parameter
         public List<SchoolBo> GetPlcSchoolByType()
         {
             List<SchoolBo> list;
-            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=1 ");
+            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=1 ORDER BY PaiXu ASC ");
 
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
@@ -280,7 +270,7 @@ namespace Services.Parameter
         public List<SchoolBo> GetPriSchoolByType()
         {
             List<SchoolBo> list;
-            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=2 ");
+            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=2 ORDER BY PaiXu ASC ");
 
             using (var context = DataBaseConnection.GetMySqlConnection())
             {

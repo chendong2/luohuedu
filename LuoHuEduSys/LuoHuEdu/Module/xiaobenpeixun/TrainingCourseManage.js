@@ -65,7 +65,7 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'CourseCode', title: '课程代码', width: 80 }
 
         ]],
-        singleSelect: false,
+        singleSelect: true,
         toolbar: '#toolbar',
         sortName: 'CourseDate',
         sortOrder: 'desc',
@@ -136,9 +136,6 @@ function loadPartialHtml() {
         panel('formTemplate', {
             href: '/View/xiaobenyanxiu/XiaoBenTrainingCourseForm.htm',
             onLoad: function () {
-                //                setValidatebox('Name', {
-                //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
-                //                });
             }
         });
         panel('registerSetTemplate', {
@@ -360,6 +357,7 @@ function saveData() {
 
     var form2JsonObj = form2Json("ff");
     form2JsonObj.SchoolId = $.cookie('SchoolId');
+    form2JsonObj.OrganizationalName = $.cookie('SchoolId');
     var form2JsonStr = JSON.stringify(form2JsonObj);
     var jsonDataStr = "{courseBo:" + form2JsonStr + "}";
     ajaxCRUD({
@@ -417,8 +415,7 @@ function Search() {
                 courseBo: {
                     TheYear: $("#TheYearSerch").val().trim(),
                     CourseName: $("#txtCourseName").val().trim()
-//                    OrganizationalName:$("#ddlChooseSchool").combobox('getValue'),
-//                    TrainType: $("#ddlTraintype1").combobox('getValue')
+
                 }
             };
             var paramStr = JSON.stringify(studentData);
@@ -651,13 +648,13 @@ function studentManage(courseid) {
         sortName: 'Name',
         sortOrder: 'desc',
         rownumbers: true,
-        pagination: true,
+        pagination: false,
         loader: function (param, success, error) {
             var studentData = {
-                page: param.page,
-                rows: param.rows,
-                order: param.order,
-                sort: param.sort,
+                page: 1,
+                rows: 5000,
+                order: '',
+                sort:'',
                 courseId: courseid
             };
             var paramStr = JSON.stringify(studentData);
@@ -707,10 +704,10 @@ function StudentSearch() {
         pageNumber: 1,
         loader: function (param, success, error) {
             var studentData = {
-                page: param.page,
-                rows: param.rows,
-                order: param.order,
-                sort: param.sort,
+                page:1,
+                rows:5000,
+                order: '',
+                sort:'',
                 courseId: $("#HsmCourseId").val(),
                 studentBo: {
                     Name: $("#txtName").val().trim(),
@@ -820,13 +817,13 @@ var chooseStudentDataGridOptions = {
     sortName: 'Name',
     sortOrder: 'desc',
     rownumbers: true,
-    pagination: true,
+    pagination: false,
     loader: function (param, success, error) {
         var studentData = {
-            page: param.page,
-            rows: param.rows,
-            order: param.order,
-            sort: param.sort,
+            page: 1,
+            rows: 5000,
+            order: '',
+            sort:'',
             studentBo: { SchoolId: $.cookie('SchoolId') }
         };
         var paramStr = JSON.stringify(studentData);
@@ -938,13 +935,13 @@ function chooseStudentSearch() {
         sortName: 'Name',
         sortOrder: 'desc',
         rownumbers: true,
-        pagination: true,
+        pagination: false,
         loader: function (param, success, error) {
             var studentData = {
-                page: param.page,
-                rows: param.rows,
-                order: param.order,
-                sort: param.sort,
+                page: 1,
+                rows: 5000,
+                order: '',
+                sort: '',
                 studentBo: {
                     SchoolId: $("#ddlChooseSchool").combobox('getValue')
                 }
@@ -1224,7 +1221,21 @@ function qiandao(id) {
     });
 }
 
-
+//点击“编辑”按钮
+function jiesuan2() {
+    ajaxCRUD({
+        url: '/WebServices/Admin/Student.asmx/CourseJieSuan2',
+        data: "{id:'" + cousrIdCD + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '批量签到成功', 'info');
+                refreshTable('kgDG');
+            } else {
+                msgShow('提示', '批量签到失败', 'info');
+            }
+        }
+    });
+}
 function quxiao(id) {
     ajaxCRUD({
         url: '/WebServices/Admin/Student.asmx/CancelQianDao',
@@ -1238,7 +1249,6 @@ function quxiao(id) {
             }
         }
     });
-
 }
 
 

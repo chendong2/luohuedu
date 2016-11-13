@@ -19,6 +19,18 @@ using(easyloader.defaultReferenceModules, function () {
                  }
              }
          },
+           { field: 'Manage', title: '管理', width: 60,
+               formatter: function (value, rec) {
+                   if (($.cookie('perList').indexOf("学校管理员") > -1))
+                   {
+                       var btn = '<a class="editcls" onclick="studentManage(\'' + rec.Id + '\')" href="javascript:void(0)">学员管理</a>';
+                        return btn;
+                   } else {
+                              return '';
+                          }
+                    
+                 }
+           },
             { field: 'quxiaobaoming', title: '取消报名', width: 60, formatter: function (value, rec) {
                 if ($.cookie('perList').indexOf("课程报名") > -1) {
                     return '<a style="cursor:pointer" onclick="deletebaomingData(\'' + rec.Id + '\')" href="javascript:void(0)">取消</a>';
@@ -27,49 +39,36 @@ using(easyloader.defaultReferenceModules, function () {
                 }
             }
             },
-            { field: 'CourseName', title: '课程名称', width: 80, formatter: function (value, rec) {
+            { field: 'CourseName', title: '课程名称', width: 180, formatter: function (value, rec) {
                 if ($.cookie('perList').indexOf("课程浏览") > -1) {
                     return '<a style="cursor:pointer" onclick="kecheng(\'' + rec.Id + '\')" href="javascript:void(0)">' + value + '</a>';
                 } else {
                     return '';
                 }
             }
-        },
-             { field: 'Locked', title: '状态', width: 100, formatter: function (value) {
-                 if (value == 1)
-                     return '<span style="red">已锁定</span>';
-                 else if (value == 2)
-                     return '<span>未锁定</span>';
-                 else
-                     return '<span>未设置</span>';
-             }
-             },
-            { field: 'TheYear', title: '年度', width: 80 },
+            },
+            { field: 'SchoolName', title: '学校名称', width: 140 },
+            { field: 'Name', title: '授课教师', width: 80, sortable: true },
+            { field: 'DateTimeStartAndEnd', title: '课程起始', width: 150, sortable: true },
+             { field: 'Period', title: '学时', width: 40 },
             { field: 'TrainType', title: '培训类型', width: 80 },
-
-            { field: 'SubjectName', title: '培训科目', width: 80 },
-            { field: 'Phone', title: '联系电话', width: 80 },
-            { field: 'Period', title: '学时', width: 80 },
-            { field: 'Cost', title: '培训费用', width: 80 },
-            { field: 'SetCheck', title: '考勤设定', width: 70 },
-            { field: 'IsMust', title: '种类', width: 60, formatter: function (value) {
+            {field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
+            { field: 'YiBao', title: '已报人数', width: 60, sortable: true },
+            { field: 'Locked', title: '锁定', width: 60, sortable: true, formatter: function (value) {
                 if (value == 1)
-                    return '<span>选修</span>';
+                    return '<span style="red">已锁定</span>';
+                else if (value == 2)
+                    return '<span>未锁定</span>';
                 else
-                    return '<font>必修</font>';
+                    return '<span>未设置</span>';
             }
             },
-
-            { field: 'Address', title: '培训地址', width: 70, sortable: true },
-            { field: 'MaxNumber', title: '额定人数', width: 70, sortable: true },
-            { field: 'SetApply', title: '超出额定人数设定', width: 100 },
-            { field: 'SchoolName', title: '组织单位名称', width: 100 },
-            { field: 'TimeStartStr', title: '培训开始', width: 70 },
-            { field: 'TimeEndStr', title: '培训结束', width: 70 },
-            { field: 'CourseCode', title: '课程代码', width: 60 }
+            { field: 'SubjectName', title: '培训科目', width:80 },
+       
+            {field: 'Address', title: '培训地址', width: 130, sortable: true }
 
         ]],
-        singleSelect: false,
+        singleSelect: true,
         toolbar: '#toolbar',
         sortName: 'Name',
         sortOrder: 'desc',
@@ -122,6 +121,19 @@ function loadPartialHtml() {
         panel('formTemplate', {
             href: '/View/Course/TrainingCourseForm.htm',
             onLoad: function () {
+            }
+        });
+        panel('studentManageTemplate', {
+            href: '/View/Course/XiaoBenStudentManage.htm',
+            onLoad: function () {
+
+            }
+        });
+        panel('chooseStudentTemplate', {
+            href: '/View/Course/XiaoBenChooseStudent.htm',
+
+            onLoad: function () {
+
             }
         });
     }
@@ -183,23 +195,7 @@ function getAllSubject(ddlRoute, isSimpleSearch) {
     });
 }
 
-//获取所有学校数据，用于绑定下拉框
-function getAllSchool(ddlRoute, isSimpleSearch) {
-    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetAllSchoolNew';
-    $("#sSchool").empty();
-    ajaxCRUD({
-        async: false,
-        url: webserviceUrl,
-        data: '{}',
-        success: function (data) {
-            if (isSimpleSearch) {
-                // 如果是搜索条件用的dll，那么加入请选择选项
-                data.unshift({ 'Id': 0, 'SchoolName': '请选择' });
-            }
-            initCombobox(ddlRoute, "Id", "SchoolName", data, true);
-        }
-    });
-}
+
 
 //获取年份数据，用于绑定下拉框
 function getTheYear() {
@@ -211,10 +207,6 @@ function getTheYear() {
         $("#TheYear").append(option);
     }
 }
-
-
-
-
 
 
 //批量删除前台提示
@@ -338,7 +330,431 @@ function Search() {
 }
 
 
+
 //关闭弹出层
-function closeFormDialog() {
-    closeDialog('dlg');
+function closeFormDialog(id) {
+    closeDialog(id);
 }
+
+var moduleName = '校本培训-';
+
+
+//点击“学员管理”按钮
+function studentManage(courseid) {
+    var row = getSelectedRow('dg');
+    // 学员管理列表参数设置
+    var studentManageDataGridOptions = {
+
+        columns: [[
+            { field: 'Id', checkbox: true },
+            { field: 'Name', title: '姓名', width: 80, sortable: false },
+            { field: 'Sex', title: '性别', width: 60, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "男";
+                    } else {
+                        return "女";
+                    }
+                }
+            },
+            { field: 'SchoolName', title: '学校名称', width: 80, sortable: false }
+        ]],
+        singleSelect: false,
+        toolbar: '#studentManageToolbar',
+        sortName: 'Name',
+        sortOrder: 'desc',
+        rownumbers: true,
+        pagination: false,
+        loader: function (param, success, error) {
+            var studentData = {
+                page: 1,
+                rows: 5000,
+                order: '',
+                sort: '',
+                courseId: courseid
+            };
+            var paramStr = JSON.stringify(studentData);
+
+            ajaxCRUD({
+                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseStudentByCourseId',
+                data: paramStr,
+                success: function (data) {
+                    success(data);
+                },
+                error: function () {
+                    error.apply(this, arguments);
+                }
+            });
+
+        },
+        onDblClickRow: function (rowIndex, rowData) {
+            //rowData.Id
+        }
+    };
+
+    $("#HsmCourseId").val(courseid);
+
+    if (row == null) {
+        msgShow(moduleName + '学员管理', '请选择一行数据！', '');
+    }
+    else if (row.Locked == 1) {
+        msgShow(moduleName + '学员管理', '锁定的课程不能编辑学员！', '');
+    } else {
+        openDialog('studentManageDlg', {
+            title: '学员管理',
+            iconCls: 'icon-edit',
+            onOpen: function () {
+                //初始化列表组件
+                iniDataGrid('studentManageDG', studentManageDataGridOptions);
+            }
+        });
+    }
+
+}
+
+//学员管理搜索
+function StudentSearch() {
+
+    // 列表参数设置
+    var dataGridOptions = {
+        pageNumber: 1,
+        loader: function (param, success, error) {
+            var studentData = {
+                page: 1,
+                rows: 5000,
+                order: '',
+                sort: '',
+                courseId: $("#HsmCourseId").val(),
+                studentBo: {
+                    Name: $("#txtName").val().trim(),
+                    SchoolName: $("#txtSchoolName").val().trim()
+                }
+            };
+            var paramStr = JSON.stringify(studentData);
+
+            ajaxCRUD({
+                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseStudentByCourseId',
+                data: paramStr,
+                success: function (data) {
+                    success(data);
+                },
+                error: function () {
+                    error.apply(this, arguments);
+                }
+            });
+        }
+    };
+
+    //初始化列表组件
+    iniDataGrid('studentManageDG', dataGridOptions);
+}
+
+//批量删除前台提示
+function deleteStudentManageDatas() {
+    deleteItems('studentManageDG', deleteStudentManageDatasAjax);
+}
+
+//批量删除后台AJAX处理
+function deleteStudentManageDatasAjax(str) {
+    ajaxCRUD({
+        url: '/WebServices/Course/CourseWebServices.asmx/DeleteCourseStudent',
+        data: "{ids:'" + str + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '删除成功', 'info');
+                refreshTable('studentManageDG');
+            } else {
+                msgShow('提示', '删除失败', 'info');
+            }
+        }
+    });
+}
+
+// 选择学员列表参数设置
+// 列表参数设置
+var chooseStudentDataGridOptions = {
+    title: '',
+    columns: [[
+            { field: 'Id', checkbox: true },
+            { field: 'Name', title: '姓名', width: 80, sortable: false },
+            { field: 'IDNo', title: '身份证', width: 180, sortable: false },
+            { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
+            { field: 'Sex', title: '性别', width: 60, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "男";
+                    } else {
+                        return "女";
+                    }
+                }
+            },
+            { field: 'Profession', title: '专业', width: 80, sortable: false },
+            { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
+            { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "高中";
+                    } else if (value == "2") {
+                        return "中专";
+                    } else if (value == "3") {
+                        return "大专";
+                    } else if (value == "4") {
+                        return "本科";
+                    } else if (value == "5") {
+                        return "硕士";
+                    } else if (value == "6") {
+                        return "博士";
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            { field: 'StudyPeriod', title: '任课学段', width: 80, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "幼儿";
+                    } else if (value == "2") {
+                        return "小学";
+                    } else if (value == "3") {
+                        return "初中";
+                    } else if (value == "4") {
+                        return "高中";
+                    } else {
+                        return "其他";
+                    }
+                }
+            },
+            { field: 'Office', title: '职务', width: 80, sortable: false },
+             { field: 'Telephone', title: '手机', width: 100, sortable: false },
+            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
+        ]],
+    singleSelect: false,
+    toolbar: '#chooseStudentToolbar',
+    sortName: 'Name',
+    sortOrder: 'desc',
+    rownumbers: true,
+    pagination: false,
+    loader: function (param, success, error) {
+        var studentData = {
+            page: 1,
+            rows: 5000,
+            order: '',
+            sort: '',
+            studentBo: { SchoolId: $.cookie('SchoolId') }
+        };
+        var paramStr = JSON.stringify(studentData);
+
+        ajaxCRUD({
+            url: '/WebServices/Admin/Student.asmx/GetStudentList',
+            data: paramStr,
+            success: function (data) {
+                success(data);
+            },
+            error: function () {
+                error.apply(this, arguments);
+            }
+        });
+
+    },
+    onDblClickRow: function (rowIndex, rowData) {
+
+    }
+};
+
+//点击“选择学员”按钮
+function chooseStudent() {
+
+    //选择单位下拉数据绑定 
+    getAllSchool("ddlChooseSchool", true);
+
+    openDialog('chooseStudentDlg', {
+        title: '选择学员',
+        iconCls: 'icon-add',
+        onOpen: function () {
+            //初始化列表组件
+            iniDataGrid('chooseStudentDG', chooseStudentDataGridOptions);
+        }
+    });
+
+
+}
+
+
+function chooseStudentSearch() {
+
+    // 选择学员列表参数设置
+    // 列表参数设置
+    var chooseStudentDataGridOptions = {
+        title: '',
+        columns: [[
+            { field: 'Id', checkbox: true },
+            { field: 'Name', title: '姓名', width: 80, sortable: false },
+            { field: 'IDNo', title: '身份证', width: 180, sortable: false },
+            { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
+            { field: 'Sex', title: '性别', width: 60, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "男";
+                    } else {
+                        return "女";
+                    }
+                }
+            },
+            { field: 'Profession', title: '专业', width: 80, sortable: false },
+            { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
+            { field: 'Birthday', title: '生日', width: 100, sortable: false,
+                formatter: function (value) {
+                    value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
+                    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+                }
+            },
+            { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "高中";
+                    } else if (value == "2") {
+                        return "中专";
+                    } else if (value == "3") {
+                        return "大专";
+                    } else if (value == "4") {
+                        return "本科";
+                    } else if (value == "5") {
+                        return "硕士";
+                    } else if (value == "6") {
+                        return "博士";
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            { field: 'StudyPeriod', title: '任课学段', width: 80, sortable: false,
+                formatter: function (value) {
+                    if (value == "1") {
+                        return "幼儿";
+                    } else if (value == "2") {
+                        return "小学";
+                    } else if (value == "3") {
+                        return "初中";
+                    } else if (value == "4") {
+                        return "高中";
+                    } else {
+                        return "其他";
+                    }
+                }
+            },
+            { field: 'Office', title: '职务', width: 80, sortable: false },
+             { field: 'Telephone', title: '手机', width: 100, sortable: false },
+            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
+        ]],
+        singleSelect: false,
+        toolbar: '#chooseStudentToolbar',
+        sortName: 'Name',
+        sortOrder: 'desc',
+        rownumbers: true,
+        pagination: false,
+        loader: function (param, success, error) {
+            var studentData = {
+                page: 1,
+                rows: 5000,
+                order: '',
+                sort: '',
+                studentBo: {
+                    SchoolId: $("#ddlChooseSchool").combobox('getValue')
+                }
+            };
+            var paramStr = JSON.stringify(studentData);
+
+            ajaxCRUD({
+                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                data: paramStr,
+                success: function (data) {
+                    success(data);
+                },
+                error: function () {
+                    error.apply(this, arguments);
+                }
+            });
+
+        },
+        onDblClickRow: function (rowIndex, rowData) {
+
+        }
+    };
+
+    //初始化列表组件
+    iniDataGrid('chooseStudentDG', chooseStudentDataGridOptions);
+}
+
+//获取所有学校数据，用于绑定下拉框
+function getAllSchool(ddlRoute, isSimpleSearch) {
+    var webserviceUrl = '/WebServices/Parameter/School.asmx/GetAllSchoolNew';
+    ajaxCRUD({
+        async: false,
+        url: webserviceUrl,
+        data: '{}',
+        success: function (data) {
+            if (isSimpleSearch) {
+                // 如果是搜索条件用的dll，那么加入请选择选项
+                data.unshift({ 'Id': 0, 'SchoolName': '请选择' });
+            }
+            initCombobox(ddlRoute, "Id", "SchoolName", data, true);
+        }
+    });
+}
+
+function chooseStudentData() {
+
+    //检测学员是否重复选择
+    var studentManageDataRows = $("#studentManageDG").datagrid('getData').rows;
+    var studentNameArr = [];
+    var chooseStudentRows = $('#chooseStudentDG').datagrid('getSelections');
+    for (var csi = 0; csi < chooseStudentRows.length; csi++) {
+        var chooseStudentRow = chooseStudentRows[csi];
+
+        $.each(studentManageDataRows, function (index, studentManageDataRow) {
+            if (chooseStudentRow.Id == studentManageDataRow.StudentId) {
+                studentNameArr.push(chooseStudentRow.Name);
+            }
+        });
+    }
+
+    if (studentNameArr.length > 0) {
+        msgShow('提示', studentNameArr.join('、') + "学员已被选择过，不需要重复选择", 'info');
+        return false;
+    }
+
+    //添加新学员
+    var idArr = [];
+    var rows = $('#chooseStudentDG').datagrid('getSelections');
+    for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        idArr.push(row.Id);
+    }
+
+    var ids = idArr.join(',');
+
+    var studentData = {
+        ids: ids,
+        studentBo: {
+            CourseId: $("#HsmCourseId").val()
+        }
+    };
+
+    var paramStr = JSON.stringify(studentData);
+
+    ajaxCRUD({
+        url: '/WebServices/Course/CourseWebServices.asmx/BatchAddCourseStudent',
+        data: paramStr,
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '选择学员成功', 'info');
+                closeFormDialog('chooseStudentDlg');
+                refreshTable('studentManageDG');
+            } else {
+                msgShow('提示', '提交失败', 'info');
+            }
+        }
+    });
+    return false;
+}
+

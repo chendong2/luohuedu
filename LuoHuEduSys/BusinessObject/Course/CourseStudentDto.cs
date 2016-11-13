@@ -86,5 +86,10 @@ namespace BusinessObject.Course
 
         public string Telephone { get; set; }
 
+
+        public int PeriodM { get; set; }
+        public int PeriodA { get; set; }
+        public int PeriodN { get; set; }
+
     }
 }

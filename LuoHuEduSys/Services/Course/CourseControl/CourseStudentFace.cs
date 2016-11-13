@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BusinessObject.Course;
 using BusinessObject.WSBo;
 using Dapper;
 using Domain.common;
@@ -40,6 +41,35 @@ namespace Services.Course.CourseControl
             catch (Exception ex)
             {
                 LogHelper.WriteLog(string.Format("CourseStudentFace.GetCourseStudentByCourseId({0})异常", courseId), ex);
+                return null;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 根据课程ID获取报名数据
+        /// </summary>
+        /// <param name="courseId">课程ID</param>
+        /// <returns></returns>
+        public List<CourseStudentDto> GetCourseStudentByCourseIdNew(string courseId)
+        {
+            string strSql = string.Format(@"SELECT * FROM `tb_coursestudent` WHERE `CourseId`=@CourseId");
+            try
+            {
+                using (var context = DataBaseConnection.GetMySqlConnection())
+                {
+                    var list = context.Query<CourseStudentDto>(strSql,
+                                                 new
+                                                 {
+                                                     CourseId = courseId
+                                                 }).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(string.Format("CourseStudentFace.GetCourseStudentByCourseIdNew({0})异常", courseId), ex);
                 return null;
             }
         }

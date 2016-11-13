@@ -206,6 +206,15 @@ namespace LuoHuEdu.WebServices.Admin
             return studentService.CourseJieSun(id);
         }
 
+        //结算课程给予课时
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool CourseJieSuan2(string id)
+        {
+            var studentService = new CourseStudentService();
+            return studentService.CourseJieSun2(id);
+        }
+
         //取消签到
         [ScriptMethod]
         [WebMethod(EnableSession = true)]

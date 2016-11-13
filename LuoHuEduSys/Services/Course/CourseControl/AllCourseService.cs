@@ -177,16 +177,18 @@ GROUP BY ct.StudentId,tb_traintype.TrainType,TheYear )b ON st.id=b.studentid whe
             pageSize = page * rows;
             var pageList = new Page<CourseBo>();
 
-            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName`, CONCAT(st.Name,c.`WaiPingName`) AS NAME,COUNT(ct.id) AS YiBao    FROM                                                                                tb_course AS c 
                                             INNER JOIN tb_subject AS s ON c.Subject=s.Id
                                             INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
-                                            INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName` 
-                                            WHERE  c.Locked=2  AND  c.TimeEnd >DATE_SUB( DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL 1 DAY) AND CourseState=2 AND EXISTS( SELECT * FROM tb_student st LEFT JOIN tb_subject su ON st.`FirstTeaching`=su.`Id`  
+                                            INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
+                                            LEFT JOIN tb_student st ON st.`Id`=c.`TeacherId` 
+                                            LEFT JOIN `tb_coursestudent` ct ON ct.`CourseId`=c.`Id`
+                                             WHERE  c.Locked=2  AND  c.TimeEnd >DATE_SUB( DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL 1 DAY) AND CourseState=2 AND EXISTS( SELECT * FROM tb_student st LEFT JOIN tb_subject su ON st.`FirstTeaching`=su.`Id`  
 LEFT JOIN tb_subject su1 ON st.`SecondTeaching`=su1.`Id`
 WHERE POSITION(st.StudyPeriod IN c.TeachingObject)>0 AND POSITION(st.Staffing IN c.ObjectEstablish)>0  
 AND (POSITION(su.`SubjectName` IN c.ObjectSubject)>0 OR POSITION(su1.`SubjectName` IN c.ObjectSubject)>0) 
 AND (POSITION(st.`SchoolId` IN c.PlcSchool)>0  OR POSITION(st.`SchoolId` IN c.PriSchool)>0 )
-AND st.`Id`=@StudentId ) AND c.Requirement=1 ");
+AND st.`Id`=@StudentId )  ");
 
            if (courseBo != null)
           {
@@ -197,13 +199,15 @@ AND st.`Id`=@StudentId ) AND c.Requirement=1 ");
               }
           }
 
-            switch (sort)
-            {
-                case "TheYear":
-                    strSql += " order by TheYear " + order;
-                    break;
-            }
+            //switch (sort)
+            //{
+            //    case "TheYear":
+            //        strSql += " order by TheYear " + order;
+            //        break;
+            //}
 
+            const string group = " GROUP BY c.`Id` ORDER BY c.`TimeStart` DESC ";
+            strSql += group;
 
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
@@ -213,6 +217,7 @@ AND st.`Id`=@StudentId ) AND c.Requirement=1 ");
                                                 StudentId = studentId,
                                                 CourseName = string.Format("%{0}%", courseBo.CourseName)
                                             }).Count();
+                
                 strSql += " limit @pageindex,@pagesize";
 
                 var list = context.Query<CourseBo>(strSql,

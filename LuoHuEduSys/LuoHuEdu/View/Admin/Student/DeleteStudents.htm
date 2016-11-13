@@ -1,0 +1,35 @@
+﻿<div id="DelBuDlg" style="width: 400px;" data-options="buttons: '#TongBuDlg-button',
+                                                                        closed: true,
+                                                                        shadow:false,
+                                                                        modal:true">
+    <style type="text/css">
+        .custom_forms tr td input[type="text"]
+        {
+            width: auto;
+        }
+    </style>
+    <form id="TongBuForm" method="post">
+        <div id="formTabs" class="easyui-tabs">
+        <table class="custom_forms_popup">
+            <tbody>
+                <tr>
+                    <td>
+                        <span style="color:red">删除该用户会造成课时错误，会影响到他调离后回查课时，除了退休、辞职超过两年、账号重复，其他情况都不能删除!</span>
+                    </td>
+                </tr>
+                   <tr>
+                    <td>
+                        <span style="color:red"></span>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+    </div>
+    <div>
+        <input id="Hid" type="hidden" name="Id" />
+    </div>
+    </form>
+</div>
+<div id="TongBuDlg-button">
+    <a class="easyui-linkbutton" onclick="saveLockedAuditSetData()">确定</a> 
+</div>

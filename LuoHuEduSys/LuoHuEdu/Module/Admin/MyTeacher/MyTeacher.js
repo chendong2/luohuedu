@@ -90,16 +90,22 @@ using(easyloader.defaultReferenceModules, function () {
     });
 
 });
+
 //获取年份数据，用于绑定下拉框
 function getTheYearSerch() {
     var currentYear = new Date().getFullYear();
     $("#TheYearSerch").empty();
+    var aa = currentYear + "-" + (currentYear + 1);
+    var option1 = "<option  value='" + aa + "'>" + aa + "</option>";
+    $("#TheYearSerch").append(option1);
     for (var i = 1; i <= 15; i++) {
         var data = currentYear - i + "-" + (currentYear - i + 1);
         var option = "<option  value='" + data + "'>" + data + "</option>";
         $("#TheYearSerch").append(option);
     }
 }
+
+
 
 //easyloader.defaultTime为700ms
 setTimeout(loadPartialHtml, easyloader.defaultTime);
@@ -113,9 +119,7 @@ function loadPartialHtml() {
         panel('formTemplate', {
             href: '/View/Admin/MyTeacher/MyTeacherForm.htm',
             onLoad: function () {
-                //                setValidatebox('Name', {
-                //                    validType: "unique['WebServices/AdminWebService/JobWebService/JobWebService.asmx/CheckUniqueByJobName','JobName','JobName','jobName','岗位名称']"
-                //                });
+            
             }
         });
     }
@@ -208,6 +212,9 @@ function getAllStudent(ddlRoute, isSimpleSearch) {
 function getTheYear() {
     var currentYear = new Date().getFullYear();
     $("#TheYear").empty();
+    var aa = currentYear + "-" + (currentYear + 1);
+    var option1 = "<option  value='" + aa + "'>" + aa + "</option>";
+    $("#TheYear").append(option1);
     for (var i = 1; i <= 15; i++) {
         var data = currentYear - i + "-" + (currentYear - i + 1);
         var option = "<option  value='" + data + "'>" + data + "</option>";

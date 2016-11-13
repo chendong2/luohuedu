@@ -39,11 +39,13 @@ namespace Services.Course.CourseControl
             pageSize = page * rows;
             var pageList = new Page<CourseBo>();
 
-            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
-                                            left JOIN tb_subject AS s ON c.Subject=s.Id
-                                            left JOIN tb_traintype AS t ON c.TrainType=t.Id 
-					                        left JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`                                         
-                                            WHERE 1=1 
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName`, CONCAT(st.Name,c.`WaiPingName`) AS NAME,COUNT(ct.id) AS YiBao FROM tb_course AS c 
+                                            LEFT JOIN tb_subject AS s ON c.Subject=s.Id
+                                            LEFT JOIN tb_traintype AS t ON c.TrainType=t.Id 
+                                            LEFT JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
+                                            LEFT JOIN tb_student st ON st.`Id`=c.`TeacherId` 
+                                            LEFT JOIN `tb_coursestudent` ct ON ct.`CourseId`=c.`Id`                                        
+                                            WHERE 1=1
                                              ");
             if (courseBo != null)
             {
@@ -83,7 +85,6 @@ namespace Services.Course.CourseControl
                     strSql += " and c.Locked=@Locked ";
                 }
             }
-
             string adminSchoolId = string.Empty;
 
             if (Domain.common.UserInfo.havePermissions("学校管理员") && !Domain.common.UserInfo.havePermissions("系统管理员"))
@@ -98,14 +99,14 @@ namespace Services.Course.CourseControl
                 strSql += " and c.OrganizationalName=@adminSchoolId ";
             }
 
-            switch (sort)
-            {
-                case "TheYear":
-                    strSql += " order by TheYear " + order;
-                    break;
-            }
-
-
+            //switch (sort)
+            //{
+            //    case "TheYear":
+            //        strSql += " order by TheYear " + order;
+            //        break;
+            //}
+            const string group = " GROUP BY c.`Id` ORDER BY c.`TimeStart` DESC ";
+            strSql += group;
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
                 count = context.Query<CourseBo>(strSql,
@@ -529,7 +530,7 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
             pageSize = page * rows;
             var pageList = new Page<CourseBo>();
 
-            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName` FROM tb_course AS c 
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName`,cs.`Period` AS HuoDePeriod FROM tb_course AS c 
                                             INNER JOIN tb_subject AS s ON c.Subject=s.Id
                                             INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
 					                        INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
