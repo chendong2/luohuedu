@@ -281,7 +281,7 @@ namespace Services.Admin.StudentControl
             pageSize = page * rows;
             var pageList = new Page<StudentBo>();
 
-            string strSql = string.Format(@"SELECT tb_student.*,tb_school.SchoolName from tb_student inner join tb_school on tb_student.SchoolId=tb_school.Id where 1=1  ");
+            string strSql = string.Format(@"SELECT tb_student.*,tb_school.SchoolName FROM tb_school left JOIN tb_student ON tb_student.SchoolId=tb_school.Id where 1=1  ");
             if (studentBo != null)
             {
                 if (!string.IsNullOrEmpty(studentBo.Name))
@@ -296,9 +296,9 @@ namespace Services.Admin.StudentControl
                 {
                     strSql += "and SchoolName like @SchoolName ";
                 }
-                if (studentBo.SchoolId != null && studentBo.SchoolId != "0" && studentBo.SchoolId.Length>0)
+                if (studentBo.SchoolId != null && studentBo.SchoolId != "0" && studentBo.SchoolId.Length > 0)
                 {
-                    strSql += "and tb_student.SchoolId=@SchoolId ";
+                    strSql += " and tb_student.SchoolId=@SchoolId ";
                 }
             }
 
@@ -617,10 +617,10 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
             var pageList = new Page<StudentBo>();
             var sqlStr = @"SELECT  cs.id,st.Name,st.Sex,sc.schoolname,st.office,
                             st.telephone,cs.Sign,cs.`SignADate`,cs.`SignMDate`,cs.`SignNDate`,cs.Period,st.Birthday 
-                            FROM tb_student st 
-                            INNER JOIN tb_coursestudent cs ON st.IDNo=cs.IDNo 
+                            FROM tb_coursestudent cs
+                            INNER JOIN tb_student st ON st.IDNo=cs.IDNo 
                             INNER JOIN tb_course co ON cs.courseid=co.id  
-                            INNER JOIN tb_school sc ON st.schoolid=sc.id 
+                            LEFT JOIN tb_school sc ON st.schoolid=sc.id
                             WHERE  1=1  ";
 
             if (studentBo != null )

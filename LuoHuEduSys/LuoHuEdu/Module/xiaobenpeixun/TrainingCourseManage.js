@@ -652,7 +652,7 @@ function studentManage(courseid) {
         loader: function (param, success, error) {
             var studentData = {
                 page: 1,
-                rows: 5000,
+                rows:200,
                 order: '',
                 sort:'',
                 courseId: courseid
@@ -705,7 +705,7 @@ function StudentSearch() {
         loader: function (param, success, error) {
             var studentData = {
                 page:1,
-                rows:5000,
+                rows:200,
                 order: '',
                 sort:'',
                 courseId: $("#HsmCourseId").val(),
@@ -773,44 +773,7 @@ var chooseStudentDataGridOptions = {
                 }
             },
             { field: 'Profession', title: '专业', width: 80, sortable: false },
-            { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
-            { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
-                formatter: function (value) {
-                    if (value == "1") {
-                        return "高中";
-                    } else if (value == "2") {
-                        return "中专";
-                    } else if (value == "3") {
-                        return "大专";
-                    } else if (value == "4") {
-                        return "本科";
-                    } else if (value == "5") {
-                        return "硕士";
-                    } else if (value == "6") {
-                        return "博士";
-                    } else {
-                        return "";
-                    }
-                }
-            },
-            { field: 'StudyPeriod', title: '任课学段', width: 80, sortable: false,
-                formatter: function (value) {
-                    if (value == "1") {
-                        return "幼儿";
-                    } else if (value == "2") {
-                        return "小学";
-                    } else if (value == "3") {
-                        return "初中";
-                    } else if (value == "4") {
-                        return "高中";
-                    } else {
-                        return "其他";
-                    }
-                }
-            },
-            { field: 'Office', title: '职务', width: 80, sortable: false },
-             { field: 'Telephone', title: '手机', width: 100, sortable: false },
-            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
+            { field: 'Professiontitles', title: '职称', width: 80, sortable: false }
         ]],
     singleSelect: false,
     toolbar: '#chooseStudentToolbar',
@@ -821,7 +784,7 @@ var chooseStudentDataGridOptions = {
     loader: function (param, success, error) {
         var studentData = {
             page: 1,
-            rows: 5000,
+            rows:200,
             order: '',
             sort:'',
             studentBo: { SchoolId: $.cookie('SchoolId') }
@@ -885,50 +848,7 @@ function chooseStudentSearch() {
                 }
             },
             { field: 'Profession', title: '专业', width: 80, sortable: false },
-            { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
-            { field: 'Birthday', title: '生日', width: 100, sortable: false,
-                formatter: function (value) {
-                    value.replace(/Date\([\d+]+\)/, function (a) { eval('d = new ' + a) });
-                    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-                }
-            },
-            { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
-                formatter: function (value) {
-                    if (value == "1") {
-                        return "高中";
-                    } else if (value == "2") {
-                        return "中专";
-                    } else if (value == "3") {
-                        return "大专";
-                    } else if (value == "4") {
-                        return "本科";
-                    } else if (value == "5") {
-                        return "硕士";
-                    } else if (value == "6") {
-                        return "博士";
-                    } else {
-                        return "";
-                    }
-                }
-            },
-            { field: 'StudyPeriod', title: '任课学段', width: 80, sortable: false,
-                formatter: function (value) {
-                    if (value == "1") {
-                        return "幼儿";
-                    } else if (value == "2") {
-                        return "小学";
-                    } else if (value == "3") {
-                        return "初中";
-                    } else if (value == "4") {
-                        return "高中";
-                    } else {
-                        return "其他";
-                    }
-                }
-            },
-            { field: 'Office', title: '职务', width: 80, sortable: false },
-             { field: 'Telephone', title: '手机', width: 100, sortable: false },
-            { field: 'RegistrationCode', title: '市注册码', width: 100, sortable: false }
+            { field: 'Professiontitles', title: '职称', width: 80, sortable: false }
         ]],
         singleSelect: false,
         toolbar: '#chooseStudentToolbar',
@@ -939,7 +859,7 @@ function chooseStudentSearch() {
         loader: function (param, success, error) {
             var studentData = {
                 page: 1,
-                rows: 5000,
+                rows:200,
                 order: '',
                 sort: '',
                 studentBo: {

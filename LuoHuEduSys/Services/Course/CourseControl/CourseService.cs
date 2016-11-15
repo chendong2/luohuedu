@@ -70,7 +70,7 @@ namespace Services.Course.CourseControl
                     strSql += " and c.TheYear=@TheYear ";
                 }
                 //课程代码查询
-                if (!string.IsNullOrEmpty(courseBo.OrganizationalName) &&courseBo.OrganizationalName!="0")
+                if (!string.IsNullOrEmpty(courseBo.OrganizationalName) && courseBo.OrganizationalName != "0")
                 {
                     strSql += " and c.OrganizationalName=@OrganizationalName ";
                 }
@@ -96,15 +96,12 @@ namespace Services.Course.CourseControl
                 var adminBo = studentService.GetAllStudentById1(userId);
                 adminSchoolId = adminBo.SchoolId;
 
-                strSql += " and c.OrganizationalName=@adminSchoolId ";
+                strSql += " and c.OrganizationalName=@adminSchoolId and c.TrainType='c038430c-1b54-4c91-9e60-993642e79163' ";
+
+
             }
 
-            //switch (sort)
-            //{
-            //    case "TheYear":
-            //        strSql += " order by TheYear " + order;
-            //        break;
-            //}
+           
             const string group = " GROUP BY c.`Id` ORDER BY c.`TimeStart` DESC ";
             strSql += group;
             using (var context = DataBaseConnection.GetMySqlConnection())

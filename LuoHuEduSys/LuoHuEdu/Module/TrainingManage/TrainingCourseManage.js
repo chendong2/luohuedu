@@ -766,7 +766,7 @@ function studentManage(courseid) {
         loader: function (param, success, error) {
             var studentData = {
                 page: 1,
-                rows: 1000,
+                rows: 200,
                 order: '',
                 sort: '',
                 courseId: courseid
@@ -896,7 +896,7 @@ var chooseStudentDataGridOptions = {
     loader: function (param, success, error) {
         var studentData = {
             page:1,
-            rows: 1000,
+            rows: 200,
             order: '',
             sort: '',
             studentBo: {}
@@ -1006,7 +1006,7 @@ function chooseStudentSearch() {
         loader: function (param, success, error) {
             var studentData = {
                 page: 1,
-                rows: 1000,
+                rows: 200,
                 order: '',
                 sort: '',
                 studentBo: {
