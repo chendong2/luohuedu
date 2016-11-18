@@ -19,6 +19,11 @@
     </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1538,6 +1543,7 @@
     <None Include="Log\LogInfo\20160515.0" />
     <None Include="Log\LogInfo\20160516.0" />
     <None Include="Log\LogInfo\20160520.0" />
+    <None Include="Properties\PublishProfiles\配置文件1.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Themes\Menu\SmallImages\" />

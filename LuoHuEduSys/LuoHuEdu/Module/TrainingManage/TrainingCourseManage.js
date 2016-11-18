@@ -13,9 +13,10 @@ using(easyloader.defaultReferenceModules, function () {
             { field: 'Id', checkbox: true },
 
               { field: 'CourseName', title: '课程名称', width: 200, sortable: true },
-              
-              { field:
-                  'opt',
+
+              {
+                  field:
+                    'opt',
                   title: '报名设置',
                   width: 80,
                   formatter: function (value, rec) {
@@ -23,26 +24,30 @@ using(easyloader.defaultReferenceModules, function () {
                       return btn;
                   }
               },
-            { field: 'Aduit', title: '审核', width: 40,
+            {
+                field: 'Aduit', title: '审核', width: 40,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="courseAudit(\'' + rec.Id + '\')" href="javascript:void(0)">审核</a>';
                     return btn;
                 }
             },
-              { field: 'SuoDing', title: '锁定', width:40,
+              {
+                  field: 'SuoDing', title: '锁定', width: 40,
                   formatter: function (value, rec) {
                       var btn = '<a class="editcls" onclick="lockedCourse(\'' + rec.Id + '\')" href="javascript:void(0)">锁定</a>';
                       return btn;
                   }
               },
-            { field: 'Manage', title: '管理', width: 60,
+            {
+                field: 'Manage', title: '管理', width: 60,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="studentManage(\'' + rec.Id + '\')" href="javascript:void(0)">学员管理</a>';
                     return btn;
                 }
             },
 
-            { field: 'kaoqing', title: '考勤', width:40,
+            {
+                field: 'kaoqing', title: '考勤', width: 40,
                 formatter: function (value, rec) {
                     var btn = '<a class="editcls" onclick="kaoQing(\'' + rec.Id + '\')" href="javascript:void(0)">考勤</a>';
                     return btn;
@@ -54,29 +59,31 @@ using(easyloader.defaultReferenceModules, function () {
              { field: 'Period', title: '学时', width: 40 },
             { field: 'TrainType', title: '培训类型', width: 80 },
             { field: 'MaxNumber', title: '额定人数', width: 60, sortable: true },
-             { field: 'YiBao', title: '已报人数', width:60, sortable: true },
-            { field: 'CourseState', title: '状态', width: 80, formatter: function (value) {
-                if (value == 1)
-                    return '<span style="color:red">待审</span>';
-                else if (value == 2)
-                    return '<span  style="color:green">已审并开放</span>';
-                else if (value == 3)
-                    return '<span>不通过</span>';
-                return '<span style="red">待审核状态</span>';
-            }
+             { field: 'YiBao', title: '已报人数', width: 60, sortable: true },
+            {
+                field: 'CourseState', title: '状态', width: 80, formatter: function (value) {
+                    if (value == 1)
+                        return '<span style="color:red">待审</span>';
+                    else if (value == 2)
+                        return '<span  style="color:green">已审并开放</span>';
+                    else if (value == 3)
+                        return '<span>不通过</span>';
+                    return '<span style="red">待审核状态</span>';
+                }
             },
-            { field: 'Locked', title: '锁定', width: 60, sortable: true, formatter: function (value) {
-                if (value == 1)
-                    return '<span style="red">已锁定</span>';
-                else if (value == 2)
-                    return '<span>未锁定</span>';
-                else
-                    return '<span>未设置</span>';
-            }
+            {
+                field: 'Locked', title: '锁定', width: 60, sortable: true, formatter: function (value) {
+                    if (value == 1)
+                        return '<span style="red">已锁定</span>';
+                    else if (value == 2)
+                        return '<span>未锁定</span>';
+                    else
+                        return '<span>未设置</span>';
+                }
             },
             { field: 'SubjectName', title: '培训科目', width: 80 },
             { field: 'Address', title: '培训地址', width: 130, sortable: true }
-            
+
         ]],
         singleSelect: true,
         toolbar: '#toolbar',
@@ -299,7 +306,7 @@ function fillForm(itemid) {
                 data: "{id:'" + data.TeacherId + "'}",
                 success: function (data1) {
                     // 如果是搜索条件用的dll，那么加入请选择选项
-                    $("#ddlSchoolName").combobox('setValue', data1.SchoolId);   
+                    $("#ddlSchoolName").combobox('setValue', data1.SchoolId);
                 }
             });
 
@@ -746,7 +753,8 @@ function studentManage(courseid) {
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
-            { field: 'Sex', title: '性别', width: 60, sortable: false,
+            {
+                field: 'Sex', title: '性别', width: 60, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "男";
@@ -877,7 +885,8 @@ var chooseStudentDataGridOptions = {
             { field: 'Name', title: '姓名', width: 80, sortable: false },
             { field: 'IDNo', title: '身份证', width: 180, sortable: false },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
-            { field: 'Sex', title: '性别', width: 60, sortable: false,
+            {
+                field: 'Sex', title: '性别', width: 60, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "男";
@@ -886,7 +895,7 @@ var chooseStudentDataGridOptions = {
                     }
                 }
             }
-        ]],
+    ]],
     singleSelect: false,
     toolbar: '#chooseStudentToolbar',
     sortName: 'Name',
@@ -895,7 +904,7 @@ var chooseStudentDataGridOptions = {
     pagination: false,
     loader: function (param, success, error) {
         var studentData = {
-            page:1,
+            page: 1,
             rows: 200,
             order: '',
             sort: '',
@@ -950,7 +959,8 @@ function chooseStudentSearch() {
             { field: 'Name', title: '姓名', width: 80, sortable: false },
             { field: 'IDNo', title: '身份证', width: 180, sortable: false },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
-            { field: 'Sex', title: '性别', width: 60, sortable: false,
+            {
+                field: 'Sex', title: '性别', width: 60, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "男";
@@ -961,7 +971,8 @@ function chooseStudentSearch() {
             },
             { field: 'Profession', title: '专业', width: 80, sortable: false },
             { field: 'Professiontitles', title: '职称', width: 80, sortable: false },
-            { field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
+            {
+                field: 'HighDegree', title: '最高学历', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "高中";
@@ -980,7 +991,8 @@ function chooseStudentSearch() {
                     }
                 }
             },
-            { field: 'StudyPeriod', title: '任课学段', width: 80, sortable: false,
+            {
+                field: 'StudyPeriod', title: '任课学段', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "幼儿";
@@ -1120,7 +1132,8 @@ function kaoQing(id) {
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
-            { field: 'Sex', title: '性别', width: 60, sortable: false,
+            {
+                field: 'Sex', title: '性别', width: 60, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "男";
@@ -1131,7 +1144,8 @@ function kaoQing(id) {
             },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Period', title: '学时', width: 80, sortable: false },
-            { field: 'Sign', title: '状态', width: 80, sortable: false,
+            {
+                field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "未签";
@@ -1142,7 +1156,17 @@ function kaoQing(id) {
             },
             { field: 'SignMDate', title: '上午签到', width: 150, sortable: false },
             { field: 'SignADate', title: '下午签到', width: 150, sortable: false },
-            { field: 'SignNDate', title: '晚上签到', width: 150, sortable: false }
+            { field: 'SignNDate', title: '晚上签到', width: 150, sortable: false },
+             {
+                 field: 'Sign1', title: '操作', width: 80, sortable: false,
+                 formatter: function (value, rec) {
+                     if (rec.Sign == "1") {
+                         return '<a style="color:red;cursor:pointer" onclick="qiandao(\'' + rec.Id + '\')" href="javascript:void(0)">签到</a>';
+                     } else {
+                         return '<a style="color:red;cursor:pointer" onclick="quxiao(\'' + rec.Id + '\')" href="javascript:void(0)">取消签到</a>';
+                     }
+                 }
+             }
         ]],
         singleSelect: false,
         toolbar: '#KaoqingToolbar',
@@ -1195,7 +1219,8 @@ function KaoqingSearch() {
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
-            { field: 'Sex', title: '性别', width: 60, sortable: false,
+            {
+                field: 'Sex', title: '性别', width: 60, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "男";
@@ -1206,7 +1231,8 @@ function KaoqingSearch() {
             },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Period', title: '学分', width: 80, sortable: false },
-            { field: 'Sign', title: '状态', width: 80, sortable: false,
+            {
+                field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
                         return "未签";
@@ -1217,8 +1243,18 @@ function KaoqingSearch() {
             },
             { field: 'KaoQingDateOne', title: '上午签到', width: 80, sortable: false },
             { field: 'KaoQingMorningOne', title: '下午签到', width: 80, sortable: false },
-            { field: 'KaoQingAfternoonOne', title: '晚上签到', width: 80, sortable: false }
-          
+            { field: 'KaoQingAfternoonOne', title: '晚上签到', width: 80, sortable: false },
+            {
+                field: 'Sign1', title: '操作', width: 80, sortable: false,
+                formatter: function (value, rec) {
+                    if (rec.Sign == "1") {
+                        return '<a style="color:red;cursor:pointer" onclick="qiandao(\'' + rec.Id + '\')" href="javascript:void(0)">签到</a>';
+                    } else {
+                        return '<a style="color:red;cursor:pointer" onclick="quxiao(\'' + rec.Id + '\')" href="javascript:void(0)">取消签到</a>';
+                    }
+                }
+            }
+
         ]],
         singleSelect: false,
         toolbar: '#KaoqingToolbar',

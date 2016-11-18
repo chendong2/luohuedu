@@ -410,7 +410,7 @@ namespace LuoHuEdu.WebServices.Course
                     foreach (var linshiBo in list)
                     {
                         string strurl =
-                        @"http://219.223.7.19:81/api/api-jsonIdno.php?usid=szsjky&echostr=8e3340e111ef9e7e44f741b105242fcfe236c23e&IDNO=";
+                        @"http://219.223.4.187:8081/api-jsonIdno.php?usid=szsjky&echostr=8e3340e111ef9e7e44f741b105242fcfe236c23e&IDNO=";
                         strurl = strurl + linshiBo.IDNo;
                         string result = webClient.DownloadString(strurl);
                         var mm = Newtonsoft.Json.JsonConvert.DeserializeObject<IList<CourseStudentTempOldBo>>(result);
@@ -447,7 +447,7 @@ namespace LuoHuEdu.WebServices.Course
                 CourseStudentTempOldService courseStudentTemp = new CourseStudentTempOldService();
                 var list = student.GetListIdNo();
                 //同步个人数据
-                string strurl = @"http://219.223.7.19:81/api/api-jsonIdno.php?usid=szsjky&echostr=8e3340e111ef9e7e44f741b105242fcfe236c23e&IDNO=";
+                string strurl = @"http://219.223.4.187:8081/api-jsonIdno.php?usid=szsjky&echostr=8e3340e111ef9e7e44f741b105242fcfe236c23e&IDNO=";
                 strurl = strurl + IDNo;
                 string result = webClient.DownloadString(strurl);
                 var mm = Newtonsoft.Json.JsonConvert.DeserializeObject<IList<CourseStudentTempOldBo>>(result);
