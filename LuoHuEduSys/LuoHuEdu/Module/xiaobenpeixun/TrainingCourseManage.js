@@ -869,7 +869,7 @@ function chooseStudentSearch() {
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Admin/Student.asmx/GetStudentListNew',
                 data: paramStr,
                 success: function (data) {
                     success(data);

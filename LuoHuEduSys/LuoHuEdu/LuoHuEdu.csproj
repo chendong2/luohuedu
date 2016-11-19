@@ -1300,7 +1300,6 @@
     <Content Include="View\Parameter\Subject\SubjectForm.htm" />
     <Content Include="View\Parameter\Subject\SubjectList.htm" />
     <Content Include="View\StudentXueXiaoGuanLi\DeleteStudents.htm" />
-    <Content Include="View\StudentXueXiaoGuanLi\StudentCourseList.htm" />
     <Content Include="View\StudentXueXiaoGuanLi\StudentForm.htm" />
     <Content Include="View\StudentXueXiaoGuanLi\XiaoGuanLiStudentList.htm" />
     <Content Include="View\StudentXueXiaoGuanLi\TongBuCourse.htm" />

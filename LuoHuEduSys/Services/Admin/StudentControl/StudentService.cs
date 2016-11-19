@@ -358,6 +358,81 @@ namespace Services.Admin.StudentControl
         }
 
 
+
+        //获取数据列表
+        public Page<StudentBo> XiaoGuanGetStudents(int page, int rows, string sort, string order, StudentBo studentBo)
+        {
+            int count = 0;
+            int pageIndex = 0;
+            int pageSize = 0;
+            if (page < 0)
+            {
+                pageIndex = 0;
+            }
+            else
+            {
+                pageIndex = (page - 1) * rows;
+            }
+            pageSize = page * rows;
+            var pageList = new Page<StudentBo>();
+
+            string strSql = string.Format(@"SELECT tb_student.*,tb_school.SchoolName FROM tb_school left JOIN tb_student ON tb_student.SchoolId=tb_school.Id where 1=1  ");
+            if (studentBo != null)
+            {
+                if (!string.IsNullOrEmpty(studentBo.Name))
+                {
+                    strSql += "and Name = @Name ";
+                }
+                if (!string.IsNullOrEmpty(studentBo.IDNo))
+                {
+                    strSql += "and IDNo = @IDNo ";
+                }
+            }
+            //只给学校管理员管理学员使用
+                string userId = Domain.common.UserInfo.GetUserId().ToString();
+                var adminBo = GetAllStudentById1(userId);
+                var adminSchoolId = adminBo.SchoolId;
+                strSql += " and tb_student.SchoolId=@adminSchoolId ";
+          
+
+            switch (sort)
+            {
+                case "Name":
+                    strSql += " order by Name " + order;
+                    break;
+            }
+
+
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                count = context.Query<StudentBo>(strSql,
+                                            new
+                                            {
+                                                Name = studentBo.Name,
+                                                IDNo = studentBo.IDNo,
+                                                adminSchoolId = adminSchoolId
+                                            }).Count();
+                strSql += " limit @pageindex,@pagesize";
+
+                var list = context.Query<StudentBo>(strSql,
+                                                new
+                                                {
+                                                    Name = studentBo.Name,
+                                                    IDNo = studentBo.IDNo,
+                                                    adminSchoolId = adminSchoolId,
+                                                    pageindex = pageIndex,
+                                                    pagesize = pageSize
+                                                }).ToList();
+
+                pageList.ListT = list;
+                pageList.PageIndex = page;
+                pageList.PageSize = rows;
+                pageList.TotalCount = count;
+            }
+
+            return pageList;
+        }
+
         //获取数据列表
         public Page<StudentBo> GetStudentsNew(int page, int rows, string sort, string order, StudentBo studentBo)
         {

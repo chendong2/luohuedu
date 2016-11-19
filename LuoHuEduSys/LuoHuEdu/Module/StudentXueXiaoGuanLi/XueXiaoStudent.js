@@ -97,7 +97,7 @@ using(easyloader.defaultReferenceModules, function () {
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Admin/Student.asmx/XiaoGuanGetStudentListNew',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -363,7 +363,7 @@ function Search() {
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Admin/Student.asmx/GetStudentList',
+                url: '/WebServices/Admin/Student.asmx/XiaoGuanGetStudentListNew',
                 data: paramStr,
                 success: function (data) {
                     success(data);
