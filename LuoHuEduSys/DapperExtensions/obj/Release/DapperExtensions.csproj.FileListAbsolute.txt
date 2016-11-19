@@ -1,0 +1,8 @@
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\DapperExtensions\bin\Release\DapperExtensions.dll
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\DapperExtensions\bin\Release\DapperExtensions.pdb
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\DapperExtensions\bin\Release\Dapper.dll
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\DapperExtensions\bin\Release\Dapper.pdb
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\DapperExtensions\bin\Release\Dapper.xml
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\DapperExtensions\obj\Release\DapperExtensions.csprojResolveAssemblyReference.cache
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\DapperExtensions\obj\Release\DapperExtensions.dll
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\DapperExtensions\obj\Release\DapperExtensions.pdb

@@ -1248,6 +1248,7 @@
     <Content Include="Module\Parameter\Exemption.js" />
     <Content Include="Module\Parameter\TrainType.js" />
     <Content Include="Module\Parameter\Subject.js" />
+    <Content Include="Module\StudentXueXiaoGuanLi\XueXiaoStudent.js" />
     <Content Include="Module\System\PswChange.js" />
     <Content Include="Module\System\UserInfo.js" />
     <Content Include="Module\TrainingManage\TeacherMessage.js" />
@@ -1298,6 +1299,11 @@
     <Content Include="View\Parameter\TrainType\TrainTypeList.htm" />
     <Content Include="View\Parameter\Subject\SubjectForm.htm" />
     <Content Include="View\Parameter\Subject\SubjectList.htm" />
+    <Content Include="View\StudentXueXiaoGuanLi\DeleteStudents.htm" />
+    <Content Include="View\StudentXueXiaoGuanLi\StudentCourseList.htm" />
+    <Content Include="View\StudentXueXiaoGuanLi\StudentForm.htm" />
+    <Content Include="View\StudentXueXiaoGuanLi\XiaoGuanLiStudentList.htm" />
+    <Content Include="View\StudentXueXiaoGuanLi\TongBuCourse.htm" />
     <Content Include="View\System\PswChange.htm" />
     <Content Include="View\System\UserInfo.htm" />
     <Content Include="View\TrainingManage\ExemptionManage\ExemptionManageForm.htm" />

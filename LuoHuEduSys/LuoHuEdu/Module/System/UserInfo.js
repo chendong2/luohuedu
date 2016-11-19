@@ -57,7 +57,7 @@ function saveData() {
     var basicUrl = '/WebServices/Admin/Student.asmx/';
 
     
-    var wsMethod = "UpdateStudent"; //修改
+    var wsMethod = "UpdateStudentNew"; //修改
 
     var formUrl = basicUrl + wsMethod;
 

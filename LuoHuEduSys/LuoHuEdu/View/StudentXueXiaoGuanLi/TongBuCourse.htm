@@ -1,0 +1,35 @@
+﻿<div id="TongBuDlg" style="width: 400px;" data-options="buttons: '#TongBuDlg-button',
+                                                                        closed: true,
+                                                                        shadow:false,
+                                                                        modal:true">
+    <style type="text/css">
+        .custom_forms tr td input[type="text"]
+        {
+            width: auto;
+        }
+    </style>
+    <form id="TongBuForm" method="post">
+        <div id="formTabs" class="easyui-tabs">
+        <table class="custom_forms_popup">
+            <tbody>
+                <tr>
+                    <td>
+                        <span style="color:red">同步学时操作会重置该教师之前获得的学时，请谨慎操作！</span>
+                    </td>
+                </tr>
+                   <tr>
+                    <td>
+                        <span style="color:red">如需同步请点击确定按钮进行同步！</span>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+    </div>
+    <div>
+        <input id="Hid" type="hidden" name="Id" />
+    </div>
+    </form>
+</div>
+<div id="TongBuDlg-button">
+    <a class="easyui-linkbutton" onclick="saveLockedAuditSetData()">确定</a> 
+</div>

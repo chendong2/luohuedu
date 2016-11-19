@@ -44,7 +44,15 @@ namespace LuoHuEdu.WebServices.Admin
             return studentService.UpdateStudent(studentBo);
         }
 
-  
+        //编辑数据
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public bool UpdateStudentNew(StudentBo studentBo)
+        {
+            studentBo.State = 1;
+            var studentService = new StudentService();
+            return studentService.UpdateStudent(studentBo);
+        }
 
         //批量删除数据
         [ScriptMethod]

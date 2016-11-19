@@ -1,0 +1,4 @@
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\BusinessObject\bin\Release\BusinessObject.dll
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\BusinessObject\bin\Release\BusinessObject.pdb
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\BusinessObject\obj\Release\BusinessObject.dll
+E:\GitHub\luohuedu\luohuedu\LuoHuEduSys\BusinessObject\obj\Release\BusinessObject.pdb

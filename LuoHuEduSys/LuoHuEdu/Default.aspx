@@ -258,7 +258,7 @@
             menus_5.push({ "menuid": "51", "menuname": "校本培训", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/xiaobenyanxiu/XiaoBenTrainingCourseList.htm") %>' });
         }
         if (perStr.indexOf("校本培训") > -1) {
-            menus_5.push({ "menuid": "52", "menuname": "学员信息管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/Admin/Student/StudentList.htm") %>' });
+            menus_5.push({ "menuid": "52", "menuname": "学员信息管理", "icon": "icon-nav", "divclass": "", "url": '<%=Page.ResolveUrl("~/View/StudentXueXiaoGuanLi/XiaoGuanLiStudentList.htm") %>' });
         }
 
 

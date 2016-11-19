@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile>2016-11-08T22:47:41.8651057+08:00</TimeStampOfAssociatedLegacyPublishXmlFile>
+    <_PublishTargetUrl>E:\LuohuEduFabu</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/BusinessObject.dll">
+      <publishTime>11/18/2016 04:08:38</publishTime>
+    </File>
+    <File Include="bin/BusinessObject.pdb">
+      <publishTime>11/18/2016 04:08:38</publishTime>
+    </File>
+    <File Include="bin/Dapper.dll">
+      <publishTime>07/07/2016 18:31:56</publishTime>
+    </File>
+    <File Include="bin/Dapper.pdb">
+      <publishTime>07/07/2016 18:39:10</publishTime>
+    </File>
+    <File Include="bin/DapperExtensions.dll">
+      <publishTime>11/18/2016 04:08:39</publishTime>
+    </File>
+    <File Include="bin/DapperExtensions.pdb">
+      <publishTime>11/18/2016 04:08:39</publishTime>
+    </File>
+    <File Include="bin/Domain.dll">
+      <publishTime>11/18/2016 04:08:39</publishTime>
+    </File>
+    <File Include="bin/Domain.pdb">
+      <publishTime>11/18/2016 04:08:39</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>07/07/2016 18:31:55</publishTime>
+    </File>
+    <File Include="bin/LuoHuEdu.DAO.dll">
+      <publishTime>11/18/2016 04:08:40</publishTime>
+    </File>
+    <File Include="bin/LuoHuEdu.DAO.pdb">
+      <publishTime>11/18/2016 04:08:40</publishTime>
+    </File>
+    <File Include="bin/LuoHuEduWebService.dll">
+      <publishTime>11/19/2016 12:34:55</publishTime>
+    </File>
+    <File Include="bin/LuoHuEduWebService.pdb">
+      <publishTime>11/19/2016 12:34:55</publishTime>
+    </File>
+    <File Include="bin/MiniProfiler.dll">
+      <publishTime>07/07/2016 18:31:56</publishTime>
+    </File>
+    <File Include="bin/MiniProfiler.pdb">
+      <publishTime>07/07/2016 18:39:10</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>07/07/2016 18:31:56</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>08/16/2016 22:30:21</publishTime>
+    </File>
+    <File Include="bin/Oracle.ManagedDataAccess.dll">
+      <publishTime>07/07/2016 18:31:56</publishTime>
+    </File>
+    <File Include="bin/Services.dll">
+      <publishTime>11/18/2016 04:08:40</publishTime>
+    </File>
+    <File Include="bin/Services.pdb">
+      <publishTime>11/18/2016 04:08:40</publishTime>
+    </File>
+    <File Include="Course/Course.asmx">
+      <publishTime>07/07/2016 18:31:56</publishTime>
+    </File>
+    <File Include="CourseInfo/CourseInfoWebService.asmx">
+      <publishTime>07/07/2016 18:53:53</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/19/2016 12:30:00</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
