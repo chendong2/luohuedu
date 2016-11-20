@@ -17,6 +17,7 @@ using(easyloader.defaultReferenceModules, function () {
                     return btn;
                 }
             },
+          
             { field: 'Name', title: '姓名', width: 80, sortable: false },
             { field: 'LoginId', title: 'LoginId', width: 80, sortable: false },
             { field: 'IDNo', title: '身份证', width: 180, sortable: false },
