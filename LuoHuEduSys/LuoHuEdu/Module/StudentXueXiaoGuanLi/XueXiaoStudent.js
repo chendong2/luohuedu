@@ -17,10 +17,17 @@ using(easyloader.defaultReferenceModules, function () {
                     return btn;
                 }
             },
-          
-            { field: 'Name', title: '姓名', width: 80, sortable: false },
+            {
+                field: 'Name', title: '姓名', width: 80, sortable: false
+            },
             { field: 'LoginId', title: 'LoginId', width: 80, sortable: false },
-            { field: 'IDNo', title: '身份证', width: 180, sortable: false },
+            {
+                field: 'IDNo', title: '身份证', width: 180,
+                formatter: function (value, rec) {
+                    var btn = '<a class="editcls"   href="http://219.223.4.187:8081/api-jsonIdno.php?usid=szsjky&echostr=8e3340e111ef9e7e44f741b105242fcfe236c23e&IDNO='+rec.IDNo+'" target="_blank">' + rec.IDNo + '</a>';
+                    return btn;
+                }
+            },
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Sex', title: '性别', width: 60, sortable: false,
                 formatter: function (value) {
