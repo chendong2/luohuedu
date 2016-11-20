@@ -27,6 +27,29 @@ namespace LuoHuEdu.WebServices.Course
     public class CourseWebServices : System.Web.Services.WebService
     {
 
+
+
+        //获取课程列表数据(小本培训)
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetCourseListNew(int page, int rows, string sort, string order, CourseBo courseBo)
+        {
+
+            var courseService = new CourseService();
+            var list = courseService.GetCourseListNew(page, rows, sort, order, courseBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
         //获取课程列表数据
         [ScriptMethod]
         [WebMethod(EnableSession = true)]

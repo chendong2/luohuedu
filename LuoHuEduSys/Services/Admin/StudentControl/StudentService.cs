@@ -314,15 +314,8 @@ namespace Services.Admin.StudentControl
 
                 strSql += " and tb_student.SchoolId=@adminSchoolId ";
             }
-
-            switch (sort)
-            {
-                case "Name":
-                    strSql += " order by Name " + order;
-                    break;
-            }
-
-
+            strSql += " ORDER BY CONVERT(NAME USING gbk ) COLLATE gbk_chinese_ci ASC ";
+          
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
                 count = context.Query<StudentBo>(strSql,
@@ -393,16 +386,7 @@ namespace Services.Admin.StudentControl
                 var adminBo = GetAllStudentById1(userId);
                 var adminSchoolId = adminBo.SchoolId;
                 strSql += " and tb_student.SchoolId=@adminSchoolId ";
-          
-
-            switch (sort)
-            {
-                case "Name":
-                    strSql += " order by Name " + order;
-                    break;
-            }
-
-
+                strSql += " ORDER BY CONVERT(NAME USING gbk ) COLLATE gbk_chinese_ci ASC " ;
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
                 count = context.Query<StudentBo>(strSql,
@@ -484,14 +468,7 @@ namespace Services.Admin.StudentControl
                 strSql += " and tb_student.SchoolId=@adminSchoolId ";
             }
 
-            switch (sort)
-            {
-                case "Name":
-                    strSql += " order by Name " + order;
-                    break;
-            }
-
-
+            strSql += " ORDER BY CONVERT(NAME USING gbk ) COLLATE gbk_chinese_ci ASC ";
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
                 count = context.Query<StudentBo>(strSql,

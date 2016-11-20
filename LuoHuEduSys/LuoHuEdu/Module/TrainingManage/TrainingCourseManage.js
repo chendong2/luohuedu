@@ -1299,7 +1299,23 @@ function PrintBaoMing() {
 }
 
 
-//点击“编辑”按钮
+//批量签到
+function jiesuan2() {
+    ajaxCRUD({
+        url: '/WebServices/Admin/Student.asmx/CourseJieSuan2',
+        data: "{id:'" + cousrIdCD + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '批量签到成功', 'info');
+                refreshTable('kgDG');
+            } else {
+                msgShow('提示', '批量签到失败', 'info');
+            }
+        }
+    });
+}
+
+//批量结算
 function jiesuan() {
     ajaxCRUD({
         url: '/WebServices/Admin/Student.asmx/CourseJieSuan',

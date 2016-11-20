@@ -13,6 +13,85 @@ namespace Services.Course.CourseControl
 {
     public class CourseService
     {
+
+        public Page<CourseBo> GetCourseListNew(int page, int rows, string order, string sort, CourseBo courseBo)
+        {
+            int count = 0;
+            int pageIndex = 0;
+            int pageSize = 0;
+            if (page < 0)
+            {
+                pageIndex = 0;
+            }
+            else
+            {
+                pageIndex = (page - 1) * rows;
+            }
+            pageSize = page * rows;
+            var pageList = new Page<CourseBo>();
+
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName`, CONCAT(st.Name,c.`WaiPingName`) AS NAME,COUNT(ct.id) AS YiBao FROM tb_course AS c 
+                                            LEFT JOIN tb_subject AS s ON c.Subject=s.Id
+                                            LEFT JOIN tb_traintype AS t ON c.TrainType=t.Id 
+                                            LEFT JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
+                                            LEFT JOIN tb_student st ON st.`Id`=c.`TeacherId` 
+                                            LEFT JOIN `tb_coursestudent` ct ON ct.`CourseId`=c.`Id`                                        
+                                            WHERE 1=1
+                                             ");
+            if (courseBo != null)
+            {
+                //课程名称查询
+                if (!string.IsNullOrEmpty(courseBo.CourseName))
+                {
+                    strSql += "and c.CourseName Like @CourseName ";
+                }
+                //课程代码查询
+                if (!string.IsNullOrEmpty(courseBo.TheYear))
+                {
+                    strSql += " and c.TheYear=@TheYear ";
+                }
+            }
+            string adminSchoolId = string.Empty;
+
+         
+                string userId = Domain.common.UserInfo.GetUserId().ToString();
+                var studentService = new StudentService();
+                var adminBo = studentService.GetAllStudentById1(userId);
+                adminSchoolId = adminBo.SchoolId;
+                strSql += " and c.OrganizationalName=@OrganizationalName and c.TrainType='c038430c-1b54-4c91-9e60-993642e79163' ";
+
+
+            const string group = " GROUP BY c.`Id` ORDER BY c.`TimeStart` DESC ";
+            strSql += group;
+            using (var context = DataBaseConnection.GetMySqlConnection())
+            {
+                count = context.Query<CourseBo>(strSql,
+                                            new
+                                            {
+                                                CourseName = string.Format("%{0}%", courseBo.CourseName),
+                                                TheYear = courseBo.TheYear,
+                                                OrganizationalName = adminSchoolId
+                                            }).Count();
+                strSql += " limit @pageindex,@pagesize";
+
+                var list = context.Query<CourseBo>(strSql,
+                                                new
+                                                {
+                                                    CourseName = string.Format("%{0}%", courseBo.CourseName),
+                                                    TheYear = courseBo.TheYear,
+                                                    OrganizationalName = adminSchoolId,
+                                                    pageindex = pageIndex,
+                                                    pagesize = pageSize
+                                                }).ToList();
+
+                pageList.ListT = list;
+                pageList.PageIndex = page;
+                pageList.PageSize = rows;
+                pageList.TotalCount = count;
+            }
+
+            return pageList;
+        }
         #region "通用增删改查方法"
         /// <summary>
         /// 分页获取课程数据方法

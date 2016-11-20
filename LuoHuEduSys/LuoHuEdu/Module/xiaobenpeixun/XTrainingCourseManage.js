@@ -82,7 +82,7 @@ using(easyloader.defaultReferenceModules, function () {
             var paramStr = JSON.stringify(courseData);
 
             ajaxCRUD({
-                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseList',
+                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseListNew',
                 data: paramStr,
                 success: function (data) {
                     success(data);
@@ -421,7 +421,7 @@ function Search() {
             var paramStr = JSON.stringify(studentData);
 
             ajaxCRUD({
-                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseList',
+                url: '/WebServices/Course/CourseWebServices.asmx/GetCourseListNew',
                 data: paramStr,
                 success: function (data) {
                     success(data);
