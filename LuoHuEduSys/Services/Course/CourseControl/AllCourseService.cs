@@ -199,12 +199,6 @@ AND st.`Id`=@StudentId )  ");
               }
           }
 
-            //switch (sort)
-            //{
-            //    case "TheYear":
-            //        strSql += " order by TheYear " + order;
-            //        break;
-            //}
 
             const string group = " GROUP BY c.`Id` ORDER BY c.`TimeStart` DESC ";
             strSql += group;

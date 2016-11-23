@@ -382,12 +382,24 @@ namespace Services.Course.CourseControl
                                             @CourseId,@Period,@IDNo,@SignMDate,@SignADate,SignNDate);";
                     string[] idArray = ids.Split(',');
 
-                    for (int i = 0; i < idArray.Length; i++)
+                    var list = GetByStudentsByCourseId(studentBo.CourseId);
+                    var strList=new List<string>();
+                    foreach (var s in idArray)
                     {
-                        var student = connection.Query<StudentBo>(courseSql, new { Id = idArray[i] }).FirstOrDefault();
+                        var courseStudentDto = list.Find(p => p.StudentId == s);
+                        if (courseStudentDto == null)
+                        {
+                            strList.Add(s);
+                        }
+                    }
+
+
+                    for (int i = 0; i < strList.Count; i++)
+                    {
+                        var student = connection.Query<StudentBo>(courseSql, new { Id = strList[i] }).FirstOrDefault();
                         if (student != null) studentBo.IDNo = student.IDNo;
                         studentBo.Id = Guid.NewGuid().ToString();
-                        studentBo.StudentId = idArray[i];
+                        studentBo.StudentId = strList[i];
                         connection.Execute(strSql, studentBo);
                     }
                 }
@@ -427,7 +439,18 @@ namespace Services.Course.CourseControl
            
         }
 
+        public List<CourseStudentDto> GetByStudentsByCourseId(string courseId)
+        {
+            string sqlStr = @"SELECT c.*,co.CourseName,s.Name FROM tb_coursestudent c 
+                             INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
+                             INNER JOIN `tb_student` s ON s.`Id`=c.`StudentId` WHERE co.Id=@Id";
+            using (var connection = DataBaseConnection.GetMySqlConnection())
+            {
+                var list = connection.Query<CourseStudentDto>(sqlStr, new {Id=courseId}).ToList();
 
+                return list;
+            }
+        }
         /// <summary>
         /// 取消报名方法
         /// </summary>

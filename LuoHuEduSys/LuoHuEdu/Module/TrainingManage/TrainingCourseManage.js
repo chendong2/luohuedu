@@ -1081,10 +1081,10 @@ function chooseStudentData() {
         });
     }
 
-    if (studentNameArr.length > 0) {
-        msgShow('提示', studentNameArr.join('、') + "学员已被选择过，不需要重复选择", 'info');
-        return false;
-    }
+    //if (studentNameArr.length > 0) {
+    //    msgShow('提示', studentNameArr.join('、') + "学员已被选择过，不需要重复选择", 'info');
+    //    return false;
+    //}
 
     //添加新学员
     var idArr = [];

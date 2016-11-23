@@ -271,7 +271,10 @@ namespace LuoHuEdu.WebServices.Course
         [WebMethod(EnableSession = true)]
         public bool BatchAddCourseStudent(CourseStudentDto studentBo, string ids)
         {
+           
+            
             var courseStudent = new CourseStudentService();
+          
             return courseStudent.BatchAddCourseStudent(studentBo, ids);
         }
         #endregion
