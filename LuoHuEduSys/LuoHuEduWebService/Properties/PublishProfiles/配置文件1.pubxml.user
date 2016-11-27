@@ -10,10 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/BusinessObject.dll">
-      <publishTime>11/18/2016 04:08:38</publishTime>
+      <publishTime>11/20/2016 22:37:28</publishTime>
     </File>
     <File Include="bin/BusinessObject.pdb">
-      <publishTime>11/18/2016 04:08:38</publishTime>
+      <publishTime>11/20/2016 22:37:28</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
       <publishTime>07/07/2016 18:31:56</publishTime>
@@ -22,31 +22,31 @@
       <publishTime>07/07/2016 18:39:10</publishTime>
     </File>
     <File Include="bin/DapperExtensions.dll">
-      <publishTime>11/18/2016 04:08:39</publishTime>
+      <publishTime>11/20/2016 22:37:29</publishTime>
     </File>
     <File Include="bin/DapperExtensions.pdb">
-      <publishTime>11/18/2016 04:08:39</publishTime>
+      <publishTime>11/20/2016 22:37:29</publishTime>
     </File>
     <File Include="bin/Domain.dll">
-      <publishTime>11/18/2016 04:08:39</publishTime>
+      <publishTime>11/20/2016 22:37:28</publishTime>
     </File>
     <File Include="bin/Domain.pdb">
-      <publishTime>11/18/2016 04:08:39</publishTime>
+      <publishTime>11/20/2016 22:37:28</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>07/07/2016 18:31:55</publishTime>
     </File>
     <File Include="bin/LuoHuEdu.DAO.dll">
-      <publishTime>11/18/2016 04:08:40</publishTime>
+      <publishTime>11/20/2016 22:37:30</publishTime>
     </File>
     <File Include="bin/LuoHuEdu.DAO.pdb">
-      <publishTime>11/18/2016 04:08:40</publishTime>
+      <publishTime>11/20/2016 22:37:30</publishTime>
     </File>
     <File Include="bin/LuoHuEduWebService.dll">
-      <publishTime>11/19/2016 12:34:55</publishTime>
+      <publishTime>11/25/2016 21:01:12</publishTime>
     </File>
     <File Include="bin/LuoHuEduWebService.pdb">
-      <publishTime>11/19/2016 12:34:55</publishTime>
+      <publishTime>11/25/2016 21:01:12</publishTime>
     </File>
     <File Include="bin/MiniProfiler.dll">
       <publishTime>07/07/2016 18:31:56</publishTime>
@@ -64,10 +64,10 @@
       <publishTime>07/07/2016 18:31:56</publishTime>
     </File>
     <File Include="bin/Services.dll">
-      <publishTime>11/18/2016 04:08:40</publishTime>
+      <publishTime>11/25/2016 21:01:10</publishTime>
     </File>
     <File Include="bin/Services.pdb">
-      <publishTime>11/18/2016 04:08:40</publishTime>
+      <publishTime>11/25/2016 21:01:10</publishTime>
     </File>
     <File Include="Course/Course.asmx">
       <publishTime>07/07/2016 18:31:56</publishTime>
@@ -76,7 +76,7 @@
       <publishTime>07/07/2016 18:53:53</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/19/2016 12:30:00</publishTime>
+      <publishTime>11/25/2016 21:01:13</publishTime>
     </File>
   </ItemGroup>
 </Project>

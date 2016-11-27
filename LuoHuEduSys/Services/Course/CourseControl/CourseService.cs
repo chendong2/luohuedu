@@ -43,7 +43,7 @@ namespace Services.Course.CourseControl
                 //课程名称查询
                 if (!string.IsNullOrEmpty(courseBo.CourseName))
                 {
-                    strSql += "and c.CourseName Like @CourseName ";
+                    strSql += "and c.CourseName = @CourseName ";
                 }
                 //课程代码查询
                 if (!string.IsNullOrEmpty(courseBo.TheYear))
@@ -68,7 +68,7 @@ namespace Services.Course.CourseControl
                 count = context.Query<CourseBo>(strSql,
                                             new
                                             {
-                                                CourseName = string.Format("%{0}%", courseBo.CourseName),
+                                                CourseName = courseBo.CourseName,
                                                 TheYear = courseBo.TheYear,
                                                 OrganizationalName = adminSchoolId
                                             }).Count();
@@ -77,7 +77,7 @@ namespace Services.Course.CourseControl
                 var list = context.Query<CourseBo>(strSql,
                                                 new
                                                 {
-                                                    CourseName = string.Format("%{0}%", courseBo.CourseName),
+                                                    CourseName =courseBo.CourseName,
                                                     TheYear = courseBo.TheYear,
                                                     OrganizationalName = adminSchoolId,
                                                     pageindex = pageIndex,
@@ -605,36 +605,30 @@ ObjectSubject=@ObjectSubject,PlcSchool=@PlcSchool,PriSchool=@PriSchool WHERE Id=
             }
             pageSize = page * rows;
             var pageList = new Page<CourseBo>();
-
+            StudentService service=new StudentService();
+           
+            var bo = service.GetAllStudentById(studentId);
             string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName`,cs.`Period` AS HuoDePeriod FROM tb_course AS c 
                                             INNER JOIN tb_subject AS s ON c.Subject=s.Id
                                             INNER JOIN tb_traintype AS t ON c.TrainType=t.Id 
 					                        INNER JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
 					                        INNER JOIN tb_coursestudent cs ON c.`Id`=cs.`CourseId`                                 
-                                            WHERE cs.`StudentId`=@StudentId
+                                            WHERE cs.IDNo=@IDNo 
                                              ");
-
-            switch (sort)
-            {
-                case "TheYear":
-                    strSql += " order by TheYear " + order;
-                    break;
-            }
-
 
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
                 count = context.Query<CourseBo>(strSql,
                                             new
                                             {
-                                                StudentId = studentId
+                                                IDNo = bo.IDNo
                                             }).Count();
                 strSql += " limit @pageindex,@pagesize";
 
                 var list = context.Query<CourseBo>(strSql,
                                                 new
                                                 {
-                                                    StudentId = studentId,
+                                                    IDNo = bo.IDNo,
                                                     pageindex = pageIndex,
                                                     pagesize = pageSize
                                                 }).ToList();

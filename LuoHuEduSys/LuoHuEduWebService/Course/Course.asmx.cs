@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
+using Newtonsoft.Json;
 using Services.Course.CourseControl;
 
 namespace LuoHuEduWebService.Course
@@ -28,7 +29,7 @@ namespace LuoHuEduWebService.Course
            var course = new CourseStudentService();
            string IDNo= idNo.ToUpper();//身份证号统一大写
            var list = course.GetCourseStudent(IDNo, yearNo, isAll);
-           return Newtonsoft.Json.JsonConvert.SerializeObject(list);
+           return JsonConvert.SerializeObject(list);
         }
     }
 }

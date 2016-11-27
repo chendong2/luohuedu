@@ -24,7 +24,12 @@ namespace Services.Course.CourseControl
         public List<CourseStudentBo> GetCourseStudentNew(string idNo, string yearNo, string isAll)
         {
             //合并新数据和之前导入的数据
-            string sql = @"SELECT s.`Name` ,s.`IDNo`,co.`TheYear` AS YearNo,0 AS TermNo,tr.TrainType,co.`CourseName`,'面授' AS 'StudyType',c.`Period`,
+            string sql = @"SELECT s.`Name` ,s.`IDNo`,co.`TheYear` AS YearNo,0 AS TermNo, CASE tr.TrainType
+                            WHEN '集中培训' THEN '专业科目'
+                            WHEN '专项培训' THEN '专业科目'
+                            WHEN '校本培训' THEN '个人选修'
+                            ELSE tr.TrainType
+                            END AS CourseType,co.`CourseName`,'面授' AS 'StudyType',c.`Period`,
                             DATE_FORMAT(co.`TimeStart`, '%Y-%m-%d') AS StartDate,DATE_FORMAT(co.`TimeEnd`, '%Y-%m-%d') 
                             AS EndDate,sc.`SchoolName` AS TrainDept
                             FROM `tb_coursestudent` c
