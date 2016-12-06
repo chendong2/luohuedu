@@ -1375,10 +1375,10 @@
       <publishTime>11/20/2016 22:37:30</publishTime>
     </File>
     <File Include="bin/LuoHuEdu.dll">
-      <publishTime>11/28/2016 00:04:35</publishTime>
+      <publishTime>12/05/2016 22:54:29</publishTime>
     </File>
     <File Include="bin/LuoHuEdu.pdb">
-      <publishTime>11/28/2016 00:04:35</publishTime>
+      <publishTime>12/05/2016 22:54:29</publishTime>
     </File>
     <File Include="bin/MiniProfiler.dll">
       <publishTime>07/07/2016 18:31:56</publishTime>
@@ -1396,10 +1396,10 @@
       <publishTime>07/07/2016 18:31:56</publishTime>
     </File>
     <File Include="bin/Services.dll">
-      <publishTime>11/28/2016 00:04:34</publishTime>
+      <publishTime>12/05/2016 22:54:28</publishTime>
     </File>
     <File Include="bin/Services.pdb">
-      <publishTime>11/28/2016 00:04:34</publishTime>
+      <publishTime>12/05/2016 22:54:28</publishTime>
     </File>
     <File Include="Common/Configs/log4net_local.config">
       <publishTime>09/08/2016 15:34:31</publishTime>
@@ -3577,7 +3577,7 @@
       <publishTime>10/14/2016 16:58:30</publishTime>
     </File>
     <File Include="Module/Course/Course.js">
-      <publishTime>11/20/2016 16:12:09</publishTime>
+      <publishTime>11/29/2016 21:57:58</publishTime>
     </File>
     <File Include="Module/Course/CourseStudentTemp.js">
       <publishTime>09/23/2016 02:37:05</publishTime>
@@ -3628,7 +3628,7 @@
       <publishTime>11/20/2016 12:31:47</publishTime>
     </File>
     <File Include="Module/TrainingManage/TrainingCourseManage.js">
-      <publishTime>11/20/2016 22:38:59</publishTime>
+      <publishTime>11/29/2016 21:50:23</publishTime>
     </File>
     <File Include="Module/TrainingManage/TrainManage.js">
       <publishTime>07/07/2016 18:31:56</publishTime>
@@ -3646,7 +3646,7 @@
       <publishTime>11/19/2016 18:05:47</publishTime>
     </File>
     <File Include="Module/xiaobenpeixun/XTrainingCourseManage.js">
-      <publishTime>11/20/2016 22:31:47</publishTime>
+      <publishTime>12/05/2016 23:11:05</publishTime>
     </File>
     <File Include="View/Admin/MyCourse/MyCourseList.htm">
       <publishTime>08/15/2016 23:17:58</publishTime>
@@ -3865,7 +3865,7 @@
       <publishTime>09/22/2016 03:40:20</publishTime>
     </File>
     <File Include="View/xiaobenyanxiu/XiaoBenKaoqingList.htm">
-      <publishTime>11/04/2016 16:00:13</publishTime>
+      <publishTime>12/05/2016 23:08:26</publishTime>
     </File>
     <File Include="View/xiaobenyanxiu/XiaoBenKaoqingPrint.htm">
       <publishTime>10/31/2016 01:53:32</publishTime>

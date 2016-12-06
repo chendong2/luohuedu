@@ -922,10 +922,7 @@ function chooseStudentData() {
         });
     }
 
-    //if (studentNameArr.length > 0) {
-    //    msgShow('提示', studentNameArr.join('、')+"学员已被选择过，不需要重复选择", 'info');
-    //    return false;
-    //}
+   
     
     //添加新学员
     var idArr = [];
@@ -1152,6 +1149,23 @@ function jiesuan2() {
                 refreshTable('kgDG');
             } else {
                 msgShow('提示', '批量签到失败', 'info');
+            }
+        }
+    });
+}
+
+
+//批量结算
+function jiesuan() {
+    ajaxCRUD({
+        url: '/WebServices/Admin/Student.asmx/CourseJieSuan',
+        data: "{id:'" + cousrIdCD + "'}",
+        success: function (data) {
+            if (data == true) {
+                msgShow('提示', '结算成功', 'info');
+                refreshTable('kgDG');
+            } else {
+                msgShow('提示', '结算失败', 'info');
             }
         }
     });

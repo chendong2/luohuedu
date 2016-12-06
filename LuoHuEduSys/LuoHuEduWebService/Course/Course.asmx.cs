@@ -29,6 +29,7 @@ namespace LuoHuEduWebService.Course
            var course = new CourseStudentService();
            string IDNo= idNo.ToUpper();//身份证号统一大写
            var list = course.GetCourseStudent(IDNo, yearNo, isAll);
+           list = list.FindAll(p => p.Period > 0);
            return JsonConvert.SerializeObject(list);
         }
     }
