@@ -605,6 +605,7 @@ function getAllPublicSchool() {
         success: function (dataList) {
             $('#PublicSchoolTbl').empty();
             var tdArr = new Array();
+            var dataListCount = dataList.length;
             $.each(dataList, function (index, schoolBo) {
 
                 //索引为偶数时则清除数组
@@ -620,6 +621,15 @@ function getAllPublicSchool() {
                     $('#PublicSchoolTbl').append('<tr>' + tdArr.join('') + '</tr>');
                 }
             });
+            if (dataListCount % 2 != 0) {
+                tdArr.splice(0, tdArr.length);
+                var schoolBo = dataList[dataListCount - 1];
+                var tdHtml = '<td class="td_right"><input type="checkbox" name="PlcSchool" value="' + schoolBo.Id + '"/></td><td class="td_left">' + schoolBo.SchoolName + '<td class="td_right"></td><td class="td_left"></td>';
+                tdArr.push(tdHtml);
+
+                $('#PublicSchoolTbl').append('<tr>' + tdArr.join('') + '</tr>');
+            }
+
         }
     });
 }
@@ -634,6 +644,7 @@ function getAllPrivateSchool() {
         success: function (dataList) {
             $('#PrivateSchoolTbl').empty();
             var tdArr = new Array();
+            var dataListCount = dataList.length;
             $.each(dataList, function (index, schoolBo) {
 
                 //索引为偶数时则清除数组
@@ -649,6 +660,14 @@ function getAllPrivateSchool() {
                     $('#PrivateSchoolTbl').append('<tr>' + tdArr.join('') + '</tr>');
                 }
             });
+            if (dataListCount % 2 != 0) {
+                tdArr.splice(0, tdArr.length);
+                var schoolBo = dataList[dataListCount - 1];
+                var tdHtml = '<td class="td_right"><input type="checkbox" name="PlcSchool" value="' + schoolBo.Id + '"/></td><td class="td_left">' + schoolBo.SchoolName + '<td class="td_right"></td><td class="td_left"></td>';
+                tdArr.push(tdHtml);
+
+                $('#PrivateSchoolTbl').append('<tr>' + tdArr.join('') + '</tr>');
+            }
         }
     });
 }

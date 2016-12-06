@@ -1064,6 +1064,7 @@ function KaoqingSearch() {
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Office', title: '职务', width: 80, sortable: false },
             { field: 'Telephone', title: '手机', width: 80, sortable: false },
+             { field: 'Period', title: '学分', width: 80, sortable: false },
             { field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
