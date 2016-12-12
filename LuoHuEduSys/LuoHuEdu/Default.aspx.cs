@@ -63,8 +63,8 @@ namespace HuaTongCallCenter
             Session.Contents.Remove("UserName");
             Session.Contents.Remove("perList");
          
-           Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=localhost:23007/Login.aspx");
-           //Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.186/Login.aspx");
+           //Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=localhost:23007/Login.aspx");
+           Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.186/Login.aspx");
         }
     }
 }

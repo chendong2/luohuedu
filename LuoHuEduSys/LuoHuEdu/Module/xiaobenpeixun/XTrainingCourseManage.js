@@ -787,12 +787,12 @@ var chooseStudentDataGridOptions = {
             rows:200,
             order: '',
             sort:'',
-            studentBo: { SchoolId: $.cookie('SchoolId') }
+            studentBo: {  }
         };
         var paramStr = JSON.stringify(studentData);
 
         ajaxCRUD({
-            url: '/WebServices/Admin/Student.asmx/GetStudentList',
+            url: '/WebServices/Admin/Student.asmx/GetStudentListAAA',
             data: paramStr,
             success: function (data) {
                 success(data);
@@ -982,6 +982,7 @@ function kaoQing(id) {
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Office', title: '职务', width: 80, sortable: false },
             { field: 'Telephone', title: '手机', width: 80, sortable: false },
+            { field: 'Period', title: '学分', width: 80, sortable: false },
             { field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {
@@ -1064,7 +1065,7 @@ function KaoqingSearch() {
             { field: 'SchoolName', title: '学校名称', width: 80, sortable: false },
             { field: 'Office', title: '职务', width: 80, sortable: false },
             { field: 'Telephone', title: '手机', width: 80, sortable: false },
-             { field: 'Period', title: '学分', width: 80, sortable: false },
+            { field: 'Period', title: '学分', width: 80, sortable: false },
             { field: 'Sign', title: '状态', width: 80, sortable: false,
                 formatter: function (value) {
                     if (value == "1") {

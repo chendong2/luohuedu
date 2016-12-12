@@ -69,6 +69,8 @@ namespace LuoHuEdu.WebServices.Admin
         [WebMethod(EnableSession = true)]
         public object GetStudentList(int page, int rows, string sort, string order, StudentBo studentBo)
         {
+            //通过session获取 不用本地cookie
+           //studentBo.SchoolId= HttpContext.Current.Session["SchoolId"].ToString();
 
             var student = new StudentService();
             var list = student.GetStudents(page, rows, sort, order, studentBo);
@@ -85,6 +87,33 @@ namespace LuoHuEdu.WebServices.Admin
                 return new { total = 0, rows = 0 };
             }
         }
+
+        //获取数据列表
+        [ScriptMethod]
+        [WebMethod(EnableSession = true)]
+        public object GetStudentListAAA(int page, int rows, string sort, string order, StudentBo studentBo)
+        {
+            //通过session获取 不用本地cookie
+            studentBo.SchoolId = HttpContext.Current.Session["SchoolId"].ToString();
+
+            var student = new StudentService();
+            var list = student.GetStudents(page, rows, sort, order, studentBo);
+            if (list != null)
+            {
+                return new
+                {
+                    total = list.TotalCount,
+                    rows = list.ListT
+                };
+            }
+            else
+            {
+                return new { total = 0, rows = 0 };
+            }
+        }
+
+
+
 
 
         //获取数据列表

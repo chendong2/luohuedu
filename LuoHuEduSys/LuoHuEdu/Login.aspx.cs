@@ -36,13 +36,19 @@ namespace HuaTongCallCenter
             string userid = Request.QueryString["userid"];
             string passwdmd5 = Request.QueryString["passwd_md5"];
             if(id!=null &&userid!=null &&passwdmd5!=null){
-              string ServerPage = "http://www.luohuedu.net/user_WebService.asmx/checkuser";
+              string ServerPage = "http://www.luohuedu.net/user_WebService.asmx/checkuser?";
               try
               {
                   StudentService studentService=new StudentService();
                   string postData = "id=" + id + "&userid=" + userid + "&passwd_md5_1=" + passwdmd5;
-                  string res = HttpConnectToServer(ServerPage, postData);
-                  DataSet ds = GetDataSet(res);
+                  ServerPage = ServerPage + postData;
+                  WebClient webClient = new WebClient();
+                  webClient.Encoding = System.Text.Encoding.UTF8;
+                  webClient.Headers["User-Agent"] = "blah";
+                  webClient.Credentials = CredentialCache.DefaultCredentials;
+                  var s= webClient.DownloadString(ServerPage);
+                  // string res = HttpConnectToServer(ServerPage, postData);
+                  DataSet ds = GetDataSet(s);
                   if(ds.Tables.Count>0)
                   {
                       DataTable dt = ds.Tables[0];
@@ -114,6 +120,8 @@ namespace HuaTongCallCenter
               }
             }
         }
+
+     
 
         //发送消息到服务器
         public static string HttpConnectToServer(string ServerPage, string postData)
@@ -221,5 +229,15 @@ namespace HuaTongCallCenter
         }
 
         #endregion
+    }
+
+    partial class User
+    {
+        public string userid { get; set; }
+        public string loginid { get; set; }
+
+        public int sex { get; set; }
+
+        public string schoolcode { get; set; }
     }
 }
