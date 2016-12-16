@@ -793,7 +793,7 @@ function studentManage(courseid) {
         loader: function (param, success, error) {
             var studentData = {
                 page: 1,
-                rows: 200,
+                rows: 600,
                 order: '',
                 sort: '',
                 courseId: courseid
@@ -924,7 +924,7 @@ var chooseStudentDataGridOptions = {
     loader: function (param, success, error) {
         var studentData = {
             page: 1,
-            rows: 200,
+            rows: 600,
             order: '',
             sort: '',
             studentBo: {}
@@ -1037,7 +1037,7 @@ function chooseStudentSearch() {
         loader: function (param, success, error) {
             var studentData = {
                 page: 1,
-                rows: 200,
+                rows: 600,
                 order: '',
                 sort: '',
                 studentBo: {
@@ -1099,12 +1099,6 @@ function chooseStudentData() {
             }
         });
     }
-
-    //if (studentNameArr.length > 0) {
-    //    msgShow('提示', studentNameArr.join('、') + "学员已被选择过，不需要重复选择", 'info');
-    //    return false;
-    //}
-
     //添加新学员
     var idArr = [];
     var rows = $('#chooseStudentDG').datagrid('getSelections');

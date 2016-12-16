@@ -240,9 +240,9 @@ AND st.`Id`=@StudentId )  ");
             List<CourseStudentDto> list;
             string strSql = string.Format(@"SELECT NAME,sch.SchoolName,Office,s.SubjectName,cs.Period,st.Telephone FROM tb_course co 
                                             INNER JOIN tb_coursestudent cs ON co.`Id`=cs.`CourseId` 
-                                            INNER JOIN tb_student st ON st.`Id`=cs.`StudentId` 
+                                            INNER JOIN tb_student st ON st.`IDNo`=cs.`IDNo` 
                                             LEFT JOIN `tb_subject` s ON s.`Id`=st.`FirstTeaching`
-                                            INNER JOIN tb_school sch ON sch.`Id`=st.`SchoolId` 
+                                            INNER JOIN tb_school sch ON sch.`Id`=st.`SchoolId`  
                                             WHERE co.`Id`=@courseId  ORDER BY sch.SchoolName");
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
