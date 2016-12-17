@@ -130,13 +130,15 @@ namespace Services.Course.CourseControl
                                             ON c.`Id`=tb1.CourseId                                           
                                             WHERE 1=1
                                              ");
-            string countSql = string.Format(@"SELECT COUNT(DISTINCT c.id) AS datacount  FROM tb_course AS c 
+            string countSql = string.Format(@"SELECT COUNT(*) as datacount FROM tb_course AS c 
                                             LEFT JOIN tb_subject AS s ON c.Subject=s.Id
                                             LEFT JOIN tb_traintype AS t ON c.TrainType=t.Id 
                                             LEFT JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
                                             LEFT JOIN tb_student st ON st.`Id`=c.`TeacherId` 
-                                            LEFT JOIN `tb_coursestudent` ct ON ct.`CourseId`=c.`Id`                                        
-                                            WHERE 1=1
+                                            LEFT JOIN  (
+                                            SELECT CourseId,COUNT(id) AS YiBao FROM `tb_coursestudent` GROUP BY courseid )tb1 
+                                            ON c.`Id`=tb1.CourseId                                           
+                                            WHERE 1=1 
                                              ");
             if (courseBo != null)
             {
