@@ -30,12 +30,14 @@ namespace Services.Course.CourseControl
             pageSize = page * rows;
             var pageList = new Page<CourseBo>();
 
-            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName`, CONCAT(st.Name,c.`WaiPingName`) AS NAME,COUNT(ct.id) AS YiBao FROM tb_course AS c 
+            string strSql = string.Format(@"SELECT c.*,s.SubjectName,t.TrainType,sh.`SchoolName`, CONCAT(st.Name,c.`WaiPingName`) AS NAME,tb1.YiBao FROM tb_course AS c 
                                             LEFT JOIN tb_subject AS s ON c.Subject=s.Id
                                             LEFT JOIN tb_traintype AS t ON c.TrainType=t.Id 
                                             LEFT JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
                                             LEFT JOIN tb_student st ON st.`Id`=c.`TeacherId` 
-                                            LEFT JOIN `tb_coursestudent` ct ON ct.`CourseId`=c.`Id`                                        
+                                            LEFT JOIN  (
+                                            SELECT CourseId,COUNT(id) AS YiBao FROM `tb_coursestudent` GROUP BY courseid )tb1 
+                                            ON c.`Id`=tb1.CourseId                                           
                                             WHERE 1=1
                                              ");
             if (courseBo != null)
@@ -61,7 +63,7 @@ namespace Services.Course.CourseControl
                 strSql += " and c.OrganizationalName=@OrganizationalName and c.TrainType='c038430c-1b54-4c91-9e60-993642e79163' ";
 
 
-            const string group = " GROUP BY c.`Id` ORDER BY c.`TimeStart` DESC ";
+            const string group = " ORDER BY c.`TimeStart` DESC ";
             strSql += group;
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
