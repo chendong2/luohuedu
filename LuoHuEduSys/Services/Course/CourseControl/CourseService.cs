@@ -201,7 +201,7 @@ namespace Services.Course.CourseControl
             }
 
            
-            const string group = " GROUP BY c.`Id` ORDER BY c.`TimeStart` DESC ";
+            const string group = "ORDER BY c.`TimeStart` DESC ";
             strSql += group;
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
