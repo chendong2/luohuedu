@@ -652,7 +652,7 @@ function studentManage(courseid) {
         loader: function (param, success, error) {
             var studentData = {
                 page: 1,
-                rows:200,
+                rows:600,
                 order: '',
                 sort:'',
                 courseId: courseid
@@ -705,7 +705,7 @@ function StudentSearch() {
         loader: function (param, success, error) {
             var studentData = {
                 page:1,
-                rows:200,
+                rows:600,
                 order: '',
                 sort:'',
                 courseId: $("#HsmCourseId").val(),
@@ -784,7 +784,7 @@ var chooseStudentDataGridOptions = {
     loader: function (param, success, error) {
         var studentData = {
             page: 1,
-            rows:200,
+            rows:600,
             order: '',
             sort:'',
             studentBo: {  }
@@ -859,7 +859,7 @@ function chooseStudentSearch() {
         loader: function (param, success, error) {
             var studentData = {
                 page: 1,
-                rows:200,
+                rows:600,
                 order: '',
                 sort: '',
                 studentBo: {
