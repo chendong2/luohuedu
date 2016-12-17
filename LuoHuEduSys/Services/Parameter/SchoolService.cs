@@ -270,7 +270,7 @@ namespace Services.Parameter
         public List<SchoolBo> GetPriSchoolByType()
         {
             List<SchoolBo> list;
-            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=2 ORDER BY PaiXu ASC ");
+            string strSql = string.Format(@"SELECT Id,SchoolName from tb_school where SchoolType=2 ORDER BY PaiXu ASC ");
 
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
