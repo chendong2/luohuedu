@@ -126,42 +126,57 @@ namespace Services.Course.CourseControl
                                             LEFT JOIN `tb_coursestudent` ct ON ct.`CourseId`=c.`Id`                                        
                                             WHERE 1=1
                                              ");
+            string countSql = string.Format(@"SELECT COUNT(DISTINCT c.id) AS datacount  FROM tb_course AS c 
+                                            LEFT JOIN tb_subject AS s ON c.Subject=s.Id
+                                            LEFT JOIN tb_traintype AS t ON c.TrainType=t.Id 
+                                            LEFT JOIN `tb_school` sh ON sh.`Id`=  c.`OrganizationalName`
+                                            LEFT JOIN tb_student st ON st.`Id`=c.`TeacherId` 
+                                            LEFT JOIN `tb_coursestudent` ct ON ct.`CourseId`=c.`Id`                                        
+                                            WHERE 1=1
+                                             ");
             if (courseBo != null)
             {
                 //课程名称查询
                 if (!string.IsNullOrEmpty(courseBo.CourseName))
                 {
                     strSql += "and c.CourseName Like @CourseName ";
+                    countSql += "and c.CourseName Like @CourseName ";
                 }
                 //课程代码查询
                 if (!string.IsNullOrEmpty(courseBo.CourseCode))
                 {
                     strSql += " and c.CourseCode=@CourseCode ";
+                    countSql += " and c.CourseCode=@CourseCode ";
                 }
                 //课程代码查询
                 if (!string.IsNullOrEmpty(courseBo.TeacherId))
                 {
                     strSql += " and c.TeacherId=@TeacherId ";
+                    countSql += " and c.TeacherId=@TeacherId ";
                 }
                 //课程代码查询
                 if (!string.IsNullOrEmpty(courseBo.TheYear))
                 {
                     strSql += " and c.TheYear=@TheYear ";
+                    countSql += " and c.TheYear=@TheYear ";
                 }
                 //课程代码查询
                 if (!string.IsNullOrEmpty(courseBo.OrganizationalName) && courseBo.OrganizationalName != "0")
                 {
                     strSql += " and c.OrganizationalName=@OrganizationalName ";
+                    countSql += " and c.OrganizationalName=@OrganizationalName ";
                 }
                 //课程代码查询
                 if (!string.IsNullOrEmpty(courseBo.TrainType) && courseBo.TrainType != "0")
                 {
                     strSql += " and c.TrainType=@TrainType ";
+                    countSql += " and c.TrainType=@TrainType ";
                 }
                 //课程代码查询
                 if ( courseBo.Locked !=0)
                 {
                     strSql += " and c.Locked=@Locked ";
+                    countSql += " and c.Locked=@Locked ";
                 }
             }
             string adminSchoolId = string.Empty;
@@ -178,6 +193,7 @@ namespace Services.Course.CourseControl
                 strSql += " and c.OrganizationalName=@adminSchoolId and c.TrainType='c038430c-1b54-4c91-9e60-993642e79163' ";
 
 
+                countSql += " and c.OrganizationalName=@adminSchoolId and c.TrainType='c038430c-1b54-4c91-9e60-993642e79163' ";
             }
 
            
@@ -185,7 +201,7 @@ namespace Services.Course.CourseControl
             strSql += group;
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
-                count = context.Query<CourseBo>(strSql,
+                count = context.Query<CourseBo>(countSql,
                                             new
                                             {
                                                 CourseName = string.Format("%{0}%", courseBo.CourseName),
@@ -196,7 +212,7 @@ namespace Services.Course.CourseControl
                                                 TrainType = courseBo.TrainType,
                                                 Locked=courseBo.Locked
 
-                                            }).Count();
+                                            }).ToList()[0].datacount;
                 strSql += " limit @pageindex,@pagesize";
 
                 var list = context.Query<CourseBo>(strSql,

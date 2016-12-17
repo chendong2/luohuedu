@@ -249,5 +249,10 @@ namespace BusinessObject.Course
         /// </summary>
         public int HuoDePeriod { get; set; }
 
+        /// <summary>
+        /// 总数据数
+        /// </summary>
+        public int datacount { get; set; }
+
     }
 }

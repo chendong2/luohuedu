@@ -674,22 +674,31 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
                             INNER JOIN tb_course co ON cs.courseid=co.id  
                             LEFT JOIN tb_school sc ON st.schoolid=sc.id
                             WHERE  1=1  ";
+            string countSql = string.Format(@"SELECT  COUNT(*) AS datacount 
+                            FROM tb_coursestudent cs
+                            INNER JOIN tb_student st ON st.IDNo=cs.IDNo 
+                            INNER JOIN tb_course co ON cs.courseid=co.id  
+                            LEFT JOIN tb_school sc ON st.schoolid=sc.id
+                            WHERE  1=1  ");
 
             if (studentBo != null )
             {
                 if (!string.IsNullOrEmpty(studentBo.courseId))
                 {
                     sqlStr += "  and cs.CourseId=@CourseId  ";
+                    countSql += "  and cs.CourseId=@CourseId  ";
                 }
 
                 if (!string.IsNullOrEmpty(studentBo.Name))
                 {
                     sqlStr += "  and st.Name like @Name  ";
+                    countSql += "  and st.Name like @Name  ";
                 }
 
                 if (!string.IsNullOrEmpty(studentBo.SchoolName) && studentBo.SchoolName!="请选择")
                 {
                     sqlStr += "  and sc.SchoolName like @SchoolName  ";
+                    countSql += "  and sc.SchoolName like @SchoolName  ";
                 }
             }
 
@@ -699,13 +708,13 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
 
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
-                count = context.Query<StudentBo>(sqlStr,
+                count = context.Query<StudentBo>(countSql,
                                             new
                                             {
                                                 Name = string.Format("%{0}%", studentBo.Name),
                                                 SchoolName = string.Format("%{0}%", studentBo.SchoolName),
                                                 CourseId = studentBo.courseId,
-                                            }).Count();
+                                            }).ToList()[0].datacount;
                 sqlStr += " limit @pageindex,@pagesize";
 
                 var list = context.Query<StudentBo>(sqlStr,

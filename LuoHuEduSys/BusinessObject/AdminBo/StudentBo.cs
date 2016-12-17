@@ -110,5 +110,9 @@ namespace BusinessObject.AdminBo
         public string SignMDate { get; set; }
         public string SignADate { get; set; }
         public string SignNDate { get; set; }
+
+        //数据总数
+        public int datacount { get; set; }
+        
     }
 }

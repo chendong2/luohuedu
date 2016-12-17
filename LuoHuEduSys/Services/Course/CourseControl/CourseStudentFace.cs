@@ -112,11 +112,12 @@ namespace Services.Course.CourseControl
             {
                 using (var context = DataBaseConnection.GetMySqlConnection())
                 {
-                    count = context.Query<CourseStudentWSBo>(strSql,
+                    //因为没有分页，所以不需要查询两次
+                    /*count = context.Query<CourseStudentWSBo>(strSql,
                         new
                         {
                             CourseId = courseId
-                        }).Count();
+                        }).Count();*/
 
                     strSql += " limit @pageindex,@pagesize";
                     var list = context.Query<CourseStudentWSBo>(strSql,
@@ -129,7 +130,7 @@ namespace Services.Course.CourseControl
                     pageList.ListT = list;
                     pageList.PageIndex = page;
                     pageList.PageSize = rows;
-                    pageList.TotalCount = count;
+                    pageList.TotalCount = list.Count;//查出来的数据就是最大的数量
                 }
             }
             catch (Exception ex)
