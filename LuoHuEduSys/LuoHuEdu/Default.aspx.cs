@@ -53,7 +53,7 @@ namespace HuaTongCallCenter
                 Session.Contents.Remove("UserId");
                 Session.Contents.Remove("UserName");
                 //Response.Redirect("~/Login.aspx");
-                Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.186/Login.aspx");
+                Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.181/Login.aspx");
             }
         }
 
@@ -64,7 +64,7 @@ namespace HuaTongCallCenter
             Session.Contents.Remove("perList");
          
            //Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=localhost:23007/Login.aspx");
-           Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.186/Login.aspx");
+           Response.Redirect("http://web.luohuedu.net/pxzx_login.aspx?url=219.223.4.181/Login.aspx");
         }
     }
 }

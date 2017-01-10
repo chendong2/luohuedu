@@ -667,65 +667,36 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
             }
             pageSize = page * rows;
             var pageList = new Page<StudentBo>();
-            var sqlStr = @"SELECT  cs.id,st.Name,st.Sex,sc.schoolname,st.office,
-                            st.telephone,cs.Sign,cs.`SignADate`,cs.`SignMDate`,cs.`SignNDate`,cs.Period,st.Birthday 
+            var sqlStr = @" SELECT  cs.id,st.Name,st.Sex,sc.schoolname,st.office,
+                            cs.Sign,cs.`SignADate`,cs.`SignMDate`,cs.`SignNDate`,cs.Period 
                             FROM tb_coursestudent cs
                             INNER JOIN tb_student st ON st.IDNo=cs.IDNo 
                             INNER JOIN tb_course co ON cs.courseid=co.id  
-                            LEFT JOIN tb_school sc ON st.schoolid=sc.id
+                            inner JOIN tb_school sc ON st.schoolid=sc.id
                             WHERE  1=1  ";
-            string countSql = string.Format(@"SELECT  COUNT(*) AS datacount 
-                            FROM tb_coursestudent cs
-                            INNER JOIN tb_student st ON st.IDNo=cs.IDNo 
-                            INNER JOIN tb_course co ON cs.courseid=co.id  
-                            LEFT JOIN tb_school sc ON st.schoolid=sc.id
-                            WHERE  1=1  ");
-
             if (studentBo != null )
             {
                 if (!string.IsNullOrEmpty(studentBo.courseId))
                 {
                     sqlStr += "  and cs.CourseId=@CourseId  ";
-                    countSql += "  and cs.CourseId=@CourseId  ";
                 }
-
                 if (!string.IsNullOrEmpty(studentBo.Name))
                 {
-                    sqlStr += "  and st.Name like @Name  ";
-                    countSql += "  and st.Name like @Name  ";
+                    sqlStr += "  and st.Name = @Name ";
                 }
-
                 if (!string.IsNullOrEmpty(studentBo.SchoolName) && studentBo.SchoolName!="请选择")
                 {
-                    sqlStr += "  and sc.SchoolName like @SchoolName  ";
-                    countSql += "  and sc.SchoolName like @SchoolName  ";
+                    sqlStr += "  and sc.SchoolName = @SchoolName  ";
                 }
             }
-
-          
-            sqlStr += " order by Name " + order;
-
-
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
-                count = context.Query<StudentBo>(countSql,
-                                            new
-                                            {
-                                                Name = string.Format("%{0}%", studentBo.Name),
-                                                SchoolName = string.Format("%{0}%", studentBo.SchoolName),
-                                                CourseId = studentBo.courseId,
-                                            }).ToList()[0].datacount;
-                sqlStr += " limit @pageindex,@pagesize";
-
                 var list = context.Query<StudentBo>(sqlStr,
                                                 new
                                                 {
-
-                                                    Name = string.Format("%{0}%", studentBo.Name),
-                                                    SchoolName = string.Format("%{0}%", studentBo.SchoolName),
-                                                    CourseId = studentBo.courseId,
-                                                    pageindex = pageIndex,
-                                                    pagesize = pageSize
+                                                    Name =  studentBo.Name,
+                                                    SchoolName = studentBo.SchoolName,
+                                                    CourseId = studentBo.courseId
                                                 }).ToList();
 
 
@@ -734,9 +705,7 @@ INNER JOIN tb_maintrainset mt  ON mt.Id=stt.ProgramId  WHERE  stt.SchoolAudit=2 
                 pageList.PageSize = rows;
                 pageList.TotalCount = count;
             }
-
             return pageList;
-
         }
 
 

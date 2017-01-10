@@ -1186,11 +1186,11 @@ function kaoQing(id) {
         sortName: 'Name',
         sortOrder: 'desc',
         rownumbers: true,
-        pagination: true,
+        pagination: false,
         loader: function (param, success, error) {
             var studentData = {
-                page: param.page,
-                rows: param.rows,
+                page:0,
+                rows: 0,
                 order: param.order,
                 sort: param.sort,
                 studentBo: {
@@ -1228,7 +1228,6 @@ function KaoqingSearch() {
 
     // 列表参数设置
     var kqDataGridOptions = {
-
         columns: [[
             { field: 'Id', checkbox: true },
             { field: 'Name', title: '姓名', width: 80, sortable: false },
@@ -1274,11 +1273,11 @@ function KaoqingSearch() {
         sortName: 'Name',
         sortOrder: 'desc',
         rownumbers: true,
-        pagination: true,
+        pagination: false,
         loader: function (param, success, error) {
             var studentData = {
-                page: param.page,
-                rows: param.rows,
+                page: 0,
+                rows: 0,
                 order: param.order,
                 sort: param.sort,
                 studentBo: {

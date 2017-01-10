@@ -86,11 +86,10 @@ namespace Services.Course.CourseControl
         /// <returns></returns>
         public Page<CourseStudentWSBo> GetCourseStudentByCourseIdNew(int page, int rows, string order, string sort, string courseId)
         {
-            string strSql = string.Format(@"SELECT c.`Id`,s.IDNo,s.`Name`,s.`Sex`,sc.`SchoolName`,s.`Id` AS StudentId,c.`CourseId`,co.`CourseName` 
-                                            FROM  tb_student s
-                                            LEFT JOIN `tb_coursestudent` c ON c.`IDNo`=s.`IDNo`
-                                            LEFT JOIN tb_school sc ON sc.`Id`=s.`SchoolId`
-                                            INNER JOIN `tb_course` co ON co.`Id`=c.`CourseId`
+            string strSql = string.Format(@"SELECT c.`Id`,s.IDNo,s.`Name`,s.`Sex`,sc.`SchoolName`,s.`Id` AS StudentId,c.`CourseId` 
+                                            FROM `tb_coursestudent` c   
+                                            INNER JOIN tb_student s ON c.`IDNo`=s.`IDNo`
+                                            INNER JOIN tb_school sc ON sc.`Id`=s.`SchoolId`
                                             WHERE  c.`CourseId`=@CourseId ");
 
 
@@ -119,13 +118,11 @@ namespace Services.Course.CourseControl
                             CourseId = courseId
                         }).Count();*/
 
-                    strSql += " limit @pageindex,@pagesize";
+                    //strSql += " limit @pageindex,@pagesize";
                     var list = context.Query<CourseStudentWSBo>(strSql,
                                                  new
                                                  {
                                                      CourseId = courseId,
-                                                     pageIndex=@pageIndex,
-                                                     pageSize=@pageSize
                                                  }).ToList();
                     pageList.ListT = list;
                     pageList.PageIndex = page;

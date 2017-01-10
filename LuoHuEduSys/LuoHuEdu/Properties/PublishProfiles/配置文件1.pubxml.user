@@ -1342,10 +1342,10 @@
       <publishTime>07/07/2016 18:31:56</publishTime>
     </File>
     <File Include="bin/BusinessObject.dll">
-      <publishTime>12/17/2016 17:41:08</publishTime>
+      <publishTime>12/19/2016 23:00:43</publishTime>
     </File>
     <File Include="bin/BusinessObject.pdb">
-      <publishTime>12/17/2016 17:41:08</publishTime>
+      <publishTime>12/19/2016 23:00:43</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
       <publishTime>07/07/2016 18:31:56</publishTime>
@@ -1354,31 +1354,31 @@
       <publishTime>07/07/2016 18:39:10</publishTime>
     </File>
     <File Include="bin/DapperExtensions.dll">
-      <publishTime>12/17/2016 17:41:08</publishTime>
+      <publishTime>12/19/2016 23:00:44</publishTime>
     </File>
     <File Include="bin/DapperExtensions.pdb">
-      <publishTime>12/17/2016 17:41:08</publishTime>
+      <publishTime>12/19/2016 23:00:44</publishTime>
     </File>
     <File Include="bin/Domain.dll">
-      <publishTime>12/17/2016 17:41:08</publishTime>
+      <publishTime>12/19/2016 23:00:43</publishTime>
     </File>
     <File Include="bin/Domain.pdb">
-      <publishTime>12/17/2016 17:41:08</publishTime>
+      <publishTime>12/19/2016 23:00:43</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>07/07/2016 18:31:56</publishTime>
     </File>
     <File Include="bin/LuoHuEdu.DAO.dll">
-      <publishTime>12/17/2016 17:41:09</publishTime>
+      <publishTime>12/19/2016 23:00:45</publishTime>
     </File>
     <File Include="bin/LuoHuEdu.DAO.pdb">
-      <publishTime>12/17/2016 17:41:09</publishTime>
+      <publishTime>12/19/2016 23:00:45</publishTime>
     </File>
     <File Include="bin/LuoHuEdu.dll">
-      <publishTime>12/17/2016 17:41:11</publishTime>
+      <publishTime>01/10/2017 00:55:09</publishTime>
     </File>
     <File Include="bin/LuoHuEdu.pdb">
-      <publishTime>12/17/2016 17:41:11</publishTime>
+      <publishTime>01/10/2017 00:55:09</publishTime>
     </File>
     <File Include="bin/MiniProfiler.dll">
       <publishTime>07/07/2016 18:31:56</publishTime>
@@ -1396,10 +1396,10 @@
       <publishTime>07/07/2016 18:31:56</publishTime>
     </File>
     <File Include="bin/Services.dll">
-      <publishTime>12/17/2016 17:41:09</publishTime>
+      <publishTime>12/22/2016 22:15:00</publishTime>
     </File>
     <File Include="bin/Services.pdb">
-      <publishTime>12/17/2016 17:41:09</publishTime>
+      <publishTime>12/22/2016 22:15:00</publishTime>
     </File>
     <File Include="Common/Configs/log4net_local.config">
       <publishTime>09/08/2016 15:34:31</publishTime>
@@ -3577,7 +3577,7 @@
       <publishTime>10/14/2016 16:58:30</publishTime>
     </File>
     <File Include="Module/Course/Course.js">
-      <publishTime>11/29/2016 21:57:58</publishTime>
+      <publishTime>12/25/2016 17:26:34</publishTime>
     </File>
     <File Include="Module/Course/CourseStudentTemp.js">
       <publishTime>09/23/2016 02:37:05</publishTime>
@@ -3628,7 +3628,7 @@
       <publishTime>11/20/2016 12:31:47</publishTime>
     </File>
     <File Include="Module/TrainingManage/TrainingCourseManage.js">
-      <publishTime>12/16/2016 14:40:37</publishTime>
+      <publishTime>12/19/2016 23:00:42</publishTime>
     </File>
     <File Include="Module/TrainingManage/TrainManage.js">
       <publishTime>07/07/2016 18:31:56</publishTime>
@@ -3889,7 +3889,7 @@
       <publishTime>09/22/2016 03:40:20</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/17/2016 17:42:01</publishTime>
+      <publishTime>12/19/2016 23:03:04</publishTime>
     </File>
     <File Include="WebServices/Admin/Student.asmx">
       <publishTime>07/07/2016 18:31:56</publishTime>

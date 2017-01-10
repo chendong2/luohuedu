@@ -234,7 +234,7 @@ namespace Services.Parameter
         public List<SchoolBo> GetAllSchoolNew()
         {
             List<SchoolBo> list;
-            string strSql = string.Format(@"SELECT * from tb_school where 1=1 ORDER BY PaiXu ASC   ");
+            string strSql = string.Format(@"SELECT Id,SchoolName from tb_school  ORDER BY PaiXu ASC   ");
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
 
@@ -252,7 +252,7 @@ namespace Services.Parameter
         public List<SchoolBo> GetPlcSchoolByType()
         {
             List<SchoolBo> list;
-            string strSql = string.Format(@"SELECT * from tb_school where SchoolType=1 ORDER BY PaiXu ASC ");
+            string strSql = string.Format(@"SELECT Id,SchoolName from tb_school where SchoolType=1 ORDER BY PaiXu ASC ");
 
             using (var context = DataBaseConnection.GetMySqlConnection())
             {
